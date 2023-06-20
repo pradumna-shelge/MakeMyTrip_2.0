@@ -1,0 +1,148 @@
+create database BookMyShow
+use BookMyShow
+
+drop database  BookMyShow
+
+-- User Table
+CREATE TABLE [User] (
+user_id INT PRIMARY KEY IDENTITY(1,1),
+name VARCHAR(50),
+imageUrl VARCHAR(50),
+email VARCHAR(100),
+address VARCHAR(100),
+phone_number VARCHAR(20),
+createdDate datetime,
+Last_Login_Date datetime,
+Last_Modification_Date datetime
+);
+
+-- Flight Table
+CREATE TABLE Flight (
+flight_id INT PRIMARY KEY IDENTITY(1,1),
+airline_id INT,
+FOREIGN KEY (airline_id) REFERENCES Airline(airline_id),
+created_Date datetime,
+created_id int,
+Last_Modification_Date datetime,
+Last_Modification_ID datetime,
+);
+
+
+
+
+-- Airline Table
+CREATE TABLE Airline (
+airline_id INT PRIMARY KEY IDENTITY(1,1),
+airline_name VARCHAR(50),
+created_Date datetime,
+created_id int,
+Last_Modification_Date datetime,
+Last_Modification_ID datetime,
+);
+
+-- City Table
+CREATE TABLE AirportData (
+airport_id INT PRIMARY KEY,
+airport_name VARCHAR(50),
+city_name VARCHAR(50),
+country_id int REFERENCES Country(country_id),
+created_Date datetime,
+created_id int,
+Last_Modification_Date datetime,
+Last_Modification_ID datetime,
+);
+
+CREATE TABLE Country (
+country_id INT PRIMARY KEY,
+country_name VARCHAR(50),
+created_Date datetime,
+created_id int,
+Last_Modification_Date datetime,
+Last_Modification_ID datetime,
+);
+
+-- SeatType Table
+CREATE TABLE SeatType (
+seat_type_id INT PRIMARY KEY,
+seat_type_name VARCHAR(50),
+seat_type_rows int,
+seat_type_column int,
+created_Date datetime,
+created_id int,
+Last_Modification_Date datetime,
+Last_Modification_ID datetime,
+);
+
+-- SeatTypePrice Table
+CREATE TABLE SeatTypePrice (
+seat_type_id INT,
+flight_id INT,
+price DECIMAL(10, 2),
+available_seats INT,
+FOREIGN KEY (seat_type_id) REFERENCES SeatType(seat_type_id),
+FOREIGN KEY (flight_id) REFERENCES Flight(flight_id)
+);
+
+-- Booking Table
+CREATE TABLE Booking (
+booking_id INT PRIMARY KEY,
+user_id INT,
+flight_id INT,
+seat_type_id INT,
+booking_date DATETIME,
+total_price DECIMAL(10, 2),
+status VARCHAR(20),
+FOREIGN KEY (user_id) REFERENCES [User](user_id),
+FOREIGN KEY (flight_id) REFERENCES Flight(flight_id),
+created_Date datetime,
+created_id int,
+Last_Modification_Date datetime,
+Last_Modification_ID datetime,
+FOREIGN KEY (seat_type_id) REFERENCES SeatType(seat_type_id),
+);
+
+-- Passenger Table
+CREATE TABLE Passenger (
+passenger_id INT PRIMARY KEY,
+booking_id INT,
+name VARCHAR(50),
+age INT,
+FOREIGN KEY (booking_id) REFERENCES Booking(booking_id),
+created_Date datetime,
+created_id int,
+Last_Modification_Date datetime,
+Last_Modification_ID datetime,
+);
+
+-- Payment Table
+CREATE TABLE Payment (
+payment_id INT PRIMARY KEY,
+booking_id INT,
+payment_date DATETIME,
+amount DECIMAL(10, 2),
+payment_method VARCHAR(50),
+FOREIGN KEY (booking_id) REFERENCES Booking(booking_id)
+);
+
+-- TripType Table
+CREATE TABLE TripType (
+trip_type_id INT PRIMARY KEY,
+trip_type_name VARCHAR(50)
+);
+
+-- Journey Table
+CREATE TABLE Journey (
+journey_id INT PRIMARY KEY,
+flight_id INT,
+source_city_id INT,
+destination_city_id INT,
+trip_type_id INT,
+FOREIGN KEY (flight_id) REFERENCES Flight(flight_id),
+FOREIGN KEY (source_city_id) REFERENCES City(city_id),
+FOREIGN KEY (destination_city_id) REFERENCES City(city_id),
+FOREIGN KEY (trip_type_id) REFERENCES TripType(trip_type_id),
+created_Date datetime,
+created_id int,
+Last_Modification_Date datetime,
+Last_Modification_ID datetime,
+);

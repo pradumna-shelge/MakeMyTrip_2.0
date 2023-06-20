@@ -1,0 +1,52 @@
+
+
+  
+
+
+li{
+    text-transform: capitalize;
+}
+
+
+
+
+
+.nav-link-bottom>a{
+    text-decoration: none;
+    color: aliceblue;
+  }
+
+
+
+
+
+
+
+.signUp{
+background: linear-gradient(to right, #4daff5, #0d6cd1);
+border-radius: 7px;
+
+ 
+}
+
+.bg-blueDark {
+background: linear-gradient(to bottom, #010c24, #054ea6);
+position: relative;
+/* height: 90%; */
+/* clip-path: polygon(100% 0, 100% 87%, 54% 100%, 0 100%, 0 0); */
+}
+
+.nav-md-link{
+    border-bottom: 1px solid rgb(97, 98, 99);
+    font-size:small;
+    font-weight: 5px;
+    padding: 10px;
+    color: #595a5d;
+    display: flex;
+    gap: 3%;
+
+}
+
+.nav-md-link:hover{
+    color: #0d6cd1;
+}
