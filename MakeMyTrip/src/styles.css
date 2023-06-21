@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.bg-gray{
+    background-color: rgb(226, 228, 230);
+    
+  }
+  .bg-blueDark {
+    background: linear-gradient(to bottom, #010c24, #054ea6);
+    position: relative;
+    /* height: 90%; */
+    /* clip-path: polygon(100% 0, 100% 87%, 54% 100%, 0 100%, 0 0); */
+    }
+
+
+    .bg-lightBlue{
+        background: linear-gradient(to right, #4daff5, #0d6cd1);
+        border-radius: 7px;
+        
+         
+        }

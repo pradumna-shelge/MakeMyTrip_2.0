@@ -1,0 +1,26 @@
+/* mat-slider {
+    width: max-content;
+  } */
+
+  .filter-card{
+border: 1px solid black;
+  }
+  .mat-button-toggle-group{
+    border: none;
+    /* display: flex ;
+    justify-content: space-around; */
+  }
+  .mat-button-toggle{
+    border: 1px solid rgb(192, 188, 188);
+ font-size: 9px;
+ padding: 0;
+width: fit;
+padding: 0 0px;
+  }
+  p{
+    line-height: 0;
+  }
+
+  .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+    padding: 0 0px;
+}

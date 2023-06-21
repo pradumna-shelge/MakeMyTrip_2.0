@@ -1,0 +1,32 @@
+.card{
+    padding: 0;
+    background-color: rgba(255, 255, 255, 0.064);
+    text-align: center;
+    height:80px ;
+    
+   
+}
+.card-body{
+    padding: 0;
+    color: white;
+    font-weight: 100;
+}
+.date-Input{
+    border: none;
+background-color:transparent;
+color: transparent;
+width: 1px;
+
+}
+
+.card-title{
+    color: white;
+    padding: 0;
+
+}
+
+.select-trip{
+    background-color: transparent;
+    color: white;
+    border:  none;
+}

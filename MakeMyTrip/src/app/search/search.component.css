@@ -1,0 +1,117 @@
+
+.login-link {
+    display: flex;
+    align-items: center;
+  }
+  
+  .login-link img {
+    max-height: 20px;
+    margin-right: 5px;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+  }
+.navbar {
+    background-color:white;
+   
+        min-height: 50px;
+        
+      
+  }
+  .navbar-brand img {
+    max-height: 30px;
+  }
+
+  
+  .nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-link img {
+    margin-bottom: 5px;
+    border: 1px solid transparent;
+  }
+
+  .nav-link:hover {
+    color: #007bff;
+  }
+
+  .nav-link:hover img {
+    border-color: #007bff;
+  }
+
+
+  .nav-link span {
+    color: black;
+    background-color: transparent;
+    padding: 4px 9px;
+    border-radius: 10px;
+  }
+
+  .nav-link:hover span {
+    color: white;
+    background-color: #007bff;
+  }
+
+  @media (max-width: 767px) {
+
+
+    .navbar{
+        
+    }
+    
+  }
+
+  .first{
+ margin-top: -4%;
+ margin-left:  15%;
+ margin-right:  10%;
+ border-radius: 15px;
+  }
+  .nav-item{
+ margin-left: 25px;
+
+  }
+
+  .search{
+   
+    border-radius: 10px ;
+  }
+  .card{
+    margin: 0;
+    background-color: rgba(220, 220, 220, 0.31);
+    border-radius: 5px;
+    margin-bottom: 7px;
+    
+  }
+
+  .btn-search{
+ 
+    display: flex;
+    
+
+  }
+
+
+
+
+ 
+
+
+  .date-Input{
+border: none;
+background-color:transparent;
+color: transparent;
+width: 1px;
+}
+
+h4{
+    font-weight: bold;
+}
+
+.acordin-container{
+    color: rgb(102, 105, 105);
+    
+}

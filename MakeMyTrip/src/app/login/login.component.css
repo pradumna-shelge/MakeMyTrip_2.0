@@ -1,0 +1,13 @@
+.bg-blueDark {
+    background: linear-gradient(to bottom, #010c24, #054ea6);
+    position: relative;
+    /* height: 90%; */
+    /* clip-path: polygon(100% 0, 100% 87%, 54% 100%, 0 100%, 0 0); */
+    }
+
+    .signUp{
+        background: linear-gradient(to right, #4daff5, #0d6cd1);
+        border-radius: 7px;
+        
+         
+        }

@@ -1,0 +1,216 @@
+
+<div class="bg-blueDark col-12  col-lg-12 pb-5 pt-3">
+
+    
+    
+    <div class=" d-flex flex-column flex-lg-row justify-content-center  gap-3 ">
+        <div class="card px-2">
+            
+            <div class="card-body" >
+               
+                
+                <p class="fs-6 fw-light mx-2 ">Trip Type</p>
+                <select class="select-trip" aria-label="Default select example">
+                    
+                    <option value="2">OneWay</option>
+                    <option value="1">Round</option>
+               
+                  </select>
+            </div>
+                    
+                
+              
+            
+        </div>
+
+        <div class="card px-2">
+            <div class="card-body" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="d-flex mx-1 align-content-center  "  >
+                <i class="d-lg-none fa-solid fa-plane-departure"></i>
+                <p class="fs-6 fw-light mx-2 ">FROM</p>
+            </div>
+            <p class="">{{this.form.city }}</p>
+
+
+            </div>
+            <div class="dropdown-menu">
+                <div class="">
+                    <div class="">
+                        <div class="d-flex align-content-center  ">
+                         
+                            <input type="text" #search class="form-control" placeholder="From"
+                                (input)="checkAirport(search.value)">
+                        </div>
+
+                        <p>Search Result</p>
+                        <ol class="list-group ">
+                            <ng-container *ngFor="let item of filterAirport;let i = index">
+                                <li class="list-group-item d-flex justify-content-between align-items-start"
+                                *ngIf="i<5" (click)="from(item,1)">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">{{item.city}}</div>
+
+                                </div>
+                                <span class="badge bg-primary rounded-pill">{{item.airportCode}}</span>
+                            </li>
+                            </ng-container>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="card px-2">
+            <div class="card-body" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="d-flex"  >
+
+                    <i class="fa-solid fa-plane-arrival d-lg-none"></i>
+                    <p class="fs-6 fw-light mx-2 ">TO</p>
+                </div>
+                <p>{{this.to.city}}</p>
+               
+
+            </div>
+            <div class="dropdown-menu">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-search" viewBox="0 0 16 16">
+                                <path
+                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM11 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                            </svg>
+                            <input type="text" #search1 class=" m-1 form-control" placeholder="From"
+                                (input)="checkAirport(search1.value)">
+                        </div>
+
+                        <p>Search Result</p>
+                        <ol class="list-group ">
+                            <ng-container *ngFor="let item of filterAirport;let i = index">
+                                <li class="list-group-item d-flex justify-content-between align-items-start"
+                                *ngIf="i<5" (click)="from(item,2)">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">{{item.city}}</div>
+
+                                </div>
+                                <span class="badge bg-primary rounded-pill">{{item.airportCode}}</span>
+                            </li>
+                            </ng-container>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="card px-2">
+            <div class="card-body" data-bs-toggle="dropdown1" aria-expanded="false"  (click)="picker1.open()">
+                <p class="fs-6 fw-light">DEPARTURE DATE  </p>
+               
+                    <p>{{datep1|date}}</p>
+
+                        <input   [(ngModel)]="datep1"  matInput [matDatepicker]="picker1" class="date-Input ">
+                       
+                        <mat-datepicker  #picker1></mat-datepicker>
+                     
+                     
+
+
+                
+            </div>
+          
+        </div>
+         <div class="card px-2">
+            <div class="card-body" data-bs-toggle="dropdown1" aria-expanded="false"  (click)="picker.open()">
+                <p class="fs-6 fw-light">RETURN DATE  </p>
+               
+                    <p>{{datep|date}}</p>
+
+                        <input   [(ngModel)]="datep"  matInput [matDatepicker]="picker" class="  date-Input">
+                       
+                        <mat-datepicker  #picker></mat-datepicker>
+                     
+                     
+
+
+                
+            </div>
+          
+        </div>
+
+        <div class="card px-2">
+            <div class="card-body" data-bs-toggle="dropdown" aria-expanded="false">
+                <p class="fs-6 fw-light">PASSENGERS</p>
+                <div class="card-title d-flex justify-content-evenly">
+                    <p> {{seatNumbers}}</p>
+                      
+                </div>
+
+            </div>
+            <div class="dropdown-menu p-3 ">
+                <div class="">
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3"><label for="seatTypeSelect" class="form-label">CHOOSE TRAVEL CLASS</label><select #type class="form-select" #seatTypeSelect>
+                                    <option value="Economy">Economy Class</option>
+                                    <option value="Business">Business Class</option>
+                                    <option value="firstClass">First Class</option>
+                                </select></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="seatTypeSelect" class="form-label">ADULTS (12y +)</label><select #ad class="form-select" >
+                                <option [value]="item" *ngFor="let item of num">{{item+1}}</option>
+                                
+                            </select>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="seatTypeSelect" class="form-label">CHILDREN (2y - 12y)</label><select #b class="form-select" >
+                                <option [value]="item" *ngFor="let item of num">{{item}}</option>
+                                
+                            </select>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="seatTypeSelect" class="form-label">INFANTS (below 2y)</label><select #c class="form-select" >
+                                <option [value]="item" *ngFor="let item of num">{{item}}</option>
+                                
+                            </select>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" class="btn btn-primary rounded" (click)="SeatType(type.value,ad.value,b.value,c.value)">Apply</button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            
+        </div> 
+        
+        <div class="h-100 pt-3 d-flex justify-content-center ">
+                             <button class="bg-light w-100  btn text-dark rounded-pill">Search<i class="mx-2 fa-solid fa-plane "></i>   </button>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<div class="row">
+    <div class="col-3">
+        <app-filter></app-filter>
+    </div>
+</div>
