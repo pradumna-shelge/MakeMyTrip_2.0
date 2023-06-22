@@ -1,5 +1,5 @@
-
-<div class="bg-blueDark col-12  col-lg-12 pb-5 pt-3">
+<div class="d-flex row  flex-column">
+<div class="bg-blueDark   col  col-lg-12 pb-5 pt-3">
 
     
     
@@ -71,7 +71,7 @@
                
 
             </div>
-            <div class="dropdown-menu">
+            <div class="dropdown-menu ">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex ">
@@ -137,65 +137,94 @@
           
         </div>
 
-        <div class="card px-2">
-            <div class="card-body" data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="card px-2" mat-button [matMenuTriggerFor]="menu">
+            <div class="card-body" data-bs-toggle="modal" data-bs-target="#modalId">
                 <p class="fs-6 fw-light">PASSENGERS</p>
-                <div class="card-title d-flex justify-content-evenly">
+                <div class="card-title d-flex justify-content-evenly"  >
+                    <mat-menu #menu="matMenu" class="p-5 ">
+                      <button mat-menu-item>Item 1</button>
+                      <button mat-menu-item>Item 2</button>
+                    </mat-menu>
                     <p> {{seatNumbers}}</p>
                       
+                    <!-- <button class="p-4 border bg-light" mat-button [matMenuTriggerFor]="menu">Menu</button> -->
                 </div>
+                <!-- <div class="position-relative">
+                    <div class=" modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                               
+                                <div class="modal-body text-sm">
+                                    <div class="px-2">
+                            
+                                        <div class="row">
+                                            <div class="col">
+                                                <p>ADULTS (12y +)</p>
+                                
+                                                <mat-button-toggle-group class=" border-0 shadow" name="favoriteColor" aria-label="Favorite Color">
+                                                    <mat-button-toggle  class="border-0"*ngFor="let item of num" [value]="item">{{item}}</mat-button-toggle>
+                                                  </mat-button-toggle-group>
+                                                 
+                                                
+                                            </div>
+                                
+                                
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                
+                                                <p>CHILDREN (2y - 12y)</p>
+                                
+                                                
+                                                    <mat-button-toggle-group  class=" border-0 shadow " name="favoriteColor" aria-label="Favorite Color">
+                                                        <mat-button-toggle  class="border-0"*ngFor="let item of num" [value]="item">{{item}}</mat-button-toggle>
+                                                      </mat-button-toggle-group>
+                                                    
+                                                  
+                                            </div>
+                                            <div class="col">
+                                                
+                                                <p>INFANTS (below 2y)</p>
+                                
+                                                <mat-button-toggle-group class=" border-0 shadow " name="favoriteColor" aria-label="Favorite Color">
+                                                    <mat-button-toggle  class="border-0"*ngFor="let item of num" [value]="item">{{item}}</mat-button-toggle>
+                                                  </mat-button-toggle-group>
+                                            </div>
+                                
+                                
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="mb-3">
+                                                    <p>CHOOSE TRAVEL CLASS</p>
+                                                   
+                                                      <mat-button-toggle-group class=" border-0 shadow" name="favoriteColor" aria-label="Favorite Color">
+                                                        <mat-button-toggle  class="border-0" value="">Economy Class</mat-button-toggle>
+                                                        <mat-button-toggle  class="border-0" value="">Business Class</mat-button-toggle>
+                                                        <mat-button-toggle  class="border-0" value="">First Class</mat-button-toggle>
+                                                      </mat-button-toggle-group>
+                                                    
+                                                  </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col shadow py-4">
+                                                <button type="button" class=" btn btn-primary rounded"  data-bs-dismiss="modal" >Done</button>
+                                            </div>
+                                
+                                
+                                        </div>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
 
             </div>
-            <div class="dropdown-menu p-3 ">
-                <div class="">
-                    <div class="row">
-                        <div class="col">
-                            <div class="mb-3"><label for="seatTypeSelect" class="form-label">CHOOSE TRAVEL CLASS</label><select #type class="form-select" #seatTypeSelect>
-                                    <option value="Economy">Economy Class</option>
-                                    <option value="Business">Business Class</option>
-                                    <option value="firstClass">First Class</option>
-                                </select></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label for="seatTypeSelect" class="form-label">ADULTS (12y +)</label><select #ad class="form-select" >
-                                <option [value]="item" *ngFor="let item of num">{{item+1}}</option>
-                                
-                            </select>
-                        </div>
-
-
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label for="seatTypeSelect" class="form-label">CHILDREN (2y - 12y)</label><select #b class="form-select" >
-                                <option [value]="item" *ngFor="let item of num">{{item}}</option>
-                                
-                            </select>
-                        </div>
-
-
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label for="seatTypeSelect" class="form-label">INFANTS (below 2y)</label><select #c class="form-select" >
-                                <option [value]="item" *ngFor="let item of num">{{item}}</option>
-                                
-                            </select>
-                        </div>
-
-
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <button type="button" class="btn btn-primary rounded" (click)="SeatType(type.value,ad.value,b.value,c.value)">Apply</button>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
+            
             
         </div> 
         
@@ -206,11 +235,91 @@
 
 
 </div>
+</div>
 
 
-
-<div class="row">
-    <div class="col-3">
+<div class="my-5 row flex justify-content-center">
+    <div class="col col-md-6 col-lg-3">
         <app-filter></app-filter>
     </div>
+    <div class="col col-md-6 col-lg-7">
+        <h1>Journey</h1>
+        <app-journey-data></app-journey-data>
+    </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="">
+    <div class="px-2">
+        
+        <div class="row">
+            <div class="col">
+                <p>ADULTS (12y +)</p>
+
+                <mat-button-toggle-group class=" border-0 shadow" name="favoriteColor" aria-label="Favorite Color">
+                    <mat-button-toggle  class="border-0"*ngFor="let item of num" [value]="item">{{item}}</mat-button-toggle>
+                  </mat-button-toggle-group>
+                 
+                
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col">
+                
+                <p>CHILDREN (2y - 12y)</p>
+
+                
+                    <mat-button-toggle-group class=" border-0 shadow " name="favoriteColor" aria-label="Favorite Color">
+                        <mat-button-toggle  class="border-0"*ngFor="let item of num" [value]="item">{{item}}</mat-button-toggle>
+                      </mat-button-toggle-group>
+                    
+                  
+            </div>
+            <div class="col">
+                
+                <p>INFANTS (below 2y)</p>
+
+                <mat-button-toggle-group class=" border-0 shadow " name="favoriteColor" aria-label="Favorite Color">
+                    <mat-button-toggle  class="border-0"*ngFor="let item of num" [value]="item">{{item}}</mat-button-toggle>
+                  </mat-button-toggle-group>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="mb-3">
+                    <p>CHOOSE TRAVEL CLASS</p>
+                   
+                      <mat-button-toggle-group class=" border-0 shadow" name="favoriteColor" aria-label="Favorite Color">
+                        <mat-button-toggle  class="border-0" value="">Economy Class</mat-button-toggle>
+                        <mat-button-toggle  class="border-0" value="">Business Class</mat-button-toggle>
+                        <mat-button-toggle  class="border-0" value="">First Class</mat-button-toggle>
+                      </mat-button-toggle-group>
+                    
+                  </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col shadow py-4">
+                <button type="button" class=" btn btn-primary rounded">Done</button>
+            </div>
+
+
+        </div>
+    </div>
+</div> -->
+

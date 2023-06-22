@@ -17,6 +17,8 @@ public partial class Flight
 
     public int? LastModificationId { get; set; }
 
+    public string? FlightName { get; set; }
+
     public virtual Airline? Airline { get; set; }
 
     public virtual ICollection<Journey> Journeys { get; set; } = new List<Journey>();

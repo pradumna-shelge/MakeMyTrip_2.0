@@ -58,7 +58,7 @@
       </ul>
       <ul class="navbar-nav ms-auto">
           <li class="nav-item" *ngIf="!islog">
-            <a class="nav-link login-link" [routerLink]="['./user']" [queryParams]="{param1:'bangulore'}" routerLinkActive="router-link-active" >
+            <a data-bs-toggle="modal" data-bs-target="#loginpage" class="nav-link login-link"  routerLinkActive="router-link-active" >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                     <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
@@ -84,5 +84,28 @@
     </div>
   </div>
 </nav>
+
+
+
+
+<div class="modal fade" id="loginpage" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-body p-0">
+
+
+
+
+               <app-login></app-login>
+
+            </div>
+            <!-- <div class="modal-footer">
+              <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Open second modal</button>
+            </div> -->
+        </div>
+    </div>
+</div>
 
 

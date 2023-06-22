@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   userData!:FormGroup
 
   Area = 1;
@@ -81,5 +81,9 @@ get Otp(){
 
   stopTimer() {
     clearInterval(this.interval);
+  }
+mobileFlag = false;
+  ChangeLogin(){
+
   }
 }

@@ -92,6 +92,7 @@ public partial class BookMyShowContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("createdDate");
             entity.Property(e => e.CreatedId).HasColumnName("createdId");
+            entity.Property(e => e.FlightName).HasMaxLength(50);
             entity.Property(e => e.LastModificationDate).HasColumnType("datetime");
 
             entity.HasOne(d => d.Airline).WithMany(p => p.Flights)

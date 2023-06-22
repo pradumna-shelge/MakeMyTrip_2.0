@@ -2,6 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { AirportModel } from 'src/Model/Airport.model';
 import { searchData } from 'src/Model/SearchData.model';
+import { AireLineService } from '../flight/Services/aire-line.service';
+import { AirportService } from '../services/airport.service';
+import { SearchDataService } from '../services/search-data.service';
 
 @Component({
   selector: 'app-search',
@@ -24,16 +27,28 @@ form :AirportModel={}as AirportModel
   departure!: string;
   return!: string|null;
   
-  constructor(private http:HttpClient){
+  constructor(private http:HttpClient, private airportService:AirportService,private searchService:SearchDataService){
 
-    this.http.get<AirportModel[]>('https://localhost:7007/api/AirportSApi').subscribe((airports:AirportModel[]) =>{
+    this.airportService.get().subscribe((airports:AirportModel[]) =>{
       this.airport = airports
       console.log(this.airport); 
       this.form = this.airport[0],
       this.to = this.airport[3]
-  
 
-         
+      this.searchData={
+        from:this.airport[0],
+        to:this.airport[3],
+        departureTime:new Date(),
+        returnTime:null,
+        passengers:{
+          adults:1,
+          child:0,
+          infants:0
+        },
+        tripType:1,
+        seatTypes:1
+      }
+     
     })
   }
 

@@ -10900,11 +10900,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MakeMy\\base-repository-deployment\\TrainingProject\\Assignments\\API\\Source\\backend\\backend.csproj",
+      "projectUniqueName": "D:\\MakeMyTrip_2.0\\MakeMyTrip_2.0\\API\\Source\\backend\\backend.csproj",
       "projectName": "backend",
-      "projectPath": "D:\\MakeMy\\base-repository-deployment\\TrainingProject\\Assignments\\API\\Source\\backend\\backend.csproj",
+      "projectPath": "D:\\MakeMyTrip_2.0\\MakeMyTrip_2.0\\API\\Source\\backend\\backend.csproj",
       "packagesPath": "C:\\Users\\pradumna.shelage\\.nuget\\packages\\",
-      "outputPath": "D:\\MakeMy\\base-repository-deployment\\TrainingProject\\Assignments\\API\\Source\\backend\\obj\\",
+      "outputPath": "D:\\MakeMyTrip_2.0\\MakeMyTrip_2.0\\API\\Source\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\pradumna.shelage\\AppData\\Roaming\\NuGet\\NuGet.Config",

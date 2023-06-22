@@ -30,3 +30,20 @@ width: 1px;
     color: white;
     border:  none;
 }
+
+.btn-group-button.active {
+    background-color: blue;
+}
+
+.mat-button-toggle-group{
+    border: 0;
+
+}
+.mat-button-toggle{
+    border: none;
+}
+
+.mar{
+    position: absolute;
+    margin-top: -100px;
+}
