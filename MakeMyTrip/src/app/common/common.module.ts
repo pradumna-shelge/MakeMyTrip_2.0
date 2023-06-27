@@ -6,13 +6,15 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 
 @NgModule({
   declarations: [
     FooterComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    // MyProfileComponent
   ],
   imports: [
     CommonModule,

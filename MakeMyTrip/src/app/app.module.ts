@@ -15,17 +15,16 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import { ProfileComponent } from './profile/profile.component';
 import { CommonModules } from './common/common.module';
+import { MyProfileComponent } from './common/my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
-    
+    MyProfileComponent,
     SearchComponent,
     
-    ProfileComponent,
   ],
   imports: [
     CommonModules,
