@@ -20,4 +20,13 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
+  it('email requriqured', () => {
+const email = component.userData.controls['email'];
+
+expect(email.invalid).toBeTruthy();
+expect(email.errors?.['required']).toBeTruthy();
+
+  })
 });

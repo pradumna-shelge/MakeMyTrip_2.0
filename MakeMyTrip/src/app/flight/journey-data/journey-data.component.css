@@ -1,0 +1,13 @@
+.line{
+    padding: 1px;
+    background-color: rgb(57, 192, 250);
+}
+.bg-custom2{
+    background-color: antiquewhite;
+}
+.book-btn{
+    color: rgb(17, 110, 232);
+    background-color:   rgba(17, 110, 232, 0.408);
+
+    border: 2px  rgb(5, 72, 159);
+}

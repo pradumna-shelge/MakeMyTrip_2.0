@@ -5,6 +5,7 @@ import { SearchResultComponent } from './search-result/search-result.component';
 
 
 const routes: Routes = [
+  
   { path: '', component: HomePageComponent,
 children:[
   { path: '', component: SearchResultComponent },

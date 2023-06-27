@@ -1,4 +1,4 @@
- <div class="container-lg pt-5">
+ <div class="container-lg pt-5" >
     <div class="card rounded 
     position-relative   bg-light pb-5">
         <div class="d-none d-lg-block position-absolute top-0 start-50 translate-middle">
@@ -83,132 +83,159 @@
 
             <div class="card-body ">
                 
+                <mat-button-toggle-group [(ngModel)]="tripType"  name="fontStyle" aria-label="Font Style">
                     <div class="btn-group row">
-                        <div class="col-6" (click)="changeTrip(0)">
+                        <div class="col-6" >
 
-                            <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off"
-                                checked />
-                            <label class="btn btn-outline-primary " for="option1">One Way</label>
+                          
+                            <mat-button-toggle class="px-2  py-2" value="2">Round Up</mat-button-toggle>
                         </div>
 
-                        <div class="col-6" (click)="changeTrip(1)">
-                            <input type="radio" class="btn-check" name="options" id="option3" autocomplete="off" />
-                            <label class="btn btn-outline-primary " for="option3">RoundTrip</label>
+                        <div class="col-6">
+                           <mat-button-toggle class="px-2  py-2" value="1" >One Way</mat-button-toggle>
                         </div>
+
+                        
                     </div>
+                </mat-button-toggle-group>
                   
                 
             </div>
 
 
-            <div class=" d-flex justify-content-center  row ">
+            <div class=" d-flex gap-1 justify-content-center position-relative  row ">
 
-                <div class="card col-10 col-lg-2">
-                    <div class="card-body" data-bs-toggle="dropdown" aria-expanded="false">
+                <div *ngIf="form" class="border position-relative  col-10 col-lg-3 " >
+                    <div class="  "  aria-expanded="false" >
                         <div class="d-flex mx-1 align-content-center  "  >
                         <i class="d-lg-none fa-solid fa-plane-departure"></i>
                         <p class="fs-6 fw-light mx-2 ">FROM</p>
                     </div>
-                    <h4 class="card-title h4">{{this.form.city }}</h4>
-                    <p>{{this.form.airportCode+","+this.form.airportName.substr(0,10)+"..."}}</p>
+                    <div data-bs-toggle="modal" data-bs-target="#From">
 
+                        <h4  class=" h4">{{form.city }}</h4>
+                       
+    
+                        <p>{{form.airportCode+","+form.airportName.substr(0,25)+"..."}}</p>
 
-                    </div>
-                    <div class="dropdown-menu">
-                        <div class="">
-                            <div class="">
-                                <div class="d-flex align-content-center  ">
-                                 
-                                    <input type="text" #search class="form-control" placeholder="From"
-                                        (input)="checkAirport(search.value)">
-                                </div>
+                    </div>    
 
-                                <p>Search Result</p>
-                                <ol class="list-group ">
-                                    <ng-container *ngFor="let item of filterAirport;let i = index">
-                                        <li class="list-group-item d-flex justify-content-between align-items-start"
-                                        *ngIf="i<5" (click)="from(item,1)">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold">{{item.city}}</div>
-
-                                        </div>
-                                        <span class="badge bg-primary rounded-pill">{{item.airportCode}}</span>
-                                    </li>
-                                    </ng-container>
-                                </ol>
-                            </div>
-
-                        </div>
-                    </div>
+                    
                 </div>
-                <div class="card col-10 col-lg-2">
-                    <div class="card-body" data-bs-toggle="dropdown" aria-expanded="false">
-                        <div class="d-flex"  >
-
-                            <i class="fa-solid fa-plane-arrival d-lg-none"></i>
-                            <p class="fs-6 fw-light mx-2 ">TO</p>
-                        </div>
-                        <h4>{{this.to.city}}</h4>
-                        <p>
-                            {{this.to.airportCode+","+this.to.airportName.substr(0,20)+"..."}}
-                        </p>
-
-                    </div>
-                    <div class="dropdown-menu">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex ">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-search" viewBox="0 0 16 16">
-                                        <path
-                                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM11 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                                    </svg>
-                                    <input type="text" #search1 class=" m-1 form-control" placeholder="From"
-                                        (input)="checkAirport(search1.value)">
+                <div class="modal     custom-modal" id="From" tabindex="-1"  >
+                    <div class="modal-dialog " role="document">
+                        <div class="modal-content">
+                            <div class="modal-body p-0 ">
+                                <div class=" ">
+                                    <div class="w-100 py-2 px-1 d-flex  shadow rounded bg-light">
+                                        
+                                        <input type="text" #search class="form-control border-0" placeholder="search..."
+                                            (input)="checkAirport(search.value)">
+                                    </div>
+                                    <div class="px-1 mt-4 ">
+        
+                                        <p>SUGGESTIONS</p>
+                                        <ol class="list-group border-0 overflow-auto" >
+                                            <div class="" *ngFor="let item of filterAirport;let i = index">
+                                                <li class=" list-group-item   align-items-start border-0"
+                                                 (click)="ChageAirport(item,true)">
+                                                <div class="ms-2 me-auto d-flex justify-content-between"  data-bs-dismiss="modal" >
+                                                    <p class="fs-6">{{item.city+","+item.country}}</p>
+        
+                                                    <span class="badge text-secondary">{{item.airportCode}}</span>
+                                                </div>
+                                                <p class="text-secondary">{{item.airportName.substr(0,25)+"..."}}</p>
+                                            </li>
+                                            </div>
+                                        </ol>
+                                    </div>
+        
                                 </div>
-
-                                <p>Search Result</p>
-                                <ol class="list-group ">
-                                    <ng-container *ngFor="let item of filterAirport;let i = index">
-                                        <li class="list-group-item d-flex justify-content-between align-items-start"
-                                        *ngIf="i<5" (click)="from(item,2)">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold">{{item.city}}</div>
-
-                                        </div>
-                                        <span class="badge bg-primary rounded-pill">{{item.airportCode}}</span>
-                                    </li>
-                                    </ng-container>
-                                </ol>
                             </div>
-
+                            
                         </div>
                     </div>
+                 </div>
                 </div>
-                <div class="card col-10 col-lg-2">
-                    <div class="card-body" data-bs-toggle="dropdown1" aria-expanded="false"  (click)="picker1.open()">
+           
+                <div *ngIf="to" class="border position-relative  col-10 col-lg-3 " >
+                    <div class="  "  aria-expanded="false" >
+                        <div class="d-flex mx-1 align-content-center  "  >
+                        <i class="d-lg-none fa-solid fa-plane-departure"></i>
+                        <p class="fs-6 fw-light mx-2 ">To</p>
+                    </div>
+                    <div data-bs-toggle="modal" data-bs-target="#ToModel">
+
+                        <h4  class=" h4">{{this.to.city }}</h4>
+                       
+    
+                        <p>{{this.to.airportCode+","+this.to.airportName.substr(0,25)+"..."}}</p>
+
+                    </div>    
+
+                    
+                </div>
+                <div class="modal     custom-modal" id="ToModel" tabindex="-1"  >
+                    <div class="modal-dialog " role="document">
+                        <div class="modal-content">
+                            <div class="modal-body p-0 ">
+                                <div class=" ">
+                                    <div class="w-100 py-2 px-1 d-flex  shadow rounded bg-light">
+                                        
+                                        <!-- <i class=" mt-auto fa-solid fs-4 fa-magnifying-glass"></i> -->
+                                        <input type="text" #search class="form-control border-0" placeholder="search..."
+                                            (input)="checkAirport(search.value)">
+                                    </div>
+                                    <div class="px-1 mt-4 ">
+        
+                                        <p>SUGGESTIONS</p>
+                                        <ol class="list-group border-0 overflow-auto" >
+                                            <div class="" *ngFor="let item of filterAirport;let i = index">
+                                                <li class=" list-group-item   align-items-start border-0"
+                                              (click)=  "ChageAirport(item,false)">
+                                                <div class="ms-2 me-auto d-flex justify-content-between"  data-bs-dismiss="modal" >
+                                                    <p class="fs-6">{{item.city+","+item.country}}</p>
+        
+                                                    <span class="badge text-secondary">{{item.airportCode}}</span>
+                                                </div>
+                                                <p class="text-secondary">{{item.airportName.substr(0,25)+"..."}}</p>
+                                            </li>
+                                            </div>
+                                        </ol>
+                                    </div>
+        
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                 </div>
+                </div>
+              
+                <div class="border position-relative  col-10 col-lg-2">
+                    <div class="" data-bs-toggle="dropdown1" aria-expanded="false"  (click)="picker1.open()">
                         <p class="fs-6 fw-light">DEPARTURE DATE  </p>
                        
-                            <h5>{{datep1|date}}</h5>
+                            <h5>{{departure|date}}</h5>
 
-                                <input   [(ngModel)]="datep1"  matInput [matDatepicker]="picker1" class="date-Input">
+                                <input   [(ngModel)]="departure"  matInput [matDatepicker]="picker1" class="date-Input">
                                
-                                <mat-datepicker  #picker1></mat-datepicker>
-                             
-                             
-
-
-                        
-                    </div>
+                                
+                                
+                                
+                                
+                                
+                            </div>
+                            <mat-datepicker class="custom-modal"  #picker1></mat-datepicker>
                   
                 </div>
-                 <div class="card col-10 col-lg-2">
-                    <div class="card-body" data-bs-toggle="dropdown1" aria-expanded="false"  (click)="picker.open()">
+                 <div  class="border position-relative col-10 col-lg-2">
+                    <div [ngClass]="{'text-secondary': tripType==1}" class="" data-bs-toggle="dropdown1" aria-expanded="false"  (click)="picker.open()">
                         <p class="fs-6 fw-light">RETURN DATE  </p>
                        
-                            <h5>{{datep|date}}</h5>
+                            <h5>{{return|date}}</h5>
 
-                                <input   [(ngModel)]="datep"  matInput [matDatepicker]="picker" class="date-Input">
+                                <input   [(ngModel)]="return"  matInput [matDatepicker]="picker" class="date-Input"     [disabled]="tripType==1">
                                
                                 <mat-datepicker  #picker></mat-datepicker>
                              
@@ -220,71 +247,100 @@
                   
                 </div>
 
-                <div class="card col-10 col-lg-2">
-                    <div class="card-body" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="border position-relative col-10 col-lg-1">
+                    <div class="" aria-expanded="false">
                         <p class="fs-6 fw-light">PASSENGERS</p>
-                        <div class="card-title d-flex justify-content-evenly">
-                            <h4> {{seatNumbers}}</h4>
-                              <p>{{this.seatTypes}}</p>
+                        <div class=" d-flex justify-content-evenly" data-bs-toggle="modal" data-bs-target="#modalId1">
+                            <h4> {{adults+child+infants}}</h4>
+                              <p>{{TicketClass[seatTypes]}}</p>
                         </div>
 
                     </div>
-                    <div class="dropdown-menu p-3 ">
-                        <div class="">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="mb-3"><label for="seatTypeSelect" class="form-label">CHOOSE TRAVEL CLASS</label><select #type class="form-select" #seatTypeSelect>
-                                            <option value="Economy">Economy Class</option>
-                                            <option value="Business">Business Class</option>
-                                            <option value="firstClass">First Class</option>
-                                        </select></div>
+                    
+                        <div class=" modal fade custom-modal1" id="modalId1" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                            <div class="modal-dialog " role="document">
+                                <div class="modal-content">
+                                   
+                                    <div class="modal-body text-sm">
+                                        <div class="px-2">
+                                
+                                            <div class="row">
+                                                <div class="col">
+                                                    <p>ADULTS (12y +)</p>
+                                    
+                                                    <mat-button-toggle-group [(ngModel)]="adults" class=" border-0 shadow" name="favoriteColor" aria-label="Favorite Color">
+                                                        <mat-button-toggle  class="border-0"*ngFor="let item of num" [value]="item+1">{{item+1}}</mat-button-toggle>
+                                                      </mat-button-toggle-group>
+                                                     
+                                                    
+                                                </div>
+                                    
+                                    
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="">
+                                                    
+                                                    <p>CHILDREN (2y - 12y)</p>
+                                    
+                                                    
+                                                    <mat-button-toggle-group [(ngModel)]="child" class=" border-0 shadow " name="favoriteColor" aria-label="Favorite Color">
+                                                        <ng-container *ngFor="let item of num">
+                                                            
+                                                            <mat-button-toggle  class="border-0" [value]="item" *ngIf="item < 6 ">{{item}}</mat-button-toggle>
+                                                        </ng-container>
+                                                      </mat-button-toggle-group>
+                                                        
+                                                      
+                                                </div>
+                                                <div class="">
+                                                    
+                                                    <p>INFANTS (below 2y)</p>
+                                    
+                                                    <mat-button-toggle-group [(ngModel)]="infants" class=" border-0 shadow " name="favoriteColor" aria-label="Favorite Color">
+                                                        <ng-container *ngFor="let item of num">
+                                                            
+                                                            <mat-button-toggle  class="border-0" [value]="item" *ngIf="item < 6 ">{{item}}</mat-button-toggle>
+                                                        </ng-container>
+                                                      </mat-button-toggle-group>
+                                                </div>
+                                    
+                                    
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <p>CHOOSE TRAVEL CLASS</p>
+                                                       
+                                                          <mat-button-toggle-group [(ngModel)]="seatTypes" class=" border-0 shadow" name="favoriteColor" aria-label="Favorite Color">
+                                                            <mat-button-toggle  class="border-0" [value]="1">Economy Class</mat-button-toggle>
+                                                            <mat-button-toggle  class="border-0" [value]="2">First Class</mat-button-toggle>
+                                                            <mat-button-toggle  class="border-0" [value]="3">Business Class</mat-button-toggle>
+                                                          </mat-button-toggle-group>
+                                                        
+                                                      </div>
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col shadow py-4">
+                                                <button type="button" class=" btn bg-lightBlue rounded"  data-bs-dismiss="modal" >Done</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="seatTypeSelect" class="form-label">ADULTS (12y +)</label><select #ad class="form-select" >
-                                        <option [value]="item" *ngFor="let item of num">{{item+1}}</option>
-                                        
-                                    </select>
-                                </div>
-
-
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="seatTypeSelect" class="form-label">CHILDREN (2y - 12y)</label><select #b class="form-select" >
-                                        <option [value]="item" *ngFor="let item of num">{{item}}</option>
-                                        
-                                    </select>
-                                </div>
-
-
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="seatTypeSelect" class="form-label">INFANTS (below 2y)</label><select #c class="form-select" >
-                                        <option [value]="item" *ngFor="let item of num">{{item}}</option>
-                                        
-                                    </select>
-                                </div>
-
-
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <button type="button" class="btn btn-primary rounded" (click)="SeatType(type.value,ad.value,b.value,c.value)">Apply</button>
-                                </div>
-
-
-                            </div>
-                        </div>
+                        
                     </div>
 
                 </div> 
 
-                <div class="d-flex justify-content-center ">
-                                     <button [routerLink]="['/flight']" routerLinkActive="router-link-active"  class="fs-3 px-5 py-3 w-50 bg-lightBlue btn text-light">Search<i class="mx-2 fa-solid fa-plane "></i>   </button>
-                </div>
+            </div>
+            <div class="d-flex position-absolute top-100 start-50 translate-middle justify-content-center ">
+                                 <button (click)="PatchSearch()" class="fs-3 px-5 py-2 w-100 bg-lightBlue btn text-light rounded-pill">Search<i class="mx-2 fa-solid fa-plane "></i>   </button>
             </div>
 
 
@@ -300,3 +356,6 @@
     <img 
 class="col-11 col-lg-9"     src="https://res.cloudinary.com/drljda4ci/image/upload/v1686747333/5f393b4d-a1ac-4a5c-bd82-db7d38cb44f1_ld8bia.jpg" alt="">
 </div>
+
+
+ 

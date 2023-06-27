@@ -1,7 +1,9 @@
-﻿using backend.Models;
+﻿using backend.DTOs;
+using backend.Models;
 using backend.RepoPattern.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 
 namespace backend.Controllers
 {
@@ -12,12 +14,14 @@ namespace backend.Controllers
         private readonly IAirportData _airport;
         private readonly ICity _city;
         private readonly IJourney _journey;
+        private readonly Iflight _flight;
 
-        public searchData(IAirportData airport,ICity city,IJourney journey)
+        public searchData(IAirportData airport,ICity city,IJourney journey,Iflight flights)
         {
                 _airport = airport;
             _city = city;
             _journey = journey;
+            _flight = flights;
         }
 
         [HttpGet]
@@ -43,23 +47,29 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(string value)
+        public IActionResult Post(JourneySearch obj)
         {
 
-            var ob = _airport.Get().FirstOrDefault(x => x.AirportCode == value);
-            if (ob == null)
+            
+            if (obj == null)
             {
-                return NotFound();
+                return BadRequest();
             }
+            
             var journay = from x in _journey.Get()
-                          where x.JourneyId == ob.AirportId
+                          //where x.SourceId == obj.fromID
+                          //&& x.DestinationId == obj.toID
                           select new { 
                           JournayId = x.JourneyId,
                           Arrival = x.Arrivaltime,
                           Depature = x.Departuretime,
-                         
+                          airlineId =  _flight.Get().FirstOrDefault(f=>f.FlightId == x.FlightId)?.AirlineId ?? -1
                           };
 
+            if (journay == null)
+            {
+                return NotFound();
+            }
             return Ok(journay);
         }
     }

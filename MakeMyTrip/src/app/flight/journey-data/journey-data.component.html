@@ -1,1 +1,43 @@
-<p>{{data|json}}</p>
+<div class=" bg-light shadow px-2 py-2">
+<div>
+
+
+<div *ngFor="let d of modifiedData">
+    <div class=" bg-white border m-3 rounded shadow py-4 px-1">
+        <div class="d-flex justify-content-between gap-5 p-1">
+
+            <div >
+                <img style="height: 30px; width:50px;" class=" p-1" [src]="d.logo" alt="airlineLogo">
+            </div>
+            <div>
+                <p class="fs-4">{{d.airline}}</p>
+                <small class=" text-secondary">AF 5643</small>
+            </div>
+            <div>
+                <h4>{{d.arrival|date:'HH:mm' }}</h4>
+                <small>{{this.search.from.city}}({{this.search.from.airportCode}})</small>
+            </div>
+            <div>
+                <p class="text-secondary ">{{d.time}}</p>
+                <p class="line w-100 h-1 "></p>
+                <small class="text-secondary ">Non Stop</small>
+            </div>
+            <div>
+                <h4>{{d.depature|date:'HH:mm' }}</h4>
+                <small>{{this.search.to.city}}({{this.search.to.airportCode}})</small>
+            </div>
+            <div>
+                <h4>{{12003|currency:'INR'}}</h4>
+                <small class="text-secondary ">per traveller </small>
+            </div>
+            <div class="d-flex justify-content-center flex-column">
+                <button class="rounded-pill  py-1 px-3 h4 book-btn">Book Now</button>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center  " >
+<p class="bg-custom2 px-2 rounded"> <small class=" bg-danger px-2 mx-1 rounded-circle "></small> Get Rs 162 off using MMTOFFER* + Additional Flat Rs 50 off on UPI payments</p>
+        </div>
+    </div>
+</div>
+</div>
+</div>

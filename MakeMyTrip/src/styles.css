@@ -17,11 +17,35 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     .bg-lightBlue{
         background: linear-gradient(to right, #4daff5, #0d6cd1);
         border-radius: 7px;
-        
+        color: white;
          
         }
 
         .signUp{
           background: linear-gradient(to right, #4daff5, #0d6cd1);
           border-radius: 7px;
+        }
+
+
+
+        .mat-button-toggle-group {
+          
+          padding-right: 3%;
+          border: none;
+      
+        }
+        .mat-button-toggle-checked {
+         
+          background: linear-gradient(to right, #4daff5, #0d6cd1);
+          color: white !important;
+         
+          
+        }
+        .mat-button-toggle{
+         margin: qpx !important;
+          border-radius: 7px;
+        }
+
+        .bg-custom1{
+          background-color: rgba(252, 246, 238, 0.375);
         }

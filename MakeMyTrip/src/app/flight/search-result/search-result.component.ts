@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AirportModel } from 'src/Model/Airport.model';
-import { searchData } from 'src/Model/SearchData.model';
+import { TicketClass, searchData } from 'src/Model/SearchData.model';
+import { AirportService } from 'src/app/services/airport.service';
+import { SearchDataService } from 'src/app/services/search-data.service';
 
 @Component({
   selector: 'app-search-result',
@@ -9,31 +12,49 @@ import { searchData } from 'src/Model/SearchData.model';
   styleUrls: ['./search-result.component.css']
 })
 export class SearchResultComponent {
-  num=[0,1,2,3,4,5,6,7,8,9];
+  num=[0,1,2,3,4,5,6,7,8];
+  TicketClass = TicketClass;
   airport:AirportModel[]=[];
   filterAirport:AirportModel[]=[];
-  searchData:searchData={} as searchData;
+  search!:searchData
 form :AirportModel={}as AirportModel
   to: AirportModel={}as AirportModel;
-  traveltype: number=0;
-  passengers: number=1;
-  seatTypes="Economy";
-  adults!: number;
-  child!: number;
-  infants!: number;
-  departure!: string;
-  return!: string|null;
+  tripType: number=1;
+  seatTypes=1;
+  adults: number=1;
+  child: number=0;
+  infants: number=0;
+  departure =new Date();
+  return: Date|null|undefined = this.departure;
   
-  constructor(private http:HttpClient){
 
-    this.http.get<AirportModel[]>('https://localhost:7007/api/AirportSApi').subscribe((airports:AirportModel[]) =>{
+
+
+  constructor( private airportService:AirportService,private searchService:SearchDataService,private router:Router){
+
+    this.airportService.get().subscribe((airports:AirportModel[]) =>{
       this.airport = airports
-      console.log(this.airport); 
-      this.form = this.airport[0],
-      this.to = this.airport[3]
-  
+     
+    })
 
-         
+    this.searchService.get().subscribe({
+     next:(data:searchData)=>{
+      this.search=data
+      this.tripType = this.search.tripType;
+      this.form = this.search.from,
+      this.to = this.search.to,
+      this.departure = this.search.departureTime ,
+      this.return = this.search.returnTime,
+      this.seatTypes = this.search.seatTypes,
+      this.adults = this.search.passengers.adults,
+      this.child = this.search.passengers.child,
+      this.infants = this.search.passengers.infants
+      console.log("secound"+this.search);
+      
+     },
+     error:(err)=>{
+      alert('Search Data Error  ')
+     }
     })
   }
 
@@ -42,6 +63,7 @@ form :AirportModel={}as AirportModel
   }
 
   from(ob:AirportModel,n:number){
+    
     if(n==1){
       this.form = ob;
     }
@@ -50,59 +72,51 @@ form :AirportModel={}as AirportModel
     }
        
   }
-  seatNumbers=1;
-  SeatType(type:string,a:string,b:string,c:string){
-    this.seatTypes = type;
-    this.adults = Number(a);
-    this.child = Number(b);
-    this.infants =Number(c);  
-this.seatNumbers = Number(a)+ Number(b)+ Number(c) ;
-console.log(a);
+  
+ 
 
-  }
-  changeTrip(TripId:number){
-    this.traveltype = TripId;
-  }
+  //   fromFlag=false;
+  //   ToFlag=false;
+  //   fromToggle(){
+  //       this.fromFlag =! this.fromFlag
+  //       this.ToFlag = false
+  //   }
+  //   toToggle(){
+  //     this.ToFlag =! this.ToFlag
+  //     this.fromFlag = false 
+  // }
+ 
+ChageAirport(val:AirportModel, fromFlag:boolean){
 
-  dates(dates:string,type:number){
-    if(type == 1){
-      this.departure =  dates;
-     console.log(dates);
-     
+if(fromFlag ){
+  this.search.from = val;
+  this.form = val;
+}
+else{
+  this.search.to = val;
+  this.to = val
+}
+console.log(this.search);
+
+}
+
+
+PatchSearch(){
+  this.search = {
+    tripType:this.tripType,
+    seatTypes:this.seatTypes,
+    from:this.form,
+    to:this.to,
+    departureTime:this.departure,
+    returnTime:this.tripType==1?null:this.return,
+    passengers:{
+      adults:this.adults,
+      child:this.child,
+      infants:this.infants
     }
-    else{
-      this.return =  dates
-    }
+
   }
-
-  navigate(re:string,de:string){
-console.log(new Date(de+""+re));
-
-    this.departure =  de;
-    this.return =  this.traveltype==0?null: re;
-
-    // var ob:searchData = {
-    //    from:this.form,
-    //    to:this.to,
-    //    type:this.traveltype,
-    //    seatTypes:this.seatTypes,
-    //    departure:this.departure,
-    //    return:this.return,
-    //     adults:this.adults,
-    //     child:this.child,
-    //     infants:this.infants
-       
-    // }
-
-
-const query = this.form.airportCode+"&&"+this.to.airportCode;
-const query1 = this.departure+"&&"+this.return;
-const query2 = this.adults+"&&"+this.child+"&&"+this.infants
-const query3 = this.seatTypes+"&&"+this.traveltype
-
-    // this.route.navigate(['/flight/searchflight'],{queryParams:{route:query,time:query1,passengers:query2,traveltype:query3}})
-  }
-
-    datep= new Date()
-    datep1=this.datep
+  this.searchService.set(this.search)
+  this.router.navigate(['/flight'])
+}
 }

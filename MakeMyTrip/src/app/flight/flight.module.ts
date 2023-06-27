@@ -20,6 +20,7 @@ import { JourneyDataComponent } from './journey-data/journey-data.component';
 import { FilterComponent } from './filter/filter.component';
 
 import { CommonModules } from '../common/common.module';
+import { TestingComponent1 } from './testing/testing.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { CommonModules } from '../common/common.module';
     SearchResultComponent,
     JourneyDataComponent,
     FilterComponent,
+    TestingComponent1,
     
     
   ],

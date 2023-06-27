@@ -17,6 +17,7 @@ builder.Services.AddScoped<IAirportData, Airpots>();
 builder.Services.AddScoped<ICity, Cityes>();
 builder.Services.AddScoped<IJourney, Journeyclass>();
 builder.Services.AddScoped<IAirlines, Airelines>();
+builder.Services.AddScoped<Iflight, Flights>();
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
