@@ -14,7 +14,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
     FooterComponent,
     LoginComponent,
     NavbarComponent,
-    // MyProfileComponent
+    MyProfileComponent
   ],
   imports: [
     CommonModule,
@@ -22,6 +22,6 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
     ReactiveFormsModule,
     FormsModule
   ],
-  exports:[LoginComponent,FooterComponent,NavbarComponent]
+  exports:[LoginComponent,FooterComponent,NavbarComponent,MyProfileComponent]
 })
 export class CommonModules { }

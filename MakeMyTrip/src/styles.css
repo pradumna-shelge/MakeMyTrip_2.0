@@ -26,7 +26,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
           border-radius: 7px;
         }
 
+.text-csblue{
+  color: #2a8ce7;
+}
 
+.btn-primary{
+  color: #2a8ce7;
+}
 
         .mat-button-toggle-group {
           

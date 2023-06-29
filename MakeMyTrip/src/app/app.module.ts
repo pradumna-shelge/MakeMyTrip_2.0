@@ -22,7 +22,6 @@ import { MyProfileComponent } from './common/my-profile/my-profile.component';
   declarations: [
     AppComponent,
     HomepageComponent,
-    MyProfileComponent,
     SearchComponent,
     
   ],
