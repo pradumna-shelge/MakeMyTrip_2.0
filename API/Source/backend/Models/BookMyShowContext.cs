@@ -218,6 +218,7 @@ public partial class BookMyShowContext : DbContext
             entity.Property(e => e.PhoneNumber).HasMaxLength(20);
             entity.Property(e => e.UserAddress).HasMaxLength(100);
             entity.Property(e => e.UserEmail).HasMaxLength(100);
+            entity.Property(e => e.UserOtpDate).HasColumnType("datetime");
             entity.Property(e => e.Username).HasMaxLength(50);
 
             entity.HasOne(d => d.Created).WithMany(p => p.InverseCreated)

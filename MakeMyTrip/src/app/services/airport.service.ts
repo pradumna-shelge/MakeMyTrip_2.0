@@ -19,7 +19,7 @@ get(){
 return this.data.asObservable();
 }
 set(){
-  this.http.get<AirportModel[]>('https://localhost:7007/api/AirportSApi').subscribe({
+  this.http.get<AirportModel[]>('https://localhost:7007/api/Airport ').subscribe({
     next:(airports:AirportModel[]) =>{
     this.data.next(airports);
  

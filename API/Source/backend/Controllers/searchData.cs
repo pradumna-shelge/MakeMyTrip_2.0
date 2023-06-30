@@ -25,10 +25,10 @@ namespace backend.Controllers
         }
 
         [HttpGet]
-        public  IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var preAirport =  _airport.Get();
-            var preCity = _city.Get();
+            var preAirport = await _airport.Get();
+            var preCity = await _city.Get();
 
             var resp = from a in preAirport
                        join c in preCity on a.AddressId equals c.LocationId
@@ -47,7 +47,7 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(JourneySearch obj)
+        public async Task<IActionResult> Post(JourneySearch obj)
         {
 
             
@@ -55,15 +55,16 @@ namespace backend.Controllers
             {
                 return BadRequest();
             }
-            
-            var journay = from x in _journey.Get()
-                          //where x.SourceId == obj.fromID
-                          //&& x.DestinationId == obj.toID
-                          select new { 
+            var journays = await _journey.Get();
+            var flights = await _flight.Get();
+            var journay =  from x in journays
+                                    //where x.SourceId == obj.fromID
+                                    //&& x.DestinationId == obj.toID
+                                select new { 
                           JournayId = x.JourneyId,
                           Arrival = x.Arrivaltime,
                           Depature = x.Departuretime,
-                          airlineId =  _flight.Get().FirstOrDefault(f=>f.FlightId == x.FlightId)?.AirlineId ?? -1
+                          airlineId = flights.FirstOrDefault(f=>f.FlightId == x.FlightId)?.AirlineId ?? -1
                           };
 
             if (journay == null)

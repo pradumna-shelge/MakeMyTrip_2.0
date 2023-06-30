@@ -1,0 +1,1 @@
+export const rootApi = "https://localhost:7007/api/"

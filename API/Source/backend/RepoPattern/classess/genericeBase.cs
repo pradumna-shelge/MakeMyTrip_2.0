@@ -21,22 +21,37 @@ namespace backend.RepoPattern.classess
             throw new NotImplementedException();
         }
 
-        public IEnumerable<T> Get()
+        public async Task<IEnumerable<T>> Get()
         {
-            return _dbset.ToList();
+            return await _dbset.ToListAsync();
 
         }
 
 
 
-        public Task<T> Post(T ob)
+        public async Task<T> Post(T ob)
         {
-            throw new NotImplementedException();
+            if(ob == null)
+            {
+                throw new ArgumentNullException(nameof(ob));
+            }
+_dbset.Add(ob);
+           await _contex.SaveChangesAsync();
+            return ob;
+            
         }
 
-        public Task Put(int i, T ob)
+        public async Task Put(T ob)
         {
-            throw new NotImplementedException();
+            if (ob == null)
+            {
+                throw new ArgumentNullException(nameof(ob));
+            }
+
+            _dbset.Update(ob);
+            await _contex.SaveChangesAsync();
+            
+
         }
     }
 }

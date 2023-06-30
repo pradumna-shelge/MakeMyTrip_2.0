@@ -29,6 +29,10 @@ public partial class User
 
     public int? RoleId { get; set; }
 
+    public int? UserOtp { get; set; }
+
+    public DateTime? UserOtpDate { get; set; }
+
     public virtual ICollection<Airline> AirlineCreateds { get; set; } = new List<Airline>();
 
     public virtual ICollection<Airline> AirlineLastModifications { get; set; } = new List<Airline>();

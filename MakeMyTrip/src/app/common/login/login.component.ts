@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,7 @@ export class LoginComponent {
 
   Area = 1;
 
-constructor(private fb:FormBuilder,private router:Router){
+constructor(private fb:FormBuilder,private router:Router,private ser:LoginService){
 // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
 //   const payload = jwt_decode(token);
 //   console.log(payload);
@@ -21,7 +23,7 @@ constructor(private fb:FormBuilder,private router:Router){
     
     this.userData = this.fb.group({
       Email:['',[ Validators.required, Validators.email]],
-      Otp:['',[ Validators.required, Validators.maxLength(4),Validators.minLength(4)]]
+      Otp:['',[ Validators.required, Validators.maxLength(6),Validators.minLength(6)]]
     })
   }
 
@@ -33,20 +35,47 @@ get Otp(){
   return this.userData.get('Otp')
 }
 
-  OtpSend(val:string) {
-
+  OtpSend() {
+    
+      this.ser.otpSend(this.Email?.value).subscribe({
+        next:(data: any) => {
+           console.log(data);
+          
+        },
+        error:(err) => {
+          console.log(err);
+          this.Area=1;
+          this.stopTimer();
+        }
+      })
+      
   }
 
   changeArea(area:number){
+    this.Area = area;
     if(area == 3){
       this.stopTimer();
-       this.router.navigate(['/admin']);
-       document.getElementById('')
+       this.ser.otpVerify(this.Email?.value,Number( this.Otp?.value)).subscribe({
+        next:(data: any) => {
+          localStorage.setItem("token",data.token);
+          console.log(data.token);
+          
+          this.router.navigate(['/'])
+         
+       },
+       error:(err:any) => {
+         console.log(err.error.mes);
+         this.Area = 2
+       }
+       })
+
+      
     }
-      this.Area = area;
-      if(area = 2){
+      
+      if(area == 2){
+        
         this.resetTimer()
-        this.OtpSend('');
+        this.OtpSend();
         this.timer();
       }
   }
@@ -86,4 +115,7 @@ mobileFlag = false;
   ChangeLogin(){
 
   }
+
+
+  
 }

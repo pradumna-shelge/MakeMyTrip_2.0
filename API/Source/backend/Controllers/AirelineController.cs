@@ -6,19 +6,19 @@ namespace backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Aireline : ControllerBase
+    public class AirelineController : ControllerBase
     {
         private IAirlines _aireline;
 
-        public Aireline(IAirlines airlines)
+        public AirelineController(IAirlines airlines)
         {
                 _aireline = airlines;
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var data = from d in _aireline.Get()
+            var data = from d in await _aireline.Get()
                        select new
                        {
                            id = d.AirlineId,
