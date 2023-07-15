@@ -158,8 +158,14 @@ overflow: hidden;
 
 .card1{
 background-color: rgba(252, 252, 252, 0.06);
-height: 80px;
+min-height: fit-content;
+max-height: 100px;
+min-width: fit-content;
+max-width: 80%;
 border-radius: 10px;
+}
+.tripselect{
+  background-color: rgba(252, 252, 252, 0);
 }
 .list_of{
   height: 500px;

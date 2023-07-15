@@ -1,6 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body { height: 100%; 
+  
+ 
+  }
+  body::-webkit-scrollbar {
+    display: none;
+  }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .bg-gray{
     background-color: rgb(226, 228, 230);
@@ -53,10 +59,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         }
 
         .bg-custom1{
-          background-color: rgba(252, 246, 238, 0.375);
-        }
+          /* background: linear-gradient( #0a338c  1%, #ffffff,white);   */
+          background-color: white;
+              }
 
         /* .modal-backdrop {background: none;}
         .modal{background: none;
         
         } */
+
+
+
+
+        a:hover {
+          cursor: pointer;
+        }
+
+        .logo{
+          width: 80px ;
+          /* border-radius: 100px; */
+        }

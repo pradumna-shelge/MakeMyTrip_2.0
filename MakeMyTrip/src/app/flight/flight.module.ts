@@ -21,6 +21,18 @@ import { FilterComponent } from './filter/filter.component';
 
 import { CommonModules } from '../common/common.module';
 import { TestingComponent1 } from './testing/testing.component';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { AirportEffects } from 'src/NgStore/AirPort/Airport.effect';
+import { AirportReducer } from 'src/NgStore/AirPort/Airport.reduser';
+import { SearchReducer } from 'src/NgStore/search/Search.reduser';
+import { FlightDetailComponent } from './journey-data/journeyDetail/flight-detail/flight-detail.component';
+import { FareSummaryComponent } from './journey-data/journeyDetail/fare-summary/fare-summary.component';
+import { CancellationComponent } from './journey-data/journeyDetail/cancellation/cancellation.component';
+import { DateChangeComponent } from './journey-data/journeyDetail/date-change/date-change.component';
+import { JourneyDetailComponent } from './journey-data/journeyDetail/journey-detail/journey-detail.component';
+import { ReviewDetailsComponent } from './review-details/review-details.component';
+import { PaymentDetailComponent } from './review-details/childs/payment-detail/payment-detail.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +43,13 @@ import { TestingComponent1 } from './testing/testing.component';
     JourneyDataComponent,
     FilterComponent,
     TestingComponent1,
+    FlightDetailComponent,
+    FareSummaryComponent,
+    CancellationComponent,
+    DateChangeComponent,
+    JourneyDetailComponent,
+    ReviewDetailsComponent,
+    PaymentDetailComponent,
     
     
   ],
@@ -49,8 +68,8 @@ import { TestingComponent1 } from './testing/testing.component';
     MatSliderModule,
     MatButtonModule,
     MatButtonToggleModule,
-    MatMenuModule
-    
+    MatMenuModule,
+
   ]
 })
 export class FlightModule { }

@@ -5,11 +5,7 @@ export interface searchData{
     to : AirportModel,
     departureTime : Date,
     returnTime? : Date|null,
-    passengers:{
-        adults: number,
-        child : number,
-        infants:number
-    },
+    passengers:Passengers,
     tripType : number,
     seatTypes:number,
 }
@@ -34,12 +30,10 @@ export const   TicketClass= [
     returnDate:string
   }
 
-  export interface JourneyModified{
-    journayId:number,
-    arrival:Date
-    depature:Date,
-    airlineId:number,
-    logo:string,
-    time:string
-    airline:string
-  }
+  export interface Passengers{
+    adults: number,
+    child : number,
+    infants:number
+}
+
+

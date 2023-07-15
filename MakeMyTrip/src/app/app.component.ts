@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AirportStore } from 'src/NgStore/AirPort/Airport.reduser';
+import { getAirportData } from 'src/NgStore/AirPort/Airport.selector';
 
 @Component({
   selector: 'app-root',

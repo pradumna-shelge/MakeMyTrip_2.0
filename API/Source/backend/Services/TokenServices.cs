@@ -37,7 +37,7 @@ namespace backend.Services
 
             var clames = new Claim[]
             {
-                new Claim(ClaimTypes.Name, user.Username),
+               
                 new Claim(ClaimTypes.Role, userRole),
                  new Claim("userEmail", user.UserEmail),
             };

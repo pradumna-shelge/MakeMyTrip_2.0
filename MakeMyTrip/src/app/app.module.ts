@@ -17,12 +17,23 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { CommonModules } from './common/common.module';
 import { MyProfileComponent } from './common/my-profile/my-profile.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { AirportReducer } from 'src/NgStore/AirPort/Airport.reduser';
+import { AirportEffects } from 'src/NgStore/AirPort/Airport.effect';
+import { SearchReducer } from 'src/NgStore/search/Search.reduser';
+import { AirLienEffects } from 'src/NgStore/AirLine/AirLine.effect';
+import { AirLineReducer } from 'src/NgStore/AirLine/AirLine.reduser';
+import { TripReducer } from 'src/NgStore/tripDetail/trip.ngStore';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     SearchComponent,
+    
+  
     
   ],
   imports: [
@@ -39,7 +50,9 @@ import { MyProfileComponent } from './common/my-profile/my-profile.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    StoreModule.forRoot({Airport:AirportReducer,search:SearchReducer,airline:AirLineReducer,trip:TripReducer}),
+    EffectsModule.forRoot(AirportEffects,AirLienEffects)
     
   ],
   providers: [],

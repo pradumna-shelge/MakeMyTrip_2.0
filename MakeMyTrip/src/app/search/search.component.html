@@ -83,16 +83,16 @@
 
             <div class="card-body ">
                 
-                <mat-button-toggle-group [(ngModel)]="tripType"  name="fontStyle" aria-label="Font Style">
+                <mat-button-toggle-group  [(ngModel)]="tripType"  name="fontStyle" aria-label="Font Style">
                     <div class="btn-group row">
                         <div class="col-6" >
 
                           
-                            <mat-button-toggle class="px-2  py-2" value="2">Round Up</mat-button-toggle>
+                            <mat-button-toggle class="px-2  py-2" [value]="2" >Round Up</mat-button-toggle>
                         </div>
 
                         <div class="col-6">
-                           <mat-button-toggle class="px-2  py-2" value="1" >One Way</mat-button-toggle>
+                           <mat-button-toggle class="px-2  py-2" [value]="1" >One Way</mat-button-toggle>
                         </div>
 
                         
@@ -105,7 +105,7 @@
 
             <div class=" d-flex gap-1 justify-content-center position-relative  row ">
 
-                <div *ngIf="form" class="border position-relative  col-10 col-lg-3 " >
+                <div  class="border position-relative  col-10 col-lg-3 " >
                     <div class="  "  aria-expanded="false" >
                         <div class="d-flex mx-1 align-content-center  "  >
                         <i class="d-lg-none fa-solid fa-plane-departure"></i>
@@ -113,10 +113,10 @@
                     </div>
                     <div data-bs-toggle="modal" data-bs-target="#From">
 
-                        <h4  class=" h4">{{form.city }}</h4>
+                        <h4  class=" h4">{{searchData.from.city }}</h4>
                        
     
-                        <p>{{form.airportCode+","+form.airportName.substr(0,25)+"..."}}</p>
+                        <p >{{searchData.from.airportCode+","+searchData.from.airportName.substr(0,25)+"..."}}</p>
 
                     </div>    
 
@@ -138,7 +138,7 @@
                                         <ol class="list-group border-0 overflow-auto" >
                                             <div class="" *ngFor="let item of filterAirport;let i = index">
                                                 <li class=" list-group-item   align-items-start border-0"
-                                                 (click)="ChageAirport(item,true)">
+                                                 (click)="ChangeAirport(item,true)">
                                                 <div class="ms-2 me-auto d-flex justify-content-between"  data-bs-dismiss="modal" >
                                                     <p class="fs-6">{{item.city+","+item.country}}</p>
         
@@ -158,7 +158,7 @@
                  </div>
                 </div>
            
-                <div *ngIf="to" class="border position-relative  col-10 col-lg-3 " >
+                <div  class="border position-relative  col-10 col-lg-3 " >
                     <div class="  "  aria-expanded="false" >
                         <div class="d-flex mx-1 align-content-center  "  >
                         <i class="d-lg-none fa-solid fa-plane-departure"></i>
@@ -166,10 +166,10 @@
                     </div>
                     <div data-bs-toggle="modal" data-bs-target="#ToModel">
 
-                        <h4  class=" h4">{{this.to.city }}</h4>
+                        <h4  class=" h4">{{searchData.to.city }}</h4>
                        
     
-                        <p>{{this.to.airportCode+","+this.to.airportName.substr(0,25)+"..."}}</p>
+                        <p>{{searchData.to.airportCode+","+searchData.to.airportName.substr(0,25)+"..."}}</p>
 
                     </div>    
 
@@ -182,7 +182,7 @@
                                 <div class=" ">
                                     <div class="w-100 py-2 px-1 d-flex  shadow rounded bg-light">
                                         
-                                        <!-- <i class=" mt-auto fa-solid fs-4 fa-magnifying-glass"></i> -->
+                                        
                                         <input type="text" #search class="form-control border-0" placeholder="search..."
                                             (input)="checkAirport(search.value)">
                                     </div>
@@ -192,7 +192,7 @@
                                         <ol class="list-group border-0 overflow-auto" >
                                             <div class="" *ngFor="let item of filterAirport;let i = index">
                                                 <li class=" list-group-item   align-items-start border-0"
-                                              (click)=  "ChageAirport(item,false)">
+                                              (click)=  "ChangeAirport(item,false)">
                                                 <div class="ms-2 me-auto d-flex justify-content-between"  data-bs-dismiss="modal" >
                                                     <p class="fs-6">{{item.city+","+item.country}}</p>
         
@@ -215,27 +215,20 @@
                 <div class="border position-relative  col-10 col-lg-2">
                     <div class="" data-bs-toggle="dropdown1" aria-expanded="false"  (click)="picker1.open()">
                         <p class="fs-6 fw-light">DEPARTURE DATE  </p>
-                       
-                            <h5>{{departure|date}}</h5>
+                            <h5>{{searchData.departureTime|date}}</h5>
 
-                                <input   [(ngModel)]="departure"  matInput [matDatepicker]="picker1" class="date-Input">
-                               
-                                
-                                
-                                
-                                
-                                
+                                <input  (dateChange)="ChangeDate(departure.value,true)" #departure matInput [matDatepicker]="picker1" class="date-Input">   
                             </div>
-                            <mat-datepicker class="custom-modal"  #picker1></mat-datepicker>
+                            <mat-datepicker  class="custom-modal"  #picker1 ></mat-datepicker>
                   
                 </div>
                  <div  class="border position-relative col-10 col-lg-2">
                     <div [ngClass]="{'text-secondary': tripType==1}" class="" data-bs-toggle="dropdown1" aria-expanded="false"  (click)="picker.open()">
                         <p class="fs-6 fw-light">RETURN DATE  </p>
                        
-                            <h5>{{return|date}}</h5>
+                            <h5>{{searchData.returnTime|date}}</h5>
 
-                                <input   [(ngModel)]="return"  matInput [matDatepicker]="picker" class="date-Input"     [disabled]="tripType==1">
+                                <input   (dateChange)="ChangeDate(departure.value,false)"  matInput [matDatepicker]="picker" class="date-Input"     [disabled]="tripType==1">
                                
                                 <mat-datepicker  #picker></mat-datepicker>
                              
@@ -251,8 +244,8 @@
                     <div class="" aria-expanded="false">
                         <p class="fs-6 fw-light">PASSENGERS</p>
                         <div class=" d-flex justify-content-evenly" data-bs-toggle="modal" data-bs-target="#modalId1">
-                            <h4> {{adults+child+infants}}</h4>
-                              <p>{{TicketClass[seatTypes]}}</p>
+                            <h4> {{this.searchData.passengers.adults+this.searchData.passengers.child+this.searchData.passengers.infants}}</h4>
+                              <p>{{TicketClass[this.searchData.seatTypes]}}</p>
                         </div>
 
                     </div>
@@ -268,8 +261,8 @@
                                                 <div class="col">
                                                     <p>ADULTS (12y +)</p>
                                     
-                                                    <mat-button-toggle-group [(ngModel)]="adults" class=" border-0 shadow" name="favoriteColor" aria-label="Favorite Color">
-                                                        <mat-button-toggle  class="border-0"*ngFor="let item of num" [value]="item+1">{{item+1}}</mat-button-toggle>
+                                                    <mat-button-toggle-group (change)="changePass($event.value,1)" class=" border-0 shadow" name="favoriteColor" aria-label="Favorite Color">
+                                                        <mat-button-toggle  class="border-0"*ngFor="let item of [1,2,3,4,5,6,7,8,9]" [value]="item">{{item}}</mat-button-toggle>
                                                       </mat-button-toggle-group>
                                                      
                                                     
@@ -283,10 +276,10 @@
                                                     <p>CHILDREN (2y - 12y)</p>
                                     
                                                     
-                                                    <mat-button-toggle-group [(ngModel)]="child" class=" border-0 shadow " name="favoriteColor" aria-label="Favorite Color">
-                                                        <ng-container *ngFor="let item of num">
+                                                    <mat-button-toggle-group (change)="changePass($event.value,2)"  class=" border-0 shadow " name="favoriteColor" aria-label="Favorite Color">
+                                                        <ng-container *ngFor="let item of [0,1,2,3,4,5,6]">
                                                             
-                                                            <mat-button-toggle  class="border-0" [value]="item" *ngIf="item < 6 ">{{item}}</mat-button-toggle>
+                                                            <mat-button-toggle  class="border-0" [value]="item" >{{item}}</mat-button-toggle>
                                                         </ng-container>
                                                       </mat-button-toggle-group>
                                                         
@@ -296,10 +289,10 @@
                                                     
                                                     <p>INFANTS (below 2y)</p>
                                     
-                                                    <mat-button-toggle-group [(ngModel)]="infants" class=" border-0 shadow " name="favoriteColor" aria-label="Favorite Color">
-                                                        <ng-container *ngFor="let item of num">
+                                                    <mat-button-toggle-group (change)="changePass($event.value,3)" class=" border-0 shadow " name="favoriteColor" aria-label="Favorite Color">
+                                                        <ng-container *ngFor="let item of [0,1,2,3,4,5,6]">
                                                             
-                                                            <mat-button-toggle  class="border-0" [value]="item" *ngIf="item < 6 ">{{item}}</mat-button-toggle>
+                                                            <mat-button-toggle  class="border-0" [value]="item" >{{item}}</mat-button-toggle>
                                                         </ng-container>
                                                       </mat-button-toggle-group>
                                                 </div>
@@ -311,7 +304,7 @@
                                                     <div class="mb-3">
                                                         <p>CHOOSE TRAVEL CLASS</p>
                                                        
-                                                          <mat-button-toggle-group [(ngModel)]="seatTypes" class=" border-0 shadow" name="favoriteColor" aria-label="Favorite Color">
+                                                          <mat-button-toggle-group (change)="changePass($event.value,4)" class=" border-0 shadow" name="favoriteColor" aria-label="Favorite Color">
                                                             <mat-button-toggle  class="border-0" [value]="1">Economy Class</mat-button-toggle>
                                                             <mat-button-toggle  class="border-0" [value]="2">First Class</mat-button-toggle>
                                                             <mat-button-toggle  class="border-0" [value]="3">Business Class</mat-button-toggle>
@@ -325,7 +318,7 @@
                                             
                                         </div>
                                         <div class="row">
-                                            <div class="col shadow py-4">
+                                            <div class="col  py-4">
                                                 <button type="button" class=" btn bg-lightBlue rounded"  data-bs-dismiss="modal" >Done</button>
                                             </div>
                                         </div>
@@ -352,7 +345,7 @@
 </div>
 
 
-<div class="mt-5 p-4 d-flex flex-wrap justify-content-center row">
+ <div class="mt-5 p-4 d-flex flex-wrap justify-content-center row">
     <img 
 class="col-11 col-lg-9"     src="https://res.cloudinary.com/drljda4ci/image/upload/v1686747333/5f393b4d-a1ac-4a5c-bd82-db7d38cb44f1_ld8bia.jpg" alt="">
 </div>

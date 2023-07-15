@@ -1,0 +1,30 @@
+<div class="bg-light p-3">
+
+
+<div class=" d-flex bg-white justify-content-evenly w-50 border p-1">
+    <a (click)="toggleFlightDetail()">Flight Detail</a>
+    <a (click)="toggleFareSummary()">Fare Summary</a>
+    <a (click)="toggleCancellation()">Cancellation</a>
+    <a (click)="toggleDateChange()">Date Change</a>
+
+</div>
+<div *ngIf="flightDetail">
+
+  <div *ngIf="displayComponent === 'flightDetail'">
+    <app-flight-detail [flightDetail]="flightDetail"></app-flight-detail>
+  </div>
+  
+  <div *ngIf="displayComponent === 'fareSummary'">
+    <app-fare-summary [flightDetail]="flightDetail"></app-fare-summary>
+  </div>
+  
+  <div *ngIf="displayComponent === 'cancellation'">
+    <app-cancellation [flightDetail]="flightDetail"></app-cancellation>
+  </div>
+  
+  <div *ngIf="displayComponent === 'dateChange'">
+    <app-date-change [flightDetail]="flightDetail"></app-date-change>
+  </div>
+</div>
+
+</div>

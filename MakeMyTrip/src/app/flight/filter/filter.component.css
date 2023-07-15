@@ -1,6 +1,6 @@
-/* mat-slider {
-    width: max-content;
-  } */
+.mat-slider {
+    color: red;
+  }
 
   .filter-card{
 border: 1px solid black;
@@ -17,10 +17,7 @@ border: 1px solid black;
 width: fit;
 padding: 0 0px;
   }
-  p{
-    line-height: 0;
-  }
-
+ 
   .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
     padding: 0 0px;
 }
@@ -29,3 +26,9 @@ padding: 0 0px;
   width: 50px;
   height: 20px;
 }
+.filterbody{
+  background-color: rgba(11, 130, 248, 0.236);
+  width: fit-content;
+}
+
+

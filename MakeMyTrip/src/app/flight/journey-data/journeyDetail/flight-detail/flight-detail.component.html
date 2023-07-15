@@ -1,0 +1,47 @@
+<div class="container border">
+    <div class="row">
+      <div class="col border">
+        <p >{{ flightDetail.from.city }} To {{ flightDetail.to.city+","+(flightDetail.departureTime | date:'dd MMM ')  }} </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="d-flex align-items-center">
+          <img class="logo" [src]="flightDetail.airline.logo" alt="">
+          <p>{{ flightDetail.airline.name }}</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row">
+          <div class="col">
+            <p>{{ flightDetail.departureTime | date:'HH:mm' }}</p>
+            <p>{{ flightDetail.departureTime | date:'EEE, dd MMM yy' }}</p>
+            <p>{{ flightDetail.from.airportCode }}, {{ flightDetail.from.city }}</p>
+          </div>
+          <div class="col">
+            <p class="text-secondary">{{ flightDetail.duration }}</p>
+            <p class="line w-100 h-1"></p>
+            <small class="text-secondary">Non Stop</small>
+          </div>
+          <div class="col">
+            <p>{{ flightDetail.arrivalTime | date:'HH:mm' }}</p>
+            <p>{{ flightDetail.arrivalTime | date:'EEE, dd MMM yy' }}</p>
+            <p>{{ flightDetail.to.airportCode }}, {{ flightDetail.to.city }}</p>
+          </div>
+          <div class="col">
+            <p>BAGGAGE:</p>
+            <p>ADULT</p>
+          </div>
+          <div class="col">
+            <p>CHECK IN</p>
+            <p>{{ flightDetail.baggage }} Kg (1 piece only)</p>
+          </div>
+          <div class="col">
+            <p>CABIN</p>
+            <p>{{ flightDetail.cabin }} Kg (1 piece only)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

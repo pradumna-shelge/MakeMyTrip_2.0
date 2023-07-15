@@ -1,12 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AirportModel } from 'src/Model/Airport.model';
-import { searchData,TicketClass } from 'src/Model/SearchData.model';
+import { Passengers, searchData,TicketClass } from 'src/Model/SearchData.model';
 import { AireLineService } from '../flight/Services/aire-line.service';
 import { AirportService } from '../services/airport.service';
-import { SearchDataService } from '../services/search-data.service';
+
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AirlineStore, SearchStore } from 'src/NgStore/Stores.interface';
+import { getAirportData } from 'src/NgStore/AirPort/Airport.selector';
+import { LoadSearchData } from 'src/NgStore/search/Search.action';
+import { LoadAirportData } from 'src/NgStore/AirPort/Airport.action';
+import { AirportStore } from 'src/NgStore/AirPort/Airport.reduser';
+import { getSearchData } from 'src/NgStore/search/Search.selector';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -14,105 +21,62 @@ import { Router } from '@angular/router';
 })
 
 export class SearchComponent {
-  num=[0,1,2,3,4,5,6,7,8];
+  
   TicketClass = TicketClass;
   airport:AirportModel[]=[];
   filterAirport:AirportModel[]=[];
-  search!:searchData
-form :AirportModel={}as AirportModel
-  to: AirportModel={}as AirportModel;
-  tripType: number=1;
-  seatTypes=1;
-  adults: number=1;
-  child: number=0;
-  infants: number=0;
-  departure =new Date();
-  return: Date|null = this.departure;
+  searchData!:searchData
+  tripType:number=1
   
+  constructor(private router:Router,private airportStore:Store<AirportStore>,private searchStore:Store<SearchStore>){
 
-
-
-  constructor( private airportService:AirportService,private searchService:SearchDataService,private router:Router){
-
-    this.airportService.get().subscribe((airports:AirportModel[]) =>{
+    this.airportStore.dispatch(LoadAirportData())
+    this.airportStore.select(getAirportData).subscribe((airports:AirportModel[]) =>{
       this.airport = airports
-      
-      this.form = this.airport[0],
-      this.to = this.airport[1]
-
-      this.search={
-        from:this.airport[0],
-        to:this.airport[1],
-        departureTime:new Date(),
-        returnTime:null,
-        passengers:{
-          adults:1,
-          child:0,
-          infants:0
-        },
-        tripType:1,
-        seatTypes:1
-      }
-      this.searchService.set(this.search)
-    
-     
+      });
+      this.searchStore.select(getSearchData).subscribe((search:searchData) =>{
+          this.searchData = search;
+          this.tripType = this.searchData.tripType
     })
   }
+
+
 
   checkAirport(val:string){
   this.filterAirport = this.airport.filter((airport:AirportModel) => airport.city.toLowerCase().match(val.toLowerCase()))
   }
 
-  from(ob:AirportModel,n:number){
-    
-    if(n==1){
-      this.form = ob;
-    }
-    else{
-      this.to =ob
-    }
-       
-  }
-  
- 
-
-
- 
-ChageAirport(val:AirportModel, fromFlag:boolean){
-
-if(fromFlag ){
-  this.search.from = val;
-  this.form = val;
+ChangeAirport(val:AirportModel, fromFlag:boolean){
+  this.searchData =fromFlag? { ...this.searchData, from: val }:{ ...this.searchData, to: val };
 }
+
+ChangeDate(val1:string, fromFlag:boolean){
+ var val = new Date(val1);
+ console.log(val);
+ 
+  this.searchData =fromFlag? { ...this.searchData, departureTime:  val }:{ ...this.searchData, returnTime: val };
+}
+
+changePass(val:number,pos:number){
+if(pos==1){
+  this.searchData = {...this.searchData,passengers:{...this.searchData.passengers,adults:val}}
+}
+else if(pos==2){
+  this.searchData = {...this.searchData,passengers:{...this.searchData.passengers,child:val}}
+}
+
+else if(pos==3){
+  this.searchData = {...this.searchData,passengers:{...this.searchData.passengers,infants:val}}
+}
+
 else{
-  this.search.to = val;
-  this.to = val
+  this.searchData = {...this.searchData,seatTypes:val}
 }
-console.log(this.search);
-
 }
-
-
 PatchSearch(){
-  this.search = {
-    tripType:this.tripType,
-    seatTypes:this.seatTypes,
-    from:this.form,
-    to:this.to,
-    departureTime:this.departure,
-    returnTime:this.return,
-    passengers:{
-      adults:this.adults,
-      child:this.child,
-      infants:this.infants
-    }
-
-  }
-  this.searchService.set(this.search)
-  console.log("first");
-  
-  console.log(this.search);
-  
+  this.searchData = {...this.searchData,tripType:this.tripType}
+  this.searchStore.dispatch(LoadSearchData({data:this.searchData}))
   this.router.navigate(['/flight'])
 }
+
 }

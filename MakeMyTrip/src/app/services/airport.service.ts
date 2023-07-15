@@ -29,4 +29,11 @@ set(){
   }
 })
 }
+
+
+getAirports(){
+  console.log("hii");
+  
+ return this.http.get<AirportModel[]>('https://localhost:7007/api/Airport ')
+}
 }

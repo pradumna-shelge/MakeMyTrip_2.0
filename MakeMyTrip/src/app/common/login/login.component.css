@@ -1,4 +1,14 @@
 .slider-img{
-    height: 30vw;
+    height: 400px;
     width: 100%;
 }
+
+.login-Page{
+    
+    height: fit-content
+}
+
+/* .login{
+height: 40vw;
+width: 80vw;
+} */
