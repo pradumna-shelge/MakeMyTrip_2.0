@@ -1,7 +1,7 @@
 
 
 <h1>{{"Flight From "+search.from.city+" To "+search.to.city}}</h1>
- <div class=" bg-light  px-2 py-2">
+ <div class="  px-2 py-2">
 <div>
 
 
@@ -15,11 +15,11 @@
                 <img  class=" logo p-1" [src]="d.airline.logo" alt="airlineLogo">
             </div>
             <div>
-                <p class="fs-4">{{d.airline.name}}</p>
-                <small class=" text-secondary">AF 5643</small>
+                <p class="fs-6">{{d.airline.name}}</p>
+                <small class=" text-secondary">{{d.flightNumber}}</small>
             </div>
             <div>
-                <h4>{{d.arrivalTime|date:'HH:mm' }}</h4>
+                <p>{{d.arrivalTime|date:'HH:mm' }}</p>
                 <small>{{this.search.from.city}}({{this.search.from.airportCode}})</small>
             </div>
             <div>
@@ -28,11 +28,11 @@
                 <small class="text-secondary ">Non Stop</small>
             </div>
             <div>
-                <h4>{{d.departureTime|date:'HH:mm' }}</h4>
+                <p>{{d.departureTime|date:'HH:mm' }}</p>
                 <small>{{this.search.to.city}}({{this.search.to.airportCode}})</small>
             </div>
             <div>
-                <h4>{{d.price|currency:'INR'}}</h4>
+                <p>{{d.price|currency:'INR'}}</p>
                 <small class="text-secondary ">per traveler </small>
             </div>
             <div class="d-flex justify-content-center flex-column">
@@ -50,7 +50,7 @@
         <div>
            
        
-            <div [id]="'collapse' + item" class="accordion-collapse collapse " [attr.aria-labelledby]="'heading' + item" >
+            <div [id]="'collapse' + item" class="accordion-collapse collapse " [attr.aria-labelledby]="'heading' + item">
               <div class="accordion-body">
                 <app-journey-detail [flightDetail]="FlightDetail" ></app-journey-detail>
               </div>

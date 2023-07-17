@@ -31,6 +31,7 @@ constructor(private router:Router, private JourneysService:JourneysService ,priv
 
 }
 filterData(data:filterInterface){
+  debugger;
   this.filteredData  = this.modifiedData;
    if(data.Price){
     const PriceData =  data.Price.split('-')
@@ -42,17 +43,33 @@ filterData(data:filterInterface){
    }
 
    if(data.DepartureTime){
-    const PriceData =  data.DepartureTime.split('-')
-    const timeValue = '12AM'; 
-const [hours, minutes] = timeValue.split(/(?<=\d)(?=[A-Z])/)[0].split(':').map(Number);
-const date = new Date();
-date.setHours(hours % 12);
-date.setMinutes(minutes);
-       let low= Number( PriceData[0]);
-       let high =Number( PriceData[1]);
-    this.FilterData = this.filteredData.filter(m=> m.price>=low && m.price<= high )
+    const dateArray =  data.DepartureTime.split('-')
+    const low = dateArray[0]; 
+
+const [Lhours, Lminutes] = low.split(/(?<=\d)(?=[A-Z])/)[0].split(':').map(Number);
+
+const LowDate = new Date( this.filteredData[0].departureTime)   ;
+LowDate.setHours(1);
+LowDate.setMinutes(0);
+
+this.filteredData = this.filteredData.filter(m=>  m.departureTime >= LowDate )
+
    }
 
+   if(data.ArrivalTime){
+    const dateArray =  data.DepartureTime.split('-')
+
+    const high = dateArray[1]; 
+
+const [Hhours, Hminutes] = high.split(/(?<=\d)(?=[A-Z])/)[0].split(':').map(Number);
+
+const HighDate = new Date();
+
+HighDate.setHours(Hhours % 12);
+HighDate.setMinutes(Hminutes);
+
+    this.filteredData = this.filteredData.filter(m=>  m.departureTime<= HighDate )
+   }
 
 }
   ngOnInit(): void {
@@ -99,7 +116,6 @@ this.airlineStore.select(getAirLineData).subscribe(data=>{
      this.JourneysService.getJourneys(this.JourneyDatapost).subscribe({
      next:(apiData:JourneyData[])=>{
          this.data = apiData;
-         console.log(this.data);
          this.modifyData()
      },
      error:(err)=>{
@@ -124,7 +140,8 @@ modifyData(){
        baggage:34,
        price:5025,
        cabin:7,
-       Surcharges:300
+       Surcharges:300,
+       flightNumber:this.airlines.find(a=>ob.airlineId==a.id)?.code+ob.flightNumber.toString()
        
     }
     tempData.push(d);

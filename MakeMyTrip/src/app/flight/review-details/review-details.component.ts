@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { tripInterface } from 'src/Model/journey.model';
 import { TripStore } from 'src/NgStore/Stores.interface';
 import { geTrip } from 'src/NgStore/tripDetail/trip.ngStore';
+import { TicketClass, searchData } from 'src/Model/SearchData.model';
 
 @Component({
   selector: 'app-review-details',
@@ -12,8 +13,8 @@ import { geTrip } from 'src/NgStore/tripDetail/trip.ngStore';
 })
 export class ReviewDetailsComponent {
 
-  journey!:TripStore;
-  
+  data!:TripStore;
+  TicketClass:string[] = TicketClass;
 
   constructor(private store:Store,private route:Router){
      
@@ -21,7 +22,7 @@ export class ReviewDetailsComponent {
 if(d.error){
 }
 else{
-  this.journey=d;
+  this.data=d;
 }
     })
   }

@@ -8,6 +8,7 @@ export interface searchData{
     passengers:Passengers,
     tripType : number,
     seatTypes:number,
+
 }
 export const   TicketClass= [
     "",
@@ -20,7 +21,8 @@ export const   TicketClass= [
     journayId:number,
     arrival:Date
     depature:Date,
-    airlineId:number
+    airlineId:number,
+    flightNumber:string
   }
 
   export interface searchPost{

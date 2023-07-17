@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+You can add global styles to this file, and also import other style files
 
 html, body { height: 100%; 
   
@@ -60,22 +60,27 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
         .bg-custom1{
           /* background: linear-gradient( #0a338c  1%, #ffffff,white);   */
-          background-color: white;
+          background-color: rgb(255, 255, 255);
               }
 
-        /* .modal-backdrop {background: none;}
-        .modal{background: none;
         
-        } */
 
 
 
 
         a:hover {
           cursor: pointer;
+         color: #002c54 !important;
+        }
+        a{
+          text-decoration: none;
+          color: #0d6cd1;
         }
 
         .logo{
           width: 80px ;
           /* border-radius: 100px; */
+        }
+        p{
+          margin: 0;
         }

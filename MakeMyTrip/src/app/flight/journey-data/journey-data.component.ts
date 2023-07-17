@@ -36,7 +36,7 @@ this.FlightDetail= d;
 addToReview(d:JourneyInterface){
 const data:TripStore={
 journey:d,
-passenger:this.search.passengers,
+search:this.search,
 error:false
   }
   this.tripStore.dispatch(LoadTripData({data:data}))

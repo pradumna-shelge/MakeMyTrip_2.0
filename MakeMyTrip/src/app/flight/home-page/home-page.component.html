@@ -12,7 +12,7 @@
 
         <router-outlet></router-outlet>
     </div>
-    <div class=" mar my-2 d-flex justify-content-center gap-2 bg-custom1  w-100 ">
+    <div class=" mar my-2 d-flex justify-content-center gap-2   w-100 ">
         <div class="col-11 col-lg-3">
             
             <app-filter (filterEmitter)="filterData($event)" ></app-filter>
@@ -22,7 +22,7 @@
         
         <app-journey-data  [modifiedData]="filteredData" ></app-journey-data>
     </div>
-            <div *ngIf="filteredData.length<1">
+            <!-- <div class="!filteredData">
                 <div class="container">
                     <div class="row">
                       <div class="col">
@@ -36,7 +36,7 @@
                     </div>
                   </div>
                   
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

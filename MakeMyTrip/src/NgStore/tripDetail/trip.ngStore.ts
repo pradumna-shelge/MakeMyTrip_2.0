@@ -1,10 +1,10 @@
-import { Passengers } from "src/Model/SearchData.model";
+import { Passengers, searchData } from "src/Model/SearchData.model";
 import { TripStore } from "../Stores.interface";
 import { JourneyInterface } from "src/Model/journey.model";
 import { createAction, createFeatureSelector, createReducer, createSelector, on, props } from "@ngrx/store";
 
 export const initialTrip:TripStore={
-    passenger:{} as Passengers,
+    search:{} as searchData,
     journey:{} as JourneyInterface,
     error:true
 
@@ -15,7 +15,7 @@ export const LoadTripData = createAction("[Trip] LoadTripData ",props<{data:Trip
 
 export const TripReducer = createReducer(
     initialTrip,
-    on(LoadTripData,(state,{data})=>({...state,passenger:data.passenger,journey:data.journey,error:data.error})),
+    on(LoadTripData,(state,{data})=>({...state,se:data.search,journey:data.journey,error:data.error})),
 )
 
 

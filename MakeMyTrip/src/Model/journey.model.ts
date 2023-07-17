@@ -4,7 +4,7 @@ import { AirportModel } from "./Airport.model"
 export interface JourneyInterface{
     id:number,
     airline:AirlineInterface,
-  
+    flightNumber:string
     from:AirportModel,
     to:AirportModel,
     departureTime:Date,

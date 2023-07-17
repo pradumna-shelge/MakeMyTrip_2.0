@@ -26,6 +26,6 @@ export interface UserStore{
 
 export interface TripStore{
        journey:JourneyInterface,
-       passenger:Passengers,
+       search:searchData,
        error:boolean
 }

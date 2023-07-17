@@ -58,9 +58,9 @@ namespace backend.Controllers
             var journays = await _journey.Get();
             var flights = await _flight.Get();
             var journay =  from x in journays
-                            //where x.SourceId == obj.fromID
-                           //&& x.DestinationId == obj.toID
-                                select new { 
+                               //where x.SourceId == obj.fromID
+                               //&& x.DestinationId == obj.toID
+                           select new { 
                            
                           JournayId = x.JourneyId,
                           Arrival = x.Arrivaltime,

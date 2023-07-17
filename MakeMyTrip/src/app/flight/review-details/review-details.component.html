@@ -1,50 +1,75 @@
 <div>
     <app-navbar></app-navbar>
 </div>
+<p>{{data|json
+  }}</p>
 <div class="d-flex ">
 
     <div class="container">
         <div class="row">
           <div class="col">
-            <h4>New Delhi → Bengaluru</h4>
-            <p>Sunday, Jul 16</p>
-            <p>Non Stop · 2h 45m</p>
+            <h4>{{data.journey.from.city}} → {{data.journey.to.city}}</h4>
+            <p>{{data.journey.departureTime | date:'dd MMM '}}</p>
+            <p>Non Stop · {{data.journey.duration}}</p>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <p class="text-danger">CANCELLATION FEES APPLY</p>
-            <p><a href="#">View Fare Rules</a></p>
+            <p><a class="text-primary" data-toggle="modal" data-target="#modelId">View Fare Rules</a></p>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <h5>IndiGo</h5>
+            <h5>{{data.journey.airline.name}}</h5>
             <p>6E 6565</p>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <p>Economy > MMTSPECIAL</p>
-            <p>22:55</p>
-            <p>New Delhi . Indira Gandhi International Airport, Terminal 1</p>
-            <p>2h 45m</p>
-            <p>01:40</p>
-            <p>Bengaluru . Bengaluru International Airport, Terminal 1</p>
+            <p>{{TicketClass[data.search.seatTypes]}}</p>
+            <p>{{data.journey.departureTime | date:'hh:MM '}}</p>
+            <p>{{data.journey.from.city}} . {{data.journey.from.airportName}}</p>
+            <p>{{data.journey.duration}}</p>
+            <p>{{data.journey.arrivalTime | date:'hh:MM '}}</p>
+            <p>{{data.journey.to.city}} . {{data.journey.to.airportName}}</p>
           </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
           <div class="col">
             <h5>Baggage</h5>
             <p>Check-in: 15 Kgs (1 piece only) + purchased</p>
             <p>Cabin: 7 Kgs (1 piece only)</p>
             <p>15 KG of extra baggage added on your trip for Rs. 6750! Total check-in baggage is now 30 KG (1 piece).</p>
           </div>
-        </div>
+        </div> -->
       </div>
       <div>
-        hiii
-        <app-payment-detail></app-payment-detail>
+        
+        <app-payment-detail ></app-payment-detail>
       </div>
 </div>
   
+
+
+
+
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        <app-cancellation [flightDetail]="data.journey"></app-cancellation>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

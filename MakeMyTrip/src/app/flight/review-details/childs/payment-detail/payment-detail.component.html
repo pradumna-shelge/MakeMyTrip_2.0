@@ -7,33 +7,25 @@
     <div class="row">
       <div class="col">
         <p class="fw-bold">Base Fare</p>
-        <p>₹ 8,009</p>
+        <p>₹ {{data.journey.price-data.journey.Surcharges}}</p>
       </div>
     </div>
     <div class="row">
       <div class="col">
         <p class="fw-bold">Taxes and Surcharges</p>
-        <p>₹ 946</p>
+        <p>₹ {{data.journey.Surcharges}}</p>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <p class="fw-bold">Other Services</p>
-        <p>Charity</p>
-        <button class="btn btn-sm btn-outline-danger">REMOVE</button>
-        <p>₹ 10</p>
-      </div>
-    </div>
-    <div class="row">
+    <!-- <div class="row">
       <div class="col">
         <p class="fw-bold">Discounts</p>
         <p>- ₹ 895</p>
       </div>
-    </div>
+    </div> -->
     <div class="row">
       <div class="col">
         <p class="fw-bold">Total Amount</p>
-        <p>₹ 8,070</p>
+        <p>₹ {{data.journey.price}}</p>
       </div>
     </div>
   </div>
