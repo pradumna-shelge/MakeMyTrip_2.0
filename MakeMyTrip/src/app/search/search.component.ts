@@ -1,9 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AirportModel } from 'src/Model/Airport.model';
 import { Passengers, searchData,TicketClass } from 'src/Model/SearchData.model';
-import { AireLineService } from '../flight/Services/aire-line.service';
-import { AirportService } from '../services/airport.service';
 
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { Router } from '@angular/router';
@@ -28,7 +25,7 @@ export class SearchComponent {
   searchData!:searchData
   tripType:number=1
   
-  constructor(private router:Router,private airportStore:Store<AirportStore>,private searchStore:Store<SearchStore>){
+  constructor(private router:Router,private airportStore:Store<AirlineStore>,private searchStore:Store<SearchStore>){
 
     this.airportStore.dispatch(LoadAirportData())
     this.airportStore.select(getAirportData).subscribe((airports:AirportModel[]) =>{

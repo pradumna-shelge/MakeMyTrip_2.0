@@ -57,16 +57,31 @@ namespace backend.Controllers
             }
             var journays = await _journey.Get();
             var flights = await _flight.Get();
-            var journay =  from x in journays
-                               //where x.SourceId == obj.fromID
-                               //&& x.DestinationId == obj.toID
-                           select new { 
-                           
-                          JournayId = x.JourneyId,
+            var journay = from x in journays
+                          where x.SourceId == x.SourceId
+                          && x.DestinationId == x.DestinationId
+                          select new {
+
+                           JournayId = x.JourneyId,
+                         
                           Arrival = x.ArrivalTime,
                           Depature = x.DepartureTime,
                           flightNumber = flights.FirstOrDefault(f => f.FlightId == x.FlightId)?.FlightNo ?? "1253",
                           airlineId = flights.FirstOrDefault(f=>f.FlightId == x.FlightId)?.AirlineId ?? -1
+                          };
+
+
+            var journay1 = from x in journays
+                              //where x.SourceId == obj.fromID
+                              //&& x.DestinationId == obj.toID
+                          select new
+                          {
+
+                              JournayId = x.JourneyId,
+                              Arrival = x.ArrivalTime,
+                              Depature = x.DepartureTime,
+                              flightNumber = flights.FirstOrDefault(f => f.FlightId == x.FlightId)?.FlightNo ?? "1253",
+                              airlineId = flights.FirstOrDefault(f => f.FlightId == x.FlightId)?.AirlineId ?? -1
                           };
 
             if (journay == null)

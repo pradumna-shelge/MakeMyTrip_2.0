@@ -1,31 +1,33 @@
-<div class="container">
+<div class="d-flex justify-content-between flex-column gap-3">
     <div class="row">
-      <div class="col">
+      <div class="col d-flex justify-content-lg-between">
         <h4>Fare Summary</h4>
       </div>
     </div>
     <div class="row">
-      <div class="col">
-        <p class="fw-bold">Base Fare</p>
+      <div class="col d-flex justify-content-lg-between">
+        <p class="fw-bold"><i class="fa-solid fa-circle-plus"></i>Base Fare</p>
         <p>₹ {{data.journey.price-data.journey.Surcharges}}</p>
       </div>
+      <hr>
     </div>
     <div class="row">
-      <div class="col">
-        <p class="fw-bold">Taxes and Surcharges</p>
+      <div class="col d-flex justify-content-lg-between">
+        <p class="fw-bold"><i class="fa-solid fa-circle-plus"></i>Taxes and Surcharges</p>
         <p>₹ {{data.journey.Surcharges}}</p>
       </div>
+      <hr>
     </div>
     <!-- <div class="row">
-      <div class="col">
+      <div class="col d-flex justify-content-lg-between">
         <p class="fw-bold">Discounts</p>
         <p>- ₹ 895</p>
       </div>
     </div> -->
     <div class="row">
-      <div class="col">
-        <p class="fw-bold">Total Amount</p>
-        <p>₹ {{data.journey.price}}</p>
+      <div class="col d-flex justify-content-lg-between">
+        <p class="fw-bold  h4">Total Amount</p>
+        <p class="fw-bold  h4">₹ {{data.journey.price}}</p>
       </div>
     </div>
   </div>

@@ -10,4 +10,6 @@ public partial class PassengerType
     public string? PassengerType1 { get; set; }
 
     public virtual ICollection<PassengerOffer> PassengerOffers { get; set; } = new List<PassengerOffer>();
+
+    public virtual ICollection<Passenger> Passengers { get; set; } = new List<Passenger>();
 }

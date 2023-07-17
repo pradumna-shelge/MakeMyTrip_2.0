@@ -35,6 +35,8 @@ public partial class Journey
 
     public virtual PassengerOffer? AdultNavigation { get; set; }
 
+    public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+
     public virtual JourneyClassPrice? BussinessClassNavigation { get; set; }
 
     public virtual PassengerOffer? ChildNavigation { get; set; }

@@ -7,6 +7,8 @@ namespace backend.DTOs
         public int fromID { get; set; }
         public int toID { get; set; }
         public string depatureDate { get; set; }
-        public string ReturnDate { get; set; }
+        public string? ReturnDate { get; set; }
+
+
     }
 }

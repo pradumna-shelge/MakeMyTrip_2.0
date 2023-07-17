@@ -45,6 +45,12 @@ public partial class User
 
     public virtual ICollection<AirportDatum> AirportDatumLastModifications { get; set; } = new List<AirportDatum>();
 
+    public virtual ICollection<Booking> BookingCreateds { get; set; } = new List<Booking>();
+
+    public virtual ICollection<Booking> BookingLastModifications { get; set; } = new List<Booking>();
+
+    public virtual ICollection<Booking> BookingUsers { get; set; } = new List<Booking>();
+
     public virtual User? Created { get; set; }
 
     public virtual ICollection<Flight> FlightCreateds { get; set; } = new List<Flight>();
@@ -64,6 +70,10 @@ public partial class User
     public virtual ICollection<LocationDatum> LocationDatumCreateds { get; set; } = new List<LocationDatum>();
 
     public virtual ICollection<LocationDatum> LocationDatumLastModifications { get; set; } = new List<LocationDatum>();
+
+    public virtual ICollection<Passenger> PassengerCreateds { get; set; } = new List<Passenger>();
+
+    public virtual ICollection<Passenger> PassengerLastModifications { get; set; } = new List<Passenger>();
 
     public virtual Role? Role { get; set; }
 

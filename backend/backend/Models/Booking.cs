@@ -3,13 +3,17 @@ using System.Collections.Generic;
 
 namespace backend.Models;
 
-public partial class SeatLocation
+public partial class Booking
 {
-    public int SeatTypeId { get; set; }
+    public int BookingId { get; set; }
 
-    public string? SeatTypeName { get; set; }
+    public int? JourneyId { get; set; }
 
-    public int? ClassType { get; set; }
+    public int? UserId { get; set; }
+
+    public DateTime? BookingDate { get; set; }
+
+    public decimal? TotalFare { get; set; }
 
     public DateTime? CreatedDate { get; set; }
 
@@ -19,11 +23,13 @@ public partial class SeatLocation
 
     public int? LastModificationId { get; set; }
 
-    public virtual SeatClassType? ClassTypeNavigation { get; set; }
-
     public virtual User? Created { get; set; }
+
+    public virtual Journey? Journey { get; set; }
 
     public virtual User? LastModification { get; set; }
 
     public virtual ICollection<Passenger> Passengers { get; set; } = new List<Passenger>();
+
+    public virtual User? User { get; set; }
 }
