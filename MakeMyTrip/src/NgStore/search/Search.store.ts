@@ -4,7 +4,7 @@ import {  SearchStore } from "../Stores.interface";
 
 export const initialSearch:SearchStore={
     search:{
-        "tripType": 2,
+        "tripType": 1,
         "seatTypes": 1,
         "from": {
             "airportId": 1,
@@ -20,8 +20,8 @@ export const initialSearch:SearchStore={
             "airportName": "Indira Gandhi International Airport",
             "country": "India"
         },
-        "departureTime": new Date( "2023-07-13T09:32:53.963Z"),
-        "returnTime": new Date("2023-07-14T09:32:53.963Z"),
+        "departureTime": new Date( "2023-08-1"),
+        "returnTime": new Date("2023-08-1"),
         "passengers": {
             "adults": 1,
             "child": 0,

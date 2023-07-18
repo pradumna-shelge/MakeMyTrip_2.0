@@ -10,6 +10,11 @@ export interface SearchStore{
     search : searchData;
     isEmpty:boolean
 }
+export interface JourneyStore{
+    dep : JourneyInterface[];
+    ren?:JourneyInterface[];
+    
+}
 
 export interface AirlineStore{
     airline:AirlineInterface[];
@@ -26,6 +31,7 @@ export interface UserStore{
 
 export interface TripStore{
        journey:JourneyInterface,
+       journey1?:JourneyInterface,
        search:searchData,
        error:boolean
 }

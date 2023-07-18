@@ -10,7 +10,7 @@
 <div class="  ">
     <div class="     ">
 
-        <router-outlet></router-outlet>
+        <app-search-result (SearchEmitter)="getAirports()"></app-search-result>
     </div>
     <div class=" mar my-2 d-flex justify-content-center gap-2   w-100 ">
         <div class="col-11 col-lg-3">
@@ -18,25 +18,11 @@
             <app-filter (filterEmitter)="filterData($event)" ></app-filter>
         </div>
         <div class="col-11 col-lg-7" >
-    <div *ngIf="filteredData" >
+    <div  >
         
         <app-journey-data  [modifiedData]="filteredData" ></app-journey-data>
     </div>
-            <!-- <div class="!filteredData">
-                <div class="container">
-                    <div class="row">
-                      <div class="col">
-                        <h4>Data Not Found</h4>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col">
-                        <p>We're sorry, but the requested data could not be found.</p>
-                      </div>
-                    </div>
-                  </div>
-                  
-            </div> -->
+            
         </div>
     </div>
 </div>

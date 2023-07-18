@@ -1,5 +1,7 @@
 --create database MakeMyTrip
 -- use MakeMyTrip
+--use master
+--drop database MakeMyTrip
 ---------------------------------------------Role Table------------------------------
 
 create table Roles(

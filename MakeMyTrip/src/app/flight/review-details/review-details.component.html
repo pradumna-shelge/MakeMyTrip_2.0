@@ -6,11 +6,14 @@
   <p class="h2">Complete your booking</p>
 </div>
 <div class="d-flex justify-content-center gap-5 row my-2">
+<div class="d-flex flex-column gap-3 col-lg-6 
+col-lg-6 " >
 
-  <div class="col-lg-6 shadow py-2 d-flex flex-column gap-4 ">
+
+  <div class="shadow py-2 d-flex flex-column gap-4 ">
     <div class="d-flex justify-content-between">
       <div class="">
-        <h4>{{data.journey.from.city}} → {{data.journey.to.city}}</h4>
+        <h4>{{data.journey.From?.city}} → {{data.journey.To?.city}}</h4>
         <div class="d-flex justify-content-sm-start gap-3 ">
           <p class="bg-gray p-1">{{data.journey.departureTime | date:'dd MMM '}}</p>
           <p>Non Stop · {{data.journey.duration}}</p>
@@ -23,18 +26,18 @@
       </div>
       <div class="d-flex gap-3">
         
-          <img [src]="data.journey.airline.logo" class="logo" alt="">
-          <h5>{{data.journey.airline.name}}</h5>
+          <img [src]="data.journey.airline?.logo" class="logo" alt="">
+          <h5>{{data.journey.airline?.name}}</h5>
           <p>6E 6565</p>
        
       </div>
       <div class=" bg-gray p-3">
         <div class="">
           <div class="d-flex justify-content-start gap-2 align-items-center">
-            <!-- <p>{{TicketClass[data.search.se  atTypes]}}</p> -->
+            
             <p class="h5">{{data.journey.departureTime | date:'hh:MM '}}</p>
             <i class="fa-solid fa-circle fs-6"></i>
-            <p > <span  class="h5">{{data.journey.from.city}}</span>  . <span>{{data.journey.from.airportName}}</span> </p>
+            <p > <span  class="h5">{{data.journey.From?.city}}</span>  . <span>{{data.journey.From?.airportName}}</span> </p>
 
           </div>
           <div class="d-flex justify-content-start  align-items-center m-1">
@@ -45,14 +48,59 @@
 
             <p class="h5">{{data.journey.arrivalTime | date:'hh:MM '}}</p>
             <i class="fa-solid fa-circle fs-6"></i>
-            <p ><span class="h5">{{data.journey.to.city}}</span>  . <span> {{data.journey.to.airportName}}</span></p>
+            <p ><span class="h5">{{data.journey.To?.city}}</span>  . <span> {{data.journey.To?.airportName}}</span></p>
           </div>
         </div>
       </div>
     </div>
- 
-    
-  <div class="col-lg-3 shadow py-2">
+    <ng-container *ngIf="data && data.journey1">
+    <div  class="shadow py-2 d-flex flex-column gap-4 ">
+      <div class="d-flex justify-content-between">
+        <div class="">
+          <h4>{{data.journey1.From?.city}} → {{data.journey1.To?.city}}</h4>
+          <div class="d-flex justify-content-sm-start gap-3 ">
+            <p class="bg-gray p-1">{{data.journey1.departureTime | date:'dd MMM '}}</p>
+            <p>Non Stop · {{data.journey1.duration}}</p>
+          </div>
+        </div>
+        
+        </div>
+        <div class="d-flex gap-3">
+          
+            <img [src]="data.journey1.airline?.logo" class="logo" alt="">
+            <h5>{{data.journey1.airline?.name}}</h5>
+            <p>6E 6565</p>
+         
+        </div>
+        <div class=" bg-gray p-3">
+          <div class="">
+            <div class="d-flex justify-content-start gap-2 align-items-center">
+              
+              <p class="h5">{{data.journey1.departureTime | date:'hh:MM '}}</p>
+              <i class="fa-solid fa-circle fs-6"></i>
+              <p > <span  class="h5">{{data.journey1.From?.city}}</span>  . <span>{{data.journey1.From?.airportName}}</span> </p>
+  
+            </div>
+            <div class="d-flex justify-content-start  align-items-center m-1">
+              <p class=" mx-5 dooted-border"><span class="mx-2 ">{{data.journey1.duration}}</span></p>
+  
+            </div>
+            <div class="d-flex justify-content-start gap-2 align-items-center ">
+  
+              <p class="h5">{{data.journey1.arrivalTime | date:'hh:MM '}}</p>
+              <i class="fa-solid fa-circle fs-6"></i>
+              <p ><span class="h5">{{data.journey1.To?.city}}</span>  . <span> {{data.journey1.To?.airportName}}</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <div>
+      <app-passnger-detail></app-passnger-detail>
+    </div>
+  </div>
+  <div class="col-lg-3 shadow payment py-3">
 
     <app-payment-detail></app-payment-detail>
   </div>
@@ -81,3 +129,4 @@
     </div>
   </div>
 </div>
+

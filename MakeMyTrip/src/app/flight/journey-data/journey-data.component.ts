@@ -7,9 +7,9 @@ import { Store } from '@ngrx/store';
 import { AirlineStore, SearchStore, TripStore } from 'src/NgStore/Stores.interface';
 import { getSearchData } from 'src/NgStore/search/Search.selector';
 import { filterInterface } from 'src/Model/filter.model';
-import { JourneyInterface } from 'src/Model/journey.model';
+import { JourneyInterface, JourneyS } from 'src/Model/journey.model';
 import { getAirLineData } from 'src/NgStore/AirLine/AirLineselector';
-import { LoadTripData } from 'src/NgStore/tripDetail/trip.ngStore';
+import { LoadReturnData, LoadTripData } from 'src/NgStore/tripDetail/trip.ngStore';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
 export class JourneyDataComponent  {
  
  
-  @Input() modifiedData!:JourneyInterface[];
+  @Input() modifiedData!:JourneyS;
   FlightDetail!:JourneyInterface
   search!:searchData
 constructor(private router:Router, private JourneysService:JourneysService ,private searchStore:Store<SearchStore>,private airlineStore:Store<AirlineStore>,private tripStore:Store<TripStore>){
@@ -31,6 +31,7 @@ constructor(private router:Router, private JourneysService:JourneysService ,priv
 }
   
 flightDetail(d:JourneyInterface){
+  
 this.FlightDetail= d;
 }
 addToReview(d:JourneyInterface){
@@ -40,6 +41,19 @@ search:this.search,
 error:false
   }
   this.tripStore.dispatch(LoadTripData({data:data}))
-this.router.navigate(['flight/review'])
+  if(this.search.tripType==1){
+
+    this.router.navigate(['flight/review'])
+  }
+}
+addToReview1(d:JourneyInterface){
+
+this.tripStore.dispatch(LoadReturnData({data:d}))  
+  this.router.navigate(['flight/review'])
+  }
+
+
+isIterable(data:JourneyInterface){
+  return Array.isArray(data)
 }
 }

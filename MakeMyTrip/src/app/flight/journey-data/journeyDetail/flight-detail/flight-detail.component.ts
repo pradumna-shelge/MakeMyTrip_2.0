@@ -8,4 +8,10 @@ import { JourneyInterface } from 'src/Model/journey.model';
 })
 export class FlightDetailComponent {
   @Input() flightDetail!:JourneyInterface
+
+
+  constructor(){
+    
+  }
+  
 }

@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AirportModel } from 'src/Model/Airport.model';
 import { TicketClass, searchData } from 'src/Model/SearchData.model';
+import { LoadAirLineData } from 'src/NgStore/AirLine/AirLine.action';
 import { LoadAirportData } from 'src/NgStore/AirPort/Airport.action';
 import { AirportStore } from 'src/NgStore/AirPort/Airport.reduser';
 import { getAirportData } from 'src/NgStore/AirPort/Airport.selector';
@@ -19,6 +20,7 @@ import { AirportService } from 'src/app/services/airport.service';
   styleUrls: ['./search-result.component.css']
 })
 export class SearchResultComponent {
+  @Output() SearchEmitter = new EventEmitter()
   TicketClass = TicketClass;
   airport:AirportModel[]=[];
   filterAirport:AirportModel[]=[];
@@ -71,7 +73,13 @@ else{
 }
 }
 PatchSearch(){
+  this.searchData = {...this.searchData,tripType:this.tripType}
   this.searchStore.dispatch(LoadSearchData({data:this.searchData}))
-  this.router.navigate(['/flight'])
+  console.log(this.searchData);
+  
+  this.SearchEmitter.emit()
+
 }
+
+
 }

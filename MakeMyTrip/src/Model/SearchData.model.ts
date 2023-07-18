@@ -24,12 +24,12 @@ export const   TicketClass= [
     airlineId:number,
     flightNumber:string
   }
-
+ 
   export interface searchPost{
     fromID:number,
     toID:number,
-    depatureDate:string,
-    returnDate:string
+    depatureDate:Date,
+    returnDate?:Date
   }
 
   export interface Passengers{

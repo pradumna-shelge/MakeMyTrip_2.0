@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JourneyData, searchPost } from 'src/Model/SearchData.model';
+import { JourneyS } from 'src/Model/journey.model';
 import { baseApi } from 'src/env';
 
 @Injectable({
@@ -13,6 +14,6 @@ export class JourneysService {
 
   getJourneys(data:searchPost){
     
-    return this.http.post<JourneyData[]>(baseApi+this.searchData,data)
+    return this.http.post<JourneyS>(baseApi+this.searchData,data)
   }
 }

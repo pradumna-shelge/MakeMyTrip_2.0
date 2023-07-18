@@ -1,14 +1,14 @@
 <div class="container border">
     <div class="row">
       <div class="col border">
-        <p >{{ flightDetail.from.city }} To {{ flightDetail.to.city+","+(flightDetail.departureTime | date:'dd MMM ')  }} </p>
+        <p >{{ flightDetail.From?.city }} To {{ flightDetail.To?.city+","+(flightDetail.departureTime | date:'dd MMM ')  }} </p>
       </div>
     </div>
     <div class="row">
       <div class="col">
         <div class="d-flex align-items-center">
-          <img class="logo" [src]="flightDetail.airline.logo" alt="">
-          <p>{{ flightDetail.airline.name }}</p>
+          <img class="logo" [src]="flightDetail.airline?.logo" alt="">
+          <p>{{ flightDetail.airline?.name }}</p>
         </div>
       </div>
       <div class="col">
@@ -16,7 +16,7 @@
           <div class="col">
             <p>{{ flightDetail.departureTime | date:'HH:mm' }}</p>
             <p>{{ flightDetail.departureTime | date:'EEE, dd MMM yy' }}</p>
-            <p>{{ flightDetail.from.airportCode }}, {{ flightDetail.from.city }}</p>
+            <p>{{ flightDetail.From?.airportCode }}, {{ flightDetail.From?.city }}</p>
           </div>
           <div class="col">
             <p class="text-secondary">{{ flightDetail.duration }}</p>
@@ -26,7 +26,7 @@
           <div class="col">
             <p>{{ flightDetail.arrivalTime | date:'HH:mm' }}</p>
             <p>{{ flightDetail.arrivalTime | date:'EEE, dd MMM yy' }}</p>
-            <p>{{ flightDetail.to.airportCode }}, {{ flightDetail.to.city }}</p>
+            <p>{{ flightDetail.To?.airportCode }}, {{ flightDetail.To?.city }}</p>
           </div>
           <div class="col">
             <p>BAGGAGE:</p>

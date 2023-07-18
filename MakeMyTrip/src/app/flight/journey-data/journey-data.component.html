@@ -1,64 +1,113 @@
-
-
 <h1>{{"Flight From "+search.from.city+" To "+search.to.city}}</h1>
- <div class="  px-2 py-2">
-<div>
-
-
-
-
-<div *ngIf="modifiedData.length>0" >
-    <div *ngFor="let d of modifiedData;let item=index" class=" bg-white border m-3 rounded shadow py-4 px-1 accordion">
-        <div class="d-flex justify-content-between gap-1 p-1">
-
-            <div class=" d-flex justify-content-center flex-column ">
-                <img  class=" logo p-1" [src]="d.airline.logo" alt="airlineLogo">
-            </div>
-            <div>
-                <p class="fs-6">{{d.airline.name}}</p>
-                <small class=" text-secondary">{{d.flightNumber}}</small>
-            </div>
-            <div>
-                <p>{{d.arrivalTime|date:'HH:mm' }}</p>
-                <small>{{this.search.from.city}}({{this.search.from.airportCode}})</small>
-            </div>
-            <div>
-                <p class="text-secondary ">{{d.duration}}</p>
-                <p class="line w-100 h-1 "></p>
-                <small class="text-secondary ">Non Stop</small>
-            </div>
-            <div>
-                <p>{{d.departureTime|date:'HH:mm' }}</p>
-                <small>{{this.search.to.city}}({{this.search.to.airportCode}})</small>
-            </div>
-            <div>
-                <p>{{d.price|currency:'INR'}}</p>
-                <small class="text-secondary ">per traveler </small>
-            </div>
-            <div class="d-flex justify-content-center flex-column">
-                <button class="rounded-pill  py-1 px-3 h4 book-btn"(click)="addToReview(d)" >Book Now</button>
-            </div>
-        </div>
-        <!-- <div class="d-flex justify-content-center  " >
-<p class="bg-custom2 px-2 rounded"> <small class=" bg-danger px-2 mx-1 rounded-circle "></small> Get Rs 162 off using MMTOFFER* + Additional Flat Rs 50 off on UPI payments</p>
-        </div> -->
-        <div class=" d-flex justify-content-end " (click)="flightDetail(d)">
-            <a  class="text-primary"  data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + item" aria-expanded="true" [attr.aria-controls]="'collapse' +item">
-                 Flight Details
-              </a>
-        </div>
+<!-- <p>{{modifiedData.dep|json}}</p> -->
+<div class="  px-2 py-2">
+    <div>
         <div>
-           
+            <div  *ngIf=" modifiedData && modifiedData.dep ">
+                
+                <div *ngFor="let d of modifiedData.dep;let item=index"
+                    class=" bg-white border m-3 rounded shadow py-4 px-1 accordion">
+                    <div class="d-flex justify-content-between gap-1 p-1">
+    
+                        <div class=" d-flex justify-content-center flex-column ">
+                            <img class=" logo p-1" [src]="d.airline?.logo" alt="airlineLogo">
+                        </div>
+                        <div>
+                            <p class="fs-6">{{d.airline?.name}}</p>
+                            <small class=" text-secondary">{{d.flightNumber}}</small>
+                        </div>
+                        <div>
+                            <p>{{d.arrivalTime|date:'HH:mm' }}</p>
+                            <small>{{this.search.from.city}}({{this.search.from.airportCode}})</small>
+                        </div>
+                        <div>
+                            <p class="text-secondary ">{{d.duration}}</p>
+                            <p class="line w-100 h-1 "></p>
+                            <small class="text-secondary ">Non Stop</small>
+                        </div>
+                        <div>
+                            <p>{{d.departureTime|date:'HH:mm' }}</p>
+                            <small>{{this.search.to.city}}({{this.search.to.airportCode}})</small>
+                        </div>
+                        <div>
+                            <p>{{d.price+d.surcharges|currency:'INR'}}</p>
+                            <small class="text-secondary ">per traveler </small>
+                        </div>
+                        <div class="d-flex justify-content-center flex-column">
+                            <button class="rounded-pill  py-1 px-3 h4 book-btn" (click)="addToReview(d)">Book Now</button>
+                        </div>
+                    </div>
+    
+                    <div class=" d-flex justify-content-end " (click)="flightDetail(d)">
+                        <a class="text-primary" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + item"
+                            aria-expanded="true" [attr.aria-controls]="'collapse' +item">
+                            Flight Details
+                        </a>
+                    </div>
+                    <div>
+    
+    
+                        <div [id]="'collapse' + item" class="accordion-collapse collapse "
+                            [attr.aria-labelledby]="'heading' + item">
+                            <div class="accordion-body">
+                                <app-journey-detail [flightDetail]="FlightDetail"></app-journey-detail>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="modifiedData && modifiedData.ren">
+
+            <div *ngFor="let d of modifiedData.ren;let item=index"
+                class=" bg-white border m-3 rounded shadow py-4 px-1 accordion">
+                <div class="d-flex justify-content-between gap-1 p-1">
+
+                    <div class=" d-flex justify-content-center flex-column ">
+                        <img class=" logo p-1" [src]="d.airline?.logo" alt="airlineLogo">
+                    </div>
+                    <div>
+                        <p class="fs-6">{{d.airline?.name}}</p>
+                        <small class=" text-secondary">{{d.flightNumber}}</small>
+                    </div>
+                    <div>
+                        <p>{{d.arrivalTime|date:'HH:mm' }}</p>
+                        <small>{{this.search.from.city}}({{this.search.from.airportCode}})</small>
+                    </div>
+                    <div>
+                        <p class="text-secondary ">{{d.duration}}</p>
+                        <p class="line w-100 h-1 "></p>
+                        <small class="text-secondary ">Non Stop</small>
+                    </div>
+                    <div>
+                        <p>{{d.departureTime|date:'HH:mm' }}</p>
+                        <small>{{this.search.to.city}}({{this.search.to.airportCode}})</small>
+                    </div>
+                    <div>
+                        <p>{{d.price+d.surcharges|currency:'INR'}}</p>
+                        <small class="text-secondary ">per traveler </small>
+                    </div>
+                    <div class="d-flex justify-content-center flex-column">
+                        <button class="rounded-pill  py-1 px-3 h4 book-btn" (click)="addToReview1(d)">Book Now</button>
+                    </div>
+                </div>
+
+                <div class=" d-flex justify-content-end " (click)="flightDetail(d)">
+                    <a class="text-primary" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + item"
+                        aria-expanded="true" [attr.aria-controls]="'collapse' +item">
+                        Flight Details
+                    </a>
+                </div>
+                <div>
+
+
+                    <div [id]="'collapse' + item" class="accordion-collapse collapse "
+                        [attr.aria-labelledby]="'heading' + item">
+                        <div class="accordion-body">
+                            <app-journey-detail [flightDetail]="FlightDetail"></app-journey-detail>
+                        </div>
+                    </div>
+                </div>
+            </div>
        
-            <div [id]="'collapse' + item" class="accordion-collapse collapse " [attr.aria-labelledby]="'heading' + item">
-              <div class="accordion-body">
-                <app-journey-detail [flightDetail]="FlightDetail" ></app-journey-detail>
-              </div>
         </div>
     </div>
-</div>
-</div>
-</div> 
-
-
-

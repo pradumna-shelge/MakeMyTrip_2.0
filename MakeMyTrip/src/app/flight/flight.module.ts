@@ -33,6 +33,7 @@ import { DateChangeComponent } from './journey-data/journeyDetail/date-change/da
 import { JourneyDetailComponent } from './journey-data/journeyDetail/journey-detail/journey-detail.component';
 import { ReviewDetailsComponent } from './review-details/review-details.component';
 import { PaymentDetailComponent } from './review-details/childs/payment-detail/payment-detail.component';
+import { PassngerDetailComponent } from './review-details/childs/passnger-detail/passnger-detail.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { PaymentDetailComponent } from './review-details/childs/payment-detail/p
     JourneyDetailComponent,
     ReviewDetailsComponent,
     PaymentDetailComponent,
+    PassngerDetailComponent,
     
     
   ],

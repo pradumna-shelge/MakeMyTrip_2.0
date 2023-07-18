@@ -1,14 +1,18 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AirlineInterface } from 'src/Model/Airline';
 import { searchData, JourneyData, searchPost } from 'src/Model/SearchData.model';
 import { filterInterface } from 'src/Model/filter.model';
-import { JourneyInterface } from 'src/Model/journey.model';
-import { getAirLineData } from 'src/NgStore/AirLine/AirLineselector';
+import { JourneyInterface, JourneyS } from 'src/Model/journey.model';
+import { getAirLineData, getAirlineById } from 'src/NgStore/AirLine/AirLineselector';
 import { SearchStore, AirlineStore, TripStore } from 'src/NgStore/Stores.interface';
 import { getSearchData } from 'src/NgStore/search/Search.selector';
 import { JourneysService } from '../Services/journeys.service';
+import { airportStore, getAirportData } from 'src/NgStore/AirPort/Airport.selector';
+import { AirportStore } from 'src/NgStore/AirPort/Airport.reduser';
+import { AirportModel } from 'src/Model/Airport.model';
+import { LoadAirportData } from 'src/NgStore/AirPort/Airport.action';
 
 @Component({
   selector: 'app-home-page',
@@ -16,30 +20,35 @@ import { JourneysService } from '../Services/journeys.service';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-  FilterData!:filterInterface 
- 
-  
   search:searchData={} as searchData;
-  data!:JourneyData[];
-  modifiedData!:JourneyInterface[];
-  filteredData!:JourneyInterface[];
-  JourneyDatapost!:searchPost;
-  airlines!:AirlineInterface[];
-  FlightDetail!:JourneyInterface
-constructor(private router:Router, private JourneysService:JourneysService ,private searchStore:Store<SearchStore>,private airlineStore:Store<AirlineStore>,private tripStore:Store<TripStore>){
- 
+  data!:JourneyS;
+  filteredData!:JourneyS;
+  postRequestData!:searchPost;
+  airportData!:AirportModel[]
+
+constructor(private airportStore: Store<AirportStore>, private router:Router, private JourneysService:JourneysService ,private searchStore:Store<SearchStore>,private airlineStore:Store<AirlineStore>,private tripStore:Store<TripStore>){
+ this.airportStore.dispatch(LoadAirportData())
+  this.airlineStore.select(getAirportData).subscribe(d=>{
+  this.airportData = d;
+  console.log(d);
+  
+ })
 
 }
 filterData(data:filterInterface){
-  debugger;
-  this.filteredData  = this.modifiedData;
+
+  this.filteredData  = this.data;
    if(data.Price){
     const PriceData =  data.Price.split('-')
        let low= Number( PriceData[0]);
        let high =Number( PriceData[1]);
-       console.log(data);
+
        
-     this.filteredData  = this.filteredData.filter(m=> m.price>=low && m.price<= high )
+     this.filteredData.dep  = this.filteredData.dep.filter(m=> m.price>=low && m.price<= high )
+     if(Array.isArray(this.filteredData.ren) ){
+
+       this.filteredData.ren  = this.filteredData.ren.filter((m:JourneyInterface)=> m.price>=low && m.price<= high )
+     }
    }
 
    if(data.DepartureTime){
@@ -48,11 +57,11 @@ filterData(data:filterInterface){
 
 const [Lhours, Lminutes] = low.split(/(?<=\d)(?=[A-Z])/)[0].split(':').map(Number);
 
-const LowDate = new Date( this.filteredData[0].departureTime)   ;
+const LowDate = new Date( this.filteredData.dep[0].departureTime)   ;
 LowDate.setHours(1);
 LowDate.setMinutes(0);
 
-this.filteredData = this.filteredData.filter(m=>  m.departureTime >= LowDate )
+this.filteredData.dep = this.filteredData.dep.filter(m=>  m.departureTime >= LowDate )
 
    }
 
@@ -67,21 +76,19 @@ const HighDate = new Date();
 
 HighDate.setHours(Hhours % 12);
 HighDate.setMinutes(Hminutes);
+if(Array.isArray(this.filteredData.ren) ){
 
-    this.filteredData = this.filteredData.filter(m=>  m.departureTime<= HighDate )
+  this.filteredData.ren = this.filteredData.ren.filter(m=>  m.departureTime<= HighDate )
+}
    }
 
 }
   ngOnInit(): void {
-    this.getAirline();
+  
   this.getAirports();
   }
 
-  getAirline(){
-this.airlineStore.select(getAirLineData).subscribe(data=>{
-  this.airlines = data;
-})
-  }
+ 
 
 
   
@@ -90,15 +97,16 @@ this.airlineStore.select(getAirLineData).subscribe(data=>{
     this.searchStore.select(getSearchData).subscribe({
       next:(data:searchData)=>{
        this.search=data
-      
-       console.log("secound"+this.search);
        if(this.search){
 
-         this.JourneyDatapost= {
+         this.postRequestData= {
           fromID: this.search.from?.airportId,
           toID: this.search.to.airportId ,
-          depatureDate: this.search.departureTime.toDateString(),
-          returnDate: this.search.returnTime?.toDateString()??''
+          depatureDate: this.search.departureTime,
+          
+       }
+       if(this.search.tripType==2){
+           this.postRequestData.returnDate = this.search.returnTime?? new Date();
        }
         }
 
@@ -111,55 +119,49 @@ this.airlineStore.select(getAirLineData).subscribe(data=>{
   }
 
   getJourneys(){
-     console.log(this.JourneyDatapost);
-     
-     this.JourneysService.getJourneys(this.JourneyDatapost).subscribe({
-     next:(apiData:JourneyData[])=>{
+
+     this.JourneysService.getJourneys(this.postRequestData).subscribe({
+     next:(apiData:JourneyS)=>{
          this.data = apiData;
+        
+         
          this.modifyData()
      },
      error:(err)=>{
-       alert(' Could not retrieve Journey data')
-       
+       alert(' Could not retrieve Journey data')   
      }
     })
   }
 
 
 modifyData(){
-  const tempData:any=[]
-  this.data.forEach((ob:JourneyData)=>{
-    var d:JourneyInterface = {
-       id:ob.journayId,
-       airline: this.airlines.find(a=>ob.airlineId==a.id)??{}as AirlineInterface,
-       from:this.search.from,
-       to:this.search.to,
-       departureTime:ob.depature,
-       arrivalTime:ob.arrival,
-       duration: this.getDuration(ob.depature,ob.arrival),
-       baggage:34,
-       price:5025,
-       cabin:7,
-       Surcharges:300,
-       flightNumber:this.airlines.find(a=>ob.airlineId==a.id)?.code+ob.flightNumber.toString()
-       
-    }
-    tempData.push(d);
+  const tempData:JourneyInterface[]=[]
+  const tempData1:JourneyInterface[]=[]
+  this.data.dep.forEach((ob:JourneyInterface)=>{
+     this.airlineStore.select(getAirlineById( ob.airlineId) ).subscribe(d=>{
+      ob.airline = d
+    })
+    ob.From =  this.airportData.find(f=>f.airportId == ob.fromid);
+    ob.To =  this.airportData.find(f=>f.airportId == ob.to);
+    tempData.push(ob);
   }) 
+  if( this.data.ren  ){
 
-  this.modifiedData = tempData;
-  this.filteredData = this.modifiedData
+    this.data.ren.forEach((ob:JourneyInterface)=>{
+      this.airlineStore.select(getAirlineById( ob.airlineId) ).subscribe(d=>{
+       ob.airline = d
+      })
+      ob.From =  this.airportData.find(f=>f.airportId == ob.fromid)
+    ob.To =  this.airportData.find(f=>f.airportId == ob.to)
+   tempData1.push(ob);
+ }) 
 }
+this.data.dep = tempData;
+if(this.data.ren)this.data.ren = tempData1
+
+this.filteredData = this.data;
+console.log(this.filteredData);
 
 
-getDuration(date1:Date,date2:Date){
-  date1 = new Date(date1)
-  date2 = new Date(date2)
-  const diffInMilliseconds = Math.abs(date2.getTime() - date1.getTime());
-  const hours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
-  const minutes = Math.floor((diffInMilliseconds / (1000 * 60)) % 60);
-  return `${hours}h ${minutes}min`;
 }
-
-
 }

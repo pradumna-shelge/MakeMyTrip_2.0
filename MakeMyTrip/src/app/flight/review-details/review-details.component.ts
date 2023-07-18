@@ -23,6 +23,9 @@ if(d.error){
 }
 else{
   this.data=d;
+  if(!d.journey1?.From){
+     d.journey1=undefined
+  }
 }
     })
   }

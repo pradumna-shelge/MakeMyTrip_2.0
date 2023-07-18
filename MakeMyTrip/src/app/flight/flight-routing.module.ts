@@ -8,11 +8,7 @@ import { ReviewDetailsComponent } from './review-details/review-details.componen
 const routes: Routes = [
   
   { path: '', component: HomePageComponent,
-children:[
-  { path: '', component: SearchResultComponent,
-    
 },
-] },
 { path: 'review', component: ReviewDetailsComponent },
 
 
