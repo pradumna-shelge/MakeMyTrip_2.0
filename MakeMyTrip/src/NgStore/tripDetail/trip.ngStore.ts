@@ -17,7 +17,7 @@ export const LoadReturnData = createAction("[Trip] LoadReturnData ",props<{data:
 
 export const TripReducer = createReducer(
     initialTrip,
-    on(LoadTripData,(state,{data})=>({...state,se:data.search,journey:data.journey,error:data.error,journey1:undefined})),
+    on(LoadTripData,(state,{data})=>({...state,search:data.search,journey:data.journey,error:data.error,journey1:undefined})),
     on(LoadReturnData,(state,{data})=>({...state,journey1:data})),
 )
 

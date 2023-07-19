@@ -1,0 +1,70 @@
+
+  .selected-seat {
+    background-color: #0ec9dd !important ; 
+    color: #fff;
+    width: 50px;
+  }
+  
+.seat{
+    width: 50px;
+    margin: 10px;
+    border: 1px solid;
+}
+.plane {
+    margin: 20px auto;
+    max-width: fit-content;
+  }
+  
+  .cockpit {
+    height: 250px; 
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    border-bottom: 5px solid #d8d8d8;
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 500px;
+      width: 100%;
+      border-radius: 50%;
+      border-right: 5px solid #d8d8d8;
+      border-left: 5px solid #d8d8d8;
+    }
+
+  }
+  
+  .exit {
+    position: relative;
+    height: 50px;
+    &:before,
+    &:after {
+      content: "EXIT";
+      font-size: 14px;
+      line-height: 18px;
+      padding: 0px 2px;
+      font-family: "Arial Narrow", Arial, sans-serif;
+      display: block;
+      position: absolute;
+      background: green;
+      color: white;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+    &:before {
+      left: 0;
+    }
+    &:after {
+      right: 0;
+    }
+  }
+  
+  .fuselage {
+    border-right: 5px solid #d8d8d8;
+    border-left: 5px solid #d8d8d8;
+  }
+  
+
+ 

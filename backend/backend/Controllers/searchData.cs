@@ -4,6 +4,7 @@ using backend.RepoPattern.classess;
 using backend.RepoPattern.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 
 namespace backend.Controllers
@@ -17,14 +18,16 @@ namespace backend.Controllers
         private readonly IJourney _journey;
         private readonly Iflight _flight;
         private readonly IAirlines _airline;
+        private readonly MakeMyTripContext _context;
 
-        public searchData(IAirportData airport,ICity city,IJourney journey,Iflight flights,IAirlines airline)
+        public searchData(MakeMyTripContext context, IAirportData airport,ICity city,IJourney journey,Iflight flights,IAirlines airline)
         {
                 _airport = airport;
             _city = city;
             _journey = journey;
             _flight = flights;
             _airline = airline;
+            _context = context;
         }
 
         [HttpGet]
@@ -77,6 +80,8 @@ namespace backend.Controllers
             var airportData = await _airport.Get();
             var airlines = await _airline.Get();
 
+
+
             var journay = from j in journays
                           join f in flights on j.FlightId equals f.FlightId
                           join fa in airportData on j.SourceId equals fa.AirportId
@@ -97,7 +102,10 @@ namespace backend.Controllers
                               duration = (j.ArrivalTime - j.DepartureTime).ToString(),
                               baggage = 17,
                               cabin = 7,
-                              Surcharges = 700
+                              Surcharges = 700,
+                              seatStature = _context.SeatClassDtos.FromSqlRaw($"exec GetSeatStructureForFlight @FlightId={f.FlightId}"),
+                              bookedSeats = new List<string> { "1A", "6B", "6C" }
+
                           };
 
 
@@ -121,9 +129,8 @@ namespace backend.Controllers
                               select new
                               {
                                   JournayId = j.JourneyId,
-                                  airline = airlines.FirstOrDefault(a => a.AirlineId == f.AirlineId),
-                                  flightNumber = f.FlightNo,
                                   airlineId = airlines.FirstOrDefault(a => a.AirlineId == f.AirlineId).AirlineId,
+                                  flightNumber = f.FlightNo,
                                   to = toAirport.AirportId,
                                   fromid = fa.AirportId,
                                   departureTime = j.DepartureTime,
@@ -132,7 +139,9 @@ namespace backend.Controllers
                                   duration = (j.ArrivalTime - j.DepartureTime).ToString(),
                                   baggage = 17,
                                   cabin = 7,
-                                  Surcharges = 700
+                                  Surcharges = 700,
+                                  seatStature = _context.SeatClassDtos.FromSqlRaw($"exec GetSeatStructureForFlight @FlightId={f.FlightId}"),
+                                  bookedSeats = new List<string> { "1A", "6B", "6C" }
                               };
 
 

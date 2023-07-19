@@ -9,6 +9,8 @@ namespace backend.DTOs
         public DateTime depatureDate { get; set; }
         public DateTime? ReturnDate { get; set; }
 
+        public int seatClass { get; set; }
+
 
     }
 }

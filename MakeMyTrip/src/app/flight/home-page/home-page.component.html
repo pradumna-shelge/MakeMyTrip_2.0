@@ -19,8 +19,62 @@
         </div>
         <div class="col-11 col-lg-7" >
     <div  >
-        
-        <app-journey-data  [modifiedData]="filteredData" ></app-journey-data>
+        <div class="  bottom-0 d-flex justify-content-between bg-lightBlue  gap-2 bg-white w-100 " *ngIf="currentJourneyDeP">
+            <div *ngIf="this.data.dep && currentJourneyDeP">
+                <div class="d-flex justify-content-between  p-1">
+                
+                    <div class=" d-flex justify-content-center flex-column ">
+                        <img class=" logo p-1" [src]="currentJourneyDeP.airline?.logo" alt="airlineLogo">  <p class="fs-6"> .Departure {{currentJourneyDeP.airline?.name}}</p>
+                    </div>
+                    <div>
+                       
+                       
+                    </div>
+                    <div>
+                        <p>{{currentJourneyDeP.arrivalTime|date:'HH:mm' }}</p>
+                        
+                    </div>
+                    
+                    <div>
+                        <p>{{currentJourneyDeP.departureTime|date:'HH:mm' }}</p>
+                        
+                    </div>
+                    <div>
+                        <p>{{currentJourneyDeP.price+currentJourneyDeP.surcharges|currency:'INR'}}</p>
+                        <small class="text-secondary ">per traveler </small>
+                    </div>
+                  
+                </div>
+            </div>
+            <div *ngIf="this.data.ren && currentJourneyRen">
+                <div class="d-flex justify-content-between  p-1">
+                
+                    <div class=" d-flex justify-content-center flex-column ">
+                        <img class=" logo p-1" [src]="currentJourneyRen.airline?.logo" alt="airlineLogo">  <p class="fs-6"> .Departure {{currentJourneyRen.airline?.name}}</p>
+                    </div>
+                    <div>
+                       
+                       
+                    </div>
+                    <div>
+                        <p>{{currentJourneyRen.arrivalTime|date:'HH:mm' }}</p>
+                        
+                    </div>
+                    
+                    <div>
+                        <p>{{currentJourneyRen.departureTime|date:'HH:mm' }}</p>
+                        
+                    </div>
+                    <div>
+                        <p>{{currentJourneyRen.price+currentJourneyRen.surcharges|currency:'INR'}}</p>
+                        <small class="text-secondary ">per traveler </small>
+                    </div>
+                  
+                </div>
+            </div>
+                <button class="rounded  py-1 px-3  " (click)="addToReview()" [disabled]="this.data.ren && !currentJourneyRen">Book Now</button>
+            </div>
+        <app-journey-data  [modifiedData]="filteredData" (AddToBook)="addToBook($event)" ></app-journey-data>
     </div>
             
         </div>

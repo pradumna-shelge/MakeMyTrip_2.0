@@ -6,13 +6,15 @@ import { searchData, JourneyData, searchPost } from 'src/Model/SearchData.model'
 import { filterInterface } from 'src/Model/filter.model';
 import { JourneyInterface, JourneyS } from 'src/Model/journey.model';
 import { getAirLineData, getAirlineById } from 'src/NgStore/AirLine/AirLineselector';
-import { SearchStore, AirlineStore, TripStore } from 'src/NgStore/Stores.interface';
+import { SearchStore, AirlineStore, TripStore, JourneyStore } from 'src/NgStore/Stores.interface';
 import { getSearchData } from 'src/NgStore/search/Search.selector';
 import { JourneysService } from '../Services/journeys.service';
 import { airportStore, getAirportData } from 'src/NgStore/AirPort/Airport.selector';
 import { AirportStore } from 'src/NgStore/AirPort/Airport.reduser';
 import { AirportModel } from 'src/Model/Airport.model';
 import { LoadAirportData } from 'src/NgStore/AirPort/Airport.action';
+import { LoadReturnData, LoadTripData } from 'src/NgStore/tripDetail/trip.ngStore';
+import { LoadJourneyData } from 'src/NgStore/journey/journey.action';
 
 @Component({
   selector: 'app-home-page',
@@ -25,7 +27,8 @@ export class HomePageComponent implements OnInit {
   filteredData!:JourneyS;
   postRequestData!:searchPost;
   airportData!:AirportModel[]
-
+  currentJourneyDeP:JourneyInterface|undefined;
+  currentJourneyRen!:JourneyInterface|undefined;
 constructor(private airportStore: Store<AirportStore>, private router:Router, private JourneysService:JourneysService ,private searchStore:Store<SearchStore>,private airlineStore:Store<AirlineStore>,private tripStore:Store<TripStore>){
  this.airportStore.dispatch(LoadAirportData())
   this.airlineStore.select(getAirportData).subscribe(d=>{
@@ -119,6 +122,8 @@ if(Array.isArray(this.filteredData.ren) ){
   }
 
   getJourneys(){
+this.currentJourneyDeP=undefined;
+this.currentJourneyRen=undefined;
 
      this.JourneysService.getJourneys(this.postRequestData).subscribe({
      next:(apiData:JourneyS)=>{
@@ -164,4 +169,32 @@ console.log(this.filteredData);
 
 
 }
+
+
+addToBook(data:any){
+  if(data.den){
+  
+    this.currentJourneyDeP = data.den;
+  }
+      if(data.ren){
+        this.currentJourneyRen = data.ren
+      }
+    }
+
+
+    addToReview(){
+      const data:TripStore={
+        journey:this.currentJourneyDeP ?? {} as JourneyInterface,
+        search:this.search,
+        error:false
+          }
+          this.tripStore.dispatch(LoadTripData({data:data}))
+
+
+if(this.currentJourneyRen){
+  
+  this.tripStore.dispatch(LoadReturnData({data:this.currentJourneyRen}))  
+}
+        this.router.navigate(['flight/review'])
+        }
 }

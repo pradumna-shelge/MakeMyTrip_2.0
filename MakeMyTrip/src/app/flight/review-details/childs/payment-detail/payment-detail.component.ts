@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TicketClass } from 'src/Model/SearchData.model';
 import { TripStore } from 'src/NgStore/Stores.interface';
-import { geTrip } from 'src/NgStore/tripDetail/trip.ngStore';
+import { geTrip, tripStore } from 'src/NgStore/tripDetail/trip.ngStore';
 
 @Component({
   selector: 'app-payment-detail',
@@ -13,15 +13,40 @@ import { geTrip } from 'src/NgStore/tripDetail/trip.ngStore';
 export class PaymentDetailComponent {
   data!:TripStore;
   TicketClass:string[] = TicketClass;
+  priceData:{
+    base:number,
+    taxes:number,
+    Surcharges:number,
+    passengers:number,
+    total:number,
+    ExtraCharges:number,
+  }={} as any
 
   constructor(private store:Store,private route:Router){
-     
-    this.store.select(geTrip).subscribe(d=>{
-if(d.error){
+    
+    this.getData()
+  }
+getData(){
+  this.store.select(geTrip).subscribe(d=>{
+    if(d.error){
+    }
+    else{
+      this.data=d;
+      console.log(this.data);
+      this.calculate()
+    }
+        })
 }
-else{
-  this.data=d;
-}
-    })
+
+
+  calculate(){
+    // this.data.search.passengers.adults??0+this.data.search.passengers.child??0+  this.data.search.passengers.infants??0?
+    this.priceData.passengers =3;
+    this.priceData.base =this.priceData.passengers  * (this.data.journey1? this.data.journey.price+this.data.journey1.price:this.data.journey.price) ,
+    this.priceData.Surcharges= this.data.journey1? this.data.journey.surcharges+this.data.journey1.surcharges:this.data.journey.surcharges
+    this.priceData.ExtraCharges = 0;
+    this.priceData.total= this.priceData.base+this.priceData.Surcharges+this.priceData.ExtraCharges 
+
+ 
   }
 }

@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-between flex-column gap-5   payment">
+<div *ngIf="priceData" class="d-flex justify-content-between flex-column gap-5   payment">
     <div class="row">
       <div class="col d-flex justify-content-lg-between">
         <h4>Fare Summary</h4>
@@ -7,14 +7,14 @@
     <div class="row">
       <div class="col d-flex justify-content-lg-between">
         <p class="fw-bold"><i class="fa-solid fa-circle-plus"></i>Base Fare</p>
-        <p>₹ {{data.journey.price-data.journey.surcharges}}</p>
+        <p>₹ {{priceData.base }}({{priceData.base/priceData.passengers+"*"+priceData.passengers+"passengers"}})</p>
       </div>
       <hr>
     </div>
     <div class="row">
       <div class="col d-flex justify-content-lg-between">
         <p class="fw-bold"><i class="fa-solid fa-circle-plus"></i>Taxes and Surcharges</p>
-        <p>₹ {{data.journey.surcharges}}</p>
+        <p>₹ {{priceData.Surcharges+priceData.ExtraCharges}}</p>
       </div>
       <hr>
     </div>
@@ -27,11 +27,13 @@
     <div class="row">
       <div class="col d-flex justify-content-lg-between">
         <p class="fw-bold  h4">Total Amount</p>
-        <p class="fw-bold  h4">₹ {{data.journey.price}}</p>
+        <p class="fw-bold  h4">₹ {{priceData.total}}</p>
       </div>
     </div>
   </div>
   
 
-
+  <div class="container mt-5">
+    <button type="button" class="btn btn-primary text-white">Proceed to Pay</button>
+  </div>
   

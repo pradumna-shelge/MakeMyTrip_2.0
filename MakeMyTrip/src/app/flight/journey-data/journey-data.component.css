@@ -11,3 +11,9 @@
 
     border: 2px  rgb(5, 72, 159);
 }
+
+input[type="radio"] {
+    -ms-transform: scale(2.5); /* IE 9 */
+    -webkit-transform: scale(2.5); /* Chrome, Safari, Opera */
+    transform: scale(2.5);
+  }

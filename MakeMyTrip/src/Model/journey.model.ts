@@ -17,7 +17,16 @@ export interface JourneyInterface {
     cabin: number;
     surcharges: number;
     From? :AirportModel,
-    To? :AirportModel 
+    To? :AirportModel ,
+    seatStature:SeatConfiguration[],
+    bookedSeats:string[]
+  }
+  interface SeatConfiguration {
+    seatClassId: number;
+    rowsStart: number;
+    rowsEnd: number;
+    columnsStart: string;
+    columnsEnd: string;
   }
   
 

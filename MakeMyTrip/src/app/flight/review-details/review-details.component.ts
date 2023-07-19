@@ -13,20 +13,5 @@ import { TicketClass, searchData } from 'src/Model/SearchData.model';
 })
 export class ReviewDetailsComponent {
 
-  data!:TripStore;
-  TicketClass:string[] = TicketClass;
 
-  constructor(private store:Store,private route:Router){
-     
-    this.store.select(geTrip).subscribe(d=>{
-if(d.error){
-}
-else{
-  this.data=d;
-  if(!d.journey1?.From){
-     d.journey1=undefined
-  }
-}
-    })
-  }
 }

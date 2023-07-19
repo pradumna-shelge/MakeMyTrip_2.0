@@ -1,0 +1,13 @@
+<h2>Make a Payment</h2>
+<form (ngSubmit)="makePayment()" #paymentForm="ngForm">
+  <mat-form-field>
+    <input matInput type="text" placeholder="Card Number" [(ngModel)]="cardNumber" name="cardNumber" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text" placeholder="Expiry Date" [(ngModel)]="expiryDate" name="expiryDate" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text" placeholder="CVV" [(ngModel)]="cvv" name="cvv" required>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!paymentForm.valid">Pay</button>
+</form>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AireLineService } from '../Services/aire-line.service';
 import { JourneyData, searchData, searchPost } from 'src/Model/SearchData.model';
 import { JourneysService } from '../Services/journeys.service';
@@ -21,8 +21,10 @@ export class JourneyDataComponent  {
  
  
   @Input() modifiedData!:JourneyS;
+  @Output() AddToBook =  new EventEmitter()
   FlightDetail!:JourneyInterface
-  search!:searchData
+  search!:searchData;
+  
 constructor(private router:Router, private JourneysService:JourneysService ,private searchStore:Store<SearchStore>,private airlineStore:Store<AirlineStore>,private tripStore:Store<TripStore>){
   this.searchStore.select(getSearchData).subscribe(d=>{
     this.search= d
@@ -34,26 +36,15 @@ flightDetail(d:JourneyInterface){
   
 this.FlightDetail= d;
 }
-addToReview(d:JourneyInterface){
-const data:TripStore={
-journey:d,
-search:this.search,
-error:false
-  }
-  this.tripStore.dispatch(LoadTripData({data:data}))
-  if(this.search.tripType==1){
 
-    this.router.navigate(['flight/review'])
-  }
-}
-addToReview1(d:JourneyInterface){
-
-this.tripStore.dispatch(LoadReturnData({data:d}))  
-  this.router.navigate(['flight/review'])
-  }
 
 
 isIterable(data:JourneyInterface){
   return Array.isArray(data)
+}
+
+
+addToBook(den:JourneyInterface|undefined,ren:JourneyInterface|undefined){
+this.AddToBook.emit({den,ren})
 }
 }

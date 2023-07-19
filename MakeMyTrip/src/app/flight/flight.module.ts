@@ -34,6 +34,9 @@ import { JourneyDetailComponent } from './journey-data/journeyDetail/journey-det
 import { ReviewDetailsComponent } from './review-details/review-details.component';
 import { PaymentDetailComponent } from './review-details/childs/payment-detail/payment-detail.component';
 import { PassngerDetailComponent } from './review-details/childs/passnger-detail/passnger-detail.component';
+import { ReviewJourneyComponent } from './review-details/childs/review-journey/review-journey.component';
+import { SeatSealationComponent } from './review-details/childs/seat-sealation/seat-sealation.component';
+import { PaymentPageComponent } from './payment-page/payment-page.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,9 @@ import { PassngerDetailComponent } from './review-details/childs/passnger-detail
     ReviewDetailsComponent,
     PaymentDetailComponent,
     PassngerDetailComponent,
+    ReviewJourneyComponent,
+    SeatSealationComponent,
+    PaymentPageComponent,
     
     
   ],
