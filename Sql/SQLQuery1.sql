@@ -276,3 +276,19 @@ LastModificationDate DATETIME,
 LastModificationId INT REFERENCES Users(UserId)
 );
 
+
+-------------------------------------------- Seats SP --------------------------------
+go
+CREATE PROCEDURE GetSeatStructureForFlight
+    @FlightId INT
+AS
+BEGIN
+    SELECT s.SeatClassId, fs.RowsStart, fs.RowsEnd, fs.columnsStart, fs.columnsEnd
+    FROM Flight f
+    JOIN FlightclassStructure fs ON f.EconomyClass = fs.FlightclassStructureId OR 
+                                    f.Businessclass = fs.FlightclassStructureId OR 
+                                    f.FirstClass = fs.FlightclassStructureId
+    JOIN SeatClassType s ON fs.SeatClassId = s.SeatClassId
+    WHERE f.FlightId = 1;
+END;
+go
