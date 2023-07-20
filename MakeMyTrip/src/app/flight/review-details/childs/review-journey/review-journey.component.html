@@ -1,22 +1,19 @@
 
-  <div  class="bg-blueDark py-4 text-white">
-  
-    <p class="h2">Complete your booking</p>
-  </div>
- 
-  
-  
-    <div *ngIf=" data && data.journey" class="shadow py-2 d-flex flex-column gap-4 ">
-      <div class="d-flex justify-content-between">
+
+  <div class="bg-white p-2 mb-2">
+
+
+    <div *ngIf=" data && data.journey" class="shadow border my-2 p-1 py-2 d-flex flex-column gap-4 ">
+      <div class="d-flex justify-content-between ">
         <div class="">
           <h4>{{data.journey.From?.city}} → {{data.journey.To?.city}}</h4>
           <div class="d-flex justify-content-sm-start gap-3 ">
-            <p class="bg-gray p-1">{{data.journey.departureTime | date:'dd MMM '}}</p>
+            <p class=" left-line p-1">{{data.journey.departureTime | date:'dd MMM '}}</p>
             <p>Non Stop · {{data.journey.duration}}</p>
           </div>
         </div>
         <div class="">
-          <p class="text-white bg-success p-1">CANCELLATION FEES APPLY</p>
+          <p style="background-image: linear-gradient(to right, rgb(45, 193, 140), rgb(33, 147, 147));" class="text-white  p-1">CANCELLATION FEES APPLY</p>
           <p><a class="text-primary mx-5" data-toggle="modal" data-target="#modelId">View Fare Rules</a></p>
         </div>
         </div>
@@ -36,8 +33,8 @@
               <p > <span  class="h5">{{data.journey.From?.city}}</span>  . <span>{{data.journey.From?.airportName}}</span> </p>
   
             </div>
-            <div class="d-flex justify-content-start  align-items-center m-1">
-              <p class=" mx-5 dooted-border"><span class="mx-2 ">{{data.journey.duration}}</span></p>
+            <div class="d-flex justify-content-start  align-items-center mx-3">
+              <p class=" mx-5 dooted-border"><span class="mx-2 fw-bold">{{data.journey.duration}}</span></p>
   
             </div>
             <div class="d-flex justify-content-start gap-2 align-items-center ">
@@ -49,17 +46,19 @@
           </div>
         </div>
       </div>
-      <ng-container *ngIf="data && data.journey1">
-      <div  class="shadow py-2 d-flex flex-column gap-4 ">
+      <div *ngIf=" data && data.journey1" class="shadow border my-2   p-1 py-2 d-flex flex-column gap-4 ">
         <div class="d-flex justify-content-between">
           <div class="">
             <h4>{{data.journey1.From?.city}} → {{data.journey1.To?.city}}</h4>
             <div class="d-flex justify-content-sm-start gap-3 ">
-              <p class="bg-gray p-1">{{data.journey1.departureTime | date:'dd MMM '}}</p>
+              <p class="yellow p-1">{{data.journey1.departureTime | date:'dd MMM '}}</p>
               <p>Non Stop · {{data.journey1.duration}}</p>
             </div>
           </div>
-          
+          <div class="">
+            <p style="background-image: linear-gradient(to right, rgb(45, 193, 140), rgb(33, 147, 147));" class="text-white  p-1">CANCELLATION FEES APPLY</p>
+            <p><a class="text-primary mx-5" data-toggle="modal" data-target="#modelId">View Fare Rules</a></p>
+          </div>
           </div>
           <div class="d-flex gap-3">
             
@@ -90,8 +89,8 @@
             </div>
           </div>
         </div>
-      </ng-container>
-  
+
+      </div>
       <div>
         <app-passnger-detail></app-passnger-detail>
       </div>
@@ -121,4 +120,4 @@
     </div>
   </div>
   
-  <button [routerLink]="['./seat']" routerLinkActive="router-link-active"  >goto</button>
+  <!-- <button [routerLink]="['./seat']" routerLinkActive="router-link-active"  >goto</button> -->

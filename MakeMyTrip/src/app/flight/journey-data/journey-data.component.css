@@ -1,10 +1,8 @@
 .line{
     padding: 1px;
-    background-color: rgb(57, 192, 250);
+    background-color: rgb(13, 240, 81);
 }
-.bg-custom2{
-    background-color: antiquewhite;
-}
+
 .book-btn{
     color: rgb(17, 110, 232);
     background-color:   rgba(17, 110, 232, 0.408);
@@ -14,10 +12,9 @@
 
 input[type="radio"] {
    
-    /* transform: scale(2.0); */
+    transform: scale(2.0);
   }
 
-.journey-card{
-    max-width: fit-content;
-    min-width: fit-content;
+.bg-new{
+    background-color: #b9daf0;
 }

@@ -11,3 +11,9 @@
 .payment{
     height: fit-content;
 }
+
+
+.test{
+    margin-top: -40px;
+    z-index: 0;
+}

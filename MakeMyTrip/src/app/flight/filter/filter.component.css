@@ -28,7 +28,10 @@ padding: 0 0px;
 }
 .filterbody{
   background-color: rgba(11, 130, 248, 0.236);
-  width: fit-content;
+  width: 150px;
 }
 
-
+form{
+  min-width: fit-content;
+  max-width: 350px;
+}

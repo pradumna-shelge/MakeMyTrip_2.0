@@ -1,88 +1,50 @@
-<h1>{{"Flight From " + search.from.city + " To " + search.to.city}}</h1>
+<!-- <h1>{{"Flight From " + search.from.city + " To " + search.to.city}}</h1> -->
 <!-- <p>{{modifiedData.dep|json}}</p> -->
-
-<div *ngIf="modifiedData && modifiedData.dep">
-    <div class="shadow d-flex justify-content-between align-items-center" *ngFor="let d of modifiedData.dep; let item=index">
-
-        
-            <div class="d-flex gap-2">
-                <img class="logo" [src]="d.airline?.logo" alt="airlineLogo">
-                <div>
-                    <p class="d-flex">{{d.airline?.name}}</p>
-                    <small>{{d.flightNumber}}</small>
-                </div>
-            </div>
-            
-                <div>
-                    <p>{{d.arrivalTime | date:'HH:mm'}}</p>
-                    <small>{{this.search.from.city}}({{this.search.from.airportCode}})</small>
-                </div>
-                <div>
-                    <p class="text-secondary">{{d.duration}}</p>
-                    <p class="line w-100 h-1"></p>
-                    <small class="text-secondary">Non Stop</small>
-                </div>
-                <div>
-                    <p>{{d.departureTime | date:'HH:mm'}}</p>
-                    <small>{{this.search.to.city}}({{this.search.to.airportCode}})</small>
-                </div>
-                <div>
-                    <p>{{d.price + d.surcharges | currency:'INR'}}</p>
-                    <small class="text-secondary">per traveler</small>
-                </div>
-                <div>
-                    <input type="radio" name="dep" (change)="addToBook(d, undefined)">
-                </div>
-            
-        
-
-        
-        <div>
-            <div [id]="'collapse' + item" class="accordion-collapse collapse" [attr.aria-labelledby]="'heading' + item">
-                <div class="accordion-body">
-                    <app-journey-detail [flightDetail]="FlightDetail"></app-journey-detail>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="text-secondary p-2 d-flex justify-content-between   ">
+    <p  class="h4 ">{{"Flight From " + search.from.city + " To " + search.to.city}}</p>
+    <p *ngIf="modifiedData.ren" class="h4 ">{{"Flight From " + search.to.city + " To " + search.from.city}}</p>
 </div>
-
-<div *ngIf="modifiedData && modifiedData.ren">
-    <div class="shadow " *ngFor="let d of modifiedData.ren; let item=index">
-
-        <div [ngClass]="{'d-flex align-items-center gap-3': modifiedData && !modifiedData.ren}">
-            <div class="d-flex gap-2">
-                <img class="logo" [src]="d.airline?.logo" alt="airlineLogo">
-                <div>
-                    <p class="d-flex">{{d.airline?.name}}</p>
-                    <small>{{d.flightNumber}}</small>
-                </div>
-            </div>
-            <div class="d-flex justify-content-between  align-items-center">
-                <div>
-                    <p>{{d.arrivalTime | date:'HH:mm'}}</p>
-                    <small>{{this.search.from.city}}({{this.search.from.airportCode}})</small>
-                </div>
-                <div>
-                    <p class="text-secondary">{{d.duration}}</p>
-                    <p class="line w-100 h-1"></p>
-                    <small class="text-secondary">Non Stop</small>
-                </div>
-                <div>
-                    <p>{{d.departureTime | date:'HH:mm'}}</p>
-                    <small>{{this.search.to.city}}({{this.search.to.airportCode}})</small>
-                </div>
-                <div>
-                    <p>{{d.price + d.surcharges | currency:'INR'}}</p>
-                    <small class="text-secondary">per traveler</small>
-                </div>
-                <div>
-                    <input type="radio" name="" id="" (change)="addToBook(undefined, d)">
-                </div>
-            </div>
+<div class="" [ngClass]="{'d-flex justify-content-between gap-2': modifiedData && modifiedData.ren}">
+<div *ngIf="modifiedData && modifiedData.dep" class="">
+    <div class="shadow py-1 px-3 rounded accordion bg-white" *ngFor="let d of modifiedData.dep; let item=index">
+  
+        <div *ngIf="modifiedData.ren" class="d-flex justify-content-start gap-2 align-items-center">
+            <img class="logo" [src]="d.airline?.logo" alt="airlineLogo">
+            <p class="d-flex">{{d.airline?.name}}</p>
         </div>
-
-        <div class="d-flex justify-content-end" (click)="flightDetail(d)">
+          <div class="d-flex    justify-content-between gap-3 align-items-center">
+            
+              <div *ngIf="!modifiedData.ren" class="">
+                  <img class="logo" [src]="d.airline?.logo" alt="airlineLogo">
+                  <div>
+                      <p class="h5">{{d.airline?.name}}</p>
+                      <small class="text-secondary">{{d.flightNumber}}</small>
+                  </div>
+              </div>
+              
+              
+                  <div>
+                      <p class="h4">{{d.arrivalTime | date:'HH:mm'}}</p>
+                      <small class="text-secondary">{{this.search.from.city}}({{this.search.from.airportCode}})</small>
+                  </div>
+                  <div>
+                      <p class="">{{d.duration}}</p>
+                      <p class="line w-100 h-1"></p>
+                      <small class="text-secondary">Non Stop</small>
+                  </div>
+                  <div>
+                      <p class="h4">{{d.departureTime | date:'HH:mm'}}</p>
+                      <small class="text-secondary">{{this.search.to.city}}({{this.search.to.airportCode}})</small>
+                  </div>
+                  <div>
+                      <p class="h4">{{d.price + d.surcharges | currency:'INR'}}</p>
+                      <small class="text-secondary">per traveler</small>
+                  </div>
+                  <div>
+                      <input type="radio" name="dep" (change)="addToBook(d, undefined)">
+                  </div>
+          </div>
+          <div *ngIf="modifiedData && !modifiedData.ren" class="d-flex justify-content-end accordion-item" (click)="flightDetail(d)">
             <a data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + item" aria-expanded="true"
                 [attr.aria-controls]="'collapse' + item" class="text-primary">
                 Flight Details
@@ -90,3 +52,78 @@
         </div>
         <div>
             <div [id]="'collapse' + item" class="accordion-collapse collapse" [attr.aria-labelledby]="'heading' + item">
+                <app-journey-detail [flightDetail]="d"></app-journey-detail>
+            </div>
+        </div>
+            
+        
+
+        
+       
+                
+    </div>
+    
+</div>
+
+<div *ngIf="modifiedData && modifiedData.ren" class="">
+    <div class="shadow py-1 px-3 rounded accordion bg-white" *ngFor="let d of modifiedData.ren; let item=index">
+  
+        <div *ngIf="modifiedData.ren" class="d-flex justify-content-start gap-2 align-items-center">
+            <img class="logo" [src]="d.airline?.logo" alt="airlineLogo">
+            <p class="d-flex">{{d.airline?.name}}</p>
+        </div>
+          <div class="d-flex    justify-content-between gap-3 align-items-center">
+            
+              <div *ngIf="!modifiedData.ren" class="">
+                  <img class="logo" [src]="d.airline?.logo" alt="airlineLogo">
+                  <div>
+                      <p class="h5">{{d.airline?.name}}</p>
+                      <small class="text-secondary">{{d.flightNumber}}</small>
+                  </div>
+              </div>
+              
+              
+                  <div>
+                      <p class="h4">{{d.arrivalTime | date:'HH:mm'}}</p>
+                      <small class="text-secondary">{{this.search.from.city}}({{this.search.from.airportCode}})</small>
+                  </div>
+                  <div>
+                      <p class="">{{d.duration}}</p>
+                      <p class="line w-100 h-1"></p>
+                      <small class="text-secondary">Non Stop</small>
+                  </div>
+                  <div>
+                      <p class="h4">{{d.departureTime | date:'HH:mm'}}</p>
+                      <small class="text-secondary">{{this.search.to.city}}({{this.search.to.airportCode}})</small>
+                  </div>
+                  <div>
+                      <p class="h4">{{d.price + d.surcharges | currency:'INR'}}</p>
+                      <small class="text-secondary">per traveler</small>
+                  </div>
+                  <div>
+                      <input type="radio" name="ren" (change)="addToBook(undefined,d )">
+                  </div>
+          </div>
+          <div *ngIf="modifiedData && !modifiedData.ren" class="d-flex justify-content-end accordion-item" (click)="flightDetail(d)">
+            <a data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + item" aria-expanded="true"
+                [attr.aria-controls]="'collapse' + item" class="text-primary">
+                Flight Details
+            </a>
+        </div>
+        <div>
+            <div [id]="'collapse' + item" class="accordion-collapse collapse" [attr.aria-labelledby]="'heading' + item">
+                <app-journey-detail [flightDetail]="d"></app-journey-detail>
+            </div>
+        </div>
+            
+        
+
+        
+       
+                
+    </div>
+    
+</div>
+
+
+</div>

@@ -1,0 +1,196 @@
+<form [formGroup]="passengerForm">
+<div class="  bg-white p-3 rounded shadow">
+   <p class="fw-bold ">Preferred by millions of travellers</p > 
+    <div class=" mt-4">
+     
+        <div class="form-check">
+          <input class="form-check-input" type="radio"  formControlName="Terms_policy" id="secureMyTrip" [value]="true">
+          <label class="form-check-label" for="secureMyTrip">
+           <span class="fw-bold">Yes</span> , Secure my trip.
+          </label>
+          
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" formControlName="Terms_policy" id="riskMyTrip" [value]="false">
+          <label class="form-check-label" for="riskMyTrip">
+            <span class="fw-bold">No</span>,I will risk my trip.
+          </label>
+        </div>
+        <div *ngIf="Terms_policy?.errors?.['required'] && Terms_policy?.['touched'] || !( Terms_policy?.value)" 
+        class="text-danger small-txt">
+     You must agree to the Terms & Conditions.
+   </div>
+      <p class="text-secondary small-txt">
+        By selecting the product, I confirm the traveller's age is between 6 months to 70 years and agree to the T&Cs
+        for this now.
+      </p>
+    </div>
+  
+    
+  </div>
+  
+
+
+<div class="bg-white shadow rounded my-2 p-3">
+
+<div>
+
+<h5>Traveller Details</h5>
+<small class="p-1 yellow block"> <span class="fw-bold">Important:</span>  Enter name as mentioned on your passport or Government approved IDs.</small>
+
+<div *ngIf="data && data.adults" class="">
+<div class="d-flex justify-content-between my-1 ">
+    <div>
+        <i class="fa-solid fa-circle-user" style="color: #5c7093;"></i>
+        <small class="">
+            ADULT (12 yrs+)</small>
+    </div>
+    <div>
+
+        {{adults.length}}/{{data.adults}}
+        <span class="text-secondry">added</span>
+    </div>
+</div>
+<!-- div *ngFor="let adult of adults.controls; let i = index">
+    <div *ngIf="adult.get('firstName').errors?.required && adult.get('firstName').touched"
+         class="text-danger small-txt">
+      First name is required for Adult {{ i + 1 }}.
+    </div>
+    <div *ngIf="adult.get('lastName').errors?.required && adult.get('lastName').touched"
+         class="text-danger small-txt">
+      Last name is required for Adult {{ i + 1 }}.
+    </div>
+    <div *ngIf="adult.get('gender').errors?.required && adult.get('gender').touched"
+         class="text-danger small-txt">
+      Gender is required for Adult {{ i + 1 }}.
+    </div>
+  </div> -->
+    <div formArrayName="adults" class="d-flex flex-column my-1 ">
+      <div *ngFor="let a of adults.controls; let i=index">
+        <div class="d-flex justify-content-between py-3 px-1 border my-2" [formGroupName]="i">
+          <input class=" form-control mx-1"  type="text" formControlName="firstName" placeholder=" First  & Middle Name">
+          <input class=" form-control mx-1" type="text" formControlName="lastName" placeholder=" Last Name">
+          <div class="d-flex gap-2">
+
+            <div>
+
+                <input type="radio" value="Male" formControlName="gender"  class="btn-check" [name]="'gender'" [id]="'option1'+i" autocomplete="off">
+                <label class=" btn btn-outline-success" [for]="'option1'+i">Male</label>
+            </div>
+            <div>
+
+                <input type="radio" value="Female"    formControlName="gender" class="btn-check" [name]="'gender'" [id]="'option2'+i" autocomplete="off">
+                <label class=" btn btn-outline-success" [for]="'option2'+i">Female</label>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <a class="p-1 border " *ngIf="adults.length < data.adults"  (click)="addAdult()">+  ADD NEW ADULT</a>
+  
+    </div>
+   
+</div>
+<div *ngIf="data && data.child" class="">
+    <div class="d-flex justify-content-between my-1 ">
+        <div>
+            <i class="fa-solid fa-circle-user" style="color: #5c7093;"></i>
+            <small class="">
+                CHILD (2-12 Yrs)</small>
+        </div>
+        <div>
+    
+            {{child.length}}/{{data.child}}
+            <span class="text-secondry">added</span>
+        </div>
+    </div>
+        <div formArrayName="child" class="d-flex flex-column my-1 ">
+          <div *ngFor="let a of child.controls; let i=index">
+            <div class="d-flex justify-content-between py-3 px-1 border my-2" [formGroupName]="i">
+              <input class=" form-control mx-1"  type="text" formControlName="firstName" placeholder=" First  & Middle Name">
+              <input class=" form-control mx-1" type="text" formControlName="lastName" placeholder=" Last Name">
+              <div class="d-flex gap-2">
+    
+                <div>
+
+                    <input type="radio" value="Male" formControlName="gender"  class="btn-check" [name]="'gender'" [id]="'option3'+i" autocomplete="off">
+                    <label class=" btn btn-outline-success" [for]="'option3'+i">Male</label>
+                </div>
+                <div>
+    
+                    <input type="radio" value="Female"    formControlName="gender" class="btn-check" [name]="'gender'" [id]="'option4'+i" autocomplete="off">
+                    <label class=" btn btn-outline-success" [for]="'option4'+i">Female</label>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <a class="p-1 border " *ngIf="child.length < data.child"  (click)="addCHILD()">+  ADD NEW CHILD</a>
+      
+        </div>
+       
+    </div>
+
+    <div *ngIf="data && data.infants" class="">
+        <div class="d-flex justify-content-between my-1 ">
+            <div>
+                <i class="fa-solid fa-circle-user" style="color: #5c7093;"></i>
+                <small class="">
+                     Infant (15 days - 2 Yrs)</small>
+            </div>
+            <div>
+        
+                {{infants.length}}/{{data.infants}}
+                <span class="text-secondry">added</span>
+            </div>
+        </div>
+            <div formArrayName="infants" class="d-flex flex-column my-1 ">
+              <div *ngFor="let a of infants.controls; let i=index">
+                <div class="d-flex justify-content-between py-3 px-1 border my-2" [formGroupName]="i">
+                  <input class=" form-control mx-1"  type="text" formControlName="firstName" placeholder=" First  & Middle Name">
+                  <input class=" form-control mx-1" type="text" formControlName="lastName" placeholder=" Last Name">
+                  <div class="d-flex gap-2">
+        
+                    <div>
+
+                        <input type="radio" value="Male" formControlName="gender"  class="btn-check" [name]="'gender'" [id]="'option5'+i" autocomplete="off">
+                        <label class=" btn btn-outline-success" [for]="'option5'+i">Male</label>
+                    </div>
+                    <div>
+        
+                        <input type="radio" value="Female"    formControlName="gender" class="btn-check" [name]="'gender'" [id]="'option6'+i" autocomplete="off">
+                        <label class=" btn btn-outline-success" [for]="'option6'+i">Female</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          
+              <a class="p-1 border " *ngIf="infants.length < data.infants"  (click)="addinfants()">+  ADD NEW Infant</a>
+          
+            </div>
+           
+        </div>
+</div>
+    
+    <hr>
+    
+    <div>
+        <p class="fw-bold mb-2">Booking details will be sent to</p>
+        <div>
+            <small >Email</small>
+            <input class="form-control w-50" type="email" formControlName="billingEmail" placeholder="Email">
+            <div *ngIf="billingEmail?.errors?.['required'] && billingEmail?.touched"
+            class="text-danger small-txt">
+         *Email is required.
+       </div>
+       <div *ngIf="billingEmail?.errors?.['email'] && billingEmail?.touched"
+            class="text-danger small-txt">
+         *Please enter a valid email address.
+       </div>
+        </div>
+    </div>
+</div>
+    <div>
+        <button  type="button" class="btn  bg-lightBlue " (click)="goToSeat()" [disabled]="passengerForm.invalid"   >Continue <i class="fa-solid fa-lock"></i></button>
+    </div>
+</form>
