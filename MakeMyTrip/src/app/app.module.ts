@@ -25,6 +25,7 @@ import { SearchReducer } from 'src/NgStore/search/Search.reduser';
 import { AirLienEffects } from 'src/NgStore/AirLine/AirLine.effect';
 import { AirLineReducer } from 'src/NgStore/AirLine/AirLine.reduser';
 import { TripReducer } from 'src/NgStore/tripDetail/trip.ngStore';
+import { bookingReducer } from 'src/NgStore/Booking/booking.reduser';
 
 
 @NgModule({
@@ -51,7 +52,7 @@ import { TripReducer } from 'src/NgStore/tripDetail/trip.ngStore';
     ReactiveFormsModule,
     FormsModule,
     MatButtonToggleModule,
-    StoreModule.forRoot({Airport:AirportReducer,search:SearchReducer,airline:AirLineReducer,trip:TripReducer}),
+    StoreModule.forRoot({Airport:AirportReducer,search:SearchReducer,airline:AirLineReducer,trip:TripReducer,booking:bookingReducer}),
     EffectsModule.forRoot(AirportEffects,AirLienEffects)
     
   ],

@@ -1,5 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { booking } from 'src/Model/booking.model';
+import { getBookingBookings } from 'src/NgStore/Booking/booking.selector';
+import { BookingStore } from 'src/NgStore/Booking/booking.store';
+import { TripStore } from 'src/NgStore/Stores.interface';
+import { geTrip } from 'src/NgStore/tripDetail/trip.ngStore';
 
 @Component({
   selector: 'app-payment-page',
@@ -7,27 +13,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./payment-page.component.css']
 })
 export class PaymentPageComponent {
-  cardNumber!: string;
-  expiryDate!: string;
-  cvv!: string;
-
-  constructor(private http: HttpClient) { }
-
-  makePayment(): void {
-    const paymentDetails = {
-      cardNumber: this.cardNumber,
-      expiryDate: this.expiryDate,
-      cvv: this.cvv
-    };
-
-    this.http.post('https://localhost:7007/api/Payment', paymentDetails).subscribe(
-      (response) => {
-       console.log("hello");
-       
-      },
-      (error) => {
-        // Handle payment error
-      }
-    );
+ bookingData!:booking;
+ tripData!:TripStore;
+  constructor(private store: Store ) { 
+    this.getBookingData()
   }
+
+
+  getBookingData(){
+this.store.select(getBookingBookings).subscribe((d)=>{
+  this.bookingData=d
+})
+this.store.select(geTrip).subscribe((d)=>{
+  this.tripData=d
+})
+}
+
+
 }

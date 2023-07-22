@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TicketClass } from 'src/Model/SearchData.model';
+import { LoadBookingSeats } from 'src/NgStore/Booking/booking.action';
 import { TripStore } from 'src/NgStore/Stores.interface';
 import { geTrip } from 'src/NgStore/tripDetail/trip.ngStore';
 
@@ -94,7 +95,7 @@ export class SeatSealationComponent {
     },
     "error": false
 };
-  TicketClass:string[] = TicketClass;
+
 
   constructor(private store:Store,private route:Router){
      
@@ -142,4 +143,22 @@ else{
 
     return this.data.journey.bookedSeats.indexOf(name) == -1
   }
+
+
+  Continue (){
+    const selectedSeatsArray = [];
+  for (const key of Object.keys(this.selectedSeats)) {
+    if (this.selectedSeats[key]) {
+      selectedSeatsArray.push(key);
+    }
+  }
+
+  console.log(selectedSeatsArray);
+  
+
+  this.store.dispatch(LoadBookingSeats({data:selectedSeatsArray}))
+
+  this.route.navigate(['flight/payment'])
+  }
+
 }

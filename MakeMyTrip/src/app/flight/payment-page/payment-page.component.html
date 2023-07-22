@@ -1,13 +1,27 @@
-<h2>Make a Payment</h2>
-<form (ngSubmit)="makePayment()" #paymentForm="ngForm">
-  <mat-form-field>
-    <input matInput type="text" placeholder="Card Number" [(ngModel)]="cardNumber" name="cardNumber" required>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput type="text" placeholder="Expiry Date" [(ngModel)]="expiryDate" name="expiryDate" required>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput type="text" placeholder="CVV" [(ngModel)]="cvv" name="cvv" required>
-  </mat-form-field>
-  <button mat-raised-button color="primary" type="submit" [disabled]="!paymentForm.valid">Pay</button>
-</form>
+<div class="container">
+    <h3>Your Booking</h3>
+  
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Flight Details</h4>
+        <p><strong>Departure:</strong> {{ tripData.search.from.city }} ({{ tripData.search.from.airportCode }}) at {{ tripData.search.departureTime }}</p>
+        <p><strong>Arrival:</strong> {{ tripData.search.to.city }} ({{ tripData.search.to.airportCode }}) at {{ tripData.search.departureTime }}</p>
+        <p><strong>Airline:</strong> {{ tripData.journey.airline?.name }}</p>
+      </div>
+      <div class="col-md-6">
+        <h4>Passenger Details</h4>
+        <div *ngFor="let p of bookingData.passengerList">
+
+            <p><strong>Name:</strong> {{ p.fullname }}</p>
+            <p><strong>Gender:</strong> {{ p.gender }}</p>
+            <p><strong>Seat No:</strong> {{ p.seatNo }}</p>
+        </div>
+      </div>
+    </div>
+  
+    <h4>Fare Summary</h4>
+    <!-- <p><strong>Fare:</strong> {{ bookingData.totalPrice }}</p>
+    <p><strong>Other Charges:</strong> {{ flightInfo.surcharges }}</p> -->
+    <p><strong>Total Due:</strong> {{ bookingData.totalPrice }}</p>
+  </div>
+  

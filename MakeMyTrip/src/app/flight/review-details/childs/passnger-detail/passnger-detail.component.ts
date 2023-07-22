@@ -3,6 +3,10 @@ import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@ang
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Passengers } from 'src/Model/SearchData.model';
+import { booking, passenger } from 'src/Model/booking.model';
+import { LoadBookingPassengers, LoadFirstJourneyId, LoadReturnJourneyId } from 'src/NgStore/Booking/booking.action';
+import { getBookingData } from 'src/NgStore/Booking/booking.selector';
+import { BookingStore } from 'src/NgStore/Booking/booking.store';
 import { TripStore } from 'src/NgStore/Stores.interface';
 import { geTrip } from 'src/NgStore/tripDetail/trip.ngStore';
 
@@ -14,14 +18,15 @@ import { geTrip } from 'src/NgStore/tripDetail/trip.ngStore';
 export class PassngerDetailComponent implements OnInit {
   passengerForm!: FormGroup;
   data!:Passengers;
-  
+  bookingData!:TripStore
 
-  constructor(private formBuilder: FormBuilder,private store:Store, private router:Router) {
+  constructor(private formBuilder: FormBuilder,private store:Store, private router:Router,) {
 
     this.store.select(geTrip).subscribe(d=>{
       if(d.error){
       }
       else{
+        this.bookingData = d
        this.data = d.search.passengers;
       }
           })
@@ -87,8 +92,45 @@ export class PassngerDetailComponent implements OnInit {
   }
 
   goToSeat(){
-    console.log(this.passengerForm.value);
+   
     
+    let passenger:passenger[]=[];
+
+    this.adults.value.forEach((d:any)=>{
+      let da:passenger ={
+        fullname: d.firstName+d.lastName,
+        gender:d.gender,
+        passengerType:1,
+        seatNo:""
+      } 
+      passenger.push(da)
+    })
+    this.child.value.forEach((d:any)=>{
+      let da:passenger ={
+        fullname: d.firstName+d.lastName,
+        gender:d.gender,
+        passengerType:2,
+        seatNo:""
+      } 
+      passenger.push(da)
+    })
+    this.infants.value.forEach((d:any)=>{
+      let da:passenger ={
+        fullname: d.firstName+d.lastName,
+        gender:d.gender,
+        passengerType:3,
+        seatNo:""
+      } 
+      passenger.push(da)
+    })
+
+
+    console.log(passenger);
+    let id = this.bookingData.journey1?.journeyId || undefined
+this.store.dispatch(LoadReturnJourneyId({data:id}))
+let id1 = this.bookingData.journey
+    this.store.dispatch(LoadFirstJourneyId({data:1}))
+    this.store.dispatch(LoadBookingPassengers({data:passenger,email:this.billingEmail?.value}));
 this.router.navigate(['/flight/review/seat'])
   }
 }

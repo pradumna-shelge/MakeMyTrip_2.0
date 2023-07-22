@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TicketClass } from 'src/Model/SearchData.model';
+import {  LoadFirstJourneyId, LoadReturnJourneyId } from 'src/NgStore/Booking/booking.action';
 import { TripStore } from 'src/NgStore/Stores.interface';
 import { geTrip } from 'src/NgStore/tripDetail/trip.ngStore';
 
@@ -20,11 +21,17 @@ export class ReviewJourneyComponent {
 if(d.error){
 }
 else{
+
   this.data={...this.data,...d};
+
   if(!d.journey1?.From){
      this.data={...this.data,journey1:undefined}
   }
+  
 }
     })
   }
+
+
+ 
 }

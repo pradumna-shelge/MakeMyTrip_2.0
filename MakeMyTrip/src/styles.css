@@ -4,9 +4,9 @@ html, body { height: 100%;
   
  
   }
-  body::-webkit-scrollbar {
+  /* body::-webkit-scrollbar {
     display: none;
-  }
+  } */
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .bg-gray{
     background-color: rgb(226, 228, 230);

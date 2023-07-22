@@ -23,6 +23,8 @@ builder.Services.AddScoped<IJourney, Journeyclass>();
 builder.Services.AddScoped<IAirlines, Airelines>();
 builder.Services.AddScoped<Iflight, Flights>();
 builder.Services.AddScoped<IUser, userRepo>();
+builder.Services.AddScoped<Ibooking, booking>();
+builder.Services.AddScoped<IPassenger, passenger>();
 
 
 builder.Services.AddControllers().AddJsonOptions(x =>
