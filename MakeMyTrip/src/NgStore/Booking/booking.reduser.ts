@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { initialBooking } from "./booking.store";
-import { LoadBooking, LoadBookingPassengers, LoadBookingSeats, LoadFirstJourneyId, LoadReturnJourneyId } from "./booking.action";
+import { LoadBooking, LoadBookingPassengers, LoadBookingSeats, LoadFirstJourneyId, LoadReturnJourneyId, LoadTotalPrice } from "./booking.action";
 import { passenger } from "src/Model/booking.model";
 
 
@@ -25,4 +25,6 @@ export const bookingReducer = createReducer(
     }),
     on(LoadFirstJourneyId,(state,{data})=>({...state,bookingData:{...state.bookingData,firstJourneyId:data}})),
     on(LoadReturnJourneyId,(state,{data})=>({...state,bookingData:{...state.bookingData,returnJourneyId:data}})),
+    on(LoadTotalPrice,(state,{data})=>({...state,bookingData:{...state.bookingData,totalPrice:data}})),
+
 )

@@ -8,7 +8,7 @@ create table Roles(
 RoleId INT PRIMARY KEY IDENTITY(1,1),
 RoleName  nvarchar(50)
 )
-INSERT INTO Roles values('Admin'),('user'),('Airline')
+INSERT INTO Roles values('Admin'),('user'),('Airline')	
 ---------------------------------------------PassengerType Table------------------------------
 
 create table PassengerType (
@@ -237,12 +237,13 @@ Adult int REFERENCES PassengerOffer(PassengerOfferId),
 Child int REFERENCES PassengerOffer(PassengerOfferId),
 Infants int REFERENCES PassengerOffer(PassengerOfferId),
 
+
 );
 
 INSERT INTO Journey (FlightId, DestinationId, SourceId, DepartureTime, ArrivalTime, Distance, SeatbasicPrice, EconomyClass, BussinessClass, Adult, Child, Infants)
 VALUES
-(1, 8, 2, '2023-08-1 10:00:00', '2023-08-1 11:30:00', 150, 2500.00, 1, 2, 1, 2, 3);
-
+(1, 1, 2, '2023-08-1 10:00:00', '2023-08-1 11:30:00', 150, 2500.00, 1, 2, 1, 2, 3),
+(1, 2, 2, '2023-08-1 13:00:00', '2023-08-1 14:30:00', 150, 3000.00, 1, 2, 1, 2, 3);
 
 
 
@@ -265,10 +266,9 @@ CREATE TABLE Passenger (
 PassengerId INT PRIMARY KEY IDENTITY(1,1),
 BookingId INT REFERENCES Booking(BookingId),
 FullName NVARCHAR(50),
-Age INT,
 Gender NVARCHAR(20),
 SeatNumber NVARCHAR(10),
-SeatTypeId INT REFERENCES SeatLocation(SeatTypeId),
+seatClass INT REFERENCES SeatClassType(SeatClassId),
 PassengerTypeId INT REFERENCES PassengerType(PassengerTypeId),
 CreatedDate DATETIME,
 CreatedId INT REFERENCES Users(UserId),

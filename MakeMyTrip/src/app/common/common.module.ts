@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 import { CommonRoutingModule } from './common-routing.module';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
@@ -22,7 +22,9 @@ import { HttpClientModule } from '@angular/common/http';
     CommonRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+  
+    
   ],
   exports:[LoginComponent,FooterComponent,NavbarComponent,MyProfileComponent]
 })

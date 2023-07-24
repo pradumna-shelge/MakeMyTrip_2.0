@@ -294,11 +294,14 @@
                                                             
                                                             <mat-button-toggle  class="border-0" [value]="item" >{{item}}</mat-button-toggle>
                                                         </ng-container>
-                                                      </mat-button-toggle-group>
+                                                    </mat-button-toggle-group>
                                                 </div>
-                                    
-                                    
+                                                
+                                                
                                             </div>
+                                            <span *ngIf="infantsFlag" class="text-danger small">
+*Number of infants cannot be more than adults
+                                            </span>
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="mb-3">
@@ -319,7 +322,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col  py-4">
-                                                <button type="button" class=" btn bg-lightBlue rounded"  data-bs-dismiss="modal" >Done</button>
+                                                <button type="button" class=" btn bg-lightBlue rounded"  data-bs-dismiss="modal" [disabled]="infantsFlag">Done</button>
                                             </div>
                                         </div>
                                     </div>

@@ -15,6 +15,9 @@ import { geTrip } from 'src/NgStore/tripDetail/trip.ngStore';
 export class PaymentPageComponent {
  bookingData!:booking;
  tripData!:TripStore;
+
+
+ 
   constructor(private store: Store ) { 
     this.getBookingData()
   }
@@ -28,6 +31,8 @@ this.store.select(geTrip).subscribe((d)=>{
   this.tripData=d
 })
 }
+payNow(){
 
+}
 
 }

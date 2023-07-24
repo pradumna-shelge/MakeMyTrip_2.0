@@ -26,7 +26,7 @@ export class SearchResultComponent {
   filterAirport:AirportModel[]=[];
   searchData!:searchData
   tripType:number=1
-  
+  infantsFlag=false
   constructor(private router:Router,private airportStore:Store<AirportStore>,private searchStore:Store<SearchStore>){
 
     this.airportStore.dispatch(LoadAirportData())
@@ -57,21 +57,28 @@ ChangeDate(val1:string, fromFlag:boolean){
 }
 
 changePass(val:number,pos:number){
-if(pos==1){
-  this.searchData = {...this.searchData,passengers:{...this.searchData.passengers,adults:val}}
-}
-else if(pos==2){
-  this.searchData = {...this.searchData,passengers:{...this.searchData.passengers,child:val}}
-}
-
-else if(pos==3){
-  this.searchData = {...this.searchData,passengers:{...this.searchData.passengers,infants:val}}
-}
-
-else{
-  this.searchData = {...this.searchData,seatTypes:val}
-}
-}
+  if(pos==1){
+    this.searchData = {...this.searchData,passengers:{...this.searchData.passengers,adults:val}}
+  }
+  else if(pos==2){
+    this.searchData = {...this.searchData,passengers:{...this.searchData.passengers,child:val}}
+  }
+  
+  else if(pos==3){
+    if(this.searchData.passengers.adults<val){
+  this.infantsFlag=true
+    }
+    
+    else{
+      this.infantsFlag=false
+      this.searchData = {...this.searchData,passengers:{...this.searchData.passengers,infants:val}}
+    }
+  }
+  
+  else{
+    this.searchData = {...this.searchData,seatTypes:val}
+  }
+  }
 PatchSearch(){
   this.searchData = {...this.searchData,tripType:this.tripType}
   this.searchStore.dispatch(LoadSearchData({data:this.searchData}))

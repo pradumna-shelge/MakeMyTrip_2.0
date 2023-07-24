@@ -1,50 +1,64 @@
-<h1 class="bg-white p-2 rounded shadow">
-  Choose The Seats
-</h1> 
-<div class="bg-white d-flex justify-content-around align-items-center">
-<div class="d-flex justify-content-center m-2  flex-column  h-100">
-   <p><span class="bg-gray px-3 py-2 border">Al</span></p>
-  </div>
-
-<div class="plane   px-4">
+<div class="d-flex justify-content-center gap-5 row mb-2 bg-custom2  ">
+  <div class="d-flex flex-column gap-3 col-lg-6 
+  col-lg-6  test" >
+  <h1 class="bg-white p-2 rounded shadow">
+    Choose The Seats 
+  </h1> {{selectedSeats|json}}
+  <div class="bg-white d-flex justify-content-around align-items-center">
+  <div class="d-flex justify-content-center m-2  flex-column  h-100">
+     <p><span class="bg-gray px-3 py-2 border">Al</span></p>
+    </div>
   
-    <div class="cockpit">
-      
+  <div class="plane   px-4">
+    
+      <div class="cockpit">
         
           
-    </div>
-    <div class="fuselage">
-      <div>
-        <p><span></span></p>
+            
       </div>
-        <div *ngFor="let seatClass of data.journey.seatStature" class="mb-4">
-    
-           
-                <div class="d-flex" *ngFor="let row of generateRange(seatClass.rowsStart, seatClass.rowsEnd)">
-                  <ng-container *ngFor="let column of generateAlphabetRange(seatClass.columnsStart, seatClass.columnsEnd); let columnIndex = index">
-
-                    
-                    <p *ngIf="AlreadyBooked(row+''+column)" [ngClass]="{ 'selected-seat': isSeatSelected(row, column) }" (click)="onSeatClick(row, column)" class="bg-success text-white seat rounded p-2 ">
-                       {{ row }}{{ column }}
-                    </p>
-                    <p *ngIf="!AlreadyBooked(row+''+column)" class="seat rounded p-2 bg-gray ">
-                        {{ row }}{{ column }}
-                    </p>
-                    <p *ngIf=" columnIndex ==2" class="px-2"></p>
-                  </ng-container>
-                </div>
-             
-          </div>
-    </div>
-    
-   
+      <div class="fuselage">
+        <div>
+          <p><span></span></p>
+        </div>
+          <div *ngFor="let seatClass of data.journey.seatStature" class="mb-4">
       
- 
+            <p class="h4">{{tikitclass[seatClass.seatClassId]}}</p>
+             
+                  <div   class="d-flex" *ngFor="let row of generateRange(seatClass.rowsStart, seatClass.rowsEnd)">
+                    <ng-container *ngFor="let column of generateAlphabetRange(seatClass.columnsStart, seatClass.columnsEnd); let columnIndex = index">
+                     
+                      
+                      <p  data-toggle="tooltip" data-placement="top" [title]="getPrice(row,column)"  *ngIf="!AlreadyBooked(row+''+column,seatClass.seatClassId) " [ngClass]="{ 'selected-seat': isSeatSelected(row, column) }" (click)="onSeatClick(row, column)" class="bg-success shadow text-white seat rounded-circle p-2 ">
+                         {{ row }}{{ column }}
+                        
+                      </p>
+                      <p *ngIf="AlreadyBooked(row+''+column,seatClass.seatClassId) " class="seat rounded-circle p-2 bg-gray ">
+                          {{ row }}{{ column }}
+                      </p>
+                      <p *ngIf=" columnIndex ==2" class="px-2"></p>
+                    </ng-container>
+                  </div>
+               
+             
+            </div>
+
+      </div>
+      
+     
+        
+   
+    </div>
   </div>
+  
+  <div  class="bg-white mt-2 p-2">
+    <button  type="button" class="btn  bg-lightBlue " (click)="Continue()"   >Continue <i class="fa-solid fa-lock"></i></button>
+  </div>
+  
+  
+  
+  </div>
+
+<div class="col-lg-3 test bg-white shadow payment py-3 ">
+  <app-payment-detail  ></app-payment-detail>
 </div>
-
-<div  class="bg-white mt-2 p-2">
-  <button  type="button" class="btn  bg-lightBlue " (click)="Continue()"   >Continue <i class="fa-solid fa-lock"></i></button>
 </div>
-
-

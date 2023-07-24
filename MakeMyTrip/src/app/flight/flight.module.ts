@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+  
 import { FlightRoutingModule } from './flight-routing.module';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SearchResultComponent } from './search-result/search-result.component';
@@ -37,6 +37,7 @@ import { PassngerDetailComponent } from './review-details/childs/passnger-detail
 import { ReviewJourneyComponent } from './review-details/childs/review-journey/review-journey.component';
 import { SeatSealationComponent } from './review-details/childs/seat-sealation/seat-sealation.component';
 import { PaymentPageComponent } from './payment-page/payment-page.component';
+import { PaymentLayoutComponent } from './payment-page/payment-layout/payment-layout.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { PaymentPageComponent } from './payment-page/payment-page.component';
     ReviewJourneyComponent,
     SeatSealationComponent,
     PaymentPageComponent,
+    PaymentLayoutComponent,
     
     
   ],

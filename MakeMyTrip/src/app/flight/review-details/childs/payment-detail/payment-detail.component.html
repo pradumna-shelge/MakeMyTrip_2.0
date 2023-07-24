@@ -1,19 +1,23 @@
-<div *ngIf="priceData" class="d-flex justify-content-between   flex-column gap-5   payment">
+<div *ngIf="priceData" class="d-flex justify-content-evenly   flex-column gap-5   payment">
     <div class="row">
-      <div class="col d-flex justify-content-lg-between">
+      <div class="col d-flex justify-content-lg-between h-100 ">
         <h4>Fare Summary</h4>
       </div>
     </div>
     <div class="row">
       <div class="col d-flex justify-content-lg-between">
-        <p class="fw-bold"><i class="fa-solid fa-circle-plus"></i>Base Fare</p>
-        <p>₹ {{priceData.base }}({{priceData.base/priceData.passengers+"*"+priceData.passengers+"passengers"}})</p>
+        <p class="fw-bold h5"><i class="fa-solid fa-circle-plus"></i>Base Fare</p>
+        <div class="text-center">
+          <p class="">₹ {{priceData.base }}</p>
+<p class="text-secondary">({{priceData.base/priceData.passengers+"*"+priceData.passengers+"Passengers"}})</p>
+        </div>
+        
       </div>
       <hr>
     </div>
     <div class="row">
       <div class="col d-flex justify-content-lg-between">
-        <p class="fw-bold"><i class="fa-solid fa-circle-plus"></i>Taxes and Surcharges</p>
+        <p class="fw-bold h5"><i class="fa-solid fa-circle-plus"></i>Taxes and Surcharges</p>
         <p>₹ {{priceData.Surcharges+priceData.ExtraCharges}}</p>
       </div>
       <hr>

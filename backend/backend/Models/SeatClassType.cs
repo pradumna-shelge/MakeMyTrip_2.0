@@ -25,5 +25,7 @@ public partial class SeatClassType
 
     public virtual User? LastModification { get; set; }
 
+    public virtual ICollection<Passenger> Passengers { get; set; } = new List<Passenger>();
+
     public virtual ICollection<SeatLocation> SeatLocations { get; set; } = new List<SeatLocation>();
 }

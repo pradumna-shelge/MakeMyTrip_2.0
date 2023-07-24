@@ -58,9 +58,10 @@ get Otp(){
        this.ser.otpVerify(this.Email?.value,Number( this.Otp?.value)).subscribe({
         next:(data: any) => {
           localStorage.setItem("token",data.token);
-          console.log(data.token);
           
-          this.router.navigate(['/'])
+          
+          // this.router.navigate(['/my-profile'])
+          window.location.reload();
          
        },
        error:(err:any) => {

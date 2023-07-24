@@ -166,8 +166,8 @@
             <div class=" modal fade custom-modal1" id="modalId1" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                 <div class="modal-dialog " role="document">
                     <div class="modal-content">
-                       
-                        <div class="modal-body text-sm">
+                                  
+                        <div class="modal-body text-dark text-sm">
                             <div class="px-2">
                     
                                 <div class="row">
@@ -183,7 +183,7 @@
                         
                         
                                 </div>
-                                <div class="d-flex justify-content-between">
+                                <div class="d-flex justify-content-between gap-4">
                                     <div class="">
                                         
                                         <p>CHILDREN (2y - 12y)</p>
@@ -207,11 +207,14 @@
                                                 
                                                 <mat-button-toggle  class="border-0" [value]="item" >{{item}}</mat-button-toggle>
                                             </ng-container>
-                                          </mat-button-toggle-group>
+                                        </mat-button-toggle-group>
                                     </div>
-                        
-                        
+                                    
+                                    
                                 </div>
+                                <span *ngIf="infantsFlag" class="text-danger small">
+*Number of infants cannot be more than adults
+                                </span>
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
@@ -232,9 +235,8 @@
                             </div>
                             <div class="row">
                                 <div class="col  py-4">
-                                    <button type="button" class=" btn bg-lightBlue rounded"  data-bs-dismiss="modal" >Done</button>
+                                    <button type="button" class=" btn bg-lightBlue rounded"  data-bs-dismiss="modal" [disabled]="infantsFlag">Done</button>
                                 </div>
-
                             </div>
                         </div>
                       

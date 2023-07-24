@@ -7,3 +7,5 @@ export const LoadBookingPassengers = createAction("[booking] LoadBookingPassenge
 export const LoadBookingSeats = createAction("[booking] LoadBookingSeats ",props<{data:string[]}>());
 export const LoadFirstJourneyId = createAction("[booking] LoadFirstJourneyId ",props<{data:number}>());
 export const LoadReturnJourneyId = createAction("[booking] LoadReturnJourneyId ",props<{data:number|undefined}>());
+
+export const LoadTotalPrice= createAction("[booking] LoadTotalPrice ",props<{data:number}>());

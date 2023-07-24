@@ -88,7 +88,7 @@ namespace backend.Controllers
                           join toAirport in airportData on j.DestinationId equals toAirport.AirportId
                           where j.SourceId == obj.fromID &&
                                 j.DestinationId == obj.toID &&
-                                j.DepartureTime.Date >= obj.depatureDate.Date
+                                j.DepartureTime?.Date >= obj.depatureDate.Date
                           select new
                           {
                               JournayId = j.JourneyId,

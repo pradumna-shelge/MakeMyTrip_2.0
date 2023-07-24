@@ -16,6 +16,5 @@ import { getBookingData } from 'src/NgStore/Booking/booking.selector';
 export class ReviewDetailsComponent {
 data = this.store.select(getBookingData);
   constructor(private store:Store,private route:Router){
-
   }
 }

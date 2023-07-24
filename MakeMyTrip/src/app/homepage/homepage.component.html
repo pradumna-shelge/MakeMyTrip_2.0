@@ -11,8 +11,8 @@
                     src="https://res.cloudinary.com/drljda4ci/image/upload/v1685688218/download_vzeuoh.png" alt="Logo"
                     height="50"></a>
             <div class="bg-lg-white  collapse navbar-collapse " id="navbarSupportedContent">
-                <ul class="d-none d-lg-block navbar-nav ms-auto mb-2 mb-lg-0 ">
-                    <li class="nav-item">
+                <ul class="d-none d-lg-block d-flex gap-3 navbar-nav ms-auto mb-2 mb-lg-0 ">
+                    <li *ngIf="!islog" class="nav-item">
                         <a data-bs-toggle="modal" href="#exampleModalToggle" role="button"
                             class="  text-white nav-link active signUp" aria-current="page">
                             <img class="" width="30px"
@@ -21,7 +21,17 @@
 
                             Login or Create Account </a>
                     </li>
+                    <li *ngIf="islog" class="nav-item">
+                        <a [routerLink]="['/my-profile']" routerLinkActive="router-link-active"  role="button"
+                            class="  text-white nav-link active signUp" aria-current="page">
+                            <img class="" width="30px"
+                                src="https://res.cloudinary.com/drljda4ci/image/upload/v1686721035/Group_1_kc5k06.svg"
+                                alt="">
 
+                            My Account </a>
+                      </li>
+                      
+                      
                 </ul>
 
                 <ul class=" px-2 bg-light rounded  navbar-nav text-black d-lg-none w-75 border bg-white">

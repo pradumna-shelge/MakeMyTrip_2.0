@@ -25,6 +25,7 @@ namespace backend.Controllers
         [HttpPost("emailValidate")]
         public async Task<IActionResult> emailValidate(LoginDTO obj)
         {
+
             var Users = await _user.Get();
             var userObj = Users.FirstOrDefault(user => user.UserEmail == obj.email);
             
@@ -36,16 +37,16 @@ UserEmail = obj.email
                 };
                await _user.Post(newUser);
 
-                userObj = Users.FirstOrDefault(user => user.UserEmail == obj.email);
+                userObj = Users.FirstOrDefault(user => user.UserEmail == newUser.UserEmail);
                 if(userObj == null)
                 {
-                    return BadRequest();
+                    return BadRequest(new { mes="user not found"});
                 }
             }
 
             if (userObj == null )
             {
-                return BadRequest();
+                return BadRequest(new { mes = "user not found" });
             }
             OtpServices otpServices = new OtpServices(_config);
 

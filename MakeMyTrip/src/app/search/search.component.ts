@@ -24,6 +24,7 @@ export class SearchComponent {
   filterAirport:AirportModel[]=[];
   searchData!:searchData
   tripType:number=1
+  infantsFlag=false
   
   constructor(private router:Router,private airportStore:Store<AirlineStore>,private searchStore:Store<SearchStore>){
 
@@ -63,7 +64,14 @@ else if(pos==2){
 }
 
 else if(pos==3){
-  this.searchData = {...this.searchData,passengers:{...this.searchData.passengers,infants:val}}
+  if(this.searchData.passengers.adults<val){
+this.infantsFlag=true
+  }
+  
+  else{
+    this.infantsFlag=false
+    this.searchData = {...this.searchData,passengers:{...this.searchData.passengers,infants:val}}
+  }
 }
 
 else{

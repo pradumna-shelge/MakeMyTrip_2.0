@@ -11,13 +11,11 @@ public partial class Passenger
 
     public string? FullName { get; set; }
 
-    public int? Age { get; set; }
-
     public string? Gender { get; set; }
 
     public string? SeatNumber { get; set; }
 
-    public int? SeatTypeId { get; set; }
+    public int? SeatClass { get; set; }
 
     public int? PassengerTypeId { get; set; }
 
@@ -37,5 +35,5 @@ public partial class Passenger
 
     public virtual PassengerType? PassengerType { get; set; }
 
-    public virtual SeatLocation? SeatType { get; set; }
+    public virtual SeatClassType? SeatClassNavigation { get; set; }
 }

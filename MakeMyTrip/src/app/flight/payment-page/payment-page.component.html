@@ -1,27 +1,53 @@
-<div class="container">
-    <h3>Your Booking</h3>
-  
-    <div class="row">
-      <div class="col-md-6">
-        <h4>Flight Details</h4>
-        <p><strong>Departure:</strong> {{ tripData.search.from.city }} ({{ tripData.search.from.airportCode }}) at {{ tripData.search.departureTime }}</p>
-        <p><strong>Arrival:</strong> {{ tripData.search.to.city }} ({{ tripData.search.to.airportCode }}) at {{ tripData.search.departureTime }}</p>
-        <p><strong>Airline:</strong> {{ tripData.journey.airline?.name }}</p>
-      </div>
-      <div class="col-md-6">
-        <h4>Passenger Details</h4>
-        <div *ngFor="let p of bookingData.passengerList">
+<nav class="navbar navbar-expand-lg navbar-dark bg-blueDark">
 
-            <p><strong>Name:</strong> {{ p.fullname }}</p>
-            <p><strong>Gender:</strong> {{ p.gender }}</p>
-            <p><strong>Seat No:</strong> {{ p.seatNo }}</p>
-        </div>
+  <div class=" container-fluid lg-mx-5">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" routerLink=""><img
+              src="https://res.cloudinary.com/drljda4ci/image/upload/v1685688218/download_vzeuoh.png" alt="Logo"
+              height="50"></a>
+      <div class="bg-lg-white  collapse navbar-collapse " id="navbarSupportedContent">
+         
+
+          
+      </div>
+
+  </div>
+</nav>
+
+
+<div class="booking-details-container container">
+  <div class="flight-details row">
+    <div class="col-md-6">
+      <h3>Your Booking</h3>
+      <p><strong>Departure:</strong> {{ tripData.search.from.city }} ({{ tripData.search.from.airportCode }}) at {{ tripData.search.departureTime }}</p>
+      <p><strong>Arrival:</strong> {{ tripData.search.to.city }} ({{ tripData.search.to.airportCode }}) at {{ tripData.search.departureTime }}</p>
+      <p><strong>Airline:</strong> {{ tripData.journey.airline?.name }}</p>
+    </div>
+    <div class="col-md-6">
+      <h3>Passenger Details</h3>
+      <div *ngFor="let p of bookingData.passengerList" class="passenger-details">
+        <p><strong>Name:</strong> {{ p.fullname }}</p>
+        <p><strong>Gender:</strong> {{ p.gender }}</p>
+        <p><strong>Seat No:</strong> {{ p.seatNo }}</p>
       </div>
     </div>
-  
-    <h4>Fare Summary</h4>
+  </div>
+
+  <div class="fare-summary">
+    <h3>Fare Summary</h3>
+    <!-- Add fare summary details using Angular bindings -->
     <!-- <p><strong>Fare:</strong> {{ bookingData.totalPrice }}</p>
     <p><strong>Other Charges:</strong> {{ flightInfo.surcharges }}</p> -->
     <p><strong>Total Due:</strong> {{ bookingData.totalPrice }}</p>
   </div>
-  
+
+  <div class="pay-now-btn">
+    <button class="btn btn-primary text-white" (click)="payNow()">Pay Now</button>
+  </div>
+
+</div>
+

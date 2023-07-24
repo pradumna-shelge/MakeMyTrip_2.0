@@ -12,6 +12,8 @@ import { geTrip } from 'src/NgStore/tripDetail/trip.ngStore';
   styleUrls: ['./seat-sealation.component.css']
 })
 export class SeatSealationComponent {
+  tikitclass=TicketClass;
+  passengerCount = 3;
   data:TripStore={
     "search": {
         "tripType": 1,
@@ -62,15 +64,16 @@ export class SeatSealationComponent {
             {
                 "seatClassId": 2,
                 "rowsStart": 11,
-                "rowsEnd": 5,
+                "rowsEnd": 15,
                 "columnsStart": "A",
                 "columnsEnd": "F"
             }
         ],
         "bookedSeats": [
-            "1A",
-            "6B",
+            "11A",
+            "13B",
             "6C"
+            
         ],
         "airline": {
             "id": 2,
@@ -107,6 +110,8 @@ else{
   if(!d.journey1?.From){
      this.data={...this.data,journey1:undefined}
   }
+
+  this.passengerCount= this.data.search.passengers.adults??0+this.data.search.passengers.child??0
 }
     })
   }
@@ -122,43 +127,60 @@ else{
     const endIndex = alphabet.indexOf(end);
     return alphabet.slice(startIndex, endIndex + 1).split('');
   }
-  selectedSeats: { [key: string]: boolean } = {};
+  selectedSeats: string[] = [];
 
 
 
   onSeatClick(row: number, column: string): void {
     
-    const seatKey = `${row}${column}`;
-    this.selectedSeats[seatKey] = !this.selectedSeats[seatKey];
+    const seatKey = `${row}${column}`;  
+    let inx  = this.selectedSeats.indexOf(seatKey)
+   if(inx==-1){
+     
+    this.selectedSeats.push(seatKey)
+
+   }
+   else{
+    this.selectedSeats.splice(inx,1)
+   }
+    if(this.selectedSeats.length>this.passengerCount){
+      this.selectedSeats.pop()
+    }
+
+    
   }
 
   isSeatSelected(row: number, column: string): boolean {
     const seatKey = `${row}${column}`;
-    return this.selectedSeats[seatKey];
+    return this.selectedSeats.indexOf(seatKey)!=-1;
   }
 
 
-  AlreadyBooked(name:string){
-
-
-    return this.data.journey.bookedSeats.indexOf(name) == -1
+  AlreadyBooked(name:string,seatclass:number){
+    return (this.data.journey.bookedSeats.indexOf(name) != -1) || seatclass== this.data.search.seatTypes
   }
 
+  sameclass(seatclass:number){
+  return   seatclass==this.data.search.seatTypes
+  }
 
   Continue (){
-    const selectedSeatsArray = [];
-  for (const key of Object.keys(this.selectedSeats)) {
-    if (this.selectedSeats[key]) {
-      selectedSeatsArray.push(key);
-    }
-  }
-
-  console.log(selectedSeatsArray);
+  
   
 
-  this.store.dispatch(LoadBookingSeats({data:selectedSeatsArray}))
+  this.store.dispatch(LoadBookingSeats({data:this.selectedSeats}))
 
   this.route.navigate(['flight/payment'])
   }
 
+
+  getPrice(row: number    , column: string): string {
+  
+    const price = this.data.journey.price;
+    
+
+   
+
+    return price ? `seat price ${price}` : 'Price is not avaliable'; 
+  }
 }

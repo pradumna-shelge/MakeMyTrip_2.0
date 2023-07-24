@@ -78,4 +78,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-//Scaffold - DbContext "Server=PC0577\MSSQL2019;Database=MakeMyTrip;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer - OutputDir Models - f
+//Scaffold-DbContext "Server=PRADUMNA\SQLEXPRESS;Database=MakeMyTrip;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -f
+//- DbContext "Server=PRADUMNA\SQLEXPRESS;Database=MakeMyTrip;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer - OutputDir Models - f

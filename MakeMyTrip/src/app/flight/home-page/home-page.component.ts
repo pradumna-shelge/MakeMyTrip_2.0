@@ -33,59 +33,71 @@ constructor(private airportStore: Store<AirportStore>, private router:Router, pr
  this.airportStore.dispatch(LoadAirportData())
   this.airlineStore.select(getAirportData).subscribe(d=>{
   this.airportData = d;
-  console.log(d);
-  
  })
-
 }
 filterData(data:filterInterface){
+  let newData=this.data;
 
-  this.filteredData  = this.data;
-   if(data.Price){
-    const PriceData =  data.Price.split('-')
-       let low= Number( PriceData[0]);
-       let high =Number( PriceData[1]);
 
-       
-     this.filteredData.dep  = this.filteredData.dep.filter(m=> m.price>=low && m.price<= high )
-     if(Array.isArray(this.filteredData.ren) ){
+  console.log("stat data");
+  console.log(this.data);
+//   if(data.Price){ 
+//     let PriceData =  data.Price.split('-')
+//     let low:number= Number( PriceData[0]);
+//      let high:number =Number( PriceData[1]);
+//      this.filteredData  = {...this.filteredData,dep:this.filteredData.dep.filter(m=> m.price>=low && m.price<= high )}
+  
+   
+//    }
+//    if(data.DepartureTime){
+   
+//     let dateArray =  data.DepartureTime.split('-')
+//     let lowerTime = dateArray[0];
+//     let upperTime = dateArray[1];
+    
+//     let lowerTimeParts = lowerTime.split(/(\d+)(am|pm)/).filter(Boolean); 
+//     let upperTimeParts = upperTime.split(/(\d+)(am|pm)/).filter(Boolean);
+    
+//     let lowerHours = parseInt(lowerTimeParts[0], 10) || 0;
+//     let upperHours = parseInt(upperTimeParts[0], 10) || 24;
 
-       this.filteredData.ren  = this.filteredData.ren.filter((m:JourneyInterface)=> m.price>=low && m.price<= high )
-     }
-   }
+// let LowDate = new Date( this.filteredData.dep[0].departureTime) ;
+// let HighDate = new Date( this.filteredData.dep[0].departureTime) ;
+// LowDate.setHours(lowerHours);
+// HighDate.setHours(upperHours)
 
-   if(data.DepartureTime){
-    const dateArray =  data.DepartureTime.split('-')
-    const low = dateArray[0]; 
+// console.log("filter data");
+// console.log(newData);
 
-const [Lhours, Lminutes] = low.split(/(?<=\d)(?=[A-Z])/)[0].split(':').map(Number);
+// newData.dep = newData.dep.filter(m=>  m.departureTime >= LowDate && m.departureTime <= HighDate  )
+// console.log("filter data1");
+// console.log(newData);
 
-const LowDate = new Date( this.filteredData.dep[0].departureTime)   ;
-LowDate.setHours(1);
-LowDate.setMinutes(0);
 
-this.filteredData.dep = this.filteredData.dep.filter(m=>  m.departureTime >= LowDate )
 
-   }
+//    }
 
-   if(data.ArrivalTime){
-    const dateArray =  data.DepartureTime.split('-')
+//    if(data.ArrivalTime){
+//     const dateArray =  data.DepartureTime.split('-')
 
-    const high = dateArray[1]; 
+//     const high = dateArray[1]; 
 
-const [Hhours, Hminutes] = high.split(/(?<=\d)(?=[A-Z])/)[0].split(':').map(Number);
+// const [Hhours, Hminutes] = high.split(/(?<=\d)(?=[A-Z])/)[0].split(':').map(Number);
 
-const HighDate = new Date();
+// const HighDate = new Date();
 
-HighDate.setHours(Hhours % 12);
-HighDate.setMinutes(Hminutes);
-if(Array.isArray(this.filteredData.ren) ){
+// HighDate.setHours(Hhours % 12);
+// HighDate.setMinutes(Hminutes);
+// if(Array.isArray(this.filteredData.ren) ){
 
-  this.filteredData.ren = this.filteredData.ren.filter(m=>  m.departureTime<= HighDate )
+//   this.filteredData.ren = this.filteredData.ren.filter(m=>  m.departureTime<= HighDate )
+// }
+//    }
+
 }
-   }
 
-}
+
+
   ngOnInit(): void {
   
   this.getAirports();
@@ -165,8 +177,6 @@ this.data.dep = tempData;
 if(this.data.ren)this.data.ren = tempData1
 
 this.filteredData = this.data;
-console.log(this.filteredData);
-
 
 }
 

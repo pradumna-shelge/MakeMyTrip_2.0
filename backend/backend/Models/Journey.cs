@@ -13,7 +13,7 @@ public partial class Journey
 
     public int? SourceId { get; set; }
 
-    public DateTime DepartureTime { get; set; }
+    public DateTime? DepartureTime { get; set; }
 
     public DateTime? ArrivalTime { get; set; }
 

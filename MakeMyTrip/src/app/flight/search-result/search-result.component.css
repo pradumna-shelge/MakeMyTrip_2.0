@@ -149,7 +149,7 @@ overflow: hidden;
   right: 120%;
   bottom:  80%;
   height: 500px;
-  width: 700px;
+  min-width: fit-content;
   overflow: hidden;
   margin-top: 300px;
   transform: translate(-50%, -50%);

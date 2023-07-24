@@ -24,6 +24,4 @@ public partial class SeatLocation
     public virtual User? Created { get; set; }
 
     public virtual User? LastModification { get; set; }
-
-    public virtual ICollection<Passenger> Passengers { get; set; } = new List<Passenger>();
 }

@@ -1,0 +1,20 @@
+.booking-details-container {
+    padding: 20px;
+    border: 1px solid #ccc;
+  }
+
+  .flight-details {
+    margin-bottom: 20px;
+  }
+
+  .passenger-details {
+    margin-bottom: 20px;
+  }
+
+  .fare-summary {
+    margin-bottom: 20px;
+  }
+
+  .pay-now-btn {
+    margin-top: 20px;
+  }
