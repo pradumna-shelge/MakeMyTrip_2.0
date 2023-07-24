@@ -28,11 +28,11 @@
                     <ng-container *ngFor="let column of generateAlphabetRange(seatClass.columnsStart, seatClass.columnsEnd); let columnIndex = index">
                      
                       
-                      <p  data-toggle="tooltip" data-placement="top" [title]="getPrice(row,column)"  *ngIf="!AlreadyBooked(row+''+column,seatClass.seatClassId) " [ngClass]="{ 'selected-seat': isSeatSelected(row, column) }" (click)="onSeatClick(row, column)" class="bg-success shadow text-white seat rounded-circle p-2 ">
+                      <p  data-toggle="tooltip" data-placement="top" [title]="getPrice(row,column)"  *ngIf="AlreadyBooked(row+''+column,seatClass.seatClassId) " [ngClass]="{ 'selected-seat': isSeatSelected(row, column) }" (click)="onSeatClick(row, column)" class="bg-success shadow text-white seat rounded-circle p-2 ">
                          {{ row }}{{ column }}
                         
                       </p>
-                      <p *ngIf="AlreadyBooked(row+''+column,seatClass.seatClassId) " class="seat rounded-circle p-2 bg-gray ">
+                      <p *ngIf="!AlreadyBooked(row+''+column,seatClass.seatClassId) " class="seat rounded-circle p-2 bg-gray ">
                           {{ row }}{{ column }}
                       </p>
                       <p *ngIf=" columnIndex ==2" class="px-2"></p>
@@ -51,14 +51,14 @@
   </div>
   
   <div  class="bg-white mt-2 p-2">
-    <button  type="button" class="btn  bg-lightBlue " (click)="Continue()"   >Continue <i class="fa-solid fa-lock"></i></button>
+    <button  type="button" class="btn  bg-lightBlue " (click)="Continue()"  [disabled]="this.selectedSeats.length!=this.passengerCount"  >Continue <i class="fa-solid fa-lock"></i></button>
   </div>
   
   
   
   </div>
 
-<div class="col-lg-3 test bg-white shadow payment py-3 ">
+<div class="col-lg-3 ">
   <app-payment-detail  ></app-payment-detail>
 </div>
 </div>

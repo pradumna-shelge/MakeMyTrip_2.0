@@ -5,7 +5,7 @@ namespace backend.Models;
 
 public partial class Booking
 {
-    public int BookingId { get; set; }
+    public long BookingId { get; set; }
 
     public int? JourneyId { get; set; }
 

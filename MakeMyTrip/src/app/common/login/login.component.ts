@@ -11,7 +11,7 @@ import { LoginService } from '../services/login.service';
 })
 export class LoginComponent {
   userData!:FormGroup
-
+otpFlag= false;
   Area = 1;
 
 constructor(private fb:FormBuilder,private router:Router,private ser:LoginService){
@@ -54,11 +54,11 @@ get Otp(){
   changeArea(area:number){
     this.Area = area;
     if(area == 3){
-      this.stopTimer();
+      
        this.ser.otpVerify(this.Email?.value,Number( this.Otp?.value)).subscribe({
         next:(data: any) => {
           localStorage.setItem("token",data.token);
-          
+          this.stopTimer();
           
           // this.router.navigate(['/my-profile'])
           window.location.reload();
@@ -67,6 +67,7 @@ get Otp(){
        error:(err:any) => {
          console.log(err.error.mes);
          this.Area = 2
+         this.otpFlag = true
        }
        })
 

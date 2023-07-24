@@ -74,9 +74,9 @@
                 <div class="text-center mt-3 p-1" *ngSwitchCase="2">
                     <button type="submit" class=" signUp btn text-light w-100" data-bs-toggle="modal"
                          (click)="changeArea(3)" [disabled]="!this.Otp?.valid">Verify</button>
-
+<span *ngIf="otpFlag" class="small text-danger">*OTP is Invalid</span>
                         <div class="text-end fs-5 text-danger" *ngIf="minutes !=0 || seconds!=0 "> <span class=" text-secondary ">Resend OTP in</span>  {{minutes}}:{{seconds}}</div>
-                        <!-- <div class="text-end fs-5 text-primary " *ngIf="minutes==0 && seconds==0 " (click)="changeArea(2)">Resend OTP</div> -->
+                        <div class="text-end fs-5 text-primary " *ngIf="minutes==0 && seconds==0 " (click)="changeArea(2)">Resend OTP</div>
                 </div>
             </div>
 

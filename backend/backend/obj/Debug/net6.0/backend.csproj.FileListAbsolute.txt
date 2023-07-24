@@ -1768,3 +1768,4 @@ C:\Users\admin\Desktop\make my trip\MakeMyTrip_2.0\backend\backend\obj\Debug\net
 C:\Users\admin\Desktop\make my trip\MakeMyTrip_2.0\backend\backend\obj\Debug\net6.0\backend.pdb
 C:\Users\admin\Desktop\make my trip\MakeMyTrip_2.0\backend\backend\obj\Debug\net6.0\backend.genruntimeconfig.cache
 C:\Users\admin\Desktop\make my trip\MakeMyTrip_2.0\backend\backend\obj\Debug\net6.0\ref\backend.dll
+D:\MakeMyTrip_2.0\MakeMyTrip_2.0\backend\backend\bin\Debug\net6.0\RazorPay Core.dll

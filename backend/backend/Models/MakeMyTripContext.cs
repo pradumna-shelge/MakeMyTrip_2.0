@@ -48,13 +48,13 @@ public partial class MakeMyTripContext : DbContext
     public virtual DbSet<SeatClassDto> SeatClassDtos { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=PRADUMNA\\SQLEXPRESS;Database=MakeMyTrip;Trusted_Connection=True;TrustServerCertificate=True;");
+        => optionsBuilder.UseSqlServer("Server=PC0577\\MSSQL2019;Database=MakeMyTrip;Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Airline>(entity =>
         {
-            entity.HasKey(e => e.AirlineId).HasName("PK__Airline__DC458213B3EBAFB0");
+            entity.HasKey(e => e.AirlineId).HasName("PK__Airline__DC4582137D1E5334");
 
             entity.ToTable("Airline");
 
@@ -65,16 +65,16 @@ public partial class MakeMyTripContext : DbContext
 
             entity.HasOne(d => d.Created).WithMany(p => p.AirlineCreateds)
                 .HasForeignKey(d => d.CreatedId)
-                .HasConstraintName("FK__Airline__Created__534D60F1");
+                .HasConstraintName("FK__Airline__Created__403A8C7D");
 
             entity.HasOne(d => d.LastModification).WithMany(p => p.AirlineLastModifications)
                 .HasForeignKey(d => d.LastModificationId)
-                .HasConstraintName("FK__Airline__LastMod__5441852A");
+                .HasConstraintName("FK__Airline__LastMod__412EB0B6");
         });
 
         modelBuilder.Entity<AirportDatum>(entity =>
         {
-            entity.HasKey(e => e.AirportId).HasName("PK__AirportD__E3DBE0EAD1817FDA");
+            entity.HasKey(e => e.AirportId).HasName("PK__AirportD__E3DBE0EA26B3B963");
 
             entity.Property(e => e.AirportId).ValueGeneratedNever();
             entity.Property(e => e.AirportCode).HasMaxLength(50);
@@ -84,23 +84,24 @@ public partial class MakeMyTripContext : DbContext
 
             entity.HasOne(d => d.Address).WithMany(p => p.AirportData)
                 .HasForeignKey(d => d.AddressId)
-                .HasConstraintName("FK__AirportDa__Addre__5BE2A6F2");
+                .HasConstraintName("FK__AirportDa__Addre__48CFD27E");
 
             entity.HasOne(d => d.Created).WithMany(p => p.AirportDatumCreateds)
                 .HasForeignKey(d => d.CreatedId)
-                .HasConstraintName("FK__AirportDa__Creat__5CD6CB2B");
+                .HasConstraintName("FK__AirportDa__Creat__49C3F6B7");
 
             entity.HasOne(d => d.LastModification).WithMany(p => p.AirportDatumLastModifications)
                 .HasForeignKey(d => d.LastModificationId)
-                .HasConstraintName("FK__AirportDa__LastM__5DCAEF64");
+                .HasConstraintName("FK__AirportDa__LastM__4AB81AF0");
         });
 
         modelBuilder.Entity<Booking>(entity =>
         {
-            entity.HasKey(e => e.BookingId).HasName("PK__Booking__73951AED1F4E39FA");
+            entity.HasKey(e => e.BookingId).HasName("PK__Booking__73951AED94ED039F");
 
             entity.ToTable("Booking");
 
+            entity.Property(e => e.BookingId).ValueGeneratedNever();
             entity.Property(e => e.BookingDate).HasColumnType("datetime");
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
             entity.Property(e => e.LastModificationDate).HasColumnType("datetime");
@@ -108,24 +109,24 @@ public partial class MakeMyTripContext : DbContext
 
             entity.HasOne(d => d.Created).WithMany(p => p.BookingCreateds)
                 .HasForeignKey(d => d.CreatedId)
-                .HasConstraintName("FK__Booking__Created__07C12930");
+                .HasConstraintName("FK__Booking__Created__74AE54BC");
 
             entity.HasOne(d => d.Journey).WithMany(p => p.Bookings)
                 .HasForeignKey(d => d.JourneyId)
-                .HasConstraintName("FK__Booking__Journey__05D8E0BE");
+                .HasConstraintName("FK__Booking__Journey__72C60C4A");
 
             entity.HasOne(d => d.LastModification).WithMany(p => p.BookingLastModifications)
                 .HasForeignKey(d => d.LastModificationId)
-                .HasConstraintName("FK__Booking__LastMod__08B54D69");
+                .HasConstraintName("FK__Booking__LastMod__75A278F5");
 
             entity.HasOne(d => d.User).WithMany(p => p.BookingUsers)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Booking__UserId__06CD04F7");
+                .HasConstraintName("FK__Booking__UserId__73BA3083");
         });
 
         modelBuilder.Entity<Flight>(entity =>
         {
-            entity.HasKey(e => e.FlightId).HasName("PK__Flight__8A9E14EE2E422822");
+            entity.HasKey(e => e.FlightId).HasName("PK__Flight__8A9E14EEA49B020F");
 
             entity.ToTable("Flight");
 
@@ -136,32 +137,32 @@ public partial class MakeMyTripContext : DbContext
 
             entity.HasOne(d => d.Airline).WithMany(p => p.Flights)
                 .HasForeignKey(d => d.AirlineId)
-                .HasConstraintName("FK__Flight__airlineI__6E01572D");
+                .HasConstraintName("FK__Flight__airlineI__5AEE82B9");
 
             entity.HasOne(d => d.BusinessclassNavigation).WithMany(p => p.FlightBusinessclassNavigations)
                 .HasForeignKey(d => d.Businessclass)
-                .HasConstraintName("FK__Flight__Business__70DDC3D8");
+                .HasConstraintName("FK__Flight__Business__5DCAEF64");
 
             entity.HasOne(d => d.Created).WithMany(p => p.FlightCreateds)
                 .HasForeignKey(d => d.CreatedId)
-                .HasConstraintName("FK__Flight__CreatedI__71D1E811");
+                .HasConstraintName("FK__Flight__CreatedI__5EBF139D");
 
             entity.HasOne(d => d.EconomyClassNavigation).WithMany(p => p.FlightEconomyClassNavigations)
                 .HasForeignKey(d => d.EconomyClass)
-                .HasConstraintName("FK__Flight__EconomyC__6EF57B66");
+                .HasConstraintName("FK__Flight__EconomyC__5BE2A6F2");
 
             entity.HasOne(d => d.FirstClassNavigation).WithMany(p => p.FlightFirstClassNavigations)
                 .HasForeignKey(d => d.FirstClass)
-                .HasConstraintName("FK__Flight__FirstCla__6FE99F9F");
+                .HasConstraintName("FK__Flight__FirstCla__5CD6CB2B");
 
             entity.HasOne(d => d.LastModification).WithMany(p => p.FlightLastModifications)
                 .HasForeignKey(d => d.LastModificationId)
-                .HasConstraintName("FK__Flight__LastModi__72C60C4A");
+                .HasConstraintName("FK__Flight__LastModi__5FB337D6");
         });
 
         modelBuilder.Entity<FlightclassStructure>(entity =>
         {
-            entity.HasKey(e => e.FlightclassStructureId).HasName("PK__Flightcl__631F102CF341D08B");
+            entity.HasKey(e => e.FlightclassStructureId).HasName("PK__Flightcl__631F102CCF93D4A1");
 
             entity.ToTable("FlightclassStructure");
 
@@ -178,20 +179,20 @@ public partial class MakeMyTripContext : DbContext
 
             entity.HasOne(d => d.Created).WithMany(p => p.FlightclassStructureCreateds)
                 .HasForeignKey(d => d.CreatedId)
-                .HasConstraintName("FK__Flightcla__Creat__6A30C649");
+                .HasConstraintName("FK__Flightcla__Creat__571DF1D5");
 
             entity.HasOne(d => d.LastModification).WithMany(p => p.FlightclassStructureLastModifications)
                 .HasForeignKey(d => d.LastModificationId)
-                .HasConstraintName("FK__Flightcla__LastM__6B24EA82");
+                .HasConstraintName("FK__Flightcla__LastM__5812160E");
 
             entity.HasOne(d => d.SeatClass).WithMany(p => p.FlightclassStructures)
                 .HasForeignKey(d => d.SeatClassId)
-                .HasConstraintName("FK__Flightcla__SeatC__693CA210");
+                .HasConstraintName("FK__Flightcla__SeatC__5629CD9C");
         });
 
         modelBuilder.Entity<Journey>(entity =>
         {
-            entity.HasKey(e => e.JourneyId).HasName("PK__Journey__4159B9EFAD7D9389");
+            entity.HasKey(e => e.JourneyId).HasName("PK__Journey__4159B9EFB2F47BAB");
 
             entity.ToTable("Journey");
 
@@ -201,55 +202,55 @@ public partial class MakeMyTripContext : DbContext
 
             entity.HasOne(d => d.AdultNavigation).WithMany(p => p.JourneyAdultNavigations)
                 .HasForeignKey(d => d.Adult)
-                .HasConstraintName("FK__Journey__Adult__01142BA1");
+                .HasConstraintName("FK__Journey__Adult__6E01572D");
 
             entity.HasOne(d => d.BussinessClassNavigation).WithMany(p => p.JourneyBussinessClassNavigations)
                 .HasForeignKey(d => d.BussinessClass)
-                .HasConstraintName("FK__Journey__Bussine__00200768");
+                .HasConstraintName("FK__Journey__Bussine__6D0D32F4");
 
             entity.HasOne(d => d.ChildNavigation).WithMany(p => p.JourneyChildNavigations)
                 .HasForeignKey(d => d.Child)
-                .HasConstraintName("FK__Journey__Child__02084FDA");
+                .HasConstraintName("FK__Journey__Child__6EF57B66");
 
             entity.HasOne(d => d.Destination).WithMany(p => p.JourneyDestinations)
                 .HasForeignKey(d => d.DestinationId)
-                .HasConstraintName("FK__Journey__Destina__7C4F7684");
+                .HasConstraintName("FK__Journey__Destina__693CA210");
 
             entity.HasOne(d => d.EconomyClassNavigation).WithMany(p => p.JourneyEconomyClassNavigations)
                 .HasForeignKey(d => d.EconomyClass)
-                .HasConstraintName("FK__Journey__Economy__7E37BEF6");
+                .HasConstraintName("FK__Journey__Economy__6B24EA82");
 
             entity.HasOne(d => d.FirstClassNavigation).WithMany(p => p.JourneyFirstClassNavigations)
                 .HasForeignKey(d => d.FirstClass)
-                .HasConstraintName("FK__Journey__FirstCl__7F2BE32F");
+                .HasConstraintName("FK__Journey__FirstCl__6C190EBB");
 
             entity.HasOne(d => d.Flight).WithMany(p => p.Journeys)
                 .HasForeignKey(d => d.FlightId)
-                .HasConstraintName("FK__Journey__FlightI__7B5B524B");
+                .HasConstraintName("FK__Journey__FlightI__68487DD7");
 
             entity.HasOne(d => d.InfantsNavigation).WithMany(p => p.JourneyInfantsNavigations)
                 .HasForeignKey(d => d.Infants)
-                .HasConstraintName("FK__Journey__Infants__02FC7413");
+                .HasConstraintName("FK__Journey__Infants__6FE99F9F");
 
             entity.HasOne(d => d.Source).WithMany(p => p.JourneySources)
                 .HasForeignKey(d => d.SourceId)
-                .HasConstraintName("FK__Journey__SourceI__7D439ABD");
+                .HasConstraintName("FK__Journey__SourceI__6A30C649");
         });
 
         modelBuilder.Entity<JourneyClassPrice>(entity =>
         {
-            entity.HasKey(e => e.JourneyClassPriceId).HasName("PK__JourneyC__4198C0486747714F");
+            entity.HasKey(e => e.JourneyClassPriceId).HasName("PK__JourneyC__4198C048C3F7C88D");
 
             entity.ToTable("JourneyClassPrice");
 
             entity.HasOne(d => d.JourneyClassTypeNavigation).WithMany(p => p.JourneyClassPrices)
                 .HasForeignKey(d => d.JourneyClassType)
-                .HasConstraintName("FK__JourneyCl__Journ__75A278F5");
+                .HasConstraintName("FK__JourneyCl__Journ__628FA481");
         });
 
         modelBuilder.Entity<LocationDatum>(entity =>
         {
-            entity.HasKey(e => e.LocationId).HasName("PK__Location__E7FEA49747B4E98B");
+            entity.HasKey(e => e.LocationId).HasName("PK__Location__E7FEA497352EC7EF");
 
             entity.Property(e => e.LocationId).ValueGeneratedNever();
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -258,20 +259,20 @@ public partial class MakeMyTripContext : DbContext
 
             entity.HasOne(d => d.Country).WithMany(p => p.InverseCountry)
                 .HasForeignKey(d => d.CountryId)
-                .HasConstraintName("FK__LocationD__Count__571DF1D5");
+                .HasConstraintName("FK__LocationD__Count__440B1D61");
 
             entity.HasOne(d => d.Created).WithMany(p => p.LocationDatumCreateds)
                 .HasForeignKey(d => d.CreatedId)
-                .HasConstraintName("FK__LocationD__Creat__5812160E");
+                .HasConstraintName("FK__LocationD__Creat__44FF419A");
 
             entity.HasOne(d => d.LastModification).WithMany(p => p.LocationDatumLastModifications)
                 .HasForeignKey(d => d.LastModificationId)
-                .HasConstraintName("FK__LocationD__LastM__59063A47");
+                .HasConstraintName("FK__LocationD__LastM__45F365D3");
         });
 
         modelBuilder.Entity<Passenger>(entity =>
         {
-            entity.HasKey(e => e.PassengerId).HasName("PK__Passenge__88915FB07D88B53C");
+            entity.HasKey(e => e.PassengerId).HasName("PK__Passenge__88915FB043972280");
 
             entity.ToTable("Passenger");
 
@@ -284,39 +285,39 @@ public partial class MakeMyTripContext : DbContext
 
             entity.HasOne(d => d.Booking).WithMany(p => p.Passengers)
                 .HasForeignKey(d => d.BookingId)
-                .HasConstraintName("FK__Passenger__Booki__0B91BA14");
+                .HasConstraintName("FK__Passenger__Booki__7C4F7684");
 
             entity.HasOne(d => d.Created).WithMany(p => p.PassengerCreateds)
                 .HasForeignKey(d => d.CreatedId)
-                .HasConstraintName("FK__Passenger__Creat__0E6E26BF");
+                .HasConstraintName("FK__Passenger__Creat__7F2BE32F");
 
             entity.HasOne(d => d.LastModification).WithMany(p => p.PassengerLastModifications)
                 .HasForeignKey(d => d.LastModificationId)
-                .HasConstraintName("FK__Passenger__LastM__0F624AF8");
+                .HasConstraintName("FK__Passenger__LastM__00200768");
 
             entity.HasOne(d => d.PassengerType).WithMany(p => p.Passengers)
                 .HasForeignKey(d => d.PassengerTypeId)
-                .HasConstraintName("FK__Passenger__Passe__0D7A0286");
+                .HasConstraintName("FK__Passenger__Passe__7E37BEF6");
 
             entity.HasOne(d => d.SeatClassNavigation).WithMany(p => p.Passengers)
                 .HasForeignKey(d => d.SeatClass)
-                .HasConstraintName("FK__Passenger__seatC__0C85DE4D");
+                .HasConstraintName("FK__Passenger__seatC__7D439ABD");
         });
 
         modelBuilder.Entity<PassengerOffer>(entity =>
         {
-            entity.HasKey(e => e.PassengerOfferId).HasName("PK__Passenge__DFBAD1A309F2B98E");
+            entity.HasKey(e => e.PassengerOfferId).HasName("PK__Passenge__DFBAD1A375F7C195");
 
             entity.ToTable("PassengerOffer");
 
             entity.HasOne(d => d.PassengerTypeNavigation).WithMany(p => p.PassengerOffers)
                 .HasForeignKey(d => d.PassengerType)
-                .HasConstraintName("FK__Passenger__Passe__787EE5A0");
+                .HasConstraintName("FK__Passenger__Passe__656C112C");
         });
 
         modelBuilder.Entity<PassengerType>(entity =>
         {
-            entity.HasKey(e => e.PassengerTypeId).HasName("PK__Passenge__EE63A2969E8535F9");
+            entity.HasKey(e => e.PassengerTypeId).HasName("PK__Passenge__EE63A29667E9A41E");
 
             entity.ToTable("PassengerType");
 
@@ -327,14 +328,14 @@ public partial class MakeMyTripContext : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__Roles__8AFACE1A7B0BD5BA");
+            entity.HasKey(e => e.RoleId).HasName("PK__Roles__8AFACE1A9A7231A6");
 
             entity.Property(e => e.RoleName).HasMaxLength(50);
         });
 
         modelBuilder.Entity<SeatClassType>(entity =>
         {
-            entity.HasKey(e => e.SeatClassId).HasName("PK__SeatClas__41D153A879FAD102");
+            entity.HasKey(e => e.SeatClassId).HasName("PK__SeatClas__41D153A8735552D6");
 
             entity.ToTable("SeatClassType");
 
@@ -344,16 +345,16 @@ public partial class MakeMyTripContext : DbContext
 
             entity.HasOne(d => d.Created).WithMany(p => p.SeatClassTypeCreateds)
                 .HasForeignKey(d => d.CreatedId)
-                .HasConstraintName("FK__SeatClass__Creat__60A75C0F");
+                .HasConstraintName("FK__SeatClass__Creat__4D94879B");
 
             entity.HasOne(d => d.LastModification).WithMany(p => p.SeatClassTypeLastModifications)
                 .HasForeignKey(d => d.LastModificationId)
-                .HasConstraintName("FK__SeatClass__LastM__619B8048");
+                .HasConstraintName("FK__SeatClass__LastM__4E88ABD4");
         });
 
         modelBuilder.Entity<SeatLocation>(entity =>
         {
-            entity.HasKey(e => e.SeatTypeId).HasName("PK__SeatLoca__7468C4FEE72CF7B4");
+            entity.HasKey(e => e.SeatTypeId).HasName("PK__SeatLoca__7468C4FE688A6EF0");
 
             entity.ToTable("SeatLocation");
 
@@ -363,20 +364,20 @@ public partial class MakeMyTripContext : DbContext
 
             entity.HasOne(d => d.ClassTypeNavigation).WithMany(p => p.SeatLocations)
                 .HasForeignKey(d => d.ClassType)
-                .HasConstraintName("FK__SeatLocat__Class__6477ECF3");
+                .HasConstraintName("FK__SeatLocat__Class__5165187F");
 
             entity.HasOne(d => d.Created).WithMany(p => p.SeatLocationCreateds)
                 .HasForeignKey(d => d.CreatedId)
-                .HasConstraintName("FK__SeatLocat__Creat__656C112C");
+                .HasConstraintName("FK__SeatLocat__Creat__52593CB8");
 
             entity.HasOne(d => d.LastModification).WithMany(p => p.SeatLocationLastModifications)
                 .HasForeignKey(d => d.LastModificationId)
-                .HasConstraintName("FK__SeatLocat__LastM__66603565");
+                .HasConstraintName("FK__SeatLocat__LastM__534D60F1");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CC4CA93C7F13");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CC4C90DE31BE");
 
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
             entity.Property(e => e.FullName).HasMaxLength(50);
@@ -390,15 +391,15 @@ public partial class MakeMyTripContext : DbContext
 
             entity.HasOne(d => d.Created).WithMany(p => p.InverseCreated)
                 .HasForeignKey(d => d.CreatedId)
-                .HasConstraintName("FK__Users__CreatedId__4E88ABD4");
+                .HasConstraintName("FK__Users__CreatedId__3B75D760");
 
             entity.HasOne(d => d.LastModification).WithMany(p => p.InverseLastModification)
                 .HasForeignKey(d => d.LastModificationId)
-                .HasConstraintName("FK__Users__LastModif__4F7CD00D");
+                .HasConstraintName("FK__Users__LastModif__3C69FB99");
 
             entity.HasOne(d => d.Role).WithMany(p => p.Users)
                 .HasForeignKey(d => d.RoleId)
-                .HasConstraintName("FK__Users__RoleId__5070F446");
+                .HasConstraintName("FK__Users__RoleId__3D5E1FD2");
         });
 
         OnModelCreatingPartial(modelBuilder);

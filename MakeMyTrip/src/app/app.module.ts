@@ -14,7 +14,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { CommonModules } from './common/common.module';
 import { MyProfileComponent } from './common/my-profile/my-profile.component';
 import { StoreModule } from '@ngrx/store';
@@ -26,6 +26,8 @@ import { AirLienEffects } from 'src/NgStore/AirLine/AirLine.effect';
 import { AirLineReducer } from 'src/NgStore/AirLine/AirLine.reduser';
 import { TripReducer } from 'src/NgStore/tripDetail/trip.ngStore';
 import { bookingReducer } from 'src/NgStore/Booking/booking.reduser';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
 
 
 @NgModule({
@@ -33,6 +35,7 @@ import { bookingReducer } from 'src/NgStore/Booking/booking.reduser';
     AppComponent,
     HomepageComponent,
     SearchComponent,
+    SpinnerComponent,
     
   
     
@@ -56,7 +59,11 @@ import { bookingReducer } from 'src/NgStore/Booking/booking.reduser';
     EffectsModule.forRoot(AirportEffects,AirLienEffects)
     
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
+    }
+  ],
   exports:[],
   bootstrap: [AppComponent]
 })

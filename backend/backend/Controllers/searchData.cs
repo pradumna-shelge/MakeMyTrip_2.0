@@ -19,8 +19,10 @@ namespace backend.Controllers
         private readonly Iflight _flight;
         private readonly IAirlines _airline;
         private readonly MakeMyTripContext _context;
+        private readonly Ibooking _booking;
+        private readonly IPassenger _passenger;
 
-        public searchData(MakeMyTripContext context, IAirportData airport,ICity city,IJourney journey,Iflight flights,IAirlines airline)
+        public searchData(MakeMyTripContext context, IAirportData airport,ICity city,IJourney journey,Iflight flights,IAirlines airline,Ibooking ibooking,IPassenger passenger)
         {
                 _airport = airport;
             _city = city;
@@ -28,6 +30,8 @@ namespace backend.Controllers
             _flight = flights;
             _airline = airline;
             _context = context;
+            _booking = ibooking;
+            _passenger = passenger;
         }
 
         [HttpGet]
@@ -79,7 +83,14 @@ namespace backend.Controllers
             var flights = await _flight.Get();
             var airportData = await _airport.Get();
             var airlines = await _airline.Get();
+            var bookings = await _booking.Get(); 
 
+         var passengers = await _passenger.Get();
+            var bookedSeat = (from j in journays
+                             join b in bookings on j.JourneyId equals b.JourneyId
+                             join p in passengers on b.BookingId equals p.BookingId
+                             where j.JourneyId == obj.fromID && p.SeatClass == obj.seatClass
+                             select p.SeatNumber).ToList();
 
 
             var journay = from j in journays
@@ -104,7 +115,7 @@ namespace backend.Controllers
                               cabin = 7,
                               Surcharges = 700,
                               seatStature = _context.SeatClassDtos.FromSqlRaw($"exec GetSeatStructureForFlight @FlightId={f.FlightId}"),
-                              bookedSeats = new List<string> { "1A", "6B", "6C" }
+                              bookedSeats = bookedSeat
 
                           };
 
@@ -118,6 +129,11 @@ namespace backend.Controllers
 
             if (obj.ReturnDate != null)
             {
+                var bookedSeat1 = (from j in journays
+                                  join b in bookings on j.JourneyId equals b.JourneyId
+                                  join p in passengers on b.BookingId equals p.BookingId
+                                  where j.JourneyId == obj.toID && p.SeatClass == obj.seatClass
+                                  select p.SeatNumber).ToList();
 
                 var journay1 = from j in journays
                               join f in flights on j.FlightId equals f.FlightId
@@ -141,7 +157,7 @@ namespace backend.Controllers
                                   cabin = 7,
                                   Surcharges = 700,
                                   seatStature = _context.SeatClassDtos.FromSqlRaw($"exec GetSeatStructureForFlight @FlightId={f.FlightId}"),
-                                  bookedSeats = new List<string> { "1A", "6B", "6C" }
+                                  bookedSeats = bookedSeat1
                               };
 
 

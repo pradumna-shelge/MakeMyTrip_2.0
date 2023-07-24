@@ -2055,6 +2055,18 @@
           }
         }
       },
+      "RazorPay.Core/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/RazorPay Core.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/RazorPay Core.dll": {}
+        }
+      },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
         "type": "package",
         "runtimeTargets": {
@@ -6641,6 +6653,19 @@
         "nuget.versioning.nuspec"
       ]
     },
+    "RazorPay.Core/1.0.2": {
+      "sha512": "vRyVsundeyWrQT7L4IyCHilcEwNpibm78vVp3HD3xpuFWhjlZ7wMxDOUdxcjgdeJWbXa52DSTG7OyH2LUuE0lA==",
+      "type": "package",
+      "path": "razorpay.core/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/netcoreapp3.1/RazorPay Core.dll",
+        "razorpay.core.1.0.2.nupkg.sha512",
+        "razorpay.core.nuspec"
+      ]
+    },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "sha512": "HdSSp5MnJSsg08KMfZThpuLPJpPwE5hBXvHwoKWosyHHfe8Mh5WKT0ylEOf6yNzX6Ngjxe4Whkafh5q7Ymac4Q==",
       "type": "package",
@@ -10891,28 +10916,24 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.5",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.5",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.13",
+      "RazorPay.Core >= 1.0.2",
       "Swashbuckle.AspNetCore >= 6.2.3"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\admin\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\pradumna.shelage\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\admin\\Desktop\\make my trip\\MakeMyTrip_2.0\\backend\\backend\\backend.csproj",
+      "projectUniqueName": "D:\\MakeMyTrip_2.0\\MakeMyTrip_2.0\\backend\\backend\\backend.csproj",
       "projectName": "backend",
-      "projectPath": "C:\\Users\\admin\\Desktop\\make my trip\\MakeMyTrip_2.0\\backend\\backend\\backend.csproj",
-      "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\admin\\Desktop\\make my trip\\MakeMyTrip_2.0\\backend\\backend\\obj\\",
+      "projectPath": "D:\\MakeMyTrip_2.0\\MakeMyTrip_2.0\\backend\\backend\\backend.csproj",
+      "packagesPath": "C:\\Users\\pradumna.shelage\\.nuget\\packages\\",
+      "outputPath": "D:\\MakeMyTrip_2.0\\MakeMyTrip_2.0\\backend\\backend\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\pradumna.shelage\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10920,7 +10941,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -10971,6 +10991,10 @@
             "target": "Package",
             "version": "[6.0.13, )"
           },
+          "RazorPay.Core": {
+            "target": "Package",
+            "version": "[1.0.2, )"
+          },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.2.3, )"
@@ -10995,7 +11019,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

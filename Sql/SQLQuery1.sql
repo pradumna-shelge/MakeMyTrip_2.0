@@ -133,9 +133,9 @@ LastModificationId int REFERENCES [Users](UserId)
 );
 INSERT INTO SeatClassType 
 VALUES
-('EconomyClass',GETDATE(), 1, GETDATE(), 1),
+('FirstClass',GETDATE(), 1, GETDATE(), 1),
 ('BusinessClass',GETDATE(), 1, GETDATE(), 1),
-('FirstClass',GETDATE(), 1, GETDATE(), 1)
+('EconomyClass',GETDATE(), 1, GETDATE(), 1)
 ---------------------------------------------- SeatLocation Type -----------------------------------
 
 CREATE TABLE SeatLocation (
@@ -149,9 +149,9 @@ LastModificationId int REFERENCES [Users](UserId)
 );
 INSERT INTO SeatLocation 
 VALUES
-( 'Window Seat', 1,GETDATE(), 1, GETDATE(), 1),
-( 'Aisle Seat', 1,GETDATE(), 1, GETDATE(), 1),
-( 'Bulkhead Seat', 1,GETDATE(), 1, GETDATE(), 1)
+( 'Window Seat', 3,GETDATE(), 1, GETDATE(), 1),
+( 'Aisle Seat', 3,GETDATE(), 1, GETDATE(), 1),
+( 'Bulkhead Seat', 3,GETDATE(), 1, GETDATE(), 1)
 
 
 --------------------------------------------- flight class Structure--------------------------------------
@@ -169,9 +169,9 @@ LastModificationId int REFERENCES [Users](UserId)
 );
 INSERT INTO FlightclassStructure 
 VALUES
-(1, 1, 10, 'A', 'F',GETDATE(), 1, GETDATE(), 1),
-(2, 11, 20, 'A', 'F',GETDATE(), 1, GETDATE(), 1),
-(3, 21, 30, 'A', 'F',GETDATE(), 1, GETDATE(), 1);
+(1, 1, 5, 'A', 'F',GETDATE(), 1, GETDATE(), 1),
+(2, 6, 10, 'A', 'F',GETDATE(), 1, GETDATE(), 1),
+(3, 11, 20, 'A', 'F',GETDATE(), 1, GETDATE(), 1);
 --------------------------------------------- Flight Table ------------------------------------------
 
 CREATE TABLE Flight (
@@ -205,8 +205,9 @@ JourneyClassType int REFERENCES SeatClassType(SeatClassId),
 )
 INSERT INTO JourneyClassPrice (JourneyClassType, [Percentage])
 VALUES
-(1, 100),
-(2, 350)
+(1, 350),
+(2, 250),
+(3,100)
 
 ---------------------------------------------- JourneyPassengerOffer Table -----------------------------
 
@@ -242,14 +243,14 @@ Infants int REFERENCES PassengerOffer(PassengerOfferId),
 
 INSERT INTO Journey (FlightId, DestinationId, SourceId, DepartureTime, ArrivalTime, Distance, SeatbasicPrice, EconomyClass, BussinessClass, Adult, Child, Infants)
 VALUES
-(1, 1, 2, '2023-08-1 10:00:00', '2023-08-1 11:30:00', 150, 2500.00, 1, 2, 1, 2, 3),
-(1, 2, 2, '2023-08-1 13:00:00', '2023-08-1 14:30:00', 150, 3000.00, 1, 2, 1, 2, 3);
+(1, 1, 2, '2023-08-1 10:00:00', '2023-08-1 11:30:00', 150, 2500.00, 2, 3, 1, 2, 3),
+(1, 2, 1, '2023-08-1 13:00:00', '2023-08-1 14:30:00', 150, 3000.00, 2, 3, 1, 2, 3);
 
 
 
 -------------------------------------------Booking Table------------------------------
 CREATE TABLE Booking (
-BookingId INT PRIMARY KEY IDENTITY(1,1),
+BookingId 	BIGINT PRIMARY KEY ,
 JourneyId INT REFERENCES Journey(JourneyId),
 UserId INT REFERENCES Users(UserId),
 BookingDate DATETIME,
@@ -264,7 +265,7 @@ LastModificationId INT REFERENCES Users(UserId)
 
 CREATE TABLE Passenger (
 PassengerId INT PRIMARY KEY IDENTITY(1,1),
-BookingId INT REFERENCES Booking(BookingId),
+BookingId 	BIGINT REFERENCES Booking(BookingId),
 FullName NVARCHAR(50),
 Gender NVARCHAR(20),
 SeatNumber NVARCHAR(10),

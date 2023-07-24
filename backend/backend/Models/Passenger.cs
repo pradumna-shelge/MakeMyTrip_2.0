@@ -7,7 +7,7 @@ public partial class Passenger
 {
     public int PassengerId { get; set; }
 
-    public int? BookingId { get; set; }
+    public long? BookingId { get; set; }
 
     public string? FullName { get; set; }
 

@@ -6,6 +6,7 @@ import { ReviewDetailsComponent } from './review-details/review-details.componen
 import { ReviewJourneyComponent } from './review-details/childs/review-journey/review-journey.component';
 import { SeatSealationComponent } from './review-details/childs/seat-sealation/seat-sealation.component';
 import { PaymentPageComponent } from './payment-page/payment-page.component';
+import { UserTripsComponent } from './user-trips/user-trips.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,8 @@ const routes: Routes = [
 ] },
 
 { path: 'payment', component: PaymentPageComponent },
+
+
 ];
 
 @NgModule({

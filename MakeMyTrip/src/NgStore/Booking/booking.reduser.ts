@@ -8,7 +8,7 @@ export const bookingReducer = createReducer(
     initialBooking,
     on(LoadBooking,(state,{data})=>({...state,data})),
     on(LoadBookingPassengers,(state,{data,email})=>({...state,bookingData:{...state.bookingData,passengerList:data,billingEmail:email}})),
-    on(LoadBookingSeats,(state,{data})=>{
+    on(LoadBookingSeats,(state,{data,seatType})=>{
         
        let pass:passenger[] =[]
        console.log(state.bookingData    );
@@ -21,7 +21,7 @@ export const bookingReducer = createReducer(
            })
        }
        
-        return {...state,bookingData:{...state.bookingData,passengerList:pass}}
+        return {...state,bookingData:{...state.bookingData,passengerList:pass,seatClass:seatType}}
     }),
     on(LoadFirstJourneyId,(state,{data})=>({...state,bookingData:{...state.bookingData,firstJourneyId:data}})),
     on(LoadReturnJourneyId,(state,{data})=>({...state,bookingData:{...state.bookingData,returnJourneyId:data}})),

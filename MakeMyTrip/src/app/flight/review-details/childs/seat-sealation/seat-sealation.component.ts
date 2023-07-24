@@ -14,90 +14,7 @@ import { geTrip } from 'src/NgStore/tripDetail/trip.ngStore';
 export class SeatSealationComponent {
   tikitclass=TicketClass;
   passengerCount = 3;
-  data:TripStore={
-    "search": {
-        "tripType": 1,
-        "seatTypes": 1,
-        "from": {
-            "airportId": 1,
-            "airportCode": "BOM",
-            "city": "Mumbai",
-            "airportName": "Chhatrapati Shivaji Maharaj International Airport",
-            "country": "India"
-        },
-        "to": {
-            "airportId": 2,
-            "airportCode": "DEL",
-            "city": "Delhi",
-            "airportName": "Indira Gandhi International Airport",
-            "country": "India"
-        },
-        "departureTime": new Date( "2023-07-31T18:30:00.000Z"),
-        "returnTime": new Date( "2023-07-31T18:30:00.000Z"),
-        "passengers": {
-            "adults": 1,
-            "child": 0,
-            "infants": 0
-        }
-    },
-    "journey": {
-      journeyId:1,
-        "airlineId": 2,
-        "flightNumber": "SG101",
-        "to": 2,
-        "fromid": 1,
-        "departureTime": new Date( "2023-07-31T18:30:00.000Z"),
-        "arrivalTime": new Date( "2023-07-31T18:30:00.000Z"),
-        "price": 2500,
-        "duration": "01:30:00",
-        "baggage": 17,
-        "cabin": 7,
-        "surcharges": 700,
-        "seatStature": [
-            {
-                "seatClassId": 1,
-                "rowsStart": 1,
-                "rowsEnd": 7,
-                "columnsStart": "A",
-                "columnsEnd": "F"
-            },
-            {
-                "seatClassId": 2,
-                "rowsStart": 11,
-                "rowsEnd": 15,
-                "columnsStart": "A",
-                "columnsEnd": "F"
-            }
-        ],
-        "bookedSeats": [
-            "11A",
-            "13B",
-            "6C"
-            
-        ],
-        "airline": {
-            "id": 2,
-            "name": "Indigo",
-            "logo": "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/6E.png",
-            "code": "6E"
-        },
-        "From": {
-            "airportId": 1,
-            "airportCode": "BOM",
-            "city": "Mumbai",
-            "airportName": "Chhatrapati Shivaji Maharaj International Airport",
-            "country": "India"
-        },
-        "To": {
-            "airportId": 2,
-            "airportCode": "DEL",
-            "city": "Delhi",
-            "airportName": "Indira Gandhi International Airport",
-            "country": "India"
-        }
-    },
-    "error": false
-};
+  data!:TripStore
 
 
   constructor(private store:Store,private route:Router){
@@ -110,6 +27,7 @@ else{
   if(!d.journey1?.From){
      this.data={...this.data,journey1:undefined}
   }
+console.log(d);
 
   this.passengerCount= this.data.search.passengers.adults??0+this.data.search.passengers.child??0
 }
@@ -157,7 +75,11 @@ else{
 
 
   AlreadyBooked(name:string,seatclass:number){
-    return (this.data.journey.bookedSeats.indexOf(name) != -1) || seatclass== this.data.search.seatTypes
+   
+   
+    
+    
+    return ((this.data.journey.bookedSeats.indexOf(name) != -1) && seatclass== this.data.search.seatTypes)
   }
 
   sameclass(seatclass:number){
@@ -168,7 +90,7 @@ else{
   
   
 
-  this.store.dispatch(LoadBookingSeats({data:this.selectedSeats}))
+  this.store.dispatch(LoadBookingSeats({data:this.selectedSeats,seatType:this.data.search.seatTypes}))
 
   this.route.navigate(['flight/payment'])
   }

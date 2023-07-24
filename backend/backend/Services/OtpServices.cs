@@ -15,7 +15,7 @@ namespace backend.Services
 
             EmailServices emailObject = new EmailServices(_config);
 
-            //emailObject.SendEmail(email, subject, body);
+            emailObject.SendEmail(email, subject, body);
 
             return otp;
 

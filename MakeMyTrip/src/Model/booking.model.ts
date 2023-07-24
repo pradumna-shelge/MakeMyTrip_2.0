@@ -1,10 +1,11 @@
 export interface booking{
     firstJourneyId: number;
-    userId: number;
+    userEmail: string;
     returnJourneyId?: number;
     passengerList: passenger[];
     billingEmail: string;
-    totalPrice:number
+    totalPrice:number,
+    seatClass:number
 }
 
 export interface passenger{

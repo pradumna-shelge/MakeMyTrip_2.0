@@ -1,12 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+
 import { booking } from 'src/Model/booking.model';
 import { getBookingBookings } from 'src/NgStore/Booking/booking.selector';
 import { BookingStore } from 'src/NgStore/Booking/booking.store';
 import { TripStore } from 'src/NgStore/Stores.interface';
 import { geTrip } from 'src/NgStore/tripDetail/trip.ngStore';
+import { PaymentService } from '../Services/payment.service';
+import { TripsService } from '../Services/trips.service';
 
+declare var Razorpay:any
 @Component({
   selector: 'app-payment-page',
   templateUrl: './payment-page.component.html',
@@ -18,7 +22,7 @@ export class PaymentPageComponent {
 
 
  
-  constructor(private store: Store ) { 
+  constructor(private store: Store,private ser:PaymentService,private bookser:TripsService ) { 
     this.getBookingData()
   }
 
@@ -31,8 +35,48 @@ this.store.select(geTrip).subscribe((d)=>{
   this.tripData=d
 })
 }
+
+
+
 payNow(){
 
+  const options = {
+    key: 'rzp_test_D4KAnFxqNqzQsE',
+    amount: this.bookingData.totalPrice, 
+    name: 'Your Company Name',
+    description: 'Payment for Order #12345',
+    order_id: '', 
+    handler: (response: any) => {
+      console.log(response);
+      this.ser.verifyPayment(response).subscribe({
+        next:(data:any)=>{
+          this.bookser.bookTrip();
+        
+        },
+        error:(err:any)=>{
+          console.log(err);
+          
+        }
+      })
+    },
+    prefill: {
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      contact: '9876543210',
+    },
+  };
+
+this.ser.getOrderId(options.amount).subscribe({
+  next:(data:any)=>{
+    options.order_id = data.orderId
+    console.log(data.orderId);
+    Razorpay.open(options);
+  }
+})
+
+
 }
+
+
 
 }

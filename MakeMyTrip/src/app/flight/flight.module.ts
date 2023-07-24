@@ -38,6 +38,7 @@ import { ReviewJourneyComponent } from './review-details/childs/review-journey/r
 import { SeatSealationComponent } from './review-details/childs/seat-sealation/seat-sealation.component';
 import { PaymentPageComponent } from './payment-page/payment-page.component';
 import { PaymentLayoutComponent } from './payment-page/payment-layout/payment-layout.component';
+import { UserTripsComponent } from './user-trips/user-trips.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { PaymentLayoutComponent } from './payment-page/payment-layout/payment-la
     SeatSealationComponent,
     PaymentPageComponent,
     PaymentLayoutComponent,
+    UserTripsComponent,
     
     
   ],

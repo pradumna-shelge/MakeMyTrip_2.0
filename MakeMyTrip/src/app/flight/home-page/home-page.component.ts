@@ -141,7 +141,8 @@ this.currentJourneyRen=undefined;
      next:(apiData:JourneyS)=>{
          this.data = apiData;
         
-         
+         console.log("booked seat");
+    console.log(apiData.dep);
          this.modifyData()
      },
      error:(err)=>{
@@ -155,8 +156,11 @@ modifyData(){
   const tempData:JourneyInterface[]=[]
   const tempData1:JourneyInterface[]=[]
   this.data.dep.forEach((ob:JourneyInterface)=>{
+    
+    
+    
      this.airlineStore.select(getAirlineById( ob.airlineId) ).subscribe(d=>{
-      ob.airline = d
+      ob ={...ob,airline:d} 
     })
     ob.From =  this.airportData.find(f=>f.airportId == ob.fromid);
     ob.To =  this.airportData.find(f=>f.airportId == ob.to);
@@ -182,6 +186,8 @@ this.filteredData = this.data;
 
 
 addToBook(data:any){
+  console.log(data);
+  
   if(data.den){
   
     this.currentJourneyDeP = data.den;

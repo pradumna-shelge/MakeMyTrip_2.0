@@ -39,15 +39,16 @@
 
   <div class="fare-summary">
     <h3>Fare Summary</h3>
-    <!-- Add fare summary details using Angular bindings -->
-    <!-- <p><strong>Fare:</strong> {{ bookingData.totalPrice }}</p>
-    <p><strong>Other Charges:</strong> {{ flightInfo.surcharges }}</p> -->
+   
     <p><strong>Total Due:</strong> {{ bookingData.totalPrice }}</p>
   </div>
 
   <div class="pay-now-btn">
     <button class="btn btn-primary text-white" (click)="payNow()">Pay Now</button>
   </div>
-
+  
 </div>
 
+
+
+<h1>{{bookingData|json}}</h1>

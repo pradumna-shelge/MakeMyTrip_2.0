@@ -12,9 +12,9 @@ export interface searchData{
 }
 export const   TicketClass= [
     "",
-    "Economy" ,
     "FirstClass" ,
     "BusinessClass" ,
+    "Economy" ,
   ]
 
   export interface JourneyData{

@@ -32,4 +32,35 @@ return this.http.post(baseApi+"login/emailValidate",{email:email,otp:0})
     localStorage.clear();
     this.route.navigate(['/'])
   }
+
+ 
+
+
+  getEmail() {
+    const token = localStorage.getItem('token') ??"";
+    const payload = token.split('.')[1];
+    const decodedPayload = this.base64UrlDecode(payload);
+    const tokenData = JSON.parse(decodedPayload).userEmail;
+
+   return tokenData
+
+  }
+
+ private  base64UrlDecode(str: string): string {
+    let output = str.replace(/-/g, '+').replace(/_/g, '/');
+    switch (output.length % 4) {
+      case 0:
+        break;
+      case 2:
+        output += '==';
+        break;
+      case 3:
+        output += '=';
+        break;
+      default:
+        throw new Error('Invalid base64url string.');
+    }
+    return decodeURIComponent(escape(atob(output)));
+  }
+
 }
