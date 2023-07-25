@@ -18,7 +18,6 @@ export class PaymentService {
 
 
   verifyPayment(val:any){
-  debugger
     const data = {paymentId:val.razorpay_payment_id,orderId:val.razorpay_order_id,signature:val.razorpay_signature}
 
 

@@ -13,4 +13,5 @@ export interface passenger{
     gender: string;
     passengerType: number;
     seatNo: string;
+    seatNo2: string|undefined;
 }

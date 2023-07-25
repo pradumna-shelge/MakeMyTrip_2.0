@@ -99,10 +99,11 @@ namespace backend.Controllers
                           join toAirport in airportData on j.DestinationId equals toAirport.AirportId
                           where j.SourceId == obj.fromID &&
                                 j.DestinationId == obj.toID &&
-                                j.DepartureTime?.Date >= obj.depatureDate.Date
+                                j.DepartureTime?.Date >= obj.depatureDate.Date 
+                                
                           select new
                           {
-                              JournayId = j.JourneyId,
+                              JourneyId = j.JourneyId,
                               airlineId = airlines.FirstOrDefault(a => a.AirlineId == f.AirlineId).AirlineId,
                               flightNumber = f.FlightNo,
                               to = toAirport.AirportId,
@@ -127,7 +128,7 @@ namespace backend.Controllers
             }
             
 
-            if (obj.ReturnDate != null)
+            if (obj.ReturnDate != null )
             {
                 var bookedSeat1 = (from j in journays
                                   join b in bookings on j.JourneyId equals b.JourneyId
@@ -144,8 +145,8 @@ namespace backend.Controllers
                                     j.ArrivalTime.Value.Date >= obj.ReturnDate.Value.Date
                               select new
                               {
-                                  JournayId = j.JourneyId,
-                                  airlineId = airlines.FirstOrDefault(a => a.AirlineId == f.AirlineId).AirlineId,
+                                  JourneyId = j.JourneyId,
+                                  airlineId = airlines.FirstOrDefault(a => a.AirlineId == f.AirlineId)?.AirlineId,
                                   flightNumber = f.FlightNo,
                                   to = toAirport.AirportId,
                                   fromid = fa.AirportId,

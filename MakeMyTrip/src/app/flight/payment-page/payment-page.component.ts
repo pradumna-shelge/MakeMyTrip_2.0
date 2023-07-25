@@ -47,14 +47,14 @@ payNow(){
     description: 'Payment for Order #12345',
     order_id: '', 
     handler: (response: any) => {
-      console.log(response);
+      
       this.ser.verifyPayment(response).subscribe({
         next:(data:any)=>{
           this.bookser.bookTrip();
         
         },
         error:(err:any)=>{
-          console.log(err);
+          
           
         }
       })
@@ -69,7 +69,7 @@ payNow(){
 this.ser.getOrderId(options.amount).subscribe({
   next:(data:any)=>{
     options.order_id = data.orderId
-    console.log(data.orderId);
+    
     Razorpay.open(options);
   }
 })

@@ -8,6 +8,8 @@
         public int passengerType { get; set; }
 
         public string seatNo { get; set; }
+        public string? seatNo2 { get; set; }
+        
 
 
     }

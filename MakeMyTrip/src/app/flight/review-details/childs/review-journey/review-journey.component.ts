@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TicketClass } from 'src/Model/SearchData.model';
-import {  LoadFirstJourneyId, LoadReturnJourneyId } from 'src/NgStore/Booking/booking.action';
+import { JourneyInterface } from 'src/Model/journey.model';
+import { LoadBooking, LoadFirstJourneyId, LoadReturnJourneyId } from 'src/NgStore/Booking/booking.action';
+
 import { TripStore } from 'src/NgStore/Stores.interface';
 import { geTrip } from 'src/NgStore/tripDetail/trip.ngStore';
 
@@ -27,11 +29,21 @@ else{
   if(!d.journey1?.From){
      this.data={...this.data,journey1:undefined}
   }
-  
+
+
+  this.store.dispatch(LoadFirstJourneyId({data:d.journey.journeyId}))
+  if(d.journey1){
+    this.store.dispatch(LoadReturnJourneyId({data:d.journey1.journeyId}))
+
+  }
+ 
 }
     })
   }
 
 
  
+
+
+
 }

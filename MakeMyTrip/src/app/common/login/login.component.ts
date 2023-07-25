@@ -17,7 +17,7 @@ otpFlag= false;
 constructor(private fb:FormBuilder,private router:Router,private ser:LoginService){
 // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
 //   const payload = jwt_decode(token);
-//   console.log(payload);
+// 
 }
   ngOnInit(): void {
     
@@ -39,11 +39,11 @@ get Otp(){
     
       this.ser.otpSend(this.Email?.value).subscribe({
         next:(data: any) => {
-           console.log(data);
+        
           
         },
         error:(err) => {
-          console.log(err);
+         
           this.Area=1;
           this.stopTimer();
         }
@@ -65,7 +65,7 @@ get Otp(){
          
        },
        error:(err:any) => {
-         console.log(err.error.mes);
+        
          this.Area = 2
          this.otpFlag = true
        }

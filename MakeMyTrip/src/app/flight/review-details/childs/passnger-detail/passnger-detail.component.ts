@@ -27,6 +27,9 @@ export class PassngerDetailComponent implements OnInit {
       }
       else{
         this.bookingData = d
+
+      
+        
        this.data = d.search.passengers;
       }
           })
@@ -90,7 +93,7 @@ export class PassngerDetailComponent implements OnInit {
 
     this.infants.push(infantsGroup);
   }
-
+ 
   goToSeat(){
    
     
@@ -101,7 +104,8 @@ export class PassngerDetailComponent implements OnInit {
         fullname: d.firstName+d.lastName,
         gender:d.gender,
         passengerType:1,
-        seatNo:""
+        seatNo:"",
+        seatNo2:undefined,
       } 
       passenger.push(da)
     })
@@ -110,7 +114,8 @@ export class PassngerDetailComponent implements OnInit {
         fullname: d.firstName+d.lastName,
         gender:d.gender,
         passengerType:2,
-        seatNo:""
+        seatNo:"",
+        seatNo2:undefined,
       } 
       passenger.push(da)
     })
@@ -119,17 +124,16 @@ export class PassngerDetailComponent implements OnInit {
         fullname: d.firstName+d.lastName,
         gender:d.gender,
         passengerType:3,
-        seatNo:""
+        seatNo:"",
+        seatNo2:undefined,
       } 
       passenger.push(da)
     })
 
 
-    console.log(passenger);
-    let id = this.bookingData.journey1?.journeyId || undefined
-this.store.dispatch(LoadReturnJourneyId({data:id}))
-let id1 = this.bookingData.journey
-    this.store.dispatch(LoadFirstJourneyId({data:1}))
+
+
+
     this.store.dispatch(LoadBookingPassengers({data:passenger,email:this.billingEmail?.value}));
 this.router.navigate(['/flight/review/seat'])
   }

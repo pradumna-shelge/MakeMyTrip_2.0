@@ -33,7 +33,7 @@ getData(){
     }
     else{
       this.data=d;
-      console.log(this.data);
+    
       this.calculate()
     }
         })

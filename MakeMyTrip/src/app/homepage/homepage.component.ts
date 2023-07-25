@@ -11,7 +11,7 @@ export class HomepageComponent {
 
   constructor(private ser:LoginService){
     this.islog = this.ser.islogin()
-    console.log(this.islog);
+   
     
   }
 }

@@ -1,15 +1,16 @@
 
   .selected-seat {
     background-color: #0ec9dd !important ; 
-    color: #fff;
+    color: #fff; 
     width: 50px;
   }
   
 .seat{
-    width: 50px;
+    width: 35px;
     margin: 10px;
-    border: 1px solid;
+    border: none;
     position: relative;
+    font-size: small;
 }
 .plane {
     margin: 20px auto;

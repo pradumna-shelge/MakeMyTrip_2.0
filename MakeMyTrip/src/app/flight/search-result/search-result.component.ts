@@ -51,7 +51,6 @@ ChangeAirport(val:AirportModel, fromFlag:boolean){
 
 ChangeDate(val1:string, fromFlag:boolean){
  var val = new Date(val1);
- console.log(val);
  
   this.searchData =fromFlag? { ...this.searchData, departureTime:  val }:{ ...this.searchData, returnTime: val };
 }
@@ -82,7 +81,7 @@ changePass(val:number,pos:number){
 PatchSearch(){
   this.searchData = {...this.searchData,tripType:this.tripType}
   this.searchStore.dispatch(LoadSearchData({data:this.searchData}))
-  console.log(this.searchData);
+ 
   
   this.SearchEmitter.emit()
 

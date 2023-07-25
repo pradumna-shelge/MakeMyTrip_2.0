@@ -14,6 +14,7 @@ export class JourneysService {
 
   getJourneys(data:searchPost){
     
+    
     return this.http.post<JourneyS>(baseApi+this.searchData,data)
   }
 }

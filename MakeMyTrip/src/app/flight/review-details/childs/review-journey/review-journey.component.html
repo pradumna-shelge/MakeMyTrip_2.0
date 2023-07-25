@@ -13,7 +13,7 @@
           <div *ngIf=" data && data.journey" class="shadow border my-2 p-1 py-2 d-flex flex-column gap-4 ">
             <div class="d-flex justify-content-between ">
               <div class="">
-                <h4>{{data.journey.From?.city}} → {{data.journey.To?.city}}</h4>
+                <h6>{{data.journey.From?.city}} → {{data.journey.To?.city}}</h6>
                 <div class="d-flex justify-content-sm-start gap-3 ">
                   <p class=" left-line p-1">{{data.journey.departureTime | date:'dd MMM '}}</p>
                   <p>Non Stop · {{data.journey.duration}}</p>
@@ -56,7 +56,7 @@
             <div *ngIf=" data && data.journey1" class="shadow border my-2   p-1 py-2 d-flex flex-column gap-4 ">
               <div class="d-flex justify-content-between">
                 <div class="">
-                  <h4>{{data.journey1.From?.city}} → {{data.journey1.To?.city}}</h4>
+                  <h6>{{data.journey1.From?.city}} → {{data.journey1.To?.city}}</h6>
                   <div class="d-flex justify-content-sm-start gap-3 ">
                     <p class="yellow p-1">{{data.journey1.departureTime | date:'dd MMM '}}</p>
                     <p>Non Stop · {{data.journey1.duration}}</p>

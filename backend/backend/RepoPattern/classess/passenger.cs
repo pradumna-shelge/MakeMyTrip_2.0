@@ -8,5 +8,7 @@ namespace backend.RepoPattern.classess
         public passenger(MakeMyTripContext context) : base(context)
         {
         }
+
+        
     }
 }

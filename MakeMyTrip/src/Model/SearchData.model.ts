@@ -29,7 +29,8 @@ export const   TicketClass= [
     fromID:number,
     toID:number,
     depatureDate:Date,
-    returnDate?:Date
+    returnDate?:Date,
+    seatClass:number
   }
 
   export interface Passengers{

@@ -50,7 +50,6 @@ ChangeAirport(val:AirportModel, fromFlag:boolean){
 
 ChangeDate(val1:string, fromFlag:boolean){
  var val = new Date(val1);
- console.log(val);
  
   this.searchData =fromFlag? { ...this.searchData, departureTime:  val }:{ ...this.searchData, returnTime: val };
 }

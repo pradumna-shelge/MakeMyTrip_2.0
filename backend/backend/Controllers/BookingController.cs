@@ -74,12 +74,57 @@ namespace backend.Controllers
 
               await  _passenger.Post(pass);
             }
-            
 
-           
-            
 
-            return Ok(new { booking1, prnNumber });
+            if (obj.returnJourneyId != null)
+            {
+
+           var   journey2 = journeyList.FirstOrDefault(ob => ob.JourneyId == obj.returnJourneyId);
+
+            if (journey2 == null)
+            {
+                return BadRequest(new { mes = "journey not found" });
+            }
+             prnNumber = GenerateUniquePRNNumber();
+
+            var booking2 = new Booking()
+            {
+                BookingId = prnNumber,
+                JourneyId = obj.returnJourneyId,
+                BookingDate = DateTime.Now,
+                UserId = users.FirstOrDefault(ob => ob.UserEmail == obj.userEmail)?.UserId,
+                TotalFare = Convert.ToDecimal(obj.totalPrice)
+
+            };
+
+            await _booking.Post(booking2);
+
+
+            foreach (var x in obj.passengerList)
+            {
+                var pass = new Passenger()
+                {
+                    FullName = x.fullname,
+                    BookingId = booking2.BookingId,
+                    PassengerTypeId = x.passengerType,
+                    SeatNumber = x.seatNo2,
+                    Gender = x.gender,
+                    SeatClass = obj.seatClass
+
+
+                };
+
+                await _passenger.Post(pass);
+
+                return Ok(new { booking1,booking2 });
+            }
+            }
+
+
+
+
+
+            return Ok(new { booking1 });
             
         }
 

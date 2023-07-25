@@ -12,7 +12,7 @@ export class LoginService {
   constructor(private http:HttpClient,private route:Router) { }
 
   otpSend(email:string){
-    console.log(email);
+   
     
 return this.http.post(baseApi+"login/emailValidate",{email:email,otp:0})
   }

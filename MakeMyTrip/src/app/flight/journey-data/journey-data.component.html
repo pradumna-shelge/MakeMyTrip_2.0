@@ -2,13 +2,13 @@
 <!-- <p>{{modifiedData.dep|json}}</p> -->
 <div class="text-secondary p-2 d-flex justify-content-between   ">
     <p  class="h4 ">{{"Flight From " + search.from.city + " To " + search.to.city}}</p>
-    <p *ngIf="modifiedData.ren" class="h4 ">{{"Flight From " + search.to.city + " To " + search.from.city}}</p>
+    <p *ngIf="modifiedData && modifiedData.ren" class="h4 ">{{"Flight From " + search.to.city + " To " + search.from.city}}</p>
 </div>
 <div class="" [ngClass]="{'d-flex justify-content-between gap-2': modifiedData && modifiedData.ren}">
 <div *ngIf="modifiedData && modifiedData.dep" class="">
     <div class="shadow py-1 px-3 rounded accordion bg-white" *ngFor="let d of modifiedData.dep; let item=index">
   
-        <div *ngIf="modifiedData.ren" class="d-flex justify-content-start gap-2 align-items-center">
+        <div *ngIf=" modifiedData && modifiedData.ren" class="d-flex justify-content-start gap-2 align-items-center">
             <img class="logo" [src]="d.airline?.logo" alt="airlineLogo">
             <p class="d-flex">{{d.airline?.name}}</p>
         </div>

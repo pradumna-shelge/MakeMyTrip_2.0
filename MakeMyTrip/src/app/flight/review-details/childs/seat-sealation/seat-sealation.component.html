@@ -3,36 +3,48 @@
   col-lg-6  test" >
   <h1 class="bg-white p-2 rounded shadow">
     Choose The Seats 
-  </h1> {{selectedSeats|json}}
+  </h1> {{this.selectedSeatsJourney|json}}  {{this.selectedSeatsJourney2|json}}
   <div class="bg-white d-flex justify-content-around align-items-center">
   <div class="d-flex justify-content-center m-2  flex-column  h-100">
-     <p><span class="bg-gray px-3 py-2 border">Al</span></p>
+    <ul class=" d-flex flex-column gap-2">
+      <li class="d-flex align-items-center gap-2">
+        <span class="p-3" style="background-color: rgb(3, 108, 48);"></span>
+        <span class="text-secondary">Available Seats</span>
+      </li>
+      <li class="d-flex align-items-center gap-2">
+        <span class="p-3" style="background-color: rgb(173, 178, 185);"></span>
+        <span class="text-secondary">Already Booked</span>
+      </li>
+      <li class="d-flex align-items-center gap-2">
+        <p class="p-3" style="background-color: rgb(21, 211, 218);"></p>
+        <span class="text-secondary">You Seats</span>
+      </li>
+      <li class="d-flex align-items-center gap-2">
+        <p class=" p-3" style="background-color: #c70606; "></p>
+        <span class="text-secondary">Exit Row Seats</span>
+      </li>
+      
+    </ul>
+    
     </div>
   
-  <div class="plane   px-4">
-    
-      <div class="cockpit">
+  <div *ngIf="!returnFlag"  class="overflow-y p-2 border">
+
+      <div class="  ">
         
-          
-            
-      </div>
-      <div class="fuselage">
-        <div>
-          <p><span></span></p>
-        </div>
-          <div *ngFor="let seatClass of data.journey.seatStature" class="mb-4">
+          <div *ngFor="let seatClass of data.journey.seatStature" class="mb-4 ">
       
-            <p class="h4">{{tikitclass[seatClass.seatClassId]}}</p>
+            <p class="h4 text-secondary">{{tikitclass[seatClass.seatClassId]}}</p>
              
                   <div   class="d-flex" *ngFor="let row of generateRange(seatClass.rowsStart, seatClass.rowsEnd)">
                     <ng-container *ngFor="let column of generateAlphabetRange(seatClass.columnsStart, seatClass.columnsEnd); let columnIndex = index">
                      
                       
-                      <p  data-toggle="tooltip" data-placement="top" [title]="getPrice(row,column)"  *ngIf="AlreadyBooked(row+''+column,seatClass.seatClassId) " [ngClass]="{ 'selected-seat': isSeatSelected(row, column) }" (click)="onSeatClick(row, column)" class="bg-success shadow text-white seat rounded-circle p-2 ">
+                      <p  data-toggle="tooltip" data-placement="top" [title]="getPrice(row,column)"  *ngIf="!AlreadyBooked(row+''+column,seatClass.seatClassId,1) " [ngClass]="{ 'selected-seat': isSeatSelected(row, column,1) }" (click)="onSeatClick(row, column,1)" class="bg-success shadow text-white seat  p-2 ">
                          {{ row }}{{ column }}
                         
                       </p>
-                      <p *ngIf="!AlreadyBooked(row+''+column,seatClass.seatClassId) " class="seat rounded-circle p-2 bg-gray ">
+                      <p *ngIf="AlreadyBooked(row+''+column,seatClass.seatClassId,1) " class="seat  p-2 bg-gray ">
                           {{ row }}{{ column }}
                       </p>
                       <p *ngIf=" columnIndex ==2" class="px-2"></p>
@@ -48,10 +60,52 @@
         
    
     </div>
+    <div *ngIf="returnFlag && data.journey1" class=" overflow-y p-2 border">
+    
+      <div class="">
+        
+          
+            
+      </div>
+      <div           class="">
+        
+          <div *ngFor="let seatClass of data.journey1?.seatStature" class="mb-4 ">
+      
+            <p class="h4 text-secondary">{{tikitclass[seatClass.seatClassId]}}</p>
+             
+                  <div   class="d-flex" *ngFor="let row of generateRange(seatClass.rowsStart, seatClass.rowsEnd)">
+                    <ng-container *ngFor="let column of generateAlphabetRange(seatClass.columnsStart, seatClass.columnsEnd); let columnIndex = index">
+                     
+                      
+                      <p  data-toggle="tooltip" data-placement="top" [title]="getPrice(row,column)"  *ngIf="!AlreadyBooked(row+''+column,seatClass.seatClassId,2) " [ngClass]="{ 'selected-seat': isSeatSelected(row, column,2) }" (click)="onSeatClick(row, column,2)" class="bg-success shadow text-white seat  p-2 ">
+                         {{ row }}{{ column }}
+                        
+                      </p>
+                      <p *ngIf="AlreadyBooked(row+''+column,seatClass.seatClassId,2) " class="seat  p-2 bg-gray ">
+                          {{ row }}{{ column }}
+                      </p>
+                      <p *ngIf=" columnIndex ==2" class="px-2"></p>
+                    </ng-container>
+                  </div>
+               
+             
+            </div>
+
+      </div>
+      
+     
+        
+   
+    </div>
+    <div  class="d-flex justify-content-center m-2  flex-column  ">
+      <p (click)="changeLayout()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-square-fill" viewBox="0 0 16 16">
+        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.5 10a.5.5 0 0 0 .832.374l4.5-4a.5.5 0 0 0 0-.748l-4.5-4A.5.5 0 0 0 5.5 4v8z"/>
+      </svg></p>
+     </div>
   </div>
   
   <div  class="bg-white mt-2 p-2">
-    <button  type="button" class="btn  bg-lightBlue " (click)="Continue()"  [disabled]="this.selectedSeats.length!=this.passengerCount"  >Continue <i class="fa-solid fa-lock"></i></button>
+    <button  type="button" class="btn  bg-lightBlue " (click)="Continue()"  [disabled]="this.selectedSeatsJourney.length!=this.passengerCount ||this.selectedSeatsJourney2.length!=this.passengerCount "  >Continue <i class="fa-solid fa-lock"></i></button>
   </div>
   
   

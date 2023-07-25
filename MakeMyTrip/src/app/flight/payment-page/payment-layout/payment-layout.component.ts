@@ -20,7 +20,7 @@ export class PaymentLayoutComponent {
             order_id: 5,
             handler: (response: any) => {
             
-              console.log(response);
+             
             },
             prefill: {
               name: 'Aman',
