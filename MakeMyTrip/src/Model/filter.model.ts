@@ -7,11 +7,15 @@ export interface filterInterface{
 }
 
 export interface Trips {
-    prnNo: string;
-    fromId: number|string;
-    toId: number|string;
-    passengers: flightPassenger[];
-    date: Date;
+    prnNo: number;
+    airline: number;
+    fromAirport: string;
+    toAirport: string;
+    passengers: number;
+    date: string;
+    total: number;
+  
+  
   }
   
   export interface flightPassenger {

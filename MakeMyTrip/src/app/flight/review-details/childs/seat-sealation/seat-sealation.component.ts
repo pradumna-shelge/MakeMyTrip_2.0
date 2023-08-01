@@ -13,8 +13,6 @@ import { geTrip } from 'src/NgStore/tripDetail/trip.ngStore';
 })
 export class SeatSealationComponent {
   tikitclass=TicketClass;
-  passengerCount = 3;
-  returnFlag=false;
   data:TripStore={
     "search": {
         "tripType": 2,
@@ -36,9 +34,9 @@ export class SeatSealationComponent {
         "departureTime": new Date("2023-08-01T10:00:00") ,
         "returnTime": new Date("2023-08-01T10:00:00") ,
         "passengers": {
-            "adults": 1,
-            "child": 0,
-            "infants": 0
+            "adults": 2,
+            "child": 2,
+            "infants": 2
         }
     },
     "journey": {
@@ -147,6 +145,8 @@ export class SeatSealationComponent {
     },
     "error": false
 }
+  passengerCount = this.data.search.passengers.adults+this.data.search.passengers.child;
+  returnFlag=false;
 
 
   constructor(private store:Store,private route:Router){
@@ -161,7 +161,7 @@ else{
      this.data={...this.data,journey1:undefined}
   }
 
-  this.passengerCount= this.data.search.passengers.adults??0+this.data.search.passengers.child??0
+  this.passengerCount= this.data.search.passengers.adults+this.data.search.passengers.child
 }
     })
   }

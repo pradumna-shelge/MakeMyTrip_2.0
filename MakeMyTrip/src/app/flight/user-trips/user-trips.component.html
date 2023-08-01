@@ -1,93 +1,56 @@
 <app-navbar></app-navbar>
 
-<!-- <h1>all trips{{trips|json}}</h1> -->
+<div class=" bg-custom2">
 
-<!-- <div class="container">
-    <h1>Flights</h1>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Flight 1</h5>
-            <p class="card-text">
-              PRN No.: 202307241135035
-              <br>From: 2
-              <br>To: 1
-              <br>Date: 2023-07-24T11:35:05.59
-            </p>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <strong>Passenger:</strong> Pradumna Vaijnath Shelage
-                <br>Gender: Male
-                <br>Seat: 11B
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Flight 2</h5>
-            <p class="card-text">
-              PRN No.: 202307241140528
-              <br>From: 2
-              <br>To: 1
-              <br>Date: 2023-07-24T11:40:52.663
-            </p>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <strong>Passenger:</strong> Aman Rajput
-                <br>Gender: Male
-                <br>Seat: 12B
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="header1 d-flex  ">
+<p class="h5 text-secondary my-2">My Account -
+  My Trips</p>
   </div>
-   -->
-<ng-container *ngFor="let t of trips" >
-
-  <div class="ticket">
-   <div class="ticket--start">
-     <img src="https://i.ibb.co/W3cK42J/image-1.png"/>
-   </div>
-   <div class="ticket--center">
-     <div class="ticket--center--row">
-       <div class="ticket--center--col">
-         <span>Your ticket for</span>
-         <strong> </strong>
-       </div>
-     </div>
-     <div class="ticket--center--row">
-       <div class="ticket--center--col">
-         <span class="ticket--info--title">Date and time</span>
-         <span class="ticket--info--subtitle">Thursday, May 14 2020</span>
-         <span class="ticket--info--content">7:00 am to 9:00 pm (GMT+1)</span>
-       </div>
-       <div class="ticket--center--col">
-         <span class="ticket--info--title">Location</span>
-         <span class="ticket--info--subtitle">Location name</span>
-         <span class="ticket--info--content">Location complete address, Town, COUNTRY</span>
-       </div>
-     </div>
-     <div class="ticket--center--row">
-       <!-- <div class="ticket--center--col">
-         <span class="ticket--info--title">Ticket type</span>
-         <span class="ticket--info--content">Event category</span>
-       </div> -->
-       <div class="ticket--center--col">
-         <span class="ticket--info--title">Order info</span>
-         <span  class="ticket--info--content">Order #0123456789. Ordered By Jhon DOE</span>
-       </div>
-     </div>
-   </div>
-   <div class="ticket--end d-flex justify-content-center">
-     <div><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Qrcode_wikipedia_fr_v2clean.png"></div>
+  <div class="  option d-flex justify-content-evenly rounded  container bg-white p-4 shadow">
     
-     
+    <p class="h5 text-secondary">UPCOMING</p>
+    <p class="h5 text-secondary">COMPLETED</p>
+    <p class="h5 text-secondary">CANCELLED</p>
+  </div>
+  <div class=" w-100 d-flex mt-3 flex-column gap-2"> 
+
+ 
+  <ng-container *ngFor="let t of trips" >
+  
+  
+  <div class="flight-card bg-white mx-auto ">
+  
+   <div class="flight-card-content">
+     <div class="flight-row">
+       <div class="flight-from">
+         <span class="from-code">{{t.fromAirport}}</span>
+         <!-- <span class="from-city">Tirane, Albania</span> -->
+       </div>
+       <div class="plane">
+         <img src="https://cdn.onlinewebfonts.com/svg/img_537856.svg" alt="">
+       </div>
+       <div class="flight-to">
+         <span class="to-code">{{t.toAirport}}</span>
+         <!-- <span class="to-city">Munich, Germany</span> -->
+       </div>
+     </div>
+     <div class="flight-details-row">
+       <div class="flight-operator">
+         <span class="title">PRN NUMBER</span>
+         <span class="detail">{{t.prnNo}}</span>
+       </div>
+       <div class="flight-number">
+         <span class="title">DATE</span>
+         <span class="detail">{{t.date | date:'mediumDate'}}</span>
+       </div>
+       <div class="flight-class">
+         <span class="title">{{"passengers"|uppercase}}</span>
+         <span class="detail">{{t.passengers}}</span>
+       </div>
+     </div>
    </div>
- </div>
-</ng-container>
+  </div>
+  </ng-container>
+</div>
+</div>
+

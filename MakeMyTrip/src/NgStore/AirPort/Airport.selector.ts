@@ -6,3 +6,4 @@ import { AirportStore } from "./Airport.reduser";
 export const airportStore = createFeatureSelector<AirportStore>('Airport');
 
 export const getAirportData = createSelector(airportStore,(state)=> state.airports)
+

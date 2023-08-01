@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSliderModule} from '@angular/material/slider';
 import { AireLineService } from '../Services/aire-line.service';
@@ -10,6 +10,7 @@ import { LoadAirLineData } from 'src/NgStore/AirLine/AirLine.action';
 import { filterInterface } from 'src/Model/filter.model';
 import { isFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { JourneyS } from 'src/Model/journey.model';
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
@@ -17,6 +18,7 @@ import { Router } from '@angular/router';
 })
 export class FilterComponent implements OnInit {
 @Output() filterEmitter =  new EventEmitter<filterInterface>();
+@Input() returnFlag = false; 
 airlines!:AirlineInterface[];
 filterData:filterInterface= {}as filterInterface;
 flag = false;

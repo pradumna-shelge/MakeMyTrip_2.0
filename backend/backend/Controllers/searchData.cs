@@ -60,18 +60,7 @@ namespace backend.Controllers
         public async Task<IActionResult> Post(JourneySearch obj)
         {
 
-    //    id: number,
-    //airline: AirlineInterface,
-    //flightNumber: string
-    //from:AirportModel,
-    //to: AirportModel,
-    //departureTime: Date,
-    //arrivalTime: Date,
-    //price: number,
-    //duration: string,
-    //baggage :number,
-    //cabin: number,
-    //Surcharges: number
+
 
 
 
@@ -84,17 +73,12 @@ namespace backend.Controllers
             var airportData = await _airport.Get();
             var airlines = await _airline.Get();
             var bookings = await _booking.Get(); 
-
-         var passengers = await _passenger.Get();
-            var bookedSeat = (from j in journays
-                             join b in bookings on j.JourneyId equals b.JourneyId
-                             join p in passengers on b.BookingId equals p.BookingId
-                             where j.JourneyId == obj.fromID && p.SeatClass == obj.seatClass
-                             select p.SeatNumber).ToList();
-
-
+            var passengers = await _passenger.Get();
+          
+           
             var journay = from j in journays
                           join f in flights on j.FlightId equals f.FlightId
+                          
                           join fa in airportData on j.SourceId equals fa.AirportId
                           join toAirport in airportData on j.DestinationId equals toAirport.AirportId
                           where j.SourceId == obj.fromID &&
@@ -104,7 +88,7 @@ namespace backend.Controllers
                           select new
                           {
                               JourneyId = j.JourneyId,
-                              airlineId = airlines.FirstOrDefault(a => a.AirlineId == f.AirlineId).AirlineId,
+                              airlineId = airlines.FirstOrDefault(a => a.AirlineId == f.AirlineId)?.AirlineId,
                               flightNumber = f.FlightNo,
                               to = toAirport.AirportId,
                               fromid = fa.AirportId,
@@ -116,9 +100,14 @@ namespace backend.Controllers
                               cabin = 7,
                               Surcharges = 700,
                               seatStature = _context.SeatClassDtos.FromSqlRaw($"exec GetSeatStructureForFlight @FlightId={f.FlightId}"),
-                              bookedSeats = bookedSeat
+                              bookedSeats = (
+                                             from  p in passengers
+                                             join b in bookings on p.BookingId equals b.BookingId
+                                             where p.SeatClass == obj.seatClass
+                                             && b.JourneyId == j.JourneyId
+                                             select p.SeatNumber).ToList()
 
-                          };
+        };
 
 
 
@@ -130,12 +119,6 @@ namespace backend.Controllers
 
             if (obj.ReturnDate != null )
             {
-                var bookedSeat1 = (from j in journays
-                                  join b in bookings on j.JourneyId equals b.JourneyId
-                                  join p in passengers on b.BookingId equals p.BookingId
-                                  where j.JourneyId == obj.toID && p.SeatClass == obj.seatClass
-                                  select p.SeatNumber).ToList();
-
                 var journay1 = from j in journays
                               join f in flights on j.FlightId equals f.FlightId
                               join fa in airportData on j.SourceId equals fa.AirportId
@@ -158,7 +141,12 @@ namespace backend.Controllers
                                   cabin = 7,
                                   Surcharges = 700,
                                   seatStature = _context.SeatClassDtos.FromSqlRaw($"exec GetSeatStructureForFlight @FlightId={f.FlightId}"),
-                                  bookedSeats = bookedSeat1
+                                  bookedSeats = (
+                                             from p in passengers
+                                             join b in bookings on p.BookingId equals b.BookingId
+                                             where p.SeatClass == obj.seatClass
+                                             && b.JourneyId == j.JourneyId
+                                             select p.SeatNumber).ToList()
                               };
 
 

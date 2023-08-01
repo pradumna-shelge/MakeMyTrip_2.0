@@ -5,7 +5,7 @@ import {  SearchStore } from "../Stores.interface";
 export const initialSearch:SearchStore={
     search:{
         "tripType": 1,
-        "seatTypes": 1,
+        "seatTypes": 3,
         "from": {
             "airportId": 1,
             "airportCode": "BOM",

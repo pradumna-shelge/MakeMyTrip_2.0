@@ -21,7 +21,7 @@ namespace backend.Controllers
         private readonly IPassenger _passenger;
         private readonly IUser _user;
 
-        public TripController(MakeMyTripContext context, IAirportData airport, ICity city, IJourney journey, Iflight flights, IAirlines airline, Ibooking ibooking, IPassenger passenger, IUser user)
+        public TripController(MakeMyTripContext context, ICity city1, IAirportData airport, ICity city, IJourney journey, Iflight flights, IAirlines airline, Ibooking ibooking, IPassenger passenger, IUser user)
         {
             _airport = airport;
             _city = city;
@@ -32,6 +32,7 @@ namespace backend.Controllers
             _booking = ibooking;
             _passenger = passenger;
             _user = user;
+            _city = city1;
         }
 
 
@@ -48,24 +49,29 @@ namespace backend.Controllers
             var bookings = await _booking.Get();
             var users = await _user.Get();
             var passengers = await _passenger.Get();
-
+            var cities = await _city.Get();
             var userID = users.FirstOrDefault(u=>u.UserEmail == email)?.UserId;
             var trips = from j in journays
                              join b in bookings on j.JourneyId equals b.JourneyId
-                             
+                             join f in flights on j.FlightId equals f.FlightId
+                             join a in  airlines on f.AirlineId equals a.AirlineId
+                             join fromA in airportData on j.SourceId equals fromA.AirportId
+                             join toA in airportData on j.DestinationId equals toA.AirportId
                              where b.UserId == userID
                              select new
                              {
                                  prnNo = b.BookingId,
-                                 fromId = j.SourceId,
-                                 toId = j.DestinationId,
-                                 passengers = from p in passengers where p.BookingId == b.BookingId select new
+                                 airline= a.AirlineId,
+                                 fromAirport = cities.FirstOrDefault(c=>c.LocationId == fromA.AddressId)?.LocationName,
+                                 toAirport = cities.FirstOrDefault(c => c.LocationId == toA.AddressId)?.LocationName,
+                                 passengers = (from p in passengers where p.BookingId == b.BookingId select new
                                  {
                                      name = p.FullName,
                                      gender = p.Gender,
                                      seat = p.SeatNumber
-                                 },
-                                 date = b.BookingDate
+                                 }).Count(),
+                                 date = b.BookingDate,
+                                 total = b.TotalFare
                              };
 
             return Ok(trips);

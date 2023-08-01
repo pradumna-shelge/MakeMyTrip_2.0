@@ -38,12 +38,11 @@
                 <div class="modal-content">
                     <div class="modal-body   p-0 ">
                        
-                            <div class="w-100 py-2 px-1 d-flex  shadow rounded bg-light">
-                                
-                                <input type="text" #search class="form-control border-0" placeholder="search..."
+                            
+                                <input type="text" #search class=" shadow border-0 form-control border-0" placeholder="search..."
                                     (input)="checkAirport(search.value)">
-                            </div>
-                            <p class="text-dark fs-6">SUGGESTIONS</p>
+                            
+                            <p class="text-secondary fs-6 p-2">SUGGESTIONS</p>
                             <div class="px-1 mt-1 list_of">
 
                                 <ol class="list-group border-0 overflow-y-auto" *ngFor="let item of filterAirport;let i = index">
@@ -90,15 +89,14 @@
                 <div class="modal-content">
                     <div class="modal-body p-0 ">
                         <div class=" ">
-                            <div class="w-100 py-2 px-1 d-flex  shadow rounded bg-light">
-                                
+                              
                                 <!-- <i class=" mt-auto fa-solid fs-4 fa-magnifying-glass"></i> -->
-                                <input type="text" #search class="form-control border-0" placeholder="search..."
-                                    (input)="checkAirport(search.value)">
-                            </div>
-                            <div class="px-1 mt-4 ">
+                                <input type="text" #tod class=" form-control shadow border-0" placeholder="search..."
+                                    (input)="checkAirport(tod.value)">
+                          
+                            <p class="text-secondary fs-6 p-2">SUGGESTIONS</p>
+                            <div class="px-1 mt-1 list_of">
 
-                                <p>SUGGESTIONS</p>
                                 <ol class="list-group border-0 overflow-auto" >
                                     <div class="" *ngFor="let item of filterAirport;let i = index">
                                         <li class=" list-group-item   align-items-start border-0"
@@ -137,10 +135,10 @@
          <div  class=" position-relative card1 col-10 col-lg-1">
             <div [ngClass]="{'text-secondary': tripType==1}" class="" data-bs-toggle="dropdown1" aria-expanded="false"  (click)="picker.open()">
                 <p class="fs-6 fw-light">RETURN DATE  </p>
-               
-                    <p class="">{{searchData.returnTime|date}}</p >
+                
+                    <p class="">{{(tripType==2)?(searchData.returnTime|date):"tap to Choose"}}</p >
 
-                        <input   (dateChange)="ChangeDate(departure.value,false)"  matInput [matDatepicker]="picker" class="date-Input"     [disabled]="tripType==1">
+                        <input *ngIf="tripType==2"  (dateChange)="ChangeDate(departure.value,false)"  matInput [matDatepicker]="picker" class="date-Input"     >
                        
                         <mat-datepicker  #picker></mat-datepicker>
                      

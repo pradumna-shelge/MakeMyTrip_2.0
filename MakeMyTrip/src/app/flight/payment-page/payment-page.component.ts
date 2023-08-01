@@ -42,8 +42,8 @@ payNow(){
 
   const options = {
     key: 'rzp_test_D4KAnFxqNqzQsE',
-    amount: this.bookingData.totalPrice, 
-    name: 'Your Company Name',
+    amount: this.bookingData.totalPrice*100, 
+    name: 'MakeMyTrip',
     description: 'Payment for Order #12345',
     order_id: '', 
     handler: (response: any) => {

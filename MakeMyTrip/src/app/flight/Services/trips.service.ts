@@ -20,7 +20,6 @@ export class TripsService {
 
 getTrips(){
   let UserEmail = this.ser.getEmail();
-
 return  this.http.get<Trips[]>(baseApi+"Trip"+`?email=${UserEmail}`);
 }
 

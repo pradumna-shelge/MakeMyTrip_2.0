@@ -25,6 +25,7 @@ export class HomePageComponent implements OnInit {
   search: searchData = {} as searchData;
   data!: JourneyS;
   filteredData!: JourneyS;
+  returnFlag =false;
   postRequestData!: searchPost;
   airportData!: AirportModel[]
   currentJourneyDeP: JourneyInterface | undefined;
@@ -36,60 +37,66 @@ export class HomePageComponent implements OnInit {
     })
   }
   filterData(data: filterInterface) {
-    let newData = this.data;
+this.filteredData= this.data
 
 
+      if(data.Price){ 
+        let PriceData =  data.Price.split('-')
+        let low:number= Number( PriceData[0]);
+         let high:number =Number( PriceData[1]);
+         this.filteredData  = {...this.filteredData,dep:this.filteredData.dep.filter(m=> m.price>=low && m.price<= high )}
+          
+         if(this.data && this.data.ren && this.filteredData.ren)
+         {
+          this.filteredData  = {...this.filteredData,ren:this.filteredData.ren.filter(m=> m.price>=low && m.price<= high )}
 
-    //   if(data.Price){ 
-    //     let PriceData =  data.Price.split('-')
-    //     let low:number= Number( PriceData[0]);
-    //      let high:number =Number( PriceData[1]);
-    //      this.filteredData  = {...this.filteredData,dep:this.filteredData.dep.filter(m=> m.price>=low && m.price<= high )}
+         }
+
+       }
+       if(data.DepartureTime){
+        let dateArray =  data.DepartureTime.split('-')
+        let lowerTime = dateArray[0];
+        let upperTime = dateArray[1];
+
+        let lowerTimeParts = lowerTime.split(/(\d+)(am|pm)/).filter(Boolean); 
+        let upperTimeParts = upperTime.split(/(\d+)(am|pm)/).filter(Boolean);
+
+        let lowerHours = parseInt(lowerTimeParts[0], 10) || 0;
+        let upperHours = parseInt(upperTimeParts[0], 10) || 24;
+
+    let LowDate = new Date( this.filteredData.dep[0].departureTime) ;
+    let HighDate = new Date( this.filteredData.dep[0].departureTime) ;
+    LowDate.setHours(lowerHours);
+    HighDate.setHours(upperHours)
+    this.filteredData ={...this.filteredData, dep:this.filteredData.dep.filter(m=> new Date( m.departureTime) >= LowDate && new Date( m.departureTime) <= HighDate  )}
+
+       }
+
+       if(data.ArrivalTime){
+        let dateArray =  data.ArrivalTime.split('-')
+        let lowerTime = dateArray[0];
+        let upperTime = dateArray[1];
+
+        let lowerTimeParts = lowerTime.split(/(\d+)(am|pm)/).filter(Boolean); 
+        let upperTimeParts = upperTime.split(/(\d+)(am|pm)/).filter(Boolean);
+
+        let lowerHours = parseInt(lowerTimeParts[0], 10) || 0;
+        let upperHours = parseInt(upperTimeParts[0], 10) || 24;
+
+    let LowDate = new Date( this.filteredData.dep[0].arrivalTime) ;
+    let HighDate = new Date( this.filteredData.dep[0].arrivalTime) ;
+    LowDate.setHours(lowerHours);
+    HighDate.setHours(upperHours)
+    this.filteredData ={...this.filteredData, ren:this.filteredData.dep.filter(m=> new Date( m.arrivalTime) >= LowDate && new Date( m.arrivalTime) <= HighDate  )}
+
+       }
 
 
-    //    }
-    //    if(data.DepartureTime){
+    if(data.Airlines.length>0){
 
-    //     let dateArray =  data.DepartureTime.split('-')
-    //     let lowerTime = dateArray[0];
-    //     let upperTime = dateArray[1];
-
-    //     let lowerTimeParts = lowerTime.split(/(\d+)(am|pm)/).filter(Boolean); 
-    //     let upperTimeParts = upperTime.split(/(\d+)(am|pm)/).filter(Boolean);
-
-    //     let lowerHours = parseInt(lowerTimeParts[0], 10) || 0;
-    //     let upperHours = parseInt(upperTimeParts[0], 10) || 24;
-
-    // let LowDate = new Date( this.filteredData.dep[0].departureTime) ;
-    // let HighDate = new Date( this.filteredData.dep[0].departureTime) ;
-    // LowDate.setHours(lowerHours);
-    // HighDate.setHours(upperHours)
-
-
-
-    // newData.dep = newData.dep.filter(m=>  m.departureTime >= LowDate && m.departureTime <= HighDate  )
-
-
-
-
-    //    }
-
-    //    if(data.ArrivalTime){
-    //     const dateArray =  data.DepartureTime.split('-')
-
-    //     const high = dateArray[1]; 
-
-    // const [Hhours, Hminutes] = high.split(/(?<=\d)(?=[A-Z])/)[0].split(':').map(Number);
-
-    // const HighDate = new Date();
-
-    // HighDate.setHours(Hhours % 12);
-    // HighDate.setMinutes(Hminutes);
-    // if(Array.isArray(this.filteredData.ren) ){
-
-    //   this.filteredData.ren = this.filteredData.ren.filter(m=>  m.departureTime<= HighDate )
-    // }
-    //    }
+     this.filteredData = {...this.filteredData,dep:this.filteredData.dep.filter(d=> data.Airlines.indexOf(d.airline?.name as string)!=-1)}
+      
+    }
 
   }
 
@@ -160,9 +167,11 @@ export class HomePageComponent implements OnInit {
       ob.From = this.airportData.find(f => f.airportId == ob.fromid);
       ob.To = this.airportData.find(f => f.airportId == ob.to);
       tempData.push(ob);
+      
     })
+    this.returnFlag = false;
     if (this.data.ren) {
-
+      this.returnFlag = true;
       this.data.ren.forEach((ob: JourneyInterface) => {
         this.airlineStore.select(getAirlineById(ob.airlineId)).subscribe(d => {
           ob.airline = d

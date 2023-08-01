@@ -6,7 +6,7 @@
 </div>
 <div class="" [ngClass]="{'d-flex justify-content-between gap-2': modifiedData && modifiedData.ren}">
 <div *ngIf="modifiedData && modifiedData.dep" class="">
-    <div class="shadow py-1 px-3 rounded accordion bg-white" *ngFor="let d of modifiedData.dep; let item=index">
+    <div class="shadow m-2 py-1 px-3 rounded accordion bg-white" *ngFor="let d of modifiedData.dep; let item=index">
   
         <div *ngIf=" modifiedData && modifiedData.ren" class="d-flex justify-content-start gap-2 align-items-center">
             <img class="logo" [src]="d.airline?.logo" alt="airlineLogo">
@@ -24,7 +24,7 @@
               
               
                   <div>
-                      <p class="h4">{{d.arrivalTime | date:'HH:mm'}}</p>
+                      <p class="h4">{{d.departureTime | date:'HH:mm'}}</p>
                       <small class="text-secondary">{{this.search.from.city}}({{this.search.from.airportCode}})</small>
                   </div>
                   <div>
@@ -33,7 +33,7 @@
                       <small class="text-secondary">Non Stop</small>
                   </div>
                   <div>
-                      <p class="h4">{{d.departureTime | date:'HH:mm'}}</p>
+                      <p class="h4">{{d.arrivalTime | date:'HH:mm'}}</p>
                       <small class="text-secondary">{{this.search.to.city}}({{this.search.to.airportCode}})</small>
                   </div>
                   <div>
@@ -84,7 +84,7 @@
               
               
                   <div>
-                      <p class="h4">{{d.arrivalTime | date:'HH:mm'}}</p>
+                      <p class="h4">{{d.departureTime | date:'HH:mm'}}</p>
                       <small class="text-secondary">{{this.search.from.city}}({{this.search.from.airportCode}})</small>
                   </div>
                   <div>
@@ -93,7 +93,7 @@
                       <small class="text-secondary">Non Stop</small>
                   </div>
                   <div>
-                      <p class="h4">{{d.departureTime | date:'HH:mm'}}</p>
+                      <p class="h4">{{d.arrivalTime | date:'HH:mm'}}</p>
                       <small class="text-secondary">{{this.search.to.city}}({{this.search.to.airportCode}})</small>
                   </div>
                   <div>
