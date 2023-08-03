@@ -39,7 +39,10 @@ constructor(private store:Store<AirlineStore>,private router:Router){
 
 priceChange(max:string){
   this.filterData = {...this.filterData,Price:1000+"-"+Number(max)};
- this.emitValue();
+  if(Number(max)==0){
+    this.filterData = {...this.filterData,Price:undefined};
+  }
+  this.emitValue();
 }
 
 airlineFilter(data:string){
@@ -80,13 +83,41 @@ arrivalTime(val:string){
 
   reset(){
     this.filterData={} as filterInterface;
+    
+    this.filterData.Price=undefined;
+    
     this.resets1=undefined;
     this.resets2=undefined;
     this.resets3=undefined;
     this.emitValue();
   }
 
+resetspec(i:number){
 
+  switch (i) {
+    case 1:
+      this.filterData.Price=undefined
+      this.priceChange("0")
+      break;
+      case 2:
+        this.filterData.DepartureTime=undefined
+        this.resets2=undefined;
+
+        break;
+        case 3:
+        this.filterData.ArrivalTime=undefined
+        this.resets3=undefined;
+
+        break;
+        
+    default:
+      break;
+  }
+
+
+  this.emitValue();
+
+}
 
   emitValue(){
     this.filterEmitter.emit(this.filterData)

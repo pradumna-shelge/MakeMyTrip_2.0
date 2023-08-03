@@ -11,7 +11,7 @@ public partial class User
 
     public string? Gender { get; set; }
 
-    public bool? MaritalStatus { get; set; }
+    public string? Address { get; set; }
 
     public string? ImageUrl { get; set; }
 
@@ -45,11 +45,23 @@ public partial class User
 
     public virtual ICollection<AirportDatum> AirportDatumLastModifications { get; set; } = new List<AirportDatum>();
 
+    public virtual ICollection<BaggageRule> BaggageRuleCreateds { get; set; } = new List<BaggageRule>();
+
+    public virtual ICollection<BaggageRule> BaggageRuleLastModifications { get; set; } = new List<BaggageRule>();
+
+    public virtual ICollection<BaggageType> BaggageTypeCreateds { get; set; } = new List<BaggageType>();
+
+    public virtual ICollection<BaggageType> BaggageTypeLastModifications { get; set; } = new List<BaggageType>();
+
     public virtual ICollection<Booking> BookingCreateds { get; set; } = new List<Booking>();
 
     public virtual ICollection<Booking> BookingLastModifications { get; set; } = new List<Booking>();
 
     public virtual ICollection<Booking> BookingUsers { get; set; } = new List<Booking>();
+
+    public virtual ICollection<CancellationRule> CancellationRuleCreateds { get; set; } = new List<CancellationRule>();
+
+    public virtual ICollection<CancellationRule> CancellationRuleLastModifications { get; set; } = new List<CancellationRule>();
 
     public virtual User? Created { get; set; }
 

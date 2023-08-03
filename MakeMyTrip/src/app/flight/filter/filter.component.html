@@ -12,31 +12,39 @@
 
  
   <div class=" m-1" [ngSwitch]="filter.key">
-    <div *ngSwitchCase="'Price'" class=" filterbody rounded-pill d-flex justify-content-between p-2 gap-1">
-      <span >₹{{filter.value}}</span>
-      <i class="fa-solid fa-xmark  rounded-circle  p-1" style="color: #ffffff; background-color:rgb(0, 190, 248) "></i>
+    <div  *ngSwitchCase="'Price'" >
+      <div *ngIf="filter.value " class=" small filterbody rounded-pill d-flex justify-content-between p-2 gap-1">
+        <span  >₹{{filter.value}}</span>
+        <i (click)="resetspec(1)" class="fa-solid fa-xmark  rounded-circle  p-1" style="color: #ffffff; background-color:rgb(0, 190, 248) "></i>
+      </div>
     </div>
-    <div *ngSwitchCase="'DepartureTime'" class=" small filterbody rounded-pill d-flex justify-content-between p-2 gap-1">
-      <span >
-        <i class="fa-solid fa-plane-departure" style="color: #337eff;"></i>
-        {{filter.value}}</span>
-      <i class="fa-solid fa-xmark  rounded-circle  p-1" style="color: #ffffff; background-color:rgb(0, 190, 248) "></i>
+    <div *ngSwitchCase="'DepartureTime'" >
+      <div *ngIf="filter.value" class=" small filterbody rounded-pill d-flex justify-content-between p-2 gap-1">
+        
+        <span >
+          <i class="fa-solid fa-plane-departure" style="color: #337eff;"></i>
+          {{filter.value}}</span>
+        <i (click)="resetspec(2)" class="fa-solid fa-xmark  rounded-circle  p-1" style="color: #ffffff; background-color:rgb(0, 190, 248) "></i>
+      </div>
     </div>
-    <div *ngSwitchCase="'ArrivalTime'" class=" filterbody rounded-pill d-flex justify-content-between p-2 gap-1">
-      <span >
-        <i class="fa-solid fa-plane-arrival" style="color: #337eff;"></i>
-        {{filter.value}}</span>
-      <i class="fa-solid fa-xmark  rounded-circle  p-1" style="color: #ffffff; background-color:rgb(0, 190, 248) "></i>
-    </div>
+    <div *ngSwitchCase="'ArrivalTime'" class="small  filterbody rounded-pill d-flex justify-content-between p-2 gap-1">
+      <div *ngIf="filter.value" class=" small filterbody rounded-pill d-flex justify-content-between p-2 gap-1">
+        
+        <span >
+          <i class="fa-solid fa-plane-departure" style="color: #337eff;"></i>
+          {{filter.value}}</span>
+        <i (click)="resetspec(3)" class="fa-solid fa-xmark  rounded-circle  p-1" style="color: #ffffff; background-color:rgb(0, 190, 248) "></i>
+      </div>
+      </div>
     
     <div *ngSwitchCase="'Airlines'"  class="d-flex flex-wrap">
       <ng-container  *ngFor="let item of filterData.Airlines">
-<div  class="m-1 filterbody rounded-pill d-flex justify-content-between p-2 gap-1">
+<div  class="m-1  small filterbody rounded-pill d-flex justify-content-between p-2 gap-1">
 
   <span >
     
     {{item}}</span>
-  <i class="fa-solid fa-xmark  rounded-circle  p-1" style="color: #ffffff; background-color:rgb(0, 190, 248) "></i>
+  <i (click)="airlineFilter(item)" class="fa-solid fa-xmark  rounded-circle  p-1" style="color: #ffffff; background-color:rgb(0, 190, 248) "></i>
 </div>
 </ng-container>
     </div>

@@ -40,7 +40,7 @@ namespace backend.Controllers
 
         [HttpPost("verify-Paymnet")]
 
-        public async Task<IActionResult> verify_Paymnet( PaymenyVerifyDto obj)
+        public IActionResult verify_Paymnet( PaymenyVerifyDto obj)
         {
             try
             {

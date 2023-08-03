@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\MakeMyTrip_2.0\\MakeMyTrip_2.0\\backend\\backend\\backend.csproj": {}
+    "C:\\Users\\admin\\Desktop\\make my trip\\MakeMyTrip_2.0\\backend\\backend\\backend.csproj": {}
   },
   "projects": {
-    "D:\\MakeMyTrip_2.0\\MakeMyTrip_2.0\\backend\\backend\\backend.csproj": {
+    "C:\\Users\\admin\\Desktop\\make my trip\\MakeMyTrip_2.0\\backend\\backend\\backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\MakeMyTrip_2.0\\MakeMyTrip_2.0\\backend\\backend\\backend.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\make my trip\\MakeMyTrip_2.0\\backend\\backend\\backend.csproj",
         "projectName": "backend",
-        "projectPath": "D:\\MakeMyTrip_2.0\\MakeMyTrip_2.0\\backend\\backend\\backend.csproj",
-        "packagesPath": "C:\\Users\\pradumna.shelage\\.nuget\\packages\\",
-        "outputPath": "D:\\MakeMyTrip_2.0\\MakeMyTrip_2.0\\backend\\backend\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Desktop\\make my trip\\MakeMyTrip_2.0\\backend\\backend\\backend.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\make my trip\\MakeMyTrip_2.0\\backend\\backend\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\pradumna.shelage\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -40,6 +45,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "AWSSDK.Core": {
+              "target": "Package",
+              "version": "[3.7.200.9, )"
+            },
+            "AWSSDK.S3": {
+              "target": "Package",
+              "version": "[3.7.201.7, )"
+            },
             "MailKit": {
               "target": "Package",
               "version": "[4.0.0, )"
@@ -100,7 +113,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

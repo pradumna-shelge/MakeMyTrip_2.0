@@ -25,6 +25,8 @@ public partial class FlightclassStructure
 
     public int? LastModificationId { get; set; }
 
+    public virtual ICollection<BaggageRule> BaggageRules { get; set; } = new List<BaggageRule>();
+
     public virtual User? Created { get; set; }
 
     public virtual ICollection<Flight> FlightBusinessclassNavigations { get; set; } = new List<Flight>();

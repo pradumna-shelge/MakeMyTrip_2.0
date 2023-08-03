@@ -16,7 +16,7 @@ import { geTrip } from 'src/NgStore/tripDetail/trip.ngStore';
 export class ReviewJourneyComponent {
   data!:TripStore;
   TicketClass:string[] = TicketClass;
-
+  flightDetail!:JourneyInterface
   constructor(private store:Store,private route:Router){
      
     this.store.select(geTrip).subscribe(d=>{
@@ -44,6 +44,8 @@ else{
 
  
 
-
+dataChange(d:JourneyInterface){
+this.flightDetail = d
+}
 
 }

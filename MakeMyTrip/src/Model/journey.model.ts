@@ -1,7 +1,12 @@
 import { AirlineInterface } from "./Airline"
 import { AirportModel } from "./Airport.model"
 
-
+export interface BaggageRule {
+  type: string;
+  defaultWeight: number;
+  max: number;
+  price: number;
+}
 export interface JourneyInterface {
   journeyId: number,
     airline?: AirlineInterface|undefined,
@@ -13,8 +18,7 @@ export interface JourneyInterface {
     arrivalTime: Date,
     price: number,
     duration: string,
-    baggage: number,
-    cabin: number,
+    baggageRule: BaggageRule[],
     surcharges: number,
     From? :AirportModel,
     To? :AirportModel ,

@@ -1,8 +1,8 @@
 
 export interface filterInterface{
-    Price:string,
-    DepartureTime:string,
-    ArrivalTime:string,
+    Price:string|undefined,
+    DepartureTime:string|undefined,
+    ArrivalTime:string|undefined
     Airlines:string[]
 }
 

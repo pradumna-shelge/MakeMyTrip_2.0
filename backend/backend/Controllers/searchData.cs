@@ -21,8 +21,14 @@ namespace backend.Controllers
         private readonly MakeMyTripContext _context;
         private readonly Ibooking _booking;
         private readonly IPassenger _passenger;
+        private readonly IBaggagetypes _baggagetypes;
+        private readonly IBaggagerule _baggagerule;
+        private readonly ICancellationrules _cancellationrules;
+        private readonly ICancellationtype _ICancellationtype;
 
-        public searchData(MakeMyTripContext context, IAirportData airport,ICity city,IJourney journey,Iflight flights,IAirlines airline,Ibooking ibooking,IPassenger passenger)
+        public searchData(MakeMyTripContext context, IAirportData airport,ICity city,IJourney journey,
+            Iflight flights,IAirlines airline,Ibooking ibooking,IPassenger passenger,IBaggagetypes baggagetypes
+            ,IBaggagerule baggagerule, ICancellationrules cancellationrules, ICancellationtype cancellationtype)
         {
                 _airport = airport;
             _city = city;
@@ -32,6 +38,13 @@ namespace backend.Controllers
             _context = context;
             _booking = ibooking;
             _passenger = passenger;
+
+            _baggagetypes = baggagetypes;
+            _baggagerule = baggagerule;
+
+            _cancellationrules = cancellationrules;
+            _ICancellationtype = cancellationtype;
+
         }
 
         [HttpGet]
@@ -74,21 +87,27 @@ namespace backend.Controllers
             var airlines = await _airline.Get();
             var bookings = await _booking.Get(); 
             var passengers = await _passenger.Get();
-          
-           
+
+            var canRules =  await _cancellationrules.Get();
+            var canTypes = await _ICancellationtype.Get();
+
+            var bagR = await _baggagerule.Get();
+            var bagT = await _baggagetypes.Get();
+
+
             var journay = from j in journays
                           join f in flights on j.FlightId equals f.FlightId
-                          
+                          join a in airlines on f.AirlineId equals a.AirlineId
                           join fa in airportData on j.SourceId equals fa.AirportId
                           join toAirport in airportData on j.DestinationId equals toAirport.AirportId
                           where j.SourceId == obj.fromID &&
                                 j.DestinationId == obj.toID &&
-                                j.DepartureTime?.Date >= obj.depatureDate.Date 
-                                
+                                j.DepartureTime?.Date >= obj.depatureDate.Date
+
                           select new
                           {
                               JourneyId = j.JourneyId,
-                              airlineId = airlines.FirstOrDefault(a => a.AirlineId == f.AirlineId)?.AirlineId,
+                              airlineId = a.AirlineId,
                               flightNumber = f.FlightNo,
                               to = toAirport.AirportId,
                               fromid = fa.AirportId,
@@ -96,8 +115,18 @@ namespace backend.Controllers
                               arrivalTime = j.ArrivalTime,
                               price = j.SeatbasicPrice,
                               duration = (j.ArrivalTime - j.DepartureTime).ToString(),
-                              baggage = 17,
-                              cabin = 7,
+                              baggageRule = (from br in bagR
+                                             join bt in bagT on br.BaggageTypeId equals bt.BaggageTypeId
+                                             where br.AirlineId == a.AirlineId && br.FlightclassStructureId == obj.seatClass
+                                             orderby bt.BaggageTypeId
+                                         select new
+                                         {
+                                           type= bt.TypeName,
+                                           defaultWeight = br.DefaultWeight,
+                                           max = br.MaxWeight,
+                                           price = br.Fee
+                                         }
+                                         ),
                               Surcharges = 700,
                               seatStature = _context.SeatClassDtos.FromSqlRaw($"exec GetSeatStructureForFlight @FlightId={f.FlightId}"),
                               bookedSeats = (
@@ -121,7 +150,9 @@ namespace backend.Controllers
             {
                 var journay1 = from j in journays
                               join f in flights on j.FlightId equals f.FlightId
-                              join fa in airportData on j.SourceId equals fa.AirportId
+                               join a in airlines on f.AirlineId equals a.AirlineId
+
+                               join fa in airportData on j.SourceId equals fa.AirportId
                               join toAirport in airportData on j.DestinationId equals toAirport.AirportId
                               where j.SourceId == obj.toID &&
                                     j.DestinationId == obj.fromID &&
@@ -129,7 +160,7 @@ namespace backend.Controllers
                               select new
                               {
                                   JourneyId = j.JourneyId,
-                                  airlineId = airlines.FirstOrDefault(a => a.AirlineId == f.AirlineId)?.AirlineId,
+                                  airlineId = a.AirlineId,
                                   flightNumber = f.FlightNo,
                                   to = toAirport.AirportId,
                                   fromid = fa.AirportId,
@@ -137,8 +168,18 @@ namespace backend.Controllers
                                   arrivalTime = j.ArrivalTime,
                                   price = j.SeatbasicPrice,
                                   duration = (j.ArrivalTime - j.DepartureTime).ToString(),
-                                  baggage = 17,
-                                  cabin = 7,
+                                  baggageRule = (from br in bagR
+                                                 join bt in bagT on br.BaggageTypeId equals bt.BaggageTypeId
+                                                 where br.AirlineId == a.AirlineId && br.FlightclassStructureId == obj.seatClass
+                                                 orderby bt.BaggageTypeId
+                                                 select new
+                                                 {
+                                                     type = bt.TypeName,
+                                                     defaultWeight = br.DefaultWeight,
+                                                     max = br.MaxWeight,
+                                                     price = br.Fee
+                                                 }
+                                         ),
                                   Surcharges = 700,
                                   seatStature = _context.SeatClassDtos.FromSqlRaw($"exec GetSeatStructureForFlight @FlightId={f.FlightId}"),
                                   bookedSeats = (

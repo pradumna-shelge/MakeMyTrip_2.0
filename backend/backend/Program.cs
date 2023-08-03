@@ -25,14 +25,26 @@ builder.Services.AddScoped<Iflight, Flights>();
 builder.Services.AddScoped<IUser, userRepo>();
 builder.Services.AddScoped<Ibooking, booking>();
 builder.Services.AddScoped<IPassenger, passenger>();
+builder.Services.AddScoped<ICancellationtype, Cancellationtypes>();
+builder.Services.AddScoped<ICancellationrules, Cancellationrule>();
 
+builder.Services.AddScoped<IBaggagetypes, Baggagetype>();
+builder.Services.AddScoped<IBaggagerule, Baggagerules>();
 
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 
-builder.Services.AddCors(options => { options.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); });
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAnyOrigin",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
 
 var tk = builder.Configuration.GetSection("Jwt");
 
@@ -72,7 +84,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors("CorsPolicy");
+
+app.UseCors("AllowAnyOrigin"); 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

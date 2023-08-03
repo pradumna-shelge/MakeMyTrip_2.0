@@ -21,6 +21,10 @@ public partial class Airline
 
     public DateTime? LastModificationDate { get; set; }
 
+    public virtual ICollection<BaggageRule> BaggageRules { get; set; } = new List<BaggageRule>();
+
+    public virtual ICollection<CancellationRule> CancellationRules { get; set; } = new List<CancellationRule>();
+
     public virtual User? Created { get; set; }
 
     public virtual ICollection<Flight> Flights { get; set; } = new List<Flight>();

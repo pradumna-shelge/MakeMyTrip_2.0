@@ -50,6 +50,7 @@ payNow(){
       
       this.ser.verifyPayment(response).subscribe({
         next:(data:any)=>{
+          debugger
           this.bookser.bookTrip();
         
         },

@@ -50,35 +50,29 @@
                             <button data-bs-toggle="modal" data-bs-target="#profileEdit" class="btn  border border-2 px-3 rounded-pill fs-5   btn-sm text-csblue"><i class="fa-solid fa-pen" ></i> Edit</button>
                           </div>
                           <div class="card-body">
-                            <div class="mb-3 d-flex justify-content-between" data-bs-toggle="modal" data-bs-target="#profileEdit">
+                            <div class="mb-3 d-flex justify-content-between" data-bs-toggle="modal" >
                                 <span class="text-uppercase">Name:</span>
-                                <button class="btn btn-outline-primary btn-sm ms-2 border-0">+ Add</button>
+                                <span *ngIf="user.fullName;else update">{{user.fullName}}</span>
+                                <ng-template #update><button class="btn btn-outline-primary btn-sm ms-2 border-0" data-bs-toggle="modal" data-bs-target="#profileEdit">+ Add</button></ng-template> 
                             </div>
                             <hr>
-                            <div class="mb-3 d-flex justify-content-between" data-bs-toggle="modal" data-bs-target="#profileEdit">
+                            <div class="mb-3 d-flex justify-content-between" data-bs-toggle="modal" >
                                 <span class="text-uppercase">Gender:</span>
-                                <button class="btn btn-outline-primary btn-sm ms-2 border-0">+ Add</button>
-                            </div>
+                                <span *ngIf="user.gender;else update1">{{user.gender}}</span>
+                                <ng-template #update1><button class="btn btn-outline-primary btn-sm ms-2 border-0" data-bs-toggle="modal" data-bs-target="#profileEdit">+ Add</button></ng-template> 
+                              </div>
                             <hr>
-                            <div class="mb-3 d-flex justify-content-between" data-bs-toggle="modal" data-bs-target="#profileEdit">
+                            <div class="mb-3 d-flex justify-content-between" data-bs-toggle="modal" >
                                 <span class="text-uppercase">Address:</span>
-                                <button class="btn btn-outline-primary btn-sm ms-2 border-0">+ Add</button>
-                            </div>
-                            <hr>
-                            <div class="mb-3 d-flex justify-content-between" data-bs-toggle="modal" data-bs-target="#profileEdit">
-                                <span class="text-uppercase">Pincode:</span>
-                                <button class="btn btn-outline-primary btn-sm ms-2 border-0">+ Add</button>
-                            </div>
-                            <hr>
-                            <div class="mb-3 d-flex justify-content-between" data-bs-toggle="modal" data-bs-target="#profileEdit">
-                                <span class="text-uppercase">State:</span>
-                                <button class="btn btn-outline-primary btn-sm ms-2 border-0">+ Add</button>
-                            </div>
+                                <span *ngIf="user.address;else update2">{{user.address}}</span>
+                                <ng-template #update2><button class="btn btn-outline-primary btn-sm ms-2 border-0" data-bs-toggle="modal" data-bs-target="#profileEdit">+ Add</button></ng-template> 
+                              </div>
+                            
                         </div>
                     </div>
                 </div>
-                    <div class="col-md-12 mt-3">
-                            <div class="card card-horizontal">
+                    <div class="col-md-12 mt-3 ">
+                            <div class="card card-horizontal shadow">
                                 <div class="card-header">
                                     <h5 class="card-title">Login Details</h5>
                                 </div>
@@ -87,37 +81,23 @@
                                     </h6>
                                     <div class="mb-3 d-flex justify-content-between">
                                         <span>Mobile Number:</span>
-                                        <button class="btn btn-outline-primary btn-sm ms-2 border-0">+ Add your mobile number</button>
+                                        <button class="btn btn-outline-primary btn-sm ms-2 border-0">+ Add your phone Number</button>
                                     </div>
                                     <div class="mb-3 d-flex justify-content-between">
                                         <span>Email ID:</span>
-                                        <button class="btn btn-outline-primary btn-sm ms-2 border-0">+ Add your Email address</button>
+                                        <span>{{user.userEmail}}</span>
+                                        
                                     </div>
-                                    <div class="mb-3 d-flex justify-content-between">
+                                    <!-- <div class="mb-3 d-flex justify-content-between">
                                         <span>Password:</span>
                                         <button class="btn btn-outline-primary btn-sm ms-2 border-0">+ Change Password?</button>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
 
                           </div>
                           
-                          <div class="col-md-12 mt-3">
-                              <div class="card card-horizontal ">
-                                  <div class="card-header d-flex justify-content-between">
-                                    <div>
-
-                                      <h5 class="card-title">Save Traveller(s)</h5>
-                                      <h6 class="card-subtitle">You have 0 Traveller(s)</h6>
-                                    </div>
-                                      <button data-bs-toggle="modal" data-bs-target="#profileEdit" class="btn  border border-2 px-3 rounded-pill fs-5   btn-sm text-csblue"><i class="fa-solid fa-pen" ></i> Add Traveller</button>
-                                    </div>
-                                    <div class="card-body">
-
-                                      
-                                  </div>
-                              </div>
-                          </div>
+                          
                     </div>
                 </div>
             </div></div>
@@ -144,51 +124,49 @@
             <div class="modal-body m-2">
                 
                 
+               
+                
+              <form [formGroup]="userForm">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="mb-4">
-                      <label for=" fullName"><small class="h6">Full Name</small><small class="text-danger">*</small></label>
-                      <input type="text" class="form-control" id="fullName">
+                      <label for="fullName"><small class="h6">Full Name</small><small class="text-danger">*</small></label>
+                      <input type="text" class="form-control" id="fullName" formControlName="fullName">
                     </div>
-                    <!-- <div class="mb-4">
-                      <label for=" birthday"><p class="h6">Birthday</p></label>
-                      <input type="text" class="form-control" id="birthday">
-                    </div> -->
                   </div>
                   <div class="col-md-6">
                     <div class="mb-4">
-                      <label for=" gender"><p class="h6">Gender</p></label>
-                      <input type="text" class="form-control" id="gender">
+                      <label><p class="h6">Gender</p></label>
+                      <div class="btn-group" data-toggle="buttons">
+                        <input type="radio" name="gender" class="btn-check" id="btn-check-male" autocomplete="off" formControlName="gender" value="male">
+                        <label class="btn btn-outline-primary" for="btn-check-male">Male</label>
+                        
+                        <input type="radio" name="gender" class="btn-check" id="btn-check-female" autocomplete="off" formControlName="gender" value="female">
+                        <label class="btn btn-outline-primary" for="btn-check-female">Female</label>
+                        
+                        <input type="radio" name="gender" class="btn-check" id="btn-check-other" autocomplete="off" formControlName="gender" value="other">
+                        <label class="btn btn-outline-primary" for="btn-check-other">Other</label>
+                      </div>
                     </div>
+                  </div>
+                  <div class="col">
                     <div class="mb-4">
-                      <label for=" address"><p class="h6">Your Address</p></label>
-                      <input type="text" class="form-control" id="address">
+                      <label for="address"><p class="h6">Your Address</p></label>
+                      <textarea class="form-control" id="address" formControlName="address" rows="3"></textarea>
                     </div>
+
                   </div>
                 </div>
-                
-                <!-- <div class="row">
-                  <div class="col-md-6">
-                    <div class="mb-3">
-                      <label for="pincode"><p class="h6">Pincode</p></label>
-                      <input type="text" class="form-control" id="pincode">
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="mb-3">
-                      <label for="state"><p class="h6">State</p></label>
-                      <select class="form-select" id="state">
-                        <option value="">Select State</option>
-                        
-                      </select>
-                    </div>
-                  </div>
-                </div> -->
+             
+              
+              
+              
                 
                 <div class="text-end m-2">
                   <button type="button" class="btn  me-2  fs-5" data-bs-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-primary  px-4 fs-5">Save</button>
+                  <button type="button" (click)="post()" data-bs-dismiss="modal"  [disabled]="userForm.invalid" class="btn btn-primary text-white px-4 fs-5">Save</button>
                 </div>
+              </form>
               </div>
         </div>
     </div>

@@ -36,11 +36,11 @@ return this.http.post(baseApi+"login/emailValidate",{email:email,otp:0})
  
 
 
-  getEmail() {
+  getEmail() :string{
     const token = localStorage.getItem('token') ??"";
     const payload = token.split('.')[1];
     const decodedPayload = this.base64UrlDecode(payload);
-    const tokenData = JSON.parse(decodedPayload).userEmail;
+    const tokenData:string = JSON.parse(decodedPayload).userEmail;
 
    return tokenData
 

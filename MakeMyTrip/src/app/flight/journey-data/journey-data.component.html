@@ -1,12 +1,22 @@
-<!-- <h1>{{"Flight From " + search.from.city + " To " + search.to.city}}</h1> -->
-<!-- <p>{{modifiedData.dep|json}}</p> -->
-<div class="text-secondary p-2 d-flex justify-content-between   ">
+
+<div class="text-secondary p-2 d-flex justify-content-center   ">
     <p  class="h4 ">{{"Flight From " + search.from.city + " To " + search.to.city}}</p>
-    <p *ngIf="modifiedData && modifiedData.ren" class="h4 ">{{"Flight From " + search.to.city + " To " + search.from.city}}</p>
+    <p *ngIf="modifiedData && modifiedData.ren" class="h4 ">, and back</p>
 </div>
 <div class="" [ngClass]="{'d-flex justify-content-between gap-2': modifiedData && modifiedData.ren}">
+    
+
+          
+        
+      
 <div *ngIf="modifiedData && modifiedData.dep" class="">
-    <div class="shadow m-2 py-1 px-3 rounded accordion bg-white" *ngFor="let d of modifiedData.dep; let item=index">
+    <div *ngIf="modifiedData.dep.length >0" class=" text-secondary d-flex justify-content-between shadow m-2 py-1 px-3 rounded  bg-white">
+        <p>Departure</p>
+        <p>Duration</p>
+        <p>Arrival</p>
+        <p>Price</p>
+      </div>
+    <div class="shadow m-2 py-1 px-3 rounded accordion bg-white border-0" *ngFor="let d of modifiedData.dep; let item=index">
   
         <div *ngIf=" modifiedData && modifiedData.ren" class="d-flex justify-content-start gap-2 align-items-center">
             <img class="logo" [src]="d.airline?.logo" alt="airlineLogo">
@@ -44,12 +54,12 @@
                       <input type="radio" name="dep" (change)="addToBook(d, undefined)">
                   </div>
           </div>
-          <div *ngIf="modifiedData && !modifiedData.ren" class="d-flex justify-content-end accordion-item" (click)="flightDetail(d)">
+          <!-- <div *ngIf="modifiedData && !modifiedData.ren" class="d-flex justify-content-end accordion-item" (click)="flightDetail(d)">
             <a data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + item" aria-expanded="true"
                 [attr.aria-controls]="'collapse' + item" class="text-primary">
                 Flight Details
             </a>
-        </div>
+        </div> -->
         <div>
             <div [id]="'collapse' + item" class="accordion-collapse collapse" [attr.aria-labelledby]="'heading' + item">
                 <app-journey-detail [flightDetail]="d"></app-journey-detail>
@@ -62,11 +72,19 @@
        
                 
     </div>
-    
+    <div class="shadow m-2 py-1 px-3 rounded accordion bg-white" *ngIf="modifiedData.dep.length <1">
+        not found
+    </div>
 </div>
 
 <div *ngIf="modifiedData && modifiedData.ren" class="">
-    <div class="shadow py-1 px-3 rounded accordion bg-white" *ngFor="let d of modifiedData.ren; let item=index">
+    <div *ngIf="modifiedData.ren.length >0" class=" text-secondary d-flex justify-content-between shadow m-2 py-1 px-3 rounded accordion bg-white">
+        <p>Departure</p>
+        <p>Duration</p>
+        <p>Arrival</p>
+        <p>Price</p>
+      </div>
+    <div class="shadow m-2 py-1 px-3 rounded accordion bg-white " *ngFor="let d of modifiedData.ren; let item=index">
   
         <div *ngIf="modifiedData.ren" class="d-flex justify-content-start gap-2 align-items-center">
             <img class="logo" [src]="d.airline?.logo" alt="airlineLogo">
@@ -122,7 +140,9 @@
        
                 
     </div>
-    
+    <div class="shadow m-2 py-1 px-3 rounded accordion bg-white  " *ngIf="modifiedData.ren.length <1">
+        not found
+    </div>
 </div>
 
 

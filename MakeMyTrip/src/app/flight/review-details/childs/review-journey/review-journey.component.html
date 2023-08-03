@@ -21,7 +21,7 @@
               </div>
               <div class="">
                 <p style="background-image: linear-gradient(to right, rgb(45, 193, 140), rgb(33, 147, 147));" class="text-white  p-1">CANCELLATION FEES APPLY</p>
-                <p><a class="text-primary mx-5" data-toggle="modal" data-target="#modelId">View Fare Rules</a></p>
+                <p><a class="text-primary mx-5" data-bs-toggle="modal" data-bs-target="#rules" (click)="dataChange(data.journey)">View Fare Rules</a></p>
               </div>
               </div>
               <div class="d-flex gap-3">
@@ -64,7 +64,7 @@
                 </div>
                 <div class="">
                   <p style="background-image: linear-gradient(to right, rgb(45, 193, 140), rgb(33, 147, 147));" class="text-white  p-1">CANCELLATION FEES APPLY</p>
-                  <p><a class="text-primary mx-5" data-toggle="modal" data-target="#modelId">View Fare Rules</a></p>
+                  <p><a class="text-primary mx-5" data-bs-toggle="modal" data-bs-target="#rules" (click)="dataChange(data.journey1)">View Fare Rules</a></p>
                 </div>
                 </div>
                 <div class="d-flex gap-3">
@@ -110,6 +110,26 @@
 
 
 
+      
+
+      <div class="modal fade" id="rules" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+          <div class="modal-content">
+            
+            <div class="modal-body">
+              <app-cancellation [flightDetail]="flightDetail"></app-cancellation>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+      
+      
+      <!-- Optional: Place to the bottom of scripts -->
+      <script>
+        const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
+      
+      </script>
 
 
 
