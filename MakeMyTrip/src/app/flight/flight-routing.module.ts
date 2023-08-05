@@ -7,12 +7,12 @@ import { ReviewJourneyComponent } from './review-details/childs/review-journey/r
 import { SeatSealationComponent } from './review-details/childs/seat-sealation/seat-sealation.component';
 import { PaymentPageComponent } from './payment-page/payment-page.component';
 import { UserTripsComponent } from './user-trips/user-trips.component';
+import { SuccessComponent } from './bookings/success/success.component';
 
 
 const routes: Routes = [
   
-  { path: '', component: HomePageComponent,
-},
+  { path: '', component: HomePageComponent,},
 { path: 'review', component: ReviewDetailsComponent,children:[
   { path: '', component: ReviewJourneyComponent },
 
@@ -20,6 +20,8 @@ const routes: Routes = [
 ] },
 
 { path: 'payment', component: PaymentPageComponent },
+
+{ path: 'success', component: SuccessComponent },
 
 
 ];

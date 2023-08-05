@@ -1,0 +1,39 @@
+.bg-color{
+    background-color: rgb(245 245 255);
+}
+
+img{
+    width: 70px;
+    height: 40px;
+}
+
+.trip-logo{
+    width: 27px;
+    height: auto;  
+}
+
+.trip-logo-new{
+    width: 16px;
+    height: 19px;  
+}
+.text-color{
+    color: rgb(36 153 149);
+}
+.text-color-dark{
+    color: rgb(28, 126, 123);
+}
+.small-txt{
+    font-size: 10px;
+}
+
+.bg-success-new{
+    background-color: rgb(181 255 214);
+}
+
+.bg-danger-new{
+    background-color: rgb(252, 220, 220);
+}
+
+.new-card{
+    background-color: rebeccapurple;
+}

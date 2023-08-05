@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AirportModel } from 'src/Model/Airport.model';
 import { TicketClass, searchData } from 'src/Model/SearchData.model';
@@ -27,8 +27,9 @@ export class SearchResultComponent {
   searchData!:searchData
   tripType:number=1
   infantsFlag=false
-  constructor(private router:Router,private airportStore:Store<AirportStore>,private searchStore:Store<SearchStore>){
-
+  minDate = new Date()
+  constructor( private par: ActivatedRoute,private router:Router,private airportStore:Store<AirportStore>,private searchStore:Store<SearchStore>){
+    this.setparems();
     this.airportStore.dispatch(LoadAirportData())
     this.airportStore.select(getAirportData).subscribe((airports:AirportModel[]) =>{
       this.airport = airports
@@ -37,9 +38,36 @@ export class SearchResultComponent {
           this.searchData = search;
           this.tripType = this.searchData.tripType
     })
+
+   
   }
 
+setparems(){
+  this.par.params.subscribe(params => {
+    const tripData:searchData = {
+      tripType: parseInt(params['tripType']),
+      seatTypes: parseInt(params['seatTypes']),
+      from: JSON.parse(params['from']),
+      to: JSON.parse(params['to']),
+      departureTime: new Date(params['departureTime']),
+      returnTime: new Date(params['returnTime']),
+      passengers: {
+        adults: parseInt(params['adults']),
+        child: parseInt(params['child']),
+        infants: parseInt(params['infants'])
+      }
 
+
+}
+
+
+
+this.searchStore.dispatch(LoadSearchData({data:tripData}))
+});
+
+
+
+}
 
   checkAirport(val:string){
   this.filterAirport = this.airport.filter((airport:AirportModel) => airport.city.toLowerCase().match(val.toLowerCase()))
@@ -50,6 +78,7 @@ ChangeAirport(val:AirportModel, fromFlag:boolean){
 }
 
 ChangeDate(val1:string, fromFlag:boolean){
+  debugger;
  var val = new Date(val1);
  
   this.searchData =fromFlag? { ...this.searchData, departureTime:  val }:{ ...this.searchData, returnTime: val };
@@ -80,6 +109,10 @@ changePass(val:number,pos:number){
   }
 PatchSearch(){
   this.searchData = {...this.searchData,tripType:this.tripType}
+  if(this.searchData.from.airportCode == this.searchData.to.airportCode){
+    this.searchData = {...this.searchData,tripType:2}
+    this.searchData = { ...this.searchData, returnTime: this.searchData.departureTime };
+  }
   this.searchStore.dispatch(LoadSearchData({data:this.searchData}))
  
   

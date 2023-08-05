@@ -2,7 +2,7 @@
 
  
  
-  
+
   
       <div class="d-flex justify-content-center gap-5 row mb-2 bg-custom2  ">
         <div class="d-flex flex-column gap-3 col-lg-6 
@@ -99,6 +99,9 @@
       
             </div>
             <div>
+              <app-secure-flight></app-secure-flight>
+            </div>
+            <div>
               <app-passnger-detail></app-passnger-detail>
             </div>
         </div>
@@ -112,24 +115,18 @@
 
       
 
-      <div class="modal fade" id="rules" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+      <div  class="modal fade" id="rules" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
           <div class="modal-content">
             
-            <div class="modal-body">
+            <div class="modal-body" data-bs-dismiss="modal">
               <app-cancellation [flightDetail]="flightDetail"></app-cancellation>
             </div>
            
           </div>
         </div>
       </div>
-      
-      
-      <!-- Optional: Place to the bottom of scripts -->
-      <script>
-        const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
-      
-      </script>
+
 
 
 

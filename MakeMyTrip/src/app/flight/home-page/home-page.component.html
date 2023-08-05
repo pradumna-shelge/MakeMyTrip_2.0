@@ -84,9 +84,10 @@
         </div>
     </div>
 </div>
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center flex-column gap-2">
 
     <button class=" align-self-center bg-lightBlue  btn h4 py-2 " (click)="addToReview()" [disabled]="(this.data.ren && !currentJourneyRen) || !currentJourneyDeP " >Book Now</button>
+    <button class=" align-self-center   btn h4 py-1 px-3 btn btn-outline-danger" (click)="cancel()" >Cancel</button>
 </div>
 </div>
 

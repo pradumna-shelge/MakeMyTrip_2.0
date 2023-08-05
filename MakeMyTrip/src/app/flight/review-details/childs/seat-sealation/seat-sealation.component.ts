@@ -14,7 +14,7 @@ import { geTrip } from 'src/NgStore/tripDetail/trip.ngStore';
 export class SeatSealationComponent {
   tikitclass=TicketClass;
   data!:TripStore;
-  passengerCount = this.data.search.passengers.adults+this.data.search.passengers.child;
+  passengerCount = 1;
   returnFlag=false;
 
 
@@ -110,12 +110,26 @@ else{
   
   
 
+
+let count=0;
+
+count = this.selectedSeatsJourney.length;
+if(this.data.journey1){
+  count+=this.selectedSeatsJourney2.length 
+  count = count/2
+}
+if(count != this.passengerCount){
+alert("please choose seats for passengers")
+}
+else{
+  
   this.store.dispatch(LoadBookingSeats({data:this.selectedSeatsJourney,seatType:this.data.search.seatTypes}))
 if(this.data.journey1){
   this.store.dispatch(LoadBookingSeats2({data:this.selectedSeatsJourney2,seatType:this.data.search.seatTypes}))
 
 }
   this.route.navigate(['flight/payment'])
+}
   }
 
 

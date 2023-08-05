@@ -1,3 +1,5 @@
+import { AirlineInterface } from "./Airline";
+import { AirportModel } from "./Airport.model";
 
 export interface filterInterface{
     Price:string|undefined,
@@ -11,7 +13,18 @@ export interface Trips {
     airline: number;
     fromAirport: string;
     toAirport: string;
-    passengers: number;
+    passengers: number|flightPassenger[];
+    date: string;
+    total: number;
+  
+  
+  }
+  export interface Trips1 {
+    prnNo: number;
+    airline: AirlineInterface;
+    fromAirport: AirportModel;
+    toAirport: AirportModel;
+    passengers:flightPassenger[];
     date: string;
     total: number;
   

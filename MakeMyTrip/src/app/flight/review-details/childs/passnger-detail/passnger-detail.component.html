@@ -1,33 +1,12 @@
+
+
+
 <form [formGroup]="passengerForm">
-<div class="  bg-white p-3 rounded shadow">
-   <p class="fw-bold ">Preferred by millions of travellers</p > 
-    <div class=" mt-4">
-     
-        <div class="form-check">
-          <input class="form-check-input" type="radio"  formControlName="Terms_policy" id="secureMyTrip" [value]="true">
-          <label class="form-check-label" for="secureMyTrip">
-           <span class="fw-bold">Yes</span> , Secure my trip.
-          </label>
-          
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" formControlName="Terms_policy" id="riskMyTrip" [value]="false">
-          <label class="form-check-label" for="riskMyTrip">
-            <span class="fw-bold">No</span>,I will risk my trip.
-          </label>
-        </div>
-        <div *ngIf="Terms_policy?.errors?.['required'] && Terms_policy?.['touched'] || !( Terms_policy?.value)" 
-        class="text-danger small-txt">
-     You must agree to the Terms & Conditions.
-   </div>
-      <p class="text-secondary small-txt">
-        By selecting the product, I confirm the traveller's age is between 6 months to 70 years and agree to the T&Cs
-        for this now.
-      </p>
-    </div>
-  
+
     
-  </div>
+  
+  
+
   
 
 
@@ -176,7 +155,8 @@
     
     <div>
         <p class="fw-bold mb-2">Booking details will be sent to</p>
-        <div>
+        <div class="d-flex justify-content-between">
+        <div class="w-75">
             <small >Email</small>
             <input class="form-control w-50" type="email" formControlName="billingEmail" placeholder="Email">
             <div *ngIf="billingEmail?.errors?.['required'] && billingEmail?.touched"
@@ -188,6 +168,10 @@
          *Please enter a valid email address.
        </div>
         </div>
+        <div class="w-25">
+          <button (click)="patchEmail()" type="button" class="btn btn-outline-info">User Email</button>
+        </div>
+      </div>
     </div>
 </div>
     <div>

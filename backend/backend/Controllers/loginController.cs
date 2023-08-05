@@ -37,16 +37,15 @@ UserEmail = obj.email
                 };
                await _user.Post(newUser);
 
-                userObj = Users.FirstOrDefault(user => user.UserEmail == newUser.UserEmail);
-                if(userObj == null)
-                {
-                    return BadRequest(new { mes="user not found"});
-                }
+               
+                
             }
+
+            userObj = Users.FirstOrDefault(user => user.UserEmail == obj.email);
 
             if (userObj == null )
             {
-                return BadRequest(new { mes = "user not found" });
+                return BadRequest(new { mes = "user is not valid" });
             }
             OtpServices otpServices = new OtpServices(_config);
 

@@ -1772,3 +1772,5 @@ C:\Users\admin\Desktop\make my trip\MakeMyTrip_2.0\backend\backend\obj\Debug\net
 C:\Users\admin\Desktop\make my trip\MakeMyTrip_2.0\backend\backend\obj\Debug\net6.0\ref\backend.dll
 C:\Users\admin\Desktop\make my trip\MakeMyTrip_2.0\backend\backend\bin\Debug\net6.0\AWSSDK.Core.dll
 C:\Users\admin\Desktop\make my trip\MakeMyTrip_2.0\backend\backend\bin\Debug\net6.0\AWSSDK.S3.dll
+D:\MakeMyTrip_2.0\MakeMyTrip_2.0\backend\backend\bin\Debug\net6.0\AWSSDK.Core.dll
+D:\MakeMyTrip_2.0\MakeMyTrip_2.0\backend\backend\bin\Debug\net6.0\AWSSDK.S3.dll

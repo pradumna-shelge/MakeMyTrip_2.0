@@ -87,7 +87,8 @@ this.filteredData= this.data
     let HighDate = new Date( this.filteredData.dep[0].arrivalTime) ;
     LowDate.setHours(lowerHours);
     HighDate.setHours(upperHours)
-    this.filteredData ={...this.filteredData, ren:this.filteredData.dep.filter(m=> new Date( m.arrivalTime) >= LowDate && new Date( m.arrivalTime) <= HighDate  )}
+    if(this.filteredData.ren)
+    this.filteredData ={...this.filteredData, ren:this.filteredData.ren.filter(m=> new Date( m.arrivalTime) >= LowDate && new Date( m.arrivalTime) <= HighDate  )}
 
        }
 
@@ -95,6 +96,11 @@ this.filteredData= this.data
     if(data.Airlines.length>0){
 
      this.filteredData = {...this.filteredData,dep:this.filteredData.dep.filter(d=> data.Airlines.indexOf(d.airline?.name as string)!=-1)}
+
+     if(this.filteredData.ren){
+      this.filteredData = {...this.filteredData,ren:this.filteredData.ren.filter(d=> data.Airlines.indexOf(d.airline?.name as string)!=-1)}
+
+     }
       
     }
 
@@ -218,5 +224,12 @@ this.filteredData= this.data
   
     
     this.router.navigate(['flight/review'])
+  }
+
+
+
+  cancel(){
+    this.currentJourneyDeP=undefined,
+  this.currentJourneyRen=undefined
   }
 }

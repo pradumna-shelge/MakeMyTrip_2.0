@@ -2,14 +2,14 @@
 <app-navbar></app-navbar>
 <div class="container mt-5 ">
     <div class="row ">
-        <div class=" col-md-4 d-flex justify-content-center ">
-            <div class="card h-fit  p-5 shadow">
-              <div class="">
-                <div>
+        <div class=" col-md-4  d-flex justify-content-center ">
+            <div  class="card h-fit shadow p-2">
+              <div class="" data-bs-toggle="modal" data-bs-target="#modalId">
+                <div class="d-flex justify-content-center  ">
 
-                  <img src="https://newprofilepic2.photo-cdn.net//assets/images/article/profile.jpg" class="card-img-top rounded"
+                  <img   [src]="user.imageUrl" class="card-img-top rounded-circle border p-1 bg-blueDark "
                   alt="Card Image  ">
-                  <button class=" position-absolute border top-50 end-1 translate-middle bg-secondary rounded-circle p-2"><i class="fa-solid fa-pen" style="color: #ffffff;"></i></button>
+                  <!-- <button class=" position-absolute border top-50 end-1 translate-middle bg-secondary rounded-circle p-2"><i class="fa-solid fa-pen" style="color: #ffffff;"></i></button> -->
                 </div>
               </div>
                 <div class="card-body">
@@ -18,19 +18,19 @@
                     <ul class="list-group">
                         <li class="list-group-item d-flex align-items-center">
                           <i class="fa-regular fa-user" style="color: #81868d;"></i>
-                            <a href="#">Profile</a>
+                            <a >Profile</a>
                         </li>
                         <li class="list-group-item d-flex align-items-center">
                           <i class="fa-sharp fa-solid fa-arrow-right-to-bracket" style="color: #89898b;"></i>
-                            <a href="#">Login Details</a>
+                            <a >Login Details</a>
                         </li>
-                        <li class="list-group-item d-flex align-items-center">
+                        <!-- <li class="list-group-item d-flex align-items-center">
                           <i class="fa-solid fa-users" style="color: #959697;"></i>
-                            <a href="#">Save Travellers</a>
-                        </li>
+                            <a >Save Travellers</a>
+                        </li> -->
                         <li class="list-group-item d-flex align-items-center">
                           
-                            <a href="#" class="mx-auto fs-4 text-danger" (click)="logout()">Logout</a>
+                            <a  class="mx-auto fs-4 text-danger" (click)="logout()">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -79,10 +79,10 @@
                                 <div class="card-body">
                                     <h6 class="card-subtitle">Manage your email address, mobile number, and password
                                     </h6>
-                                    <div class="mb-3 d-flex justify-content-between">
+                                    <!-- <div class="mb-3 d-flex justify-content-between">
                                         <span>Mobile Number:</span>
                                         <button class="btn btn-outline-primary btn-sm ms-2 border-0">+ Add your phone Number</button>
-                                    </div>
+                                    </div> -->
                                     <div class="mb-3 d-flex justify-content-between">
                                         <span>Email ID:</span>
                                         <span>{{user.userEmail}}</span>
@@ -109,9 +109,7 @@
 
 
 
- <button type="button" class="btn btn-primary btn-lg" >
-  Launch
-</button>
+
 
 
 <div class="modal fade" id="profileEdit" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
@@ -176,96 +174,49 @@
 
 
 
-<button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalId">
-  Launch
-</button>
 
 <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    <a href="#basicInfoSection" class="btn btn-primary">Basic Info</a>
-          <a href="#passportSection" class="btn btn-primary">Passport</a>
-            </div>
+            
           
-          <div class="modal-body">
+          <div class="modal-body ">
+        <div class="d-flex  justify-content-between">
+
+        <div>
+
         
-            <div class="mb-3">
-            </div>
-          
-           
-            <div id="basicInfoSection">
-              <h6>Edit Profile - Basic Info</h6>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="mb-3">
-                    <label for="fullName">Full Name</label>
-                    <input type="text" class="form-control" id="fullName">
-                  </div>
-                  <div class="mb-3">
-                    <label for="birthday">Birthday</label>
-                    <input type="date" class="form-control" id="birthday">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="mb-3">
-                    <label for="gender">Gender</label>
-                    <input type="text" class="form-control" id="gender">
-                  </div>
-                  <div class="mb-3">
-                    <label for="address">Your Address</label>
-                    <input type="text" class="form-control" id="address">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="mb-3">
-                    <label for="pincode">Pincode</label>
-                    <input type="text" class="form-control" id="pincode">
-                  </div>
-                  <div class="mb-3">
-                    <label for="state">State</label>
-                    <select class="form-select" id="state">
-                      <option value="option1">Option 1</option>
-                      <option value="option2">Option 2</option>
-                      <option value="option3">Option 3</option>
-                    </select>
-                  </div>
-                </div>
+            <img [src]="newImage" class="card-new-image rounded"
+            alt="Card Image  ">
+          </div>
+          <div class="">
+            <label class="custum-file-upload" for="file">
+              <div class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <path fill="" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" clip-rule="evenodd" fill-rule="evenodd"></path> </g></svg>
               </div>
-            </div>
+              <div class="text">
+                 <span>Click to Update Profile</span>
+                 </div>
+                 <input (change)="imgUpdate($event)" type="file" id="file">
+              </label>
+              
           
-           
-            <div id="passportSection" >
-              <h6>Edit Profile - Passport</h6>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="mb-3">
-                    <label for="passportNumber">Passport Number</label>
-                    <input type="text" class="form-control" id="passportNumber">
-                  </div>
-                  <div class="mb-3">
-                    <label for="issuingCountry">Issuing Country</label>
-                    <input type="text" class="form-control" id="issuingCountry">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="mb-3">
-                    <label for="expiryDate">Expiry Date</label>
-                    <input type="date" class="form-control" id="expiryDate">
-                  </div>
-                </div>
-              </div>
-            </div>
+          </div>
+        
+        </div>
           </div>
           
           
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary text-white" (click)="cancelUpdate()" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary text-white" (click)="post()" data-bs-dismiss="modal">Save Update</button>
           </div>
           
   
         </div>
     </div>
 </div> 
+
+
+
+

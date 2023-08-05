@@ -15,9 +15,7 @@ otpFlag= false;
   Area = 1;
 
 constructor(private fb:FormBuilder,private router:Router,private ser:LoginService){
-// const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
-//   const payload = jwt_decode(token);
-// 
+
 }
   ngOnInit(): void {
     
@@ -92,7 +90,7 @@ get Otp(){
  
 
   resetTimer() {
-    this.minutes = 1;
+    this.minutes = 2;
     this.seconds = 0;
   }
 

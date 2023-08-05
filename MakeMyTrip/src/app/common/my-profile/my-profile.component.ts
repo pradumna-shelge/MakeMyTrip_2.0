@@ -15,6 +15,7 @@ user !:User
 userForm!: FormGroup;
 token!:string;
 submitted=false;
+newImage=""
   constructor(private formBuilder: FormBuilder,private ser:LoginService,private userSer:UserService) { 
     this.getuserData()
   }
@@ -41,7 +42,7 @@ get gender(){
       next:(d:User)=>{
        
         this.user = d;
-
+        this.newImage = d.imageUrl
         this.userForm.patchValue(d)
       },
       error(err) {
@@ -54,15 +55,14 @@ get gender(){
   post(){
 
     this.submitted=true;
-   if(this.userForm.valid)
-   {
+   
 
      const data:User={
-       fullName: this.fullName?.value,
-       gender:this.gender?.value,
-       address:this.address?.value,
-       imageUrl:this.user.imageUrl??"",
-       userEmail:this.user.userEmail,
+       fullName: this.fullName?.value??"",
+       gender:this.gender?.value??"",
+       address:this.address?.value??"",
+       imageUrl:this.newImage??"",
+       userEmail:this.user.userEmail??"",
        phoneNumber:"1111111111"
      }
  console.log(data);
@@ -77,11 +77,38 @@ get gender(){
            console.log(err);
        },
      })
-   }
+   
   }
   
 
   logout(){
 this.ser.logout();
   }
+
+
+
+ 
+  imgUpdate(event: any){
+   let myfile = event.target.files[0];
+
+   let formdata = new FormData();
+
+    formdata.append('file', myfile)
+
+this.userSer.getImageUrl(formdata).subscribe({
+  next:(d:any)=>{
+    this.newImage=d.imageUrl;
+    
+  },
+  error(err) {
+      console.log(err);
+  },
+})
+
+  }
+
+cancelUpdate(){
+  this.newImage = this.user.imageUrl
+}
+
 }

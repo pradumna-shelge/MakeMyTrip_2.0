@@ -54,12 +54,12 @@
                       <input type="radio" name="dep" (change)="addToBook(d, undefined)">
                   </div>
           </div>
-          <!-- <div *ngIf="modifiedData && !modifiedData.ren" class="d-flex justify-content-end accordion-item" (click)="flightDetail(d)">
+          <div *ngIf="modifiedData && !modifiedData.ren" class="d-flex justify-content-end accordion-item" (click)="flightDetail(d)">
             <a data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + item" aria-expanded="true"
                 [attr.aria-controls]="'collapse' + item" class="text-primary">
                 Flight Details
             </a>
-        </div> -->
+        </div>
         <div>
             <div [id]="'collapse' + item" class="accordion-collapse collapse" [attr.aria-labelledby]="'heading' + item">
                 <app-journey-detail [flightDetail]="d"></app-journey-detail>
@@ -119,7 +119,9 @@
                       <small class="text-secondary">per traveler</small>
                   </div>
                   <div>
-                      <input type="radio" name="ren" (change)="addToBook(undefined,d )">
+                   
+
+                      <input  type="radio" name="ren" (change)="addToBook(undefined,d )">
                   </div>
           </div>
           <div *ngIf="modifiedData && !modifiedData.ren" class="d-flex justify-content-end accordion-item" (click)="flightDetail(d)">

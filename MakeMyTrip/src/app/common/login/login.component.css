@@ -1,10 +1,12 @@
 .slider-img{
     height: 400px;
     width: 100%;
+        opacity: 30%;
+
 }
 
 .login-Page{
-    
+    background-color: transparent !important;
     height: fit-content
 }
 
@@ -12,3 +14,12 @@
 height: 40vw;
 width: 80vw;
 } */
+
+
+.transparent-bg {
+    background-color: transparent !important;
+  }
+
+  .carousel-item{
+    background-color: black;
+  }

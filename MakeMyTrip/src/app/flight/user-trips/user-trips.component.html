@@ -18,7 +18,7 @@
   <ng-container *ngFor="let t of trips" >
   
   
-  <div class="flight-card bg-white mx-auto ">
+  <div (click)="tripDetail(t.prnNo)" class="flight-card bg-white mx-auto ">
   
    <div class="flight-card-content">
      <div class="flight-row">
@@ -53,4 +53,6 @@
   </ng-container>
 </div>
 </div>
+
+
 

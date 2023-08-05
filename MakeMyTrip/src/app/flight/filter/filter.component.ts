@@ -27,6 +27,7 @@ resets2:any;
 resets3:any;
 
 constructor(private store:Store<AirlineStore>,private router:Router){
+  
   this.store.dispatch(LoadAirLineData())
 }
   ngOnInit(): void {
@@ -107,7 +108,7 @@ resetspec(i:number){
         case 3:
         this.filterData.ArrivalTime=undefined
         this.resets3=undefined;
-
+        this.resets1=undefined;
         break;
         
     default:

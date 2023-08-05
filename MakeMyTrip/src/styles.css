@@ -110,3 +110,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
           background-color: rgb(255, 237, 209);
         }  
           
+
+        li{
+          list-style-type: none;
+        }

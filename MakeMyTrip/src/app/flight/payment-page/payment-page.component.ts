@@ -9,6 +9,9 @@ import { TripStore } from 'src/NgStore/Stores.interface';
 import { geTrip } from 'src/NgStore/tripDetail/trip.ngStore';
 import { PaymentService } from '../Services/payment.service';
 import { TripsService } from '../Services/trips.service';
+import { Router } from '@angular/router';
+import { gettripPrice } from 'src/NgStore/Payment/payment';
+import { LoadTotalPrice } from 'src/NgStore/Booking/booking.action';
 
 declare var Razorpay:any
 @Component({
@@ -19,15 +22,22 @@ declare var Razorpay:any
 export class PaymentPageComponent {
  bookingData!:booking;
  tripData!:TripStore;
-
-
+ priceDetail = this.store.select(gettripPrice)
+flag=true;
  
-  constructor(private store: Store,private ser:PaymentService,private bookser:TripsService ) { 
+  constructor(private store: Store,private ser:PaymentService,private bookser:TripsService,private router:Router ) { 
+    this.flag=true
     this.getBookingData()
   }
 
 
   getBookingData(){
+    this.store.select(gettripPrice).subscribe(d=>{
+
+      let total = d.total;
+this.store.dispatch(LoadTotalPrice({data:total}))
+
+    })
 this.store.select(getBookingBookings).subscribe((d)=>{
   this.bookingData=d
 })
@@ -39,7 +49,7 @@ this.store.select(geTrip).subscribe((d)=>{
 
 
 payNow(){
-
+  this.flag=false
   const options = {
     key: 'rzp_test_D4KAnFxqNqzQsE',
     amount: this.bookingData.totalPrice*100, 
@@ -50,8 +60,23 @@ payNow(){
       
       this.ser.verifyPayment(response).subscribe({
         next:(data:any)=>{
-          debugger
-          this.bookser.bookTrip();
+          
+          
+            
+            this.bookser.bookTrip(this.bookingData).subscribe({
+              next:(mes:any)=>{
+              console.log(mes);
+             
+              alert("booking is done")
+              this.router.navigate(['/my-trips'])
+              },
+              error:(err:any)=>{
+                
+                this.router.navigate(['/flight'])
+                alert("something went wrong booking not done")
+              }
+              
+            });
         
         },
         error:(err:any)=>{

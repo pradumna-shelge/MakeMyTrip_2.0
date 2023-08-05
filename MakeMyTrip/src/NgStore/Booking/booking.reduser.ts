@@ -11,14 +11,18 @@ export const bookingReducer = createReducer(
     on(LoadBookingSeats,(state,{data,seatType})=>{
         
        let pass:passenger[] =[]
-      
+      let j=0;
        
        if(state.bookingData.passengerList && state.bookingData.passengerList.length > 0)  {
 
            state.bookingData.passengerList.forEach((d:passenger,i:number)=>{
             d ={...d,seatNo:data[i]} 
+            if(d.passengerType==3){
+                d ={...d,seatNo:data[j++]} 
+            }
             pass.push(d)
            })
+          
        }
        
         return {...state,bookingData:{...state.bookingData,passengerList:pass,seatClass:seatType}}

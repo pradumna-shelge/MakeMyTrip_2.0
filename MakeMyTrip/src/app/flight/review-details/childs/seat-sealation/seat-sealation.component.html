@@ -3,7 +3,7 @@
   col-lg-6  test" >
   <h1 class="bg-white p-2 rounded shadow">
     Choose The Seats 
-  </h1> {{this.selectedSeatsJourney|json}}  {{this.selectedSeatsJourney2|json}}
+  </h1>
   <div class="bg-white d-flex justify-content-around align-items-center">
   <div class="d-flex justify-content-center m-2  flex-column  h-100">
     <ul class=" d-flex flex-column gap-2">
@@ -104,7 +104,9 @@
      </div>
   </div>
   
-  <div  class="bg-white mt-2 p-2">
+  <div  class="bg-white mt-2 p-2 d-flex justify-content-between">
+    <button  type="button" class="btn text-white  bg-secondary "  routerLink="../"    >Previous </button>
+
     <button  type="button" class="btn  bg-lightBlue " (click)="Continue()"  [disabled]=""  >Continue <i class="fa-solid fa-lock"></i></button>
   </div>
   

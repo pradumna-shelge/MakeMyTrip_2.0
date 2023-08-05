@@ -1,9 +1,13 @@
 ﻿using backend.DTOs;
 using backend.Models;
+using backend.RepoPattern.classess;
 using backend.RepoPattern.Interfaces;
+using backend.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using static Org.BouncyCastle.Math.EC.ECCurve;
+using static System.Net.WebRequestMethods;
 
 namespace backend.Controllers
 {
@@ -15,13 +19,14 @@ namespace backend.Controllers
         private readonly Ibooking _booking;
         private readonly IJourney _journey;
         private readonly IUser _user;
+        private readonly IConfiguration _config;
 
-        public BookingController(IPassenger passenger, Ibooking ibooking,IJourney journey,IUser user) {
+        public BookingController(IPassenger passenger, Ibooking ibooking,IJourney journey,IUser user,IConfiguration cong) {
                 _passenger = passenger;
             _booking = ibooking;
             _journey = journey;
             _user = user;
-
+            _config = cong;
         }
 
 
@@ -76,6 +81,11 @@ namespace backend.Controllers
             }
 
 
+            EmailServices emailObject = new EmailServices(_config);
+
+            var subject = "your booking for Make my trip";
+            var body = "";
+
             if (obj.returnJourneyId != null)
             {
 
@@ -110,13 +120,20 @@ namespace backend.Controllers
                     SeatNumber = x.seatNo2,
                     Gender = x.gender,
                     SeatClass = obj.seatClass
-
-
                 };
+                    await _passenger.Post(pass);
 
-                await _passenger.Post(pass);
 
-                return Ok(new { booking1,booking2 });
+                    //var fs = new FileStream("./Templates/Forgot.html", FileMode.Open, FileAccess.Read);
+                    //var sr = new StreamReader(fs);
+                    //var html = sr.ReadToEnd().Replace("##otp##", otp.ToString());
+                    //fs.Close();
+
+
+                    body = booking1.ToString()+" "+booking2.ToString();
+                    emailObject.SendEmail(obj.billingEmail, subject, body);
+
+                    return Ok(new { booking1,booking2 });
             }
             }
 
@@ -124,6 +141,9 @@ namespace backend.Controllers
 
 
 
+
+             body = booking1.ToString();
+            emailObject.SendEmail(obj.billingEmail, subject, body);
             return Ok(new { booking1 });
             
         }

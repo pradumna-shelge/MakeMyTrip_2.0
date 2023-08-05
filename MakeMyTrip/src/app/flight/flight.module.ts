@@ -39,6 +39,9 @@ import { SeatSealationComponent } from './review-details/childs/seat-sealation/s
 import { PaymentPageComponent } from './payment-page/payment-page.component';
 import { PaymentLayoutComponent } from './payment-page/payment-layout/payment-layout.component';
 import { UserTripsComponent } from './user-trips/user-trips.component';
+import { SuccessComponent } from './bookings/success/success.component';
+import { TripDetailsComponent } from './user-trips/trip-details/trip-details.component';
+import { SecureFlightComponent } from './review-details/childs/secure-flight/secure-flight.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +65,9 @@ import { UserTripsComponent } from './user-trips/user-trips.component';
     PaymentPageComponent,
     PaymentLayoutComponent,
     UserTripsComponent,
+    SuccessComponent,
+    TripDetailsComponent,
+    SecureFlightComponent,
     
     
   ],

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-blueDark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-blueDark " [ngClass]="{'newcss': flag}">
 
   <div class=" container-fluid lg-mx-5">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -18,37 +18,117 @@
   </div>
 </nav>
 
+<div class="bg-cust">
 
-<div class="booking-details-container container">
-  <div class="flight-details row">
-    <div class="col-md-6">
-      <h3>Your Booking</h3>
-      <p><strong>Departure:</strong> {{ tripData.search.from.city }} ({{ tripData.search.from.airportCode }}) at {{ tripData.search.departureTime }}</p>
-      <p><strong>Arrival:</strong> {{ tripData.search.to.city }} ({{ tripData.search.to.airportCode }}) at {{ tripData.search.departureTime }}</p>
-      <p><strong>Airline:</strong> {{ tripData.journey.airline?.name }}</p>
+  <div class="booking-details-container container  " >
+    <h4 class="text-secondary ">{{bookingData.returnJourneyId?"Return Journey":"One way journey"}}</h4>
+    <div class="flight-details  d-flex justify-content-between bg-white shadow p-3 rounded">
+      <div class="">
+        <h3 >Your Booking</h3>
+        <div>
+  
+          <p><strong>Departure:</strong> {{ tripData.search.from.city }} ({{ tripData.search.from.airportCode }}) at {{ tripData.search.departureTime }}</p>
+          <p><strong>Arrival:</strong> {{ tripData.search.to.city }} ({{ tripData.search.to.airportCode }}) at {{ tripData.search.departureTime }}</p>
+          <p><strong>Airline:</strong> {{ tripData.journey.airline?.name }}</p>
+        </div>
+        <div *ngIf="bookingData.returnJourneyId">
+  
+          <p><strong>Departure:</strong> {{ tripData.search.from.city }} ({{ tripData.search.from.airportCode }}) at {{ tripData.search.departureTime }}</p>
+          <p><strong>Arrival:</strong> {{ tripData.search.to.city }} ({{ tripData.search.to.airportCode }}) at {{ tripData.search.departureTime }}</p>
+          <p><strong>Airline:</strong> {{ tripData.journey1?.airline?.name }}</p>
+        </div>
+      </div>
+      <div class="container">
+        <h3>Passenger Details</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Seat No</th>
+                    <th *ngIf="bookingData.returnJourneyId">Return Seat No</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of bookingData.passengerList">
+                    <td>{{ p.fullname }}</td>
+                    <td>{{ p.gender }}</td>
+                    <td>{{ p.seatNo }}</td>
+                    <td *ngIf="bookingData.returnJourneyId">{{ p.seatNo2 }}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="col-md-6">
-      <h3>Passenger Details</h3>
-      <div *ngFor="let p of bookingData.passengerList" class="passenger-details">
-        <p><strong>Name:</strong> {{ p.fullname }}</p>
-        <p><strong>Gender:</strong> {{ p.gender }}</p>
-        <p><strong>Seat No:</strong> {{ p.seatNo }}</p>
+    
+    </div>
+  
+    <div class="fare-summary w-100 bg-white p-3 rounded">
+      <div class=" bg-white   payment">
+
+        <div class="mt-3 d-flex flex-column gap-2">
+        <ng-container *ngFor="let p of (priceDetail|async)|keyvalue">
+          <div [ngSwitch]="p.key">
+            <div *ngSwitchCase="'Surcharges'">
+              <div *ngIf="p.value" class="">
+                <div class=" d-flex justify-content-lg-between">
+                  <p class=" text-secondary h6"><i class=" mx-1 fa-solid fa-circle-plus"></i>Taxes and Surcharges</p>
+                  <div class="text-center">
+                    <p class="small fw-bold   text-success">+ ₹ {{p.value}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'basePrice'">
+              <div *ngIf="p.value" class="">
+                <div class=" d-flex justify-content-lg-between">
+                  <p class=" text-secondary h6"><i class=" mx-1 fa-solid fa-circle-plus"></i>Base Fare</p>
+                  <div class="text-center">
+                    <p class="small fw-bold ">₹ {{p.value}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'total'">
+              <div *ngIf="p.value" class="">
+                <hr>
+                <div class=" d-flex justify-content-lg-between">
+                  <p class=" text-secondary h5">Total Amount</p>
+                  <div class="text-center">
+                    <p class=" fw-bold h5">₹ {{p.value}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="'secureTrip'">
+              <div  class="">
+               
+                <div class=" d-flex justify-content-lg-between">
+                  <p  [ngClass]="{'text-danger text-decoration-line-through': !p.value}"  class="  text-secondary h6"><i class=" mx-1 fa-solid fa-circle-plus"></i>Secure Trip</p>
+                  <div class="text-center">
+                    <p  [ngClass]="{'text-danger': !p.value}" class=" text-success small fw-bold ">₹ {{p.value?"+247":"-247"}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+          </div>
+      
+        </ng-container>
+      </div>
       </div>
     </div>
-  </div>
-
-  <div class="fare-summary">
-    <h3>Fare Summary</h3>
-   
-    <p><strong>Total Due:</strong> {{ bookingData.totalPrice }}</p>
-  </div>
-
-  <div class="pay-now-btn">
-    <button class="btn btn-primary text-white" (click)="payNow()">Pay Now</button>
-  </div>
   
+    <div class="pay-now-btn d-flex bg-white p-3   justify-content-between">
+      <button  class="btn btn-primary text-white" (click)="payNow()" [disabled]="!flag">Pay Now</button>
+      <button  class="btn btn-danger text-white" routerLink="/" [disabled]="!flag">Cancel</button>
+    </div>
+    
+    <!-- <div  class="mess">
+    
+    <app-success></app-success>
+    </div> -->
+  </div>
 </div>
 
 
 
-<h1>{{bookingData|json}}</h1>

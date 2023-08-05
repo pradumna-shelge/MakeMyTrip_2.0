@@ -1,6 +1,6 @@
 .booking-details-container {
     padding: 20px;
-    border: 1px solid #ccc;
+  
   }
 
   .flight-details {
@@ -17,4 +17,18 @@
 
   .pay-now-btn {
     margin-top: 20px;
+  }
+
+
+  .mess{
+    position: absolute;
+    top: 12%;
+    left: 51%;
+  }
+
+
+
+  .bg-cust{
+    background-color: #c3e9f4;
+    padding: 18%;
   }

@@ -19,4 +19,9 @@ export class UserService {
   post(data:User){
     return this.http.post(baseApi+"User",data)
   }
+
+  getImageUrl(data:any){
+
+   return this.http.post(baseApi+"User/upload",data)
+  }
 }

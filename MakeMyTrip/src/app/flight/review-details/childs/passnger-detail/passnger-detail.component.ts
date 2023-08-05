@@ -5,10 +5,11 @@ import { Store } from '@ngrx/store';
 import { Passengers } from 'src/Model/SearchData.model';
 import { booking, passenger } from 'src/Model/booking.model';
 import { LoadBookingPassengers, LoadFirstJourneyId, LoadReturnJourneyId } from 'src/NgStore/Booking/booking.action';
-import { getBookingData } from 'src/NgStore/Booking/booking.selector';
+import { getBookingBillingEmail, getBookingData, getBookingPassenger } from 'src/NgStore/Booking/booking.selector';
 import { BookingStore } from 'src/NgStore/Booking/booking.store';
 import { TripStore } from 'src/NgStore/Stores.interface';
 import { geTrip } from 'src/NgStore/tripDetail/trip.ngStore';
+import { LoginService } from 'src/app/common/services/login.service';
 
 @Component({
   selector: 'app-passnger-detail',
@@ -20,7 +21,7 @@ export class PassngerDetailComponent implements OnInit {
   data!:Passengers;
   bookingData!:TripStore
 
-  constructor(private formBuilder: FormBuilder,private store:Store, private router:Router,) {
+  constructor(private formBuilder: FormBuilder,private store:Store, private router:Router,private logser:LoginService) {
 
     this.store.select(geTrip).subscribe(d=>{
       if(d.error){
@@ -42,11 +43,11 @@ export class PassngerDetailComponent implements OnInit {
       child: this.formBuilder.array([]),
       infants: this.formBuilder.array([]),
       billingEmail: new FormControl('', [Validators.required, Validators.email]),
-      Terms_policy: new FormControl(false, Validators.requiredTrue) 
+
 
     });
    
-  
+    this.patchAdult();
   }
 
   get adults() {
@@ -64,6 +65,35 @@ export class PassngerDetailComponent implements OnInit {
   get Terms_policy(){
     return this.passengerForm.get('Terms_policy')
   }
+
+patchAdult(){
+  this.store.select(getBookingBillingEmail).subscribe(d=>{
+    this.billingEmail?.patchValue(d)
+  })
+
+  this.store.select(getBookingPassenger).subscribe(d=>{
+    d.forEach(ob=>{
+      let data = {
+        firstName: ob.fullname.split(" ")[0],
+        lastName: ob.fullname.split(" ")[1],
+        gender: ob.gender
+      }
+      if(ob.passengerType==1){
+        const adultFormGroup = this.formBuilder.group({
+          firstName: new FormControl('', Validators.required),
+          lastName: new FormControl('', Validators.required),
+          gender: new FormControl('', Validators.required)
+        });
+        adultFormGroup.patchValue(data)
+        this.adults.push(adultFormGroup);
+      }
+    })
+  })
+
+  
+}
+
+
   addAdult(): void {
     const adultFormGroup = this.formBuilder.group({
       firstName: new FormControl('', Validators.required),
@@ -101,7 +131,7 @@ export class PassngerDetailComponent implements OnInit {
 
     this.adults.value.forEach((d:any)=>{
       let da:passenger ={
-        fullname: d.firstName+d.lastName,
+        fullname: d.firstName+" "+d.lastName,
         gender:d.gender,
         passengerType:1,
         seatNo:"",
@@ -111,7 +141,7 @@ export class PassngerDetailComponent implements OnInit {
     })
     this.child.value.forEach((d:any)=>{
       let da:passenger ={
-        fullname: d.firstName+d.lastName,
+        fullname: d.firstName+" " +d.lastName,
         gender:d.gender,
         passengerType:2,
         seatNo:"",
@@ -121,7 +151,7 @@ export class PassngerDetailComponent implements OnInit {
     })
     this.infants.value.forEach((d:any)=>{
       let da:passenger ={
-        fullname: d.firstName+d.lastName,
+        fullname: d.firstName+" "+d.lastName,
         gender:d.gender,
         passengerType:3,
         seatNo:"",
@@ -136,5 +166,11 @@ export class PassngerDetailComponent implements OnInit {
 
     this.store.dispatch(LoadBookingPassengers({data:passenger,email:this.billingEmail?.value}));
 this.router.navigate(['/flight/review/seat'])
+  }
+
+
+  patchEmail(){
+    let d = this.logser.getEmail()
+this.billingEmail?.patchValue(d)
   }
 }

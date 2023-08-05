@@ -1,0 +1,76 @@
+<div class="bg-white rounded p-2">
+    <div class="d-flex justify-content-between">
+        <p class=""> <img class="m-1 trip-logo" src="https://imgak.mmtcdn.com/flights/assets/media/dt/rta_assets/insurance-shield.png" alt="">Trip Secure</p>
+        <p>
+            <img src="https://tripmoneycmsimgak.mmtcdn.com/img/Group_2947_b848417d45.png" alt="">
+        </p>
+    </div>
+<div class="bg-color my-3 p-2">
+    <p>₹ 249<span class="small text-secondary">/Traveler (18% GST included)</span></p>
+    <div class="d-flex justify-content-between">
+
+        <div class="d-flex bg-white p-2 rounded shadow mt-2">
+            <div class=" align-self-center">
+               <img class="trip-logo" src="https://imgak.mmtcdn.com/flights/assets/media/mobile/common/2X/rt_ia5.png" alt="">
+            </div>
+            <div class="px-2">
+<p><span class=" small text-color ">Up to </span><span class=" small text-color-dark ">₹3000</span></p>
+<p class="small text-secondary">Missed Flight</p>
+
+</div>
+        </div>
+
+        <div class="d-flex bg-white p-2 rounded shadow mt-2">
+            <div class=" align-self-center">
+               <img class="trip-logo" src="https://tripmoneycmsimgak.mmtcdn.com/img/Screenshot_2023_04_26_at_12_46_11_AM_bd4d6d8487.png" alt="">
+            </div>
+            <div class="px-2">
+<p><span class=" small text-color ">Up to </span><span class=" small text-color-dark ">₹3000</span></p>
+<p class="small text-secondary">Trip Cancellation</p>
+
+</div>
+        </div>
+
+        <div class="d-flex bg-white p-2 rounded shadow mt-2">
+            <div class=" align-self-center">
+               <img class="trip-logo" src="https://imgak.mmtcdn.com/flights/assets/media/mobile/common/2X/rt_ia7.png" alt="">
+            </div>
+            <div class="px-2">
+<p><span class=" small text-color ">Up to </span><span class=" small text-color-dark ">₹50,000</span></p>
+<p class="small text-secondary">Accidental Death(24 hours)</p>
+
+</div>
+        </div>
+    </div>
+</div>
+
+
+<div class=" mt-4">
+    <p class="fw-bold ">Preferred by millions of travellers</p >
+    <div class="form-check rounded" >
+      <input class="form-check-input" #secureYes (change)="secureTrip(secureYes.value)" type="radio"  name="trip" checked  [value]="true">
+      <label class="form-check-label" for="secureMyTrip">
+       <span class="fw-bold">Yes</span> , Secure my trip.
+      </label>
+      <div *ngIf="flag" class="bg-success-new text-secondary small p-1 rounded">
+        <img  class="rounded-circle trip-logo-new" src="https://imgak.mmtcdn.com/flights/assets/media/dt/rta_assets/alert-green-tick.png" alt="">
+        Great! Your trip is secured.
+      </div>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" #secureNo (change)="secureTrip(secureNo.value)" type="radio" name="trip"  [value]="false">
+      <label class="form-check-label" for="riskMyTrip">
+        <span class="fw-bold">No</span>,I will risk my trip.
+      </label>
+      <div *ngIf="!flag" class="bg-danger-new small text-secondary p-1 rounded">
+        Don't let a flight delay or cancellation add to your worries. Get your trip secured.
+      </div>
+    </div>
+  
+  <p class="text-secondary small-txt">
+    By selecting the product, I confirm the traveller's age is between 6 months to 70 years and agree to the T&Cs
+    for this now.
+  </p>
+</div>
+</div>
+

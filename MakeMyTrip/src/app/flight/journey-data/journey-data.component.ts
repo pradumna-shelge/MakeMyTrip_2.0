@@ -11,6 +11,7 @@ import { JourneyInterface, JourneyS } from 'src/Model/journey.model';
 import { getAirLineData } from 'src/NgStore/AirLine/AirLineselector';
 import { LoadReturnData, LoadTripData } from 'src/NgStore/tripDetail/trip.ngStore';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/common/services/login.service';
 
 @Component({
   selector: 'app-journey-data',
@@ -24,12 +25,13 @@ export class JourneyDataComponent  {
   @Output() AddToBook =  new EventEmitter()
   FlightDetail!:JourneyInterface
   search!:searchData;
-  
-constructor(private router:Router, private JourneysService:JourneysService ,private searchStore:Store<SearchStore>,private airlineStore:Store<AirlineStore>,private tripStore:Store<TripStore>){
+  loginFlag =false;
+constructor(private logser:LoginService, private router:Router, private JourneysService:JourneysService ,private searchStore:Store<SearchStore>,private airlineStore:Store<AirlineStore>,private tripStore:Store<TripStore>){
   this.searchStore.select(getSearchData).subscribe(d=>{
     this.search= d
   })
 
+  this.loginFlag = this.logser.islogin()
 }
   
 flightDetail(d:JourneyInterface){

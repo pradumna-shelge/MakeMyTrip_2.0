@@ -28,6 +28,7 @@ import { TripReducer } from 'src/NgStore/tripDetail/trip.ngStore';
 import { bookingReducer } from 'src/NgStore/Booking/booking.reduser';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { tripPriceReducer } from 'src/NgStore/Payment/payment';
 
 
 @NgModule({
@@ -55,7 +56,7 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
     ReactiveFormsModule,
     FormsModule,
     MatButtonToggleModule,
-    StoreModule.forRoot({Airport:AirportReducer,search:SearchReducer,airline:AirLineReducer,trip:TripReducer,booking:bookingReducer}),
+    StoreModule.forRoot({Airport:AirportReducer,search:SearchReducer,airline:AirLineReducer,trip:TripReducer,booking:bookingReducer,tripPrice:tripPriceReducer}),
     EffectsModule.forRoot(AirportEffects,AirLienEffects)
     
   ],

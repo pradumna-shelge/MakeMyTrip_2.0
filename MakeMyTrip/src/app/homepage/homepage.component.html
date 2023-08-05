@@ -11,7 +11,7 @@
                     src="https://res.cloudinary.com/drljda4ci/image/upload/v1685688218/download_vzeuoh.png" alt="Logo"
                     height="50"></a>
             <div class="bg-lg-white  collapse navbar-collapse " id="navbarSupportedContent">
-                <ul class="d-none d-lg-block d-flex gap-3 navbar-nav ms-auto mb-2 mb-lg-0 ">
+                <ul class="d-none d-lg-flex d-flex gap-3 navbar-nav ms-auto mb-2 mb-lg-0 ">
                     <li *ngIf="!islog" class="nav-item">
                         <a data-bs-toggle="modal" href="#exampleModalToggle" role="button"
                             class="  text-white nav-link active signUp" aria-current="page">
@@ -30,7 +30,12 @@
 
                             My Account </a>
                       </li>
-                      
+                      <li>
+
+                          <form class="d-flex" *ngIf="islog">
+                            <a class="btn btn-outline-light me-2 p-2 px-4" [routerLink]="['/my-trips']" routerLinkActive="router-link-active" >My Trips</a>
+                          </form>
+                      </li>
                       
                 </ul>
 

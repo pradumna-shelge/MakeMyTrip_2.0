@@ -11,6 +11,8 @@ import { LoadSearchData } from 'src/NgStore/search/Search.action';
 import { LoadAirportData } from 'src/NgStore/AirPort/Airport.action';
 import { AirportStore } from 'src/NgStore/AirPort/Airport.reduser';
 import { getSearchData } from 'src/NgStore/search/Search.selector';
+import { NgIf } from '@angular/common';
+import { LoginService } from '../common/services/login.service';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -25,8 +27,10 @@ export class SearchComponent {
   searchData!:searchData
   tripType:number=1
   infantsFlag=false
-  
-  constructor(private router:Router,private airportStore:Store<AirlineStore>,private searchStore:Store<SearchStore>){
+  logFlag = false;
+  minDate = new Date()
+
+  constructor(  private router:Router,private airportStore:Store<AirlineStore>,private searchStore:Store<SearchStore>,private logSer:LoginService){
 
     this.airportStore.dispatch(LoadAirportData())
     this.airportStore.select(getAirportData).subscribe((airports:AirportModel[]) =>{
@@ -36,10 +40,14 @@ export class SearchComponent {
           this.searchData = search;
           this.tripType = this.searchData.tripType
     })
+
+    this.checkLog()
   }
 
 
-
+checkLog(){
+  this.logFlag = this.logSer.islogin();
+}
   checkAirport(val:string){
   this.filterAirport = this.airport.filter((airport:AirportModel) => airport.city.toLowerCase().match(val.toLowerCase()))
   }
@@ -79,9 +87,17 @@ else{
 }
 PatchSearch(){
   this.searchData = {...this.searchData,tripType:this.tripType}
+  if(this.searchData.from.airportCode == this.searchData.to.airportCode){
+    this.searchData = {...this.searchData,tripType:2}
+  }
   this.searchStore.dispatch(LoadSearchData({data:this.searchData}))
   this.router.navigate(['/flight'])
+  // this.setPrams();
 }
 
+
+setPrams(){
+  this.router.navigate(['/flight', this.searchData?.tripType, this.searchData?.seatTypes, JSON.stringify(this.searchData?.from), JSON.stringify(this.searchData?.to), this.searchData?.departureTime.toISOString(), this.searchData?.returnTime?.toISOString(), this.searchData?.passengers.adults, this.searchData?.passengers.child, this.searchData?.passengers.infants]);
+}
 
 }

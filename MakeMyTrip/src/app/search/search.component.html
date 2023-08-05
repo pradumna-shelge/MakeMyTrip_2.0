@@ -1,4 +1,4 @@
- <div class="container-lg pt-5" >
+ <div class="container-lg pt-5">
     <div class="card rounded 
     position-relative   bg-light pb-5">
         <div class="d-none d-lg-block position-absolute top-0 start-50 translate-middle">
@@ -217,7 +217,7 @@
                         <p class="fs-6 fw-light">DEPARTURE DATE  </p>
                             <h5>{{searchData.departureTime|date}}</h5>
 
-                                <input  (dateChange)="ChangeDate(departure.value,true)" #departure matInput [matDatepicker]="picker1" class="date-Input">   
+                                <input  (dateChange)="ChangeDate(departure.value,true)" #departure matInput [matDatepicker]="picker1" class="date-Input" [min]="minDate">   
                             </div>
                             <mat-datepicker  class="custom-modal"  #picker1 ></mat-datepicker>
                   
@@ -228,7 +228,7 @@
                        
                             <h5>{{searchData.returnTime|date}}</h5>
 
-                                <input   (dateChange)="ChangeDate(departure.value,false)"  matInput [matDatepicker]="picker" class="date-Input"     [disabled]="tripType==1">
+                                <input   (dateChange)="ChangeDate(departure.value,false)"  matInput [matDatepicker]="picker" class="date-Input"     [disabled]="tripType==1" [min]="minDate">
                                
                                 <mat-datepicker  #picker></mat-datepicker>
                              
@@ -336,7 +336,9 @@
 
             </div>
             <div class="d-flex position-absolute top-100 start-50 translate-middle justify-content-center ">
-                                 <button (click)="PatchSearch()" class="fs-3 px-5 py-2 w-100 bg-lightBlue btn text-light rounded-pill">Search<i class="mx-2 fa-solid fa-plane "></i>   </button>
+                                 <button *ngIf="logFlag" (click)="PatchSearch()" class="fs-3 px-5 py-2 w-100 bg-lightBlue btn text-light rounded-pill">Search<i class="mx-2 fa-solid fa-plane "></i>   </button>
+                                 <button  data-bs-toggle="modal" href="#exampleModalToggle"  *ngIf="!logFlag" (click)="checkLog()" class="fs-3 px-5 py-2 w-100 bg-lightBlue btn text-light rounded-pill">Search<i class="mx-2 fa-solid fa-plane "></i>   </button>
+
             </div>
 
 

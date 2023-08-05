@@ -20,8 +20,8 @@ export const initialSearch:SearchStore={
             "airportName": "Indira Gandhi International Airport",
             "country": "India"
         },
-        "departureTime": new Date( "2023-08-1"),
-        "returnTime": new Date("2023-08-1"),
+        "departureTime": new Date( "2023-08-6"),
+        "returnTime": new Date("2023-08-6"),
         "passengers": {
             "adults": 1,
             "child": 0,

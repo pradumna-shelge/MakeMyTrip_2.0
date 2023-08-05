@@ -24,8 +24,7 @@ UserId INT PRIMARY KEY IDENTITY(1,1),
 FullName  nvarchar(50),
 Gender nvarchar(20),
 [Address] nvarchar(20),
-
-ImageUrl  nvarchar(50),
+ImageUrl  nvarchar(max),
 UserEmail  nvarchar(100),
 PhoneNumber  nvarchar(10) constraint CK_MyTable_PhoneNumber check (PhoneNumber like '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
 [Password] nvarchar(max),
@@ -372,8 +371,10 @@ Infants int REFERENCES PassengerOffer(PassengerOfferId),
 
 INSERT INTO Journey (FlightId, DestinationId, SourceId, DepartureTime, ArrivalTime, Distance, SeatbasicPrice, EconomyClass, BussinessClass, Adult, Child, Infants)
 VALUES
-(1, 1, 2, '2023-08-1 10:00:00', '2023-08-1 11:30:00', 150, 2500.00, 3, 2, 1, 2, 3),
-(1, 2, 1, '2023-08-1 13:00:00', '2023-08-1 14:30:00', 150, 3000.00, 3, 2, 1, 2, 3);
+(1, 1, 2, '2023-08-5 10:00:00', '2023-08-5 11:30:00', 150, 2500.00, 3, 2, 1, 2, 3),
+(1, 2, 1, '2023-08-5 13:00:00', '2023-08-5 14:30:00', 150, 3000.00, 3, 2, 1, 2, 3),
+(2, 1, 2, '2023-08-5 12:00:00', '2023-08-5 13:30:00', 150, 4500.00, 3, 2, 1, 2, 3),
+(2, 2, 1, '2023-08-5 14:00:00', '2023-08-5 14:30:00', 150, 4000.00, 3, 2, 1, 2, 3);
 
 
 
