@@ -15,7 +15,7 @@
     <div class="   my-2 d-flex justify-content-center gap-4   ">
         <div class="">
             
-            <app-filter [returnFlag]="returnFlag" (filterEmitter)="filterData($event)" ></app-filter>
+            <app-filter [filterData]="filterData1" [returnFlag]="returnFlag" (filterEmitter)="filterData($event)" ></app-filter>
         </div>
         <div class="" >
     <div  >
@@ -41,7 +41,7 @@
 </div>
 
 <div class=" p-3 rounded  position-search mx-auto  d-flex justify-content-between bg-blue  gap-3   " *ngIf="currentJourneyDeP || currentJourneyRen">
-    <div  *ngIf="this.data.dep && currentJourneyDeP">
+    <div class="booking-card rounded p-2"   *ngIf="this.data.dep && currentJourneyDeP">
         <div class="my-2">
             <p><span class="h5">Departure . </span>{{currentJourneyDeP.airline?.name}}</p>
         </div>
@@ -62,7 +62,7 @@
             </div>
         </div>
     </div>
-    <div *ngIf="this.data.ren && currentJourneyRen">
+    <div class="booking-card rounded p-2" *ngIf="this.data.ren && currentJourneyRen">
         <div class="my-2">
             <p><span class="h5">Return . </span>{{currentJourneyRen.airline?.name}}</p>
         </div>
@@ -86,8 +86,8 @@
 </div>
 <div class="d-flex justify-content-center flex-column gap-2">
 
-    <button class=" align-self-center bg-lightBlue  btn h4 py-2 " (click)="addToReview()" [disabled]="(this.data.ren && !currentJourneyRen) || !currentJourneyDeP " >Book Now</button>
-    <button class=" align-self-center   btn h4 py-1 px-3 btn btn-outline-danger" (click)="cancel()" >Cancel</button>
+    <button class=" align-self-center bg-lightBlue  btn h6 py-1 px-3 m-2" (click)="addToReview()" [disabled]="(this.data.ren && !currentJourneyRen) || !currentJourneyDeP " >Book Now</button>
+    <a class=" align-self-center text-danger  " (click)="cancel()" >Cancel</a>
 </div>
 </div>
 

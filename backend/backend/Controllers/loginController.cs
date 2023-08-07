@@ -30,10 +30,11 @@ namespace backend.Controllers
             var userObj = Users.FirstOrDefault(user => user.UserEmail == obj.email);
             
 
-            if(userObj == null) { 
-                User newUser  = new User()
+            if(userObj == null) {
+                User newUser = new User()
                 {
-UserEmail = obj.email
+                    UserEmail = obj.email,
+                    ImageUrl = "https://www.vhv.rs/dpng/d/421-4214581_username-icon-png-st-marys-basilica-transparent-png.png"
                 };
                await _user.Post(newUser);
 

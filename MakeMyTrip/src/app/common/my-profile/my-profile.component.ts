@@ -17,6 +17,7 @@ token!:string;
 submitted=false;
 newImage=""
   constructor(private formBuilder: FormBuilder,private ser:LoginService,private userSer:UserService) { 
+    
     this.getuserData()
   }
   ngOnInit() {

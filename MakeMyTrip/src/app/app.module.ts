@@ -29,7 +29,7 @@ import { bookingReducer } from 'src/NgStore/Booking/booking.reduser';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { tripPriceReducer } from 'src/NgStore/Payment/payment';
-
+  import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -45,6 +45,7 @@ import { tripPriceReducer } from 'src/NgStore/Payment/payment';
     CommonModules,
     BrowserModule,
     AppRoutingModule,
+    ToastrModule.forRoot(),
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,

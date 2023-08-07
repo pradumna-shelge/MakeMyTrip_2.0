@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { LoginService } from '../services/login.service';
+import { ToasterService } from 'src/app/services/toaster.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent {
 otpFlag= false;
   Area = 1;
 
-constructor(private fb:FormBuilder,private router:Router,private ser:LoginService){
+constructor(private fb:FormBuilder,private router:Router,private ser:LoginService,private tostSer:ToasterService){
 
 }
   ngOnInit(): void {
@@ -63,7 +64,7 @@ get Otp(){
          
        },
        error:(err:any) => {
-        
+        this.tostSer.showError("OTP is Invalid","User Login")
          this.Area = 2
          this.otpFlag = true
        }

@@ -12,6 +12,8 @@ import { TripsService } from '../Services/trips.service';
 import { Router } from '@angular/router';
 import { gettripPrice } from 'src/NgStore/Payment/payment';
 import { LoadTotalPrice } from 'src/NgStore/Booking/booking.action';
+import { ToasterService } from 'src/app/services/toaster.service';
+import { ToastrService } from 'ngx-toastr';
 
 declare var Razorpay:any
 @Component({
@@ -25,7 +27,7 @@ export class PaymentPageComponent {
  priceDetail = this.store.select(gettripPrice)
 flag=true;
  
-  constructor(private store: Store,private ser:PaymentService,private bookser:TripsService,private router:Router ) { 
+  constructor(private tostSer:ToasterService,private store: Store,private ser:PaymentService,private bookser:TripsService,private router:Router ) { 
     this.flag=true
     this.getBookingData()
   }
@@ -43,6 +45,10 @@ this.store.select(getBookingBookings).subscribe((d)=>{
 })
 this.store.select(geTrip).subscribe((d)=>{
   this.tripData=d
+
+  if(!d.journey.From){
+    this.router.navigate(['/flight'])
+  }
 })
 }
 
@@ -67,13 +73,13 @@ payNow(){
               next:(mes:any)=>{
               console.log(mes);
              
-              alert("booking is done")
-              this.router.navigate(['/my-trips'])
+              this.tostSer.showSuccess("booking is Successful go to trips for details","Trip Booking")
+              this.router.navigate(['/flight'])
               },
               error:(err:any)=>{
                 
+                this.tostSer.showError("Something Wrong try again later ","Trip Booking")
                 this.router.navigate(['/flight'])
-                alert("something went wrong booking not done")
               }
               
             });

@@ -18,11 +18,12 @@ export class ReviewJourneyComponent {
   TicketClass:string[] = TicketClass;
   flightDetail!:JourneyInterface
   constructor(private store:Store,private route:Router){
-     
+   
     this.store.select(geTrip).subscribe(d=>{
-if(d.error){
+if(!d.journey.journeyId){
+this.route.navigate(['/flight'])
 }
-else{
+else {
 
   this.data={...this.data,...d};
 

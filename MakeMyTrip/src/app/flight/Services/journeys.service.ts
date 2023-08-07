@@ -13,8 +13,8 @@ export class JourneysService {
 
 
   getJourneys(data:searchPost){
-    
-    
+  console.log(data);
+  
     return this.http.post<JourneyS>(baseApi+this.searchData,data)
   }
 }

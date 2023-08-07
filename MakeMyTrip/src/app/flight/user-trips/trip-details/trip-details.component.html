@@ -2,28 +2,75 @@
 <app-navbar></app-navbar>
 <div class="header1 text-secondary">
 
-    <h2>Flight Information</h2>
+    <p class="h2">Journey Information</p>
+
+
+</div>
+<div class=" container">
+
+
+<div class="shadow m-3  rounded  ">
+<div class="bg-light p-2 d-flex justify-content-between">
+  <p class="d-flex gap-3"><span class="h4 text-secondary">PRN NUMBER</span><span class="h4">{{ data1.prnNo }}</span></p>
+
+  <p class="d-flex gap-3"><span class="h4 text-secondary">Date</span><span class="h4">{{ data1.date| date: "fullDate" }}</span></p>
+
+</div>
+<div class="d-flex justify-content-between p-2 ">
+  <div>
+<p class="h5 text-secondary">From</p>
+<p> <span class="h4">{{data1.fromAirport.city}},</span> <span class="text-secondary small ">{{data1.fromAirport.airportName}}</span>  </p>
+  </div>
+  <div>
+    <p class="h5 text-secondary ">To</p>
+    <p> <span class="h4">{{data1.toAirport.city}},</span> <span class="text-secondary small ">{{data1.toAirport.airportName}}</span>  </p>
+      </div>
+
 </div>
 
+<div  class="d-flex justify-content-between p-2">
+  <div class="">
+  <p><span class="h5 text-secondary">Airline</span></p>
 
-    <div class="d-flex justify-content-center gap-4">
-    <div class="details shadow m-2 p-3">
-      <p *ngIf="data1.prnNo"><strong>Flight Number:</strong> {{ data1.prnNo }}</p>
-      <p><strong>Airline:</strong> {{ data1.airline.name }}</p>
-      <p><strong>From:</strong> {{ data1.fromAirport.city }}</p>
-      <p><strong>To:</strong> {{ data1.toAirport.city }}</p>
-      <p><strong>Date:</strong> {{ data1.date }}</p>
-      <p><strong>Total Cost:</strong> {{ data1.total }}</p>
-    </div>
   
-  
-  <div class="  m-2 ">
-    <h3>Passenger Details</h3>
-    <div  *ngFor="let p of data1.passengers" class="passenger-details shadow p-3 m-3">
-      <p><strong>Name:</strong> {{ p.name }}</p>
-      <p><strong>Gender:</strong> {{ p.gender }}</p>
-      <p><strong>Seat No:</strong> {{ p.seat }}</p>
-    </div>
+
+  <img class="logo-new" [src]="data1.airline.logo" alt="">
+  <span class="small text-secondary">{{data1.airline.name}}</span>
+</div>
+
+<div >
+  <p><span class="h5 text-secondary">Total Amount</span></p>
+<p class="h4 d-flex justify-content-center">₹{{data1.total}}</p>
+</div>
+</div>
+
+</div>
+
+<div class="shadow m-3  rounded  ">
+  <div class="bg-light p-2 d-flex justify-content-between">
+    <p class="d-flex gap-3"><span class="h4 text-secondary">{{"Passenger Details"|uppercase}}</span></p>
+  </div>  
+
+
+  <div class="p-2">
+    <table class="   table table-bordered  table-success table-striped">
+      <tr class=" bg-success text-light p-2">
+        <th>FullName</th>
+        <th>Gender</th>
+        <th>Seat No</th>
+      </tr>
+      <tr *ngFor="let p of data1.passengers">
+        
+          <td>{{p.name}}</td>
+          <td>{{p.gender}}</td>
+          <td>{{p.seat}}</td>
+       
+      </tr>
+    </table>
   </div>
 </div>
+</div>
 
+
+
+ 

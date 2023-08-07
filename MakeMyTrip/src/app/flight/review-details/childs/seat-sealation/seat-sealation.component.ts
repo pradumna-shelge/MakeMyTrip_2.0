@@ -5,6 +5,7 @@ import { TicketClass } from 'src/Model/SearchData.model';
 import { LoadBookingSeats, LoadBookingSeats2 } from 'src/NgStore/Booking/booking.action';
 import { TripStore } from 'src/NgStore/Stores.interface';
 import { geTrip } from 'src/NgStore/tripDetail/trip.ngStore';
+import { ToasterService } from 'src/app/services/toaster.service';
 
 @Component({
   selector: 'app-seat-sealation',
@@ -18,11 +19,12 @@ export class SeatSealationComponent {
   returnFlag=false;
 
 
-  constructor(private store:Store,private route:Router){
+  constructor(private store:Store,private route:Router,private tostSer:ToasterService){
      
     this.store.select(geTrip).subscribe(d=>{
-if(d.error){
-}
+      if(!d.journey.journeyId){
+        this.route.navigate(['/flight'])
+        }
 else{
   this.data={...this.data,...d};
   if(!d.journey1?.From){
@@ -119,7 +121,7 @@ if(this.data.journey1){
   count = count/2
 }
 if(count != this.passengerCount){
-alert("please choose seats for passengers")
+this.tostSer.showInfo("Select Remaining Seats","Seat Choose")
 }
 else{
   

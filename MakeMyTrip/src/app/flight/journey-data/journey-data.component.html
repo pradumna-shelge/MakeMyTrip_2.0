@@ -1,11 +1,14 @@
 
 <div class="text-secondary p-2 d-flex justify-content-center   ">
     <p  class="h4 ">{{"Flight From " + search.from.city + " To " + search.to.city}}</p>
-    <p *ngIf="modifiedData && modifiedData.ren" class="h4 ">, and back</p>
+    <p *ngIf="modifiedData && modifiedData.ren && modifiedData.ren.length>0 " class="h4 ">, and back</p>
 </div>
 <div class="" [ngClass]="{'d-flex justify-content-between gap-2': modifiedData && modifiedData.ren}">
     
-
+    <!-- <div class="shadow m-2 py-1 px-3 rounded accordion bg-white" *ngIf="modifiedData.dep.length <1 && modifiedData.ren && modifiedData.ren.length < 1">
+        <p>Nothing Found for Search <span class="h4 text-secondary">{{search.from.city}} - {{search.to.city}}</span> </p>
+         
+     </div> -->
           
         
       
@@ -54,12 +57,12 @@
                       <input type="radio" name="dep" (change)="addToBook(d, undefined)">
                   </div>
           </div>
-          <div *ngIf="modifiedData && !modifiedData.ren" class="d-flex justify-content-end accordion-item" (click)="flightDetail(d)">
+          <!-- <div *ngIf="modifiedData && !modifiedData.ren" class="d-flex justify-content-end accordion-item" (click)="flightDetail(d)">
             <a data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + item" aria-expanded="true"
                 [attr.aria-controls]="'collapse' + item" class="text-primary">
                 Flight Details
             </a>
-        </div>
+        </div> -->
         <div>
             <div [id]="'collapse' + item" class="accordion-collapse collapse" [attr.aria-labelledby]="'heading' + item">
                 <app-journey-detail [flightDetail]="d"></app-journey-detail>
@@ -73,7 +76,8 @@
                 
     </div>
     <div class="shadow m-2 py-1 px-3 rounded accordion bg-white" *ngIf="modifiedData.dep.length <1">
-        not found
+        <p class="h4 text-secondary">No  Flight Found</p>
+        <p class="small">Please Adjust date</p>        
     </div>
 </div>
 
@@ -143,7 +147,9 @@
                 
     </div>
     <div class="shadow m-2 py-1 px-3 rounded accordion bg-white  " *ngIf="modifiedData.ren.length <1">
-        not found
+        
+        <p class="h4 text-secondary">No return Flight Found</p>
+        <p class="small">Please Adjust date</p>
     </div>
 </div>
 

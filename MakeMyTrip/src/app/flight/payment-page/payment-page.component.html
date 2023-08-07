@@ -27,15 +27,15 @@
         <h3 >Your Booking</h3>
         <div>
   
-          <p><strong>Departure:</strong> {{ tripData.search.from.city }} ({{ tripData.search.from.airportCode }}) at {{ tripData.search.departureTime }}</p>
-          <p><strong>Arrival:</strong> {{ tripData.search.to.city }} ({{ tripData.search.to.airportCode }}) at {{ tripData.search.departureTime }}</p>
+          <p><strong>Departure:</strong> {{ tripData.search.from.city }} ({{ tripData.search.from.airportCode }}) at {{ tripData.journey.departureTime|date:"medium" }}</p>
+          <p><strong>Arrival:</strong> {{ tripData.search.to.city }} ({{ tripData.search.to.airportCode }}) at {{tripData.journey.arrivalTime|date:"medium" }}</p>
           <p><strong>Airline:</strong> {{ tripData.journey.airline?.name }}</p>
         </div>
-        <div *ngIf="bookingData.returnJourneyId">
+        <div *ngIf="tripData.journey1">
   
-          <p><strong>Departure:</strong> {{ tripData.search.from.city }} ({{ tripData.search.from.airportCode }}) at {{ tripData.search.departureTime }}</p>
-          <p><strong>Arrival:</strong> {{ tripData.search.to.city }} ({{ tripData.search.to.airportCode }}) at {{ tripData.search.departureTime }}</p>
-          <p><strong>Airline:</strong> {{ tripData.journey1?.airline?.name }}</p>
+          <p><strong>Departure:</strong> {{ tripData.search.from.city }} ({{ tripData.search.from.airportCode }}) at {{ tripData.journey1.departureTime|date:"medium"  }}</p>
+          <p><strong>Arrival:</strong> {{ tripData.search.to.city }} ({{ tripData.search.to.airportCode }}) at {{ tripData.journey1.arrivalTime|date:"medium" }}</p>
+          <p><strong>Airline:</strong> {{ tripData.journey1.airline?.name }}</p>
         </div>
       </div>
       <div class="container">

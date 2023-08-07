@@ -58,7 +58,7 @@
   
 <div class="p-2 my-5">
   <span class="fs-6" >One Way Price</span>
-    <mat-slider [(ngModel)]="resets1" class="w-100" [min]="1000" [max]="100000"  step="1000" showTickMarks discrete [displayWith]="formatLabel">
+    <mat-slider  [(ngModel)]="resets1" class="w-100" [min]="1000" [max]="100000"  step="1000" showTickMarks discrete [displayWith]="formatLabel">
         <input #price (change)="priceChange(price.value)"   matSliderThumb>
       </mat-slider>
       <div class="d-flex justify-content-between">

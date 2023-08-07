@@ -9,12 +9,15 @@ import { getAirLineData, getAirlineById } from 'src/NgStore/AirLine/AirLineselec
 import { SearchStore, AirlineStore, TripStore, JourneyStore } from 'src/NgStore/Stores.interface';
 import { getSearchData } from 'src/NgStore/search/Search.selector';
 import { JourneysService } from '../Services/journeys.service';
-import { airportStore, getAirportData } from 'src/NgStore/AirPort/Airport.selector';
-import { AirportStore } from 'src/NgStore/AirPort/Airport.reduser';
+import {  getAirportData } from 'src/NgStore/AirPort/Airport.selector';
+
 import { AirportModel } from 'src/Model/Airport.model';
 import { LoadAirportData } from 'src/NgStore/AirPort/Airport.action';
 import { LoadReturnData, LoadTripData } from 'src/NgStore/tripDetail/trip.ngStore';
 import { LoadJourneyData } from 'src/NgStore/journey/journey.action';
+import { LoadBookingPassengers } from 'src/NgStore/Booking/booking.action';
+import { passenger } from 'src/Model/booking.model';
+import { ToasterService } from 'src/app/services/toaster.service';
 
 @Component({
   selector: 'app-home-page',
@@ -27,12 +30,13 @@ export class HomePageComponent implements OnInit {
   filteredData!: JourneyS;
   returnFlag =false;
   postRequestData!: searchPost;
-  airportData!: AirportModel[]
+  airportData!: AirportModel[];
+  filterData1= {} as filterInterface
   currentJourneyDeP: JourneyInterface | undefined;
   currentJourneyRen!: JourneyInterface | undefined;
-  constructor(private airportStore: Store<AirportStore>, private router: Router, private JourneysService: JourneysService, private searchStore: Store<SearchStore>, private airlineStore: Store<AirlineStore>, private tripStore: Store<TripStore>) {
-    this.airportStore.dispatch(LoadAirportData())
-    this.airlineStore.select(getAirportData).subscribe(d => {
+  constructor( private toasterSer:ToasterService, private store: Store, private router: Router, private JourneysService: JourneysService) {
+    this.store.dispatch(LoadAirportData())
+    this.store.select(getAirportData).subscribe(d => {
       this.airportData = d;
     })
   }
@@ -119,8 +123,9 @@ this.filteredData= this.data
 
 
   getAirports() {
-    this.searchStore.select(getSearchData).subscribe({
+    this.store.select(getSearchData).subscribe({
       next: (data: searchData) => {
+       
         this.search = data
         if (this.search) {
 
@@ -141,12 +146,17 @@ this.filteredData= this.data
         alert('Search Data Error  ')
       }
     })
+
+
+    
   }
 
   getJourneys() {
     this.currentJourneyDeP = undefined;
     this.currentJourneyRen = undefined;
+    this.filterData1= {} as filterInterface
 
+    
     this.JourneysService.getJourneys(this.postRequestData).subscribe({
       next: (apiData: JourneyS) => {
         this.data = apiData;
@@ -167,7 +177,7 @@ this.filteredData= this.data
 
 
 
-      this.airlineStore.select(getAirlineById(ob.airlineId)).subscribe(d => {
+      this.store.select(getAirlineById(ob.airlineId)).subscribe(d => {
         ob = { ...ob, airline: d }
       })
       ob.From = this.airportData.find(f => f.airportId == ob.fromid);
@@ -179,7 +189,7 @@ this.filteredData= this.data
     if (this.data.ren) {
       this.returnFlag = true;
       this.data.ren.forEach((ob: JourneyInterface) => {
-        this.airlineStore.select(getAirlineById(ob.airlineId)).subscribe(d => {
+        this.store.select(getAirlineById(ob.airlineId)).subscribe(d => {
           ob.airline = d
         })
         ob.From = this.airportData.find(f => f.airportId == ob.fromid)
@@ -210,22 +220,31 @@ this.filteredData= this.data
 
   addToReview() {
 
+if((this.currentJourneyRen && this.currentJourneyDeP) && (this.currentJourneyRen.departureTime < this.currentJourneyDeP?.arrivalTime))
+{
+
+this.toasterSer.showWarning("The selected flight timings are not compatible. Kindly try a different time option.","Invalid combination")
+}
+else{
+
+
     const data: TripStore = {
       journey: this.currentJourneyDeP ?? {} as JourneyInterface,
       search: this.search,
       error: false
     }
-    this.tripStore.dispatch(LoadTripData({ data: data }))
+    this.store.dispatch(LoadTripData({ data: data }))
 
 
-    if (this.currentJourneyRen) this.tripStore.dispatch(LoadReturnData({ data: this.currentJourneyRen }))
+    if (this.currentJourneyRen) this.store.dispatch(LoadReturnData({ data: this.currentJourneyRen }))
 
 
   
+    this.store.dispatch(LoadBookingPassengers({data:[{} as passenger ],email:""}))
     
     this.router.navigate(['flight/review'])
   }
-
+}
 
 
   cancel(){

@@ -189,7 +189,7 @@
             <div [ngSwitch]="Area">
 
                 <div class="mb-3" *ngSwitchCase="1">
-                    <label for="email" class="form-label">Email address*</label>
+                    <label for="email" class="form-label h5 text-secondary">Email address*</label>
                     <input type="email" class="form-control" formControlName="Email" placeholder="Enter email">
                     <div class="text-danger" *ngIf="Email?.touched || Email?.dirty">
 
@@ -240,7 +240,7 @@
       
         <div class="">
            
-            <p class="">By proceeding, you agree to MakeMyTrip's  Privacy Policy, <a href="">User Agreement and T&Cs</a></p>
+            <p class="small">By proceeding, you agree to MakeMyTrip's  Privacy Policy, <a href="">User Agreement and T&Cs</a></p>
         </div>
 
 

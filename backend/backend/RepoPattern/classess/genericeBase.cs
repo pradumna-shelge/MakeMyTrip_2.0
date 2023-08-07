@@ -35,7 +35,7 @@ namespace backend.RepoPattern.classess
             {
                 throw new ArgumentNullException(nameof(ob));
             }
-_dbset.Add(ob);
+await _dbset.AddAsync(ob);
            await _contex.SaveChangesAsync();
             return ob;
             

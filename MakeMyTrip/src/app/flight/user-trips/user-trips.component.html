@@ -6,19 +6,19 @@
 <p class="h5 text-secondary my-2">My Account -
   My Trips</p>
   </div>
-  <!-- <div class="  option d-flex justify-content-evenly rounded  container bg-white p-4 shadow">
+  <div class="  option d-flex justify-content-evenly rounded  container bg-white p-4 shadow">
     
-    <p class="h5 text-secondary">UPCOMING</p>
-    <p class="h5 text-secondary">COMPLETED</p>
-    <p class="h5 text-secondary">CANCELLED</p>
-  </div> -->
+    <p (click)="filter(1)" [ngClass]="{'newClass px-4 p-1': flag==1}" class="h5 text-secondary">UPCOMING</p>
+    <p (click)="filter(2)" [ngClass]="{'newClass px-4 p-1': flag==2}" class="h5 text-secondary">COMPLETED</p>
+    <p (click)="filter(3)" [ngClass]="{'newClass px-4 p-1': flag==3}" class="h5 text-secondary">All TRIPS</p>
+  </div>
   <div class=" w-100 d-flex mt-3 flex-column gap-2"> 
 
  
-  <ng-container *ngFor="let t of trips" >
+  <ng-container *ngFor="let t of newTrips" >
   
   
-  <div (click)="tripDetail(t.prnNo)" class="flight-card bg-white mx-auto ">
+  <div  (click)="tripDetail(t.prnNo)" class="flight-card bg-white mx-auto ">
   
    <div class="flight-card-content">
      <div class="flight-row">

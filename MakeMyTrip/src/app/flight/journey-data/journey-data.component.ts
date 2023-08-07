@@ -29,6 +29,9 @@ export class JourneyDataComponent  {
 constructor(private logser:LoginService, private router:Router, private JourneysService:JourneysService ,private searchStore:Store<SearchStore>,private airlineStore:Store<AirlineStore>,private tripStore:Store<TripStore>){
   this.searchStore.select(getSearchData).subscribe(d=>{
     this.search= d
+
+    
+    
   })
 
   this.loginFlag = this.logser.islogin()

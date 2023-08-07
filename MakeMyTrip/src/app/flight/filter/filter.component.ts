@@ -19,8 +19,9 @@ import { JourneyS } from 'src/Model/journey.model';
 export class FilterComponent implements OnInit {
 @Output() filterEmitter =  new EventEmitter<filterInterface>();
 @Input() returnFlag = false; 
+
 airlines!:AirlineInterface[];
-filterData:filterInterface= {}as filterInterface;
+@Input()filterData:filterInterface= {}as filterInterface;
 flag = false;
 resets1:any;
 resets2:any;
@@ -41,6 +42,7 @@ constructor(private store:Store<AirlineStore>,private router:Router){
 priceChange(max:string){
   this.filterData = {...this.filterData,Price:1000+"-"+Number(max)};
   if(Number(max)==0){
+    
     this.filterData = {...this.filterData,Price:undefined};
   }
   this.emitValue();
@@ -83,6 +85,7 @@ arrivalTime(val:string){
   }
 
   reset(){
+   
     this.filterData={} as filterInterface;
     
     this.filterData.Price=undefined;
