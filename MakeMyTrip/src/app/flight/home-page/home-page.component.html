@@ -13,7 +13,7 @@
         <app-search-result (SearchEmitter)="getAirports()"></app-search-result>
     </div>
     <div class="   my-2 d-flex justify-content-center gap-4   ">
-        <div class="">
+        <div class="filter-postion">
             
             <app-filter [filterData]="filterData1" [returnFlag]="returnFlag" (filterEmitter)="filterData($event)" ></app-filter>
         </div>

@@ -19,7 +19,7 @@
         <p>Arrival</p>
         <p>Price</p>
       </div>
-    <div class="shadow m-2 py-1 px-3 rounded accordion bg-white border-0" *ngFor="let d of modifiedData.dep; let item=index">
+    <div class="   m-2 py-1 px-3 rounded accordion bg-white border-0" *ngFor="let d of modifiedData.dep; let item=index">
   
         <div *ngIf=" modifiedData && modifiedData.ren" class="d-flex justify-content-start gap-2 align-items-center">
             <img class="logo" [src]="d.airline?.logo" alt="airlineLogo">
@@ -77,7 +77,7 @@
     </div>
     <div class="shadow m-2 py-1 px-3 rounded accordion bg-white" *ngIf="modifiedData.dep.length <1">
         <p class="h4 text-secondary">No  Flight Found</p>
-        <p class="small">Please Adjust date</p>        
+              
     </div>
 </div>
 
@@ -149,7 +149,7 @@
     <div class="shadow m-2 py-1 px-3 rounded accordion bg-white  " *ngIf="modifiedData.ren.length <1">
         
         <p class="h4 text-secondary">No return Flight Found</p>
-        <p class="small">Please Adjust date</p>
+        
     </div>
 </div>
 

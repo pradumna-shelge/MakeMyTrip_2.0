@@ -91,7 +91,11 @@ PatchSearch(){
     this.searchData = {...this.searchData,tripType:2}
   }
   this.searchStore.dispatch(LoadSearchData({data:this.searchData}))
+
+  sessionStorage.setItem('search-data', JSON.stringify( this.searchData));
+
   this.router.navigate(['/flight'])
+
   // this.setPrams();
 }
 

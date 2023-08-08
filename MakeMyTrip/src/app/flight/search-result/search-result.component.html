@@ -251,7 +251,7 @@
         </div> 
         <div class="  col-12 col-lg-1 d-flex justify-content-lg-center flex-column">
 
-            <button (click)="PatchSearch()" class="fs-5 card1  bg-secondary btn text-white rounded-pill px-2">Search  </button>
+            <button [ngClass]="{'btn-pink': searchFlag}" (click)="PatchSearch()" class="fs-5 card1  bg-secondary btn text-white rounded-pill px-5" >Search  </button>
         </div>
     </div>
 
