@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { AirportStore } from 'src/NgStore/AirPort/Airport.reduser';
 import { getAirportData } from 'src/NgStore/AirPort/Airport.selector';
 import { ToasterService } from './services/toaster.service';
+import { LoaderService } from './services/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +12,7 @@ import { ToasterService } from './services/toaster.service';
 })
 export class AppComponent {
 
-
-  constructor(private ser:ToasterService){
-    debugger;
-    
-  }
+ constructor(private ser:LoaderService){
+  this.ser.getServer();
+ }
 }

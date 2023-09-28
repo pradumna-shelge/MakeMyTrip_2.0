@@ -5,6 +5,8 @@ import { MyProfileComponent } from './common/my-profile/my-profile.component';
 import { UserTripsComponent } from './flight/user-trips/user-trips.component';
 import { FlightGuard } from './gards/flight.guard';
 import { TripDetailsComponent } from './flight/user-trips/trip-details/trip-details.component';
+import { ServerDownComponent } from './server-down/server-down.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
@@ -15,6 +17,9 @@ const routes: Routes = [
   { path: 'my-profile', component: MyProfileComponent },
   { path: 'my-trips', component: UserTripsComponent },
   { path: 'my-trips/:id', component: TripDetailsComponent },
+  { path: 'server-down', component: ServerDownComponent },
+  { path: '**', component: PageNotFoundComponent },
+
 ];
 
 @NgModule({

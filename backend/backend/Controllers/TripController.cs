@@ -78,7 +78,7 @@ namespace backend.Controllers
                                               gender = p.Gender,
                                               seat = p.SeatNumber
                                           }).Count(),
-                            date = b.BookingDate,
+                            date = j.DepartureTime,
                             total = b.TotalFare
                         };
 
@@ -126,7 +126,7 @@ namespace backend.Controllers
                                               gender = p.Gender,
                                               seat = p.SeatNumber
                                           }),
-                            date = b.BookingDate,
+                            date = j.DepartureTime,
                             total = b.TotalFare
                         };
 

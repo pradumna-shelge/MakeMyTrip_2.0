@@ -72,7 +72,7 @@ ChangeDate(val1:string, fromFlag:boolean){
    this.minReturnDate = val
  }
  else if(!fromFlag&&this.searchData.returnTime != null && (this.searchData.departureTime > this.searchData.returnTime) && this.tripType==2){
-  this.toasterSer.showError(" should be greater or equal to Departure Date","Return Date")
+ 
     }
 
  

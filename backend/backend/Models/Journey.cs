@@ -21,12 +21,6 @@ public partial class Journey
 
     public decimal? SeatbasicPrice { get; set; }
 
-    public int? EconomyClass { get; set; }
-
-    public int? FirstClass { get; set; }
-
-    public int? BussinessClass { get; set; }
-
     public int? Adult { get; set; }
 
     public int? Child { get; set; }
@@ -37,15 +31,9 @@ public partial class Journey
 
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 
-    public virtual JourneyClassPrice? BussinessClassNavigation { get; set; }
-
     public virtual PassengerOffer? ChildNavigation { get; set; }
 
     public virtual AirportDatum? Destination { get; set; }
-
-    public virtual JourneyClassPrice? EconomyClassNavigation { get; set; }
-
-    public virtual JourneyClassPrice? FirstClassNavigation { get; set; }
 
     public virtual Flight? Flight { get; set; }
 

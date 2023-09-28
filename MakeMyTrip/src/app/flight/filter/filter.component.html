@@ -1,5 +1,5 @@
 <form >
-<div class="border p-2 pb-5 bg-white shadow">
+<div class="border p-2 pb-5 bg-white shadow rounded">
   <div class=" d-flex justify-content-between ">
     <span class="h2 text-secondary" [ngClass]="{'text-warning': (filterData.DepartureTime || filterData.Price||filterData.Airlines)}">{{(filterData.DepartureTime || filterData.Price||filterData.Airlines) ?"Applied Filters":" Filters"}}</span>
     <button class=" text-primary bg-white border-0 " type="reset" (click)="reset()" >CLEAR ALL</button>

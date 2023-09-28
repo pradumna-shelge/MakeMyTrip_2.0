@@ -11,11 +11,9 @@ public partial class JourneyClassPrice
 
     public int? Percentage { get; set; }
 
-    public virtual ICollection<Journey> JourneyBussinessClassNavigations { get; set; } = new List<Journey>();
+    public int? AirlineId { get; set; }
+
+    public virtual Airline? Airline { get; set; }
 
     public virtual SeatClassType? JourneyClassTypeNavigation { get; set; }
-
-    public virtual ICollection<Journey> JourneyEconomyClassNavigations { get; set; } = new List<Journey>();
-
-    public virtual ICollection<Journey> JourneyFirstClassNavigations { get; set; } = new List<Journey>();
 }

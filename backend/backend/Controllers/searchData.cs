@@ -38,7 +38,7 @@ namespace backend.Controllers
             _context = context;
             _booking = ibooking;
             _passenger = passenger;
-
+          
             _baggagetypes = baggagetypes;
             _baggagerule = baggagerule;
 
@@ -87,7 +87,7 @@ namespace backend.Controllers
             var airlines = await _airline.Get();
             var bookings = await _booking.Get(); 
             var passengers = await _passenger.Get();
-
+            var priceDiff = await _context.JourneyClassPrices.ToListAsync();
             var canRules =  await _cancellationrules.Get();
             var canTypes = await _ICancellationtype.Get();
 
@@ -96,8 +96,10 @@ namespace backend.Controllers
 
 
             var journay = from j in journays
+                        
                           join f in flights on j.FlightId equals f.FlightId
                           join a in airlines on f.AirlineId equals a.AirlineId
+                          
                           join fa in airportData on j.SourceId equals fa.AirportId
                           join toAirport in airportData on j.DestinationId equals toAirport.AirportId
                           where j.SourceId == obj.fromID &&
@@ -113,7 +115,7 @@ namespace backend.Controllers
                               fromid = fa.AirportId,
                               departureTime = j.DepartureTime,
                               arrivalTime = j.ArrivalTime,
-                              price = j.SeatbasicPrice,
+                              price = (priceDiff.FirstOrDefault(p=>p.AirlineId == a.AirlineId && p.JourneyClassType== obj.seatClass)?.Percentage*j.SeatbasicPrice)/100,
                               duration = (j.ArrivalTime - j.DepartureTime).ToString(),
                               baggageRule = (from br in bagR
                                              join bt in bagT on br.BaggageTypeId equals bt.BaggageTypeId
@@ -166,7 +168,7 @@ namespace backend.Controllers
                                   fromid = fa.AirportId,
                                   departureTime = j.DepartureTime,
                                   arrivalTime = j.ArrivalTime,
-                                  price = j.SeatbasicPrice,
+                                  price = (priceDiff.FirstOrDefault(p => p.AirlineId == a.AirlineId && p.JourneyClassType == obj.seatClass)?.Percentage * j.SeatbasicPrice) / 100,
                                   duration = (j.ArrivalTime - j.DepartureTime).ToString(),
                                   baggageRule = (from br in bagR
                                                  join bt in bagT on br.BaggageTypeId equals bt.BaggageTypeId

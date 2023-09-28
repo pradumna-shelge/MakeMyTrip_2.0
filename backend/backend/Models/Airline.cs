@@ -29,5 +29,7 @@ public partial class Airline
 
     public virtual ICollection<Flight> Flights { get; set; } = new List<Flight>();
 
+    public virtual ICollection<JourneyClassPrice> JourneyClassPrices { get; set; } = new List<JourneyClassPrice>();
+
     public virtual User? LastModification { get; set; }
 }

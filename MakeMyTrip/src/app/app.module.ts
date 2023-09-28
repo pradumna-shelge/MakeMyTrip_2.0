@@ -30,6 +30,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { tripPriceReducer } from 'src/NgStore/Payment/payment';
   import { ToastrModule } from 'ngx-toastr';
+import { ServerDownComponent } from './server-down/server-down.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { tripPriceReducer } from 'src/NgStore/Payment/payment';
     HomepageComponent,
     SearchComponent,
     SpinnerComponent,
+    ServerDownComponent,
+    PageNotFoundComponent,
     
   
     

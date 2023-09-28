@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("makeMyTrip/[controller]")]
     [ApiController]
     public class testingController : ControllerBase
     {
@@ -48,12 +48,7 @@ namespace backend.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var bagR = await _baggagerule.Get();
-            var bagT = await _baggagetypes.Get();
-
-           
-
-            return Ok(bagT);
+            return Ok();
 
         }
 

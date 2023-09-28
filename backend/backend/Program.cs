@@ -16,7 +16,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<MakeMyTripContext>();
+builder.Services.AddDbContext<MakeMyTripContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IAirportData, Airpots>();
 builder.Services.AddScoped<ICity, Cityes>();
 builder.Services.AddScoped<IJourney, Journeyclass>();

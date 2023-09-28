@@ -130,7 +130,8 @@ namespace backend.Controllers
                     //fs.Close();
 
 
-                    body = booking1.ToString()+" "+booking2.ToString();
+                    body =$"PRN NO {booking1.BookingId} Total price {booking1.TotalFare} with {obj.passengerList.Count} Passenger ";
+                    body+= $"Journey PRN NO {booking2.BookingId} Total price {booking2.TotalFare} with {obj.passengerList.Count} Passenger ";
                     emailObject.SendEmail(obj.billingEmail, subject, body);
 
                     return Ok(new { booking1,booking2 });
@@ -142,7 +143,8 @@ namespace backend.Controllers
 
 
 
-             body = booking1.ToString();
+            body = $"PRN NO {booking1.BookingId} Total price {booking1.TotalFare} with {obj.passengerList.Count} Passenger ";
+
             emailObject.SendEmail(obj.billingEmail, subject, body);
             return Ok(new { booking1 });
             
